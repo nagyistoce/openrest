@@ -20,7 +20,7 @@ public class Restaurant implements Serializable {
             List<LatLng> deliveryArea, String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<String> deliveryTypes, String timezone, List<String> paymentTypes,
-            Map<String, Integer> minPayments, String link) {
+            Map<String, Integer> minPayments, String link, Map<String, String> properties) {
         
         this.id = id;
         this.name = name;
@@ -41,6 +41,7 @@ public class Restaurant implements Serializable {
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
         this.link = link;
+        this.properties = properties;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -148,6 +149,13 @@ public class Restaurant implements Serializable {
     /** Official restaurant web-site. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String link;
+    
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> properties = Collections.emptyMap();
 
     private static final long serialVersionUID = 1L;
 }

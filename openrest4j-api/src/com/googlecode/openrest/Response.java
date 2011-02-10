@@ -6,7 +6,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response<T> implements Serializable {
-    /** API used in an unexpected way. Nothing the user can do. */
+	/** API used in an unexpected way. Nothing the user can do. */
     public static final String RESPONSE_ERROR_INVALID_DATA = "invalid_data";
     /** Empty admin list is not allowed. */
     public static final String RESPONSE_ERROR_EMPTY_ADMIN_LIST = "empty_admin_list";
@@ -59,7 +59,8 @@ public class Response<T> implements Serializable {
     /** Default constructor for JSON deserialization. */
     public Response() {}
 
-    public static Response fromException(OpenrestException e) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public static Response fromException(OpenrestException e) {
         final Response response = new Response();
         response.timestamp = new java.util.Date().getTime();
         response.error = e.error();
@@ -67,7 +68,8 @@ public class Response<T> implements Serializable {
         return response;
     }
 
-    public static Response fromNullValue() {
+    @SuppressWarnings("rawtypes")
+	public static Response fromNullValue() {
         final Response response = new Response();
         response.timestamp = new java.util.Date().getTime();
         return response;
@@ -87,4 +89,6 @@ public class Response<T> implements Serializable {
     /** The returned value, if no error occurred. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public T value;
+    
+	private static final long serialVersionUID = 1L;
 }
