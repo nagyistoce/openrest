@@ -1,6 +1,8 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -9,19 +11,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Category implements Serializable {
     /** Constructs a previously submitted category from persisted data. */
     public Category(String id, String restaurantId, String title, String description,
-            String parentCategoryId, String tagId, Double priority) {
+            String parentCategoryId, List<String> itemIds, Double priority) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
         this.description = description;
         this.parentCategoryId = parentCategoryId;
-        this.tagId = tagId;
+        this.itemIds = itemIds;
         this.priority = priority;
     }
 
     /** Constructs a new category to be submitted. */
-    public Category(String title, String description, String parentCategoryId, String tagId, Double priority) {
-        this(null, null, title, description, parentCategoryId, tagId, priority);
+    public Category(String title, String description, String parentCategoryId, List<String> itemIds, Double priority) {
+        this(null, null, title, description, parentCategoryId, itemIds, priority);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -48,8 +50,8 @@ public class Category implements Serializable {
     public String parentCategoryId;
 
     /** The item-ids in this category. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String tagId;
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<String> itemIds = Collections.emptyList();
 
     /** Order priority. Higher means first in the list. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
