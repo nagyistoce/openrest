@@ -11,10 +11,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
-    public User(String id, String ipAddress, String upIpAddress) {
+    public User(String id, String ipAddress, String fwdIpAddresses) {
         this.id = id;
         this.ipAddress = ipAddress;
-        this.upIpAddress = upIpAddress;
+        this.fwdIpAddresses = fwdIpAddresses;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -32,11 +32,11 @@ public class User implements Serializable {
     public String ipAddress;
 
     /**
-     * The IP address of the upstream client component.
-     * In general this will correspond the the user agent IP address (but can be spoofed).
+     * Corresponds to the "X-Forwarded-For" HTTP header.
+     * This generally contains the user agent IP address (but can be spoofed).
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String upIpAddress;
+    public String fwdIpAddresses;
 
     private static final long serialVersionUID = 1L;
 }

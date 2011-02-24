@@ -1,7 +1,7 @@
 package com.googlecode.openrest;
 
 public class OpenrestException extends Exception {
-    public OpenrestException(int httpErrorCode, String error, String errorMessage) {
+	public OpenrestException(int httpErrorCode, String error, String errorMessage) {
         super(error + ": " + errorMessage);
         this.httpErrorCode = httpErrorCode;
         this.error = error;
@@ -30,4 +30,6 @@ public class OpenrestException extends Exception {
     private final int httpErrorCode;
     private final String error;
     private final String errorMessage;
+    
+	private static final long serialVersionUID = 1L;
 }
