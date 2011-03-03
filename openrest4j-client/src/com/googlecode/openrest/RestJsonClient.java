@@ -79,10 +79,10 @@ public class RestJsonClient {
     private static <T> T go(URL url, String method, Object requestObj, TypeReference<T> responseType) throws IOException {
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod(method);
+        conn.setRequestProperty("Accept", "application/json");
         if (requestObj != null) {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setRequestProperty("Accept", "application/json");
         }
         conn.connect();
 
