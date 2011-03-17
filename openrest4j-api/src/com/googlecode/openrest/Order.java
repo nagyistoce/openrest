@@ -24,7 +24,8 @@ public class Order implements Serializable {
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            java.util.Date created, java.util.Date modified, User user, String status) {
+            java.util.Date created, java.util.Date modified, User user, String status,
+            String shareToken) {
 
         this.id = id;
         this.restaurantId = restaurantId;
@@ -38,13 +39,14 @@ public class Order implements Serializable {
         this.modified = ((modified != null) ? modified.getTime() : null);
         this.user = user;
         this.status = status;
+        this.shareToken = shareToken;
     }
 
     /** Constructs a new order to be submitted. */
     public Order(List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-                null, null, null, null);
+                null, null, null, null, null);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -105,6 +107,10 @@ public class Order implements Serializable {
     /** The order's status. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String status;
+
+    /** The order's share-token. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String shareToken;
 
     private static final long serialVersionUID = 1L;
 }
