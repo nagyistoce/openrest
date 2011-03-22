@@ -11,10 +11,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Notification implements Serializable {
     /** Triggered when a new order is unhandled for some duration. */
     public static final String NOTIFICATION_TYPE_DELAYED_ORDER = "delayed_order";
+    /** Triggered when no one checks for existence of new orders for some duration. */
+    public static final String NOTIFICATION_TYPE_OFFLINE = "offline";
 
     /** All payment methods, in ascending alphabetic order! */
     public static final List<String> ALL_NOTIFICATION_TYPES = Arrays.asList(new String[] {
-        NOTIFICATION_TYPE_DELAYED_ORDER
+        NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_OFFLINE
     });
 
     /** Constructs a previously submitted notification from persisted data. */
