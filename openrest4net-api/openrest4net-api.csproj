@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44A81A63-9270-4938-A64F-9914A3472ADD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>openrest4net_api</RootNamespace>
+    <AssemblyName>openrest4net-api</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="com\googlecode\openrest\Address.cs" />
+    <Compile Include="com\googlecode\openrest\Availability.cs" />
+    <Compile Include="com\googlecode\openrest\Category.cs" />
+    <Compile Include="com\googlecode\openrest\ColorScheme.cs" />
+    <Compile Include="com\googlecode\openrest\Contact.cs" />
+    <Compile Include="com\googlecode\openrest\CreditCard.cs" />
+    <Compile Include="com\googlecode\openrest\Date.cs" />
+    <Compile Include="com\googlecode\openrest\DateTimeWindow.cs" />
+    <Compile Include="com\googlecode\openrest\Delivery.cs" />
+    <Compile Include="com\googlecode\openrest\Item.cs" />
+    <Compile Include="com\googlecode\openrest\LatLng.cs" />
+    <Compile Include="com\googlecode\openrest\Menu.cs" />
+    <Compile Include="com\googlecode\openrest\Notification.cs" />
+    <Compile Include="com\googlecode\openrest\Notifications.cs" />
+    <Compile Include="com\googlecode\openrest\Order.cs" />
+    <Compile Include="com\googlecode\openrest\OrderConfirmation.cs" />
+    <Compile Include="com\googlecode\openrest\OrderItem.cs" />
+    <Compile Include="com\googlecode\openrest\Payment.cs" />
+    <Compile Include="com\googlecode\openrest\Restaurant.cs" />
+    <Compile Include="com\googlecode\openrest\Staff.cs" />
+    <Compile Include="com\googlecode\openrest\Stats.cs" />
+    <Compile Include="com\googlecode\openrest\Status.cs" />
+    <Compile Include="com\googlecode\openrest\Tag.cs" />
+    <Compile Include="com\googlecode\openrest\User.cs" />
+    <Compile Include="com\googlecode\openrest\Variation.cs" />
+    <Compile Include="com\googlecode\openrest\WeeklyTimeWindow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
