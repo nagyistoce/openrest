@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Staff
+    public class Staff
     {
         public const string STAFF_ADMIN = "admin";
         public const string STAFF_MANAGER = "manager";
@@ -15,7 +15,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Staff() { }
+        public Staff() { }
 
         /** Maps roles (see above) to list of user-ids. */
         public IDictionary<string, IList<string>> staff = new Dictionary<string, IList<string>>();

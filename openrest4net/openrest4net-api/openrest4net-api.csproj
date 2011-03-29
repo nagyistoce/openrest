@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -51,16 +54,19 @@
     <Compile Include="com\googlecode\openrest\Menu.cs" />
     <Compile Include="com\googlecode\openrest\Notification.cs" />
     <Compile Include="com\googlecode\openrest\Notifications.cs" />
+    <Compile Include="com\googlecode\openrest\OpenrestException.cs" />
     <Compile Include="com\googlecode\openrest\Order.cs" />
     <Compile Include="com\googlecode\openrest\OrderConfirmation.cs" />
     <Compile Include="com\googlecode\openrest\OrderItem.cs" />
     <Compile Include="com\googlecode\openrest\Payment.cs" />
+    <Compile Include="com\googlecode\openrest\Response.cs" />
     <Compile Include="com\googlecode\openrest\Restaurant.cs" />
     <Compile Include="com\googlecode\openrest\Staff.cs" />
     <Compile Include="com\googlecode\openrest\Stats.cs" />
     <Compile Include="com\googlecode\openrest\Status.cs" />
     <Compile Include="com\googlecode\openrest\Tag.cs" />
     <Compile Include="com\googlecode\openrest\User.cs" />
+    <Compile Include="com\googlecode\openrest\Utils.cs" />
     <Compile Include="com\googlecode\openrest\Variation.cs" />
     <Compile Include="com\googlecode\openrest\WeeklyTimeWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

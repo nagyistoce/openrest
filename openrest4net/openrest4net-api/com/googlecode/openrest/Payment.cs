@@ -5,7 +5,7 @@ using System.Text;
 
 namespace com.googlecode.openrest
 {
-    class Payment
+    public class Payment
     {
         /** Cash payment. */
         public const string PAYMENT_TYPE_CASH = "cash";
@@ -24,7 +24,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Payment() { }
+        public Payment() { }
 
         /** Payment type. */
         public string type;

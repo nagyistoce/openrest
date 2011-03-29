@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class Date
+    public class Date
     {
         public Date(int year, int month, int day, int hour, int minute)
         {
@@ -14,7 +14,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Date() { }
+        public Date() { }
 
         public int? year;
         /** 1-based. */

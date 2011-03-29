@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Contact
+    public class Contact
     {
         public Contact(string firstName, string lastName, string email, string phone)
         {
@@ -14,7 +14,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Contact() { }
+        public Contact() { }
 
         public string firstName;
         public string lastName;

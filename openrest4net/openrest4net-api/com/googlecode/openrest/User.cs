@@ -6,7 +6,7 @@ namespace com.googlecode.openrest
      * Information regarding a remote user of the system.
      * @author DL
      */
-    class User
+    public class User
     {
         public User(string id, string ipAddress, string fwdIpAddresses)
         {
@@ -16,7 +16,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal User() { }
+        public User() { }
 
         /** The user's Facebook id. */
         public string id;

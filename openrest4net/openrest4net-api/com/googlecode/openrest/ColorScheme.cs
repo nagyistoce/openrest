@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class ColorScheme
+    public class ColorScheme
     {
         public const string THEME_LIGHT = "light";
         public const string THEME_DARK = "dark";
@@ -29,7 +29,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal ColorScheme() { }
+        public ColorScheme() { }
 
         public string theme;
         public string background;

@@ -8,7 +8,7 @@ namespace com.googlecode.openrest
     * or a dish variation ("well done").
     * @author DL
     */
-    class Item
+    public class Item
     {
         public Item(string id, string restaurantId, string title, string description,
             int price, IList<Variation> variations, Availability availability, bool inactive)
@@ -23,7 +23,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Item() { }
+        public Item() { }
 
         /** The item's unique id. */
         public string id;

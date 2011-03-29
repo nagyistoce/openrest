@@ -1,8 +1,9 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace com.googlecode.openrest
 {
-    class Address
+    public class Address
     {
         public Address(string city, string street, string number, string apt,
             string floor, string entrance, string comment, LatLng latLng)
@@ -18,8 +19,9 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Address() { }
+        public Address() { }
 
+        [JsonIgnore]
         public string StreetAddress
         {
             get

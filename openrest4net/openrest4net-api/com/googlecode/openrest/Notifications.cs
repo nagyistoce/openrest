@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Notifications
+    public class Notifications
     {
         public Notifications(IList<Notification> notifications)
         {
@@ -11,7 +11,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Notifications() { }
+        public Notifications() { }
 
         public IList<Notification> notifications = new List<Notification>();
     }

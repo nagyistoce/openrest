@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace com.googlecode.openrest
 {
-    class Status
+    public class Status
     {
         /** Available. */
         public const string STATUS_AVAILABLE = "available";
@@ -17,7 +18,21 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Status() { }
+        public Status() { }
+
+        [JsonIgnore]
+        public DateTime Until
+        {
+            get
+            {
+                return Utils.FromUnixTime(until.Value);
+            }
+
+            set
+            {
+                until = Utils.ToUnixTime(value);
+            }
+        }
 
         public string status;
         public long? until;

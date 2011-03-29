@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Stats
+    public class Stats
     {
         public const string STATS_GRANULARITY_DAY = "day";
         public const string STATS_GRANULARITY_WEEK = "week";
@@ -18,7 +18,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Stats() { }
+        public Stats() { }
 
         public Date date;
         public int? count = 0;

@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class CreditCard
+    public class CreditCard
     {
         public CreditCard(string number, int expireMonth, int expireYear, string holderId,
             string holderName, bool anonymized)
@@ -16,7 +16,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal CreditCard() { }
+        public CreditCard() { }
 
         public string number;
         /** 1-based */

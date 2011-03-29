@@ -7,7 +7,7 @@ namespace com.googlecode.openrest
      * A raw image.
      * @author DL
      */
-    class Image
+    public class Image
     {
         public Image(string contentType, byte[] content)
         {

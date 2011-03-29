@@ -7,7 +7,7 @@ namespace com.googlecode.openrest
      * A set of items that go together, e.g. "sides", "drinks", "toppings".
      * @author DL
      */
-    class Tag
+    public class Tag
     {
         public Tag(string id, string restaurantId, string title, IList<string> itemIds)
         {
@@ -18,7 +18,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Tag() { }
+        public Tag() { }
 
         /** The tag's unique id. */
         public string id;

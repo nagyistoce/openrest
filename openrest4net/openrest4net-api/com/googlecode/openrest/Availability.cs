@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Availability
+    public class Availability
     {
         public Availability(IList<WeeklyTimeWindow> weekly, IList<DateTimeWindow> exceptions)
         {
@@ -12,7 +12,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Availability() { }
+        public Availability() { }
 
         public IList<WeeklyTimeWindow> weekly = new List<WeeklyTimeWindow>();
         public IList<DateTimeWindow> exceptions = new List<DateTimeWindow>();

@@ -7,7 +7,7 @@ namespace com.googlecode.openrest
      * Restaurant information.
      * @author DL
      */
-    class Restaurant
+    public class Restaurant
     {
         public Restaurant(string id, string name, string description, Contact contact,
             int deliveryCharge, int minOrderPrice, Address address,
@@ -39,7 +39,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Restaurant() { }
+        public Restaurant() { }
 
         /** The restaurant's unique id. */
         public string id;

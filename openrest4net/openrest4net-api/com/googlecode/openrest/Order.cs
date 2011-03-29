@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Order
+    public class Order
     {
         /**
          * The restaurant required further confirmation before the order is submitted
@@ -37,7 +37,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Order() { }
+        public Order() { }
 
         /** The order's unique id. */
         public string id;

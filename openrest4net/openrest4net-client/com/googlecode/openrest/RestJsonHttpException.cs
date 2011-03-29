@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 
 namespace com.googlecode.openrest
 {
@@ -7,29 +8,31 @@ namespace com.googlecode.openrest
      * An exception thrown by a RESTful HTTP server, with an optional returned value.
      * @author DL
      */
-    class RestJsonHttpException : IOException
+    class RestJsonHttpException<T> : IOException
     {
-        public RestJsonHttpException(int httpErrorCode, Object value)
+        public RestJsonHttpException(HttpStatusCode httpStatusCode, T value)
         {
-            this.httpErrorCode = httpErrorCode;
+            this.httpStatusCode = httpStatusCode;
             this.value = value;
         }
 
-        public int HttpErrorCode {
+        public HttpStatusCode HttpStatusCode
+        {
             get
             {
-                return httpErrorCode;
+                return httpStatusCode;
             }
         }
-    
-        public Object Value {
+
+        public T Value
+        {
             get
             {
                 return value;
             }
         }
 
-        private readonly int httpErrorCode;
-        private readonly Object value;
+        private readonly HttpStatusCode httpStatusCode;
+        private readonly T value;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class LatLng
+    public class LatLng
     {
         public LatLng(double lat, double lng)
         {
@@ -11,7 +11,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal LatLng() { }
+        public LatLng() { }
 
         public double? lat;
         public double? lng;

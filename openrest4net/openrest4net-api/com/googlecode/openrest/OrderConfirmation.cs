@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class OrderConfirmation
+    public class OrderConfirmation
     {
         public OrderConfirmation(Order order, String message)
         {
@@ -11,7 +11,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal OrderConfirmation() { }
+        public OrderConfirmation() { }
 
         /** The confirmed order. */
         public Order order;

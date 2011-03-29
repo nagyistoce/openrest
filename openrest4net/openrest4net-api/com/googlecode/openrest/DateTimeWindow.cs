@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class DateTimeWindow
+    public class DateTimeWindow
     {
         public DateTimeWindow(Date start, Date end, bool available)
         {
@@ -12,7 +12,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal DateTimeWindow() { }
+        public DateTimeWindow() { }
 
         public Date start;
         public Date end;

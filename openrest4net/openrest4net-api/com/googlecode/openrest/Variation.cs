@@ -8,7 +8,7 @@ namespace com.googlecode.openrest
      * or "degree of cooking" for a hamburger.
      * @author DL
      */
-    class Variation
+    public class Variation
     {
         public const string VARIATION_DISPLAY_TYPE_DIFF = "diff";
         public const string VARIATION_DISPLAY_TYPE_CHOICE = "choice";
@@ -26,7 +26,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Variation() { }
+        public Variation() { }
 
         /** The variations's name, e.g. "sides", "degree of cooking". */
         public string title;

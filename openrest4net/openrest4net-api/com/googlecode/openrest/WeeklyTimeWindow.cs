@@ -2,7 +2,7 @@
 
 namespace com.googlecode.openrest
 {
-    class WeeklyTimeWindow
+    public class WeeklyTimeWindow
     {
         public WeeklyTimeWindow(int minuteOfWeek, int durationMins)
         {
@@ -11,7 +11,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal WeeklyTimeWindow() { }
+        public WeeklyTimeWindow() { }
 
         public int? minuteOfWeek;
         public int? durationMins;

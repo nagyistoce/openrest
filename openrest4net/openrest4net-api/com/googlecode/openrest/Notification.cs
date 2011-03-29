@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Notification
+    public class Notification
     {
         /** Triggered when a new order is unhandled for some duration. */
         public const string NOTIFICATION_TYPE_DELAYED_ORDER = "delayed_order";
@@ -23,7 +23,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Notification() { }
+        public Notification() { }
 
         public string restaurantId;
         public string type;

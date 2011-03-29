@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Category
+    public class Category
     {
         public Category(string id, string restaurantId, string title, string description,
             string parentCategoryId, IList<string> itemIds, double priority)
@@ -18,7 +18,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Category() { }
+        public Category() { }
 
         /** The category's unique id. */
         public string id;

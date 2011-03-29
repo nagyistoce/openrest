@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Menu
+    public class Menu
     {
         public Menu(IList<Item> items, IList<Tag> tags, IList<Category> categories)
         {
@@ -13,7 +13,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Menu() { }
+        public Menu() { }
 
         public IList<Item> items = new List<Item>();
 

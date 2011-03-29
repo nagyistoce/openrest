@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Delivery
+    public class Delivery
     {
         /** Delivery to an address of your choice. */
         public const string DELIVERY_TYPE_DELIVERY = "delivery";
@@ -21,7 +21,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal Delivery() { }
+        public Delivery() { }
 
         /** Delivery type. */
         public string type;

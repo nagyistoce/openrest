@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class OrderItem
+    public class OrderItem
     {
         public OrderItem(string itemId, IList<Variation> variations, IList<IList<OrderItem>> variationsChoices,
             string comment, int price, int count)
@@ -17,7 +17,7 @@ namespace com.googlecode.openrest
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
-        internal OrderItem() { }
+        public OrderItem() { }
 
         /** Item id. */
         public string itemId;
