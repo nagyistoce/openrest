@@ -44,6 +44,7 @@
     <Compile Include="com\googlecode\openrest\OpenrestClient.cs" />
     <Compile Include="com\googlecode\openrest\RestJsonClient.cs" />
     <Compile Include="com\googlecode\openrest\RestJsonHttpException.cs" />
+    <Compile Include="com\googlecode\openrest\StreamUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

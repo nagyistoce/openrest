@@ -38,12 +38,65 @@ namespace com.googlecode.openrest
 
         public static Image GetImage<T>(Uri uri)
         {
-            throw new NotImplementedException();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Method = "GET";
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        return new Image(response.ContentType, StreamUtils.ReadFully(stream, (int) response.ContentLength));
+                    }
+                }
+
+            }
+            catch (WebException e)
+            {
+                HttpWebResponse response = ((HttpWebResponse)e.Response);
+                throw new RestJsonHttpException<T>(response.StatusCode, StreamToObject<T>(response.GetResponseStream()));
+            }
         }
 
         public static T Put<T>(Uri uri, string imageFilename, Image image)
         {
-            throw new NotImplementedException();
+            string boundary = Utils.ToUnixTime(DateTime.UtcNow).ToString();
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Method = "PUT";
+            request.ContentType = "multipart/form-data; boundary=" + boundary;
+            try
+            {
+                using (Stream stream = request.GetRequestStream())
+                {
+                    using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+                    {
+                        // Send binary file.
+                        writer.WriteLine("--" + boundary);
+                        writer.WriteLine("Content-Disposition: form-data; name=\"source\"; filename=\"" + imageFilename + "\"");
+                        writer.WriteLine("Content-Type: " + image.ContentType);
+                        writer.WriteLine("Content-Transfer-Encoding: binary");
+                        writer.WriteLine();
+                        writer.Flush();
+
+                        stream.Write(image.Content, 0, image.Content.Length);
+                        writer.WriteLine();
+
+                        // End of multipart/form-data.
+                        writer.WriteLine("--" + boundary + "--");
+                    }
+                }
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    return StreamToObject<T>(response.GetResponseStream());
+                }
+            }
+            catch (WebException e)
+            {
+                HttpWebResponse response = ((HttpWebResponse)e.Response);
+                throw new RestJsonHttpException<T>(response.StatusCode, StreamToObject<T>(response.GetResponseStream()));
+            }
         }
 
         private static T Go<T>(Uri uri, string method, object requestObj)
@@ -69,7 +122,6 @@ namespace com.googlecode.openrest
                 {
                     return StreamToObject<T>(response.GetResponseStream());
                 }
-
             }
             catch (WebException e)
             {

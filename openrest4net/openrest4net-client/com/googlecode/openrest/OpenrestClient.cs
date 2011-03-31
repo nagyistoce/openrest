@@ -35,14 +35,13 @@ namespace com.googlecode.openrest
         {
             get
             {
-                return RestJsonClient.GetImage<Response<object>>(new Uri(restaurantUri + "/picture"));
+                return GetImage(new Uri(restaurantUri + "/picture"));
             }
         }
 
         public void SetImage(string imageFilename, Image image)
         {
-            RestJsonClient.Put<Response<object>>(new Uri(restaurantUri + "/picture" + "?access_token=" + accessToken),
-                    imageFilename, image);
+            SetImage(new Uri(restaurantUri + "/picture" + "?access_token=" + accessToken), imageFilename, image);
         }
 
         public void RemoveImage()
@@ -54,14 +53,13 @@ namespace com.googlecode.openrest
         {
             get
             {
-                return RestJsonClient.GetImage<Response<object>>(new Uri(restaurantUri + "/picture?type=icon"));
+                return GetImage(new Uri(restaurantUri + "/picture?type=icon"));
             }
         }
 
         public void SetIcon(string iconFilename, Image icon)
         {
-            RestJsonClient.Put<Response<object>>(new Uri(restaurantUri + "/picture?type=icon" + "&access_token=" + accessToken),
-                    iconFilename, icon);
+            SetImage(new Uri(restaurantUri + "/picture?type=icon" + "&access_token=" + accessToken), iconFilename, icon);
         }
 
         public void RemoveIcon()
@@ -136,14 +134,12 @@ namespace com.googlecode.openrest
 
         public Image ItemImage(string itemId)
         {
-            return RestJsonClient.GetImage<Response<object>>(new Uri(restaurantUri + "/items/" + itemId + "/picture"));
+            return GetImage(new Uri(restaurantUri + "/items/" + itemId + "/picture"));
         }
 
         public void SetItemImage(string itemId, string imageFilename, Image image)
         {
-            RestJsonClient.Put<Response<object>>(
-                new Uri(restaurantUri + "/items/" + itemId + "/picture" + "?access_token=" + accessToken),
-                imageFilename, image);
+            SetImage(new Uri(restaurantUri + "/items/" + itemId + "/picture" + "?access_token=" + accessToken), imageFilename, image);
         }
 
         public void RemoveItemImage(string itemId)
@@ -307,6 +303,46 @@ namespace com.googlecode.openrest
                 RestJsonClient.Delete<Response<object>>(uri);
             }
             catch (RestJsonHttpException<Response<object>> e) {
+                Response<object> response = e.Value;
+                if (response != null)
+                {
+                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+        }
+
+        private static Image GetImage(Uri uri)
+        {
+            try
+            {
+                return RestJsonClient.GetImage<Response<object>>(uri);
+            }
+            catch (RestJsonHttpException<Response<object>> e)
+            {
+                Response<object> response = e.Value;
+                if (response != null)
+                {
+                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                }
+                else
+                {
+                    throw e;
+                }
+            }
+        }
+
+        private static void SetImage(Uri uri, string imageFilename, Image image)
+        {
+            try
+            {
+                RestJsonClient.Put<Response<object>>(uri, imageFilename, image);
+            }
+            catch (RestJsonHttpException<Response<object>> e)
+            {
                 Response<object> response = e.Value;
                 if (response != null)
                 {

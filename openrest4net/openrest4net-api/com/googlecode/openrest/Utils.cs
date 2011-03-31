@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace com.googlecode.openrest
 {
-    class Utils
+    public class Utils
     {
         private Utils() { }
 
