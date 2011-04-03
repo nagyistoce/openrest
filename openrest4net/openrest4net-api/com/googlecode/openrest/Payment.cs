@@ -11,10 +11,12 @@ namespace com.googlecode.openrest
         public const string PAYMENT_TYPE_CASH = "cash";
         /** Credit card payment. */
         public const string PAYMENT_TYPE_CREDIT = "credit";
+        /** Payment by 10bis card (@see www.10bis.co.il). */
+        public const string PAYMENT_TYPE_10BIS = "10bis";
 
         /** All payment methods, in ascending alphabetic order! */
         public static readonly IList<string> ALL_PAYMENT_TYPES =
-            new List<string> { PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT };
+            new List<string> { PAYMENT_TYPE_10BIS, PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT };
 
         public Payment(string type, int amount, CreditCard card)
         {

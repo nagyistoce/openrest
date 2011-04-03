@@ -13,8 +13,9 @@ namespace com.googlecode.openrest
             int deliveryCharge, int minOrderPrice, Address address,
             IList<LatLng> deliveryArea, string welcomeMessage, string confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
-            bool inactive, IList<string> deliveryTypes, string timezone, IList<string> paymentTypes,
-            IDictionary<string, int> minPayments, string link, IDictionary<string, string> properties)
+            bool inactive, IList<string> deliveryTypes, IDictionary<string, int> deliveryMins,
+            string timezone, IList<string> paymentTypes, IDictionary<string, int> minPayments,
+            string link, IDictionary<string, string> properties)
         {
             this.id = id;
             this.name = name;
@@ -31,6 +32,7 @@ namespace com.googlecode.openrest
             this.deliveryTimes = deliveryTimes;
             this.inactive = inactive;
             this.deliveryTypes = deliveryTypes;
+            this.deliveryMins = deliveryMins;
             this.timezone = timezone;
             this.paymentTypes = paymentTypes;
             this.minPayments = minPayments;
@@ -85,6 +87,12 @@ namespace com.googlecode.openrest
 
         /** Available delivery methods. */
         public IList<string> deliveryTypes = Delivery.ALL_DELIVERY_TYPES;
+
+        /**
+         * Maps delivery methods to delivery times (maximum number of minutes till
+         * order arrives).
+         */
+        public IDictionary<string, int> deliveryMins = new Dictionary<string, int>();
 
         /** The current status. */
         public Status status;
