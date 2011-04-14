@@ -11,7 +11,7 @@ namespace com.googlecode.openrest
     public class Item
     {
         public Item(string id, string restaurantId, string title, string description,
-            int price, IList<Variation> variations, Availability availability, bool inactive)
+            int price, IList<Variation> variations, Availability availability, bool inactive, string picture)
         {
             this.id = id;
             this.restaurantId = restaurantId;
@@ -20,6 +20,7 @@ namespace com.googlecode.openrest
             this.variations = variations;
             this.availability = availability;
             this.inactive = inactive;
+            this.picture = picture;
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
@@ -54,5 +55,8 @@ namespace com.googlecode.openrest
 
         /** The current status. */
         public Status status;
+
+        /** Item picture URL (direct link). */
+        public string picture;
     }
 }

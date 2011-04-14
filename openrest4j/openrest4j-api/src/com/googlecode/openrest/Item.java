@@ -17,7 +17,7 @@ public class Item implements Serializable {
     /** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, String title, String description,
             Integer price, List<Variation> variations, Availability availability,
-            Boolean inactive) {
+            Boolean inactive, String picture) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -26,15 +26,16 @@ public class Item implements Serializable {
         this.variations = variations;
         this.availability = availability;
         this.inactive = inactive;
+        this.picture = picture;
     }
 
     /** Constructs a new item to be submitted. */
     public Item(String title, String description, Integer price, List<Variation> variations,
             Availability availability, Boolean inactive) {
-        this(null, null, title, description, price, variations, availability, inactive);
+        this(null, null, title, description, price, variations, availability, inactive, null);
     }
 
-    /** Default constructor for JSON deserialization. */
+	/** Default constructor for JSON deserialization. */
     public Item() {}
 
     /** The item's unique id. */
@@ -72,60 +73,105 @@ public class Item implements Serializable {
     /** Whether the item is deactivated (i.e. suspended or disabled). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
+    
+    /** Item picture URL (direct link). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String picture;
 
     /** The current status. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Status status;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Item other = (Item) obj;
-        if ((this.id == null) ? (other.id != null) : !this.id.equals(other.id)) {
-            return false;
-        }
-        if ((this.restaurantId == null) ? (other.restaurantId != null) : !this.restaurantId.equals(other.restaurantId)) {
-            return false;
-        }
-        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
-            return false;
-        }
-        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
-            return false;
-        }
-        if (this.price != other.price && (this.price == null || !this.price.equals(other.price))) {
-            return false;
-        }
-        if (this.variations != other.variations && (this.variations == null || !this.variations.equals(other.variations))) {
-            return false;
-        }
-        if (this.availability != other.availability && (this.availability == null || !this.availability.equals(other.availability))) {
-            return false;
-        }
-        if (this.inactive != other.inactive && (this.inactive == null || !this.inactive.equals(other.inactive))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 41 * hash + (this.restaurantId != null ? this.restaurantId.hashCode() : 0);
-        hash = 41 * hash + (this.title != null ? this.title.hashCode() : 0);
-        hash = 41 * hash + (this.description != null ? this.description.hashCode() : 0);
-        hash = 41 * hash + (this.price != null ? this.price.hashCode() : 0);
-        hash = 41 * hash + (this.variations != null ? this.variations.hashCode() : 0);
-        hash = 41 * hash + (this.availability != null ? this.availability.hashCode() : 0);
-        hash = 41 * hash + (this.inactive != null ? this.inactive.hashCode() : 0);
-        return hash;
-    }
     
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((availability == null) ? 0 : availability.hashCode());
+		result = prime * result
+				+ ((availabilityStr == null) ? 0 : availabilityStr.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((inactive == null) ? 0 : inactive.hashCode());
+		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result
+				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result
+				+ ((variations == null) ? 0 : variations.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (availability == null) {
+			if (other.availability != null)
+				return false;
+		} else if (!availability.equals(other.availability))
+			return false;
+		if (availabilityStr == null) {
+			if (other.availabilityStr != null)
+				return false;
+		} else if (!availabilityStr.equals(other.availabilityStr))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (inactive == null) {
+			if (other.inactive != null)
+				return false;
+		} else if (!inactive.equals(other.inactive))
+			return false;
+		if (picture == null) {
+			if (other.picture != null)
+				return false;
+		} else if (!picture.equals(other.picture))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
+		if (restaurantId == null) {
+			if (other.restaurantId != null)
+				return false;
+		} else if (!restaurantId.equals(other.restaurantId))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (variations == null) {
+			if (other.variations != null)
+				return false;
+		} else if (!variations.equals(other.variations))
+			return false;
+		return true;
+	}
+
     private static final long serialVersionUID = 1L;
 }

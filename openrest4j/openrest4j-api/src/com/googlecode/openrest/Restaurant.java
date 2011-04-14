@@ -21,7 +21,8 @@ public class Restaurant implements Serializable {
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<String> deliveryTypes, Map<String, Integer> deliveryMins,
             String timezone, List<String> paymentTypes,
-            Map<String, Integer> minPayments, String link, Map<String, String> properties) {
+            Map<String, Integer> minPayments, String link, String picture, String icon,
+            Map<String, String> properties) {
         
         this.id = id;
         this.name = name;
@@ -43,6 +44,8 @@ public class Restaurant implements Serializable {
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
         this.link = link;
+        this.picture = picture;
+        this.icon = icon;
         this.properties = properties;
     }
 
@@ -155,9 +158,17 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, Integer> minPayments = Collections.emptyMap();
 
-    /** Official restaurant web-site. */
+    /** Official restaurant web-site URL. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String link;
+    
+    /** Restaurant picture URL (direct link). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String picture;
+    
+    /** Restaurant icon URL (direct link). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String icon;
     
     /**
      * Map of user-defined extended properties. Developers should use unique

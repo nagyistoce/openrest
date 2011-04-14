@@ -15,7 +15,7 @@ namespace com.googlecode.openrest
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             bool inactive, IList<string> deliveryTypes, IDictionary<string, int> deliveryMins,
             string timezone, IList<string> paymentTypes, IDictionary<string, int> minPayments,
-            string link, IDictionary<string, string> properties)
+            string link, string picture, string icon, IDictionary<string, string> properties)
         {
             this.id = id;
             this.name = name;
@@ -37,6 +37,8 @@ namespace com.googlecode.openrest
             this.paymentTypes = paymentTypes;
             this.minPayments = minPayments;
             this.link = link;
+            this.picture = picture;
+            this.icon = icon;
             this.properties = properties;
         }
 
@@ -122,8 +124,14 @@ namespace com.googlecode.openrest
          */
         public IDictionary<string, int> minPayments = new Dictionary<string, int>();
 
-        /** Official restaurant web-site. */
+        /** Official restaurant web-site URL. */
         public string link;
+
+        /** Restaurant picture URL (direct link). */
+        public string picture;
+    
+        /** Restaurant icon URL (direct link). */
+        public string icon;
     
         /**
          * Map of user-defined extended properties. Developers should use unique

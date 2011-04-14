@@ -7,7 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Status implements Serializable {
-    /** Available. */
+	/** Available. */
     public static final String STATUS_AVAILABLE = "available";
     /** Unavailable. */
     public static final String STATUS_UNAVAILABLE = "unavailable";
@@ -33,6 +33,37 @@ public class Status implements Serializable {
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Long until;
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((until == null) ? 0 : until.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Status other = (Status) obj;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (until == null) {
+			if (other.until != null)
+				return false;
+		} else if (!until.equals(other.until))
+			return false;
+		return true;
+	}
 
     private static final long serialVersionUID = 1L;
 }
