@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author DL
  */
 public class RestJsonHttpException extends IOException {
-    public RestJsonHttpException(int httpErrorCode, Object value) {
+	public RestJsonHttpException(int httpErrorCode, Object value) {
         this.httpErrorCode = httpErrorCode;
         this.value = value;
     }
@@ -22,4 +22,6 @@ public class RestJsonHttpException extends IOException {
 
     private final int httpErrorCode;
     private final Object value;
+    
+	private static final long serialVersionUID = 1L;
 }

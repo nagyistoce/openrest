@@ -105,7 +105,7 @@ public class RestJsonClient {
         if ((httpStatusCode / 100) == 2) { // TODO: 2xx status codes
             final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             try {
-                return (T) streamToObject(br, responseType);
+                return streamToObject(br, responseType);
             } finally {
                 br.close();
             }
@@ -144,9 +144,9 @@ public class RestJsonClient {
         }
     }
 
-    private static <T> Object streamToObject(BufferedReader br, TypeReference<T> responseType) throws IOException {
+    private static <T> T streamToObject(BufferedReader br, TypeReference<T> responseType) throws IOException {
         // Make sure the entire response is read (allows connection reuse)
-        Object response = null;
+        T response = null;
         String line;
         while ((line = br.readLine()) != null) {
             if ((line.length() > 0) && (line.charAt(0) == '{')) {
