@@ -30,6 +30,10 @@ public class OpenrestClient {
         return set(new URL(restaurantUrl.toString() + "?access_token=" + accessToken),
                 restaurant, new TypeReference<Response<Restaurant>>() {});
     }
+    
+    public void removeRestaurant() throws IOException, OpenrestException {
+        remove(new URL(restaurantUrl.toString() + "?access_token=" + accessToken));
+    }
 
     public Image image() throws IOException, OpenrestException {
         return RestJsonClient.getImage(new URL(restaurantUrl.toString() + "/picture"),
