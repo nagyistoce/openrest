@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\googlecode\openrest\Address.cs" />
+    <Compile Include="com\googlecode\openrest\Area.cs" />
     <Compile Include="com\googlecode\openrest\Availability.cs" />
     <Compile Include="com\googlecode\openrest\Category.cs" />
     <Compile Include="com\googlecode\openrest\ColorScheme.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="com\googlecode\openrest\Date.cs" />
     <Compile Include="com\googlecode\openrest\DateTimeWindow.cs" />
     <Compile Include="com\googlecode\openrest\Delivery.cs" />
+    <Compile Include="com\googlecode\openrest\DeliveryInfo.cs" />
     <Compile Include="com\googlecode\openrest\Item.cs" />
     <Compile Include="com\googlecode\openrest\LatLng.cs" />
     <Compile Include="com\googlecode\openrest\Menu.cs" />
