@@ -16,30 +16,26 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant implements Serializable {
     public Restaurant(String id, String name, String description, Contact contact,
-            Integer deliveryCharge, Integer minOrderPrice, Address address,
-            List<LatLng> deliveryArea, String welcomeMessage, String confirmationMessage,
+            Integer deliveryCharge, Address address,
+            String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
-            Boolean inactive, List<String> deliveryTypes, Map<String, Integer> deliveryMins,
-            String timezone, List<String> paymentTypes,
-            Map<String, Integer> minPayments, String link, String picture, String icon,
-            Map<String, String> properties) {
+            Boolean inactive, List<DeliveryInfo> deliveryInfos, String timezone,
+            List<String> paymentTypes, Map<String, Integer> minPayments,
+            String link, String picture, String icon, Map<String, String> properties) {
         
         this.id = id;
         this.name = name;
         this.description = description;
         this.contact = contact;
         this.deliveryCharge = deliveryCharge;
-        this.minOrderPrice = minOrderPrice;
         this.address = address;
-        this.deliveryArea = deliveryArea;
         this.welcomeMessage = welcomeMessage;
         this.confirmationMessage = confirmationMessage;
         this.colorScheme = colorScheme;
         this.openTimes = openTimes;
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
-        this.deliveryTypes = deliveryTypes;
-        this.deliveryMins = deliveryMins;
+        this.deliveryInfos = deliveryInfos;
         this.timezone = timezone;
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
@@ -76,17 +72,9 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer deliveryCharge = 0;
 
-    /** The minimum allowed order price (in "cents"). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Integer minOrderPrice = 0;
-
     /** The address of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Address address;
-
-    /** The delivery area (polygon vertices). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<LatLng> deliveryArea = Collections.emptyList();
 
     /** The restaurant's welcome message. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -112,16 +100,9 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
 
-    /** Available delivery methods. */
+    /** Information regarding the different delivery destinations. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> deliveryTypes = Delivery.ALL_DELIVERY_TYPES;
-    
-    /**
-     * Maps delivery methods to delivery times (maximum number of minutes till
-     * order arrives).
-     */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, Integer> deliveryMins = Collections.emptyMap();
+    public List<DeliveryInfo> deliveryInfos = Collections.emptyList();
 
     /** The current status. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
