@@ -16,8 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant implements Serializable {
     public Restaurant(String id, String name, String description, Contact contact,
-            Integer deliveryCharge, Address address,
-            String welcomeMessage, String confirmationMessage,
+            Address address, String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, String timezone,
             List<String> paymentTypes, Map<String, Integer> minPayments,
@@ -27,7 +26,6 @@ public class Restaurant implements Serializable {
         this.name = name;
         this.description = description;
         this.contact = contact;
-        this.deliveryCharge = deliveryCharge;
         this.address = address;
         this.welcomeMessage = welcomeMessage;
         this.confirmationMessage = confirmationMessage;
@@ -67,10 +65,6 @@ public class Restaurant implements Serializable {
     /** The restaurant's contact. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Contact contact;
-
-    /** The delivery charge (in "cents"). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Integer deliveryCharge = 0;
 
     /** The address of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
