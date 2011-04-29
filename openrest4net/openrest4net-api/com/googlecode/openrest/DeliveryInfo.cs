@@ -10,13 +10,14 @@ namespace com.googlecode.openrest
      */
     public class DeliveryInfo
     {
-        public DeliveryInfo(string type, Area area, int minOrderPrice, int charge, int delayMins)
+        public DeliveryInfo(string type, Area area, int minOrderPrice, int charge, int delayMins, bool inactive)
         {
             this.type = type;
             this.area = area;
             this.minOrderPrice = minOrderPrice;
             this.charge = charge;
             this.delayMins = delayMins;
+            this.inactive = inactive;
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
@@ -36,5 +37,8 @@ namespace com.googlecode.openrest
     
         /** Delivery time (maximum number of minutes till order arrives). */
         public int? delayMins = 0;
+
+        /** Whether the delivery destination is deactivated (i.e. suspended or disabled). */
+        public bool? inactive = false;
     }
 }

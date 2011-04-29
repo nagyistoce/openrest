@@ -11,12 +11,14 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeliveryInfo implements Serializable {
-	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge, Integer delayMins) {
+	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
+			Integer delayMins, Boolean inactive) {
     	this.type = type;
     	this.area = area;
     	this.minOrderPrice = minOrderPrice;
     	this.charge = charge;
     	this.delayMins = delayMins;
+    	this.inactive = inactive;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -42,7 +44,11 @@ public class DeliveryInfo implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer delayMins = 0;
     
-    @Override
+    /** Whether the delivery destination is deactivated (i.e. suspended or disabled). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean inactive = Boolean.FALSE;
+    
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -50,6 +56,8 @@ public class DeliveryInfo implements Serializable {
 		result = prime * result + ((charge == null) ? 0 : charge.hashCode());
 		result = prime * result
 				+ ((delayMins == null) ? 0 : delayMins.hashCode());
+		result = prime * result
+				+ ((inactive == null) ? 0 : inactive.hashCode());
 		result = prime * result
 				+ ((minOrderPrice == null) ? 0 : minOrderPrice.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -80,6 +88,11 @@ public class DeliveryInfo implements Serializable {
 				return false;
 		} else if (!delayMins.equals(other.delayMins))
 			return false;
+		if (inactive == null) {
+			if (other.inactive != null)
+				return false;
+		} else if (!inactive.equals(other.inactive))
+			return false;
 		if (minOrderPrice == null) {
 			if (other.minOrderPrice != null)
 				return false;
@@ -92,6 +105,6 @@ public class DeliveryInfo implements Serializable {
 			return false;
 		return true;
 	}
-    
+
 	private static final long serialVersionUID = 1L;
 }
