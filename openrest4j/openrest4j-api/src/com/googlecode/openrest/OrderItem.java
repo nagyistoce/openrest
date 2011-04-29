@@ -26,7 +26,12 @@ public class OrderItem implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String itemId;
 
-    /** The ordered-item's variations. */
+    /**
+     * The ordered-item's variations.
+     * 
+     * Submitting an OrderItem with empty variations means the defaults should be assumed
+     * for variationsChoices.
+     */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<Variation> variations = Collections.emptyList();
 

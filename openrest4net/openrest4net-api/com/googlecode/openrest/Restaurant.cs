@@ -10,29 +10,24 @@ namespace com.googlecode.openrest
     public class Restaurant
     {
         public Restaurant(string id, string name, string description, Contact contact,
-            int deliveryCharge, int minOrderPrice, Address address,
-            IList<LatLng> deliveryArea, string welcomeMessage, string confirmationMessage,
+            Address address, string welcomeMessage, string confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
-            bool inactive, IList<string> deliveryTypes, IDictionary<string, int> deliveryMins,
-            string timezone, IList<string> paymentTypes, IDictionary<string, int> minPayments,
+            bool inactive, IList<DeliveryInfo> deliveryInfos, string timezone,
+            IList<string> paymentTypes, IDictionary<string, int> minPayments,
             string link, string picture, string icon, IDictionary<string, string> properties)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.contact = contact;
-            this.deliveryCharge = deliveryCharge;
-            this.minOrderPrice = minOrderPrice;
             this.address = address;
-            this.deliveryArea = deliveryArea;
             this.welcomeMessage = welcomeMessage;
             this.confirmationMessage = confirmationMessage;
             this.colorScheme = colorScheme;
             this.openTimes = openTimes;
             this.deliveryTimes = deliveryTimes;
             this.inactive = inactive;
-            this.deliveryTypes = deliveryTypes;
-            this.deliveryMins = deliveryMins;
+            this.deliveryInfos = deliveryInfos;
             this.timezone = timezone;
             this.paymentTypes = paymentTypes;
             this.minPayments = minPayments;
@@ -57,17 +52,8 @@ namespace com.googlecode.openrest
         /** The restaurant's contact. */
         public Contact contact;
 
-        /** The delivery charge (in "cents"). */
-        public int? deliveryCharge = 0;
-
-        /** The minimum allowed order price (in "cents"). */
-        public int? minOrderPrice = 0;
-
         /** The address of this restaurant. */
         public Address address;
-
-        /** The delivery area (polygon vertices). */
-        public IList<LatLng> deliveryArea = new List<LatLng>();
 
         /** The restaurant's welcome message. */
         public string welcomeMessage;
@@ -87,14 +73,8 @@ namespace com.googlecode.openrest
         /** Whether the restaurant is deactivated (i.e. suspended or disabled). */
         public bool? inactive = false;
 
-        /** Available delivery methods. */
-        public IList<string> deliveryTypes = Delivery.ALL_DELIVERY_TYPES;
-
-        /**
-         * Maps delivery methods to delivery times (maximum number of minutes till
-         * order arrives).
-         */
-        public IDictionary<string, int> deliveryMins = new Dictionary<string, int>();
+        /** Information regarding the different delivery destinations. */
+        public IList<DeliveryInfo> deliveryInfos = new List<DeliveryInfo>();
 
         /** The current status. */
         public Status status;

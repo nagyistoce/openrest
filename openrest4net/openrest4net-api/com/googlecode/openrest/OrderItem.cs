@@ -22,7 +22,12 @@ namespace com.googlecode.openrest
         /** Item id. */
         public string itemId;
 
-        /** The ordered-item's variations. */
+        /**
+         * The ordered-item's variations.
+         * 
+         * Submitting an OrderItem with empty variations means the defaults should be assumed
+         * for variationsChoices.
+         */
         public IList<Variation> variations = new List<Variation>();
 
         /** The ordered-item's chosen variations. */
