@@ -193,9 +193,35 @@ public class OpenrestClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public List<Order> orders() throws IOException, OpenrestException {
-        return get(new URL(restaurantUrl.toString() + "/orders/" +
-                ((accessToken != null) ? ("?access_token=" + accessToken) : "")),
+    public List<Order> orders(String status, java.util.Date since, java.util.Date until, String userId,
+    		String ordering, Integer limit, Boolean restaurantView) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	if (status != null) {
+    		query.append("status", status);
+    	}
+    	if (since != null) {
+    		query.append("since", Long.toString(since.getTime()));
+    	}
+    	if (until != null) {
+    		query.append("until", Long.toString(until.getTime()));
+    	}
+    	if (userId != null) {
+    		query.append("userId", userId);
+    	}
+    	if (ordering != null) {
+    		query.append("ordering", ordering);
+    	}
+    	if (limit != null) {
+    		query.append("limit", limit.toString());
+    	}
+    	if (restaurantView != null) {
+    		query.append("restaurantView", restaurantView.toString());
+    	}
+    	if (accessToken != null) {
+    		query.append("access_token", accessToken);
+    	}
+    	
+        return get(new URL(restaurantUrl.toString() + "/orders/" + query.toString()),
                 new TypeReference<Response<List<Order>>>() {});
     }
 

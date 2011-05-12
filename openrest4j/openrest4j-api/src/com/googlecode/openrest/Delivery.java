@@ -19,9 +19,10 @@ public class Delivery implements Serializable {
         DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT
     });
 
-    public Delivery(String type, Address address) {
+    public Delivery(String type, Address address, Integer charge) {
         this.type = type;
         this.address = address;
+        this.charge = charge;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -34,6 +35,10 @@ public class Delivery implements Serializable {
     /** Address to deliver to (valid only if type is DELIVERY_TYPE_DELIVERY) */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Address address;
+    
+    /** The delivery charge (in "cents"). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Integer charge = 0;
 
     private static final long serialVersionUID = 1L;
 }

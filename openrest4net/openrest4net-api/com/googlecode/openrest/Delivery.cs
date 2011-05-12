@@ -14,10 +14,11 @@ namespace com.googlecode.openrest
         public static readonly IList<string> ALL_DELIVERY_TYPES =
             new List<string> { DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT };
 
-        public Delivery(string type, Address address)
+        public Delivery(string type, Address address, int charge)
         {
             this.type = type;
             this.address = address;
+            this.charge = charge;
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
@@ -28,5 +29,8 @@ namespace com.googlecode.openrest
 
         /** Address to deliver to (valid only if type is DELIVERY_TYPE_DELIVERY) */
         public Address address;
+
+        /** The delivery charge (in "cents"). */
+        public int? charge = 0;
     }
 }
