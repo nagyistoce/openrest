@@ -25,7 +25,7 @@ public class Order implements Serializable {
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             java.util.Date created, java.util.Date modified, User user, String status,
-            String shareToken) {
+            String shareToken, String affiliate, String ref) {
 
         this.id = id;
         this.restaurantId = restaurantId;
@@ -40,13 +40,16 @@ public class Order implements Serializable {
         this.user = user;
         this.status = status;
         this.shareToken = shareToken;
+        this.affiliate = affiliate;
+        this.ref = ref;
     }
 
     /** Constructs a new order to be submitted. */
     public Order(List<OrderItem> orderItems, String comment, Integer price,
-            Delivery delivery, Contact contact, List<Payment> payments) {
+            Delivery delivery, Contact contact, List<Payment> payments,
+            String affiliate, String ref) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-                null, null, null, null, null);
+                null, null, null, null, null, affiliate, ref);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -111,6 +114,17 @@ public class Order implements Serializable {
     /** The order's share-token. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String shareToken;
+    
+    /** Affiliate-id, for orders that came through affiliate marketing. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String affiliate;
+    
+    /**
+     * Affiliate-specific referrer-id for performance tracking, e.g. 
+     * Facebook campaign id, iPhone application id, self-service station id.
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String ref;
 
     private static final long serialVersionUID = 1L;
 }
