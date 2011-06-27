@@ -24,8 +24,8 @@ public class Order implements Serializable {
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            java.util.Date created, java.util.Date modified, User user, String status,
-            String shareToken, String affiliate, String ref) {
+            Integer takeoutPacks, java.util.Date created, java.util.Date modified,
+            User user, String status, String shareToken, String affiliate, String ref) {
 
         this.id = id;
         this.restaurantId = restaurantId;
@@ -35,6 +35,7 @@ public class Order implements Serializable {
         this.delivery = delivery;
         this.contact = contact;
         this.payments = payments;
+        this.takeoutPacks = takeoutPacks;
         this.created = ((created != null) ? created.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
         this.user = user;
@@ -47,9 +48,9 @@ public class Order implements Serializable {
     /** Constructs a new order to be submitted. */
     public Order(List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
-            String affiliate, String ref) {
+            Integer takeoutPacks, String affiliate, String ref) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-                null, null, null, null, null, affiliate, ref);
+        		takeoutPacks, null, null, null, null, null, affiliate, ref);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -94,6 +95,12 @@ public class Order implements Serializable {
     /* Payments. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<Payment> payments = Collections.emptyList();
+
+    /**
+     * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
+     * For environmental reasons, clients should be encouraged to set this to 0.
+     */
+    public Integer takeoutPacks;
 
     /** The order's creation timestamp. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
