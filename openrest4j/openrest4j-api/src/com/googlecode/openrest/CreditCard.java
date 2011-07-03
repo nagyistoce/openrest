@@ -6,8 +6,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreditCard implements Serializable {
-    public CreditCard(String number, Integer expireMonth, Integer expireYear,
+public class CreditCard implements Serializable, Cloneable {
+	public CreditCard(String number, Integer expireMonth, Integer expireYear,
             String holderId, String holderName, Boolean anonymized) {
         this.number = number;
         this.expireMonth = expireMonth;
@@ -19,6 +19,11 @@ public class CreditCard implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public CreditCard() {}
+    
+    @Override
+	public Object clone() {
+    	return new CreditCard(number, expireMonth, expireYear, holderId, holderName, anonymized);
+	}
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String number;
