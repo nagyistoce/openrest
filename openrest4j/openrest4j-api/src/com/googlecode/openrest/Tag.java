@@ -13,6 +13,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tag implements Serializable {
+	/** Inclusive: tag refers to given items. */
+	public static final String TAG_MODE_INCLUDE = "include";
+    /** Exclusive: tag refers to anything but the given items. */
+    public static final String TAG_MODE_EXCLUDE = "exclude";	
+	
     /** Constructs a previously submitted tag from persisted data. */
     public Tag(String id, String restaurantId, String title, List<String> itemIds) {
         this.id = id;
