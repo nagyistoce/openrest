@@ -1,10 +1,13 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -14,6 +17,11 @@ public class Staff implements Serializable {
     public static final String STAFF_ADMIN = "admin";
     public static final String STAFF_MANAGER = "manager";
     public static final String STAFF_EMPLOYEE = "employee";
+    
+    /** All known staff types. */
+    public static final Set<String> ALL_STAFFS = new HashSet<String>(Arrays.asList(new String[] {
+    		STAFF_ADMIN, STAFF_MANAGER, STAFF_EMPLOYEE
+    }));
 
     public Staff(Map<String, List<String>> staff) {
         this.staff = staff;

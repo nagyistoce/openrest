@@ -1,8 +1,11 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -20,11 +23,16 @@ public class Order implements Serializable {
     public static final String ORDER_STATUS_ACCEPTED = "accepted";
     /** The order has been canceled. */
     public static final String ORDER_STATUS_CANCELLED = "canceled";
+    
+    /** All known order statuses. */
+    public static final Set<String> ALL_ORDER_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
+    		ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
+    }));
 
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, java.util.Date created, java.util.Date modified,
+            Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
             User user, String status, String shareToken, String affiliate, String ref) {
 
         this.id = id;
@@ -36,6 +44,7 @@ public class Order implements Serializable {
         this.contact = contact;
         this.payments = payments;
         this.takeoutPacks = takeoutPacks;
+        this.charges = charges;
         this.created = ((created != null) ? created.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
         this.user = user;
@@ -48,9 +57,9 @@ public class Order implements Serializable {
     /** Constructs a new order to be submitted. */
     public Order(List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, String affiliate, String ref) {
+            Integer takeoutPacks, List<Charge> charges, String affiliate, String ref) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-        		takeoutPacks, null, null, null, null, null, affiliate, ref);
+        		takeoutPacks, charges, null, null, null, null, null, affiliate, ref);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -101,6 +110,13 @@ public class Order implements Serializable {
      * For environmental reasons, clients should be encouraged to set this to 0.
      */
     public Integer takeoutPacks;
+    
+    /**
+	 * Extra charges or discounts associated with the order, ordered by priority
+	 * in descending order.
+	 */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<Charge> charges = Collections.emptyList();
 
     /** The order's creation timestamp. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

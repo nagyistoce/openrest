@@ -1,9 +1,12 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -17,6 +20,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Variation implements Serializable {
     public static final String VARIATION_DISPLAY_TYPE_DIFF = "diff";
     public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
+    
+    /** All known variation display types. */
+    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    		VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE
+    }));
 
     public Variation(String title, String tagId, Integer minNumAllowed, Integer maxNumAllowed,
             Map<String, Integer> prices, List<String> defaults, String displayType) {

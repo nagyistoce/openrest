@@ -1,6 +1,7 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,7 @@ public class Restaurant implements Serializable {
 
     /** Available payment methods. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> paymentTypes = Payment.ALL_PAYMENT_TYPES;
+    public List<String> paymentTypes = new ArrayList<String>(Payment.ALL_PAYMENT_TYPES);
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.

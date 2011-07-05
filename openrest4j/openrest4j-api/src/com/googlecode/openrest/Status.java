@@ -1,6 +1,9 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,6 +14,11 @@ public class Status implements Serializable {
     public static final String STATUS_AVAILABLE = "available";
     /** Unavailable. */
     public static final String STATUS_UNAVAILABLE = "unavailable";
+    
+    /** All known statuses. */
+    public static final Set<String> ALL_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
+    		STATUS_AVAILABLE, STATUS_UNAVAILABLE
+    }));
 
     public Status(String status, java.util.Date until) {
         this.status = status;

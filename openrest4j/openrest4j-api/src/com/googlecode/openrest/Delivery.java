@@ -2,7 +2,8 @@ package com.googlecode.openrest;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -14,10 +15,10 @@ public class Delivery implements Serializable {
     /** Take-out from the restaurant. */
     public static final String DELIVERY_TYPE_TAKEOUT = "takeout";
 
-    /** All delivery methods, in ascending alphabetic order! */
-    public static final List<String> ALL_DELIVERY_TYPES = Arrays.asList(new String[] {
+    /** All known delivery methods. */
+    public static final Set<String> ALL_DELIVERY_TYPES = new HashSet<String>(Arrays.asList(new String[] {
         DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT
-    });
+    }));
 
     public Delivery(String type, Address address, Integer charge) {
         this.type = type;

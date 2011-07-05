@@ -1,6 +1,9 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -9,6 +12,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class ColorScheme implements Serializable {
     public static final String THEME_LIGHT = "light";
     public static final String THEME_DARK = "dark";
+    
+    /** All known themes. */
+    public static final Set<String> ALL_THEMES = new HashSet<String>(Arrays.asList(new String[] {
+    		THEME_LIGHT, THEME_DARK
+    }));
 
     public ColorScheme(String theme, String background, String font, String border,
             String imageBackground, String imageBorder,

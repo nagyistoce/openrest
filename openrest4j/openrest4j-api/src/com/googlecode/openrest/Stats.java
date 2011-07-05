@@ -1,6 +1,9 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,6 +14,11 @@ public class Stats implements Serializable {
     public static final String STATS_GRANULARITY_WEEK = "week";
     public static final String STATS_GRANULARITY_MONTH = "month";
     public static final String STATS_GRANULARITY_YEAR = "year";
+    
+    /** All known stats granularities. */
+    public static final Set<String> ALL_STATS_GRANULARITIES = new HashSet<String>(Arrays.asList(new String[] {
+    		STATS_GRANULARITY_DAY, STATS_GRANULARITY_WEEK, STATS_GRANULARITY_MONTH, STATS_GRANULARITY_YEAR
+    }));
 
     public Stats(Date date, Integer count, Integer total) {
         this.date = date;

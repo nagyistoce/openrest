@@ -1,8 +1,11 @@
 package com.googlecode.openrest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -16,7 +19,12 @@ public class Tag implements Serializable {
 	/** Inclusive: tag refers to given items. */
 	public static final String TAG_MODE_INCLUDE = "include";
     /** Exclusive: tag refers to anything but the given items. */
-    public static final String TAG_MODE_EXCLUDE = "exclude";	
+    public static final String TAG_MODE_EXCLUDE = "exclude";
+    
+    /** All known tag modes */
+    public static final Set<String> ALL_TAG_MODES = new HashSet<String>(Arrays.asList(new String[] {
+    		TAG_MODE_INCLUDE, TAG_MODE_EXCLUDE
+    }));
 	
     /** Constructs a previously submitted tag from persisted data. */
     public Tag(String id, String restaurantId, String title, List<String> itemIds) {
