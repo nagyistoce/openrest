@@ -101,8 +101,10 @@ public class Charge implements Serializable {
     public String amountRuleType = AMOUNT_RULE_TYPE_VARIABLE;
     
     /**
-     * Charge amount rule (cents for fixed amounts, percentage for percentage
+     * Charge amount rule (cents for fixed amounts, basis points for percentage
      * amounts, undefined for variable amounts).
+     * 
+     * Basis points are 1/100th of a percentage, e.g. -500 bp referes to 5% discount. 
      * 
      * Positive numbers are extra charges, negatives are discounts.
      */
