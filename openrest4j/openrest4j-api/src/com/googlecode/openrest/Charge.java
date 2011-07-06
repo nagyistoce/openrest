@@ -45,7 +45,7 @@ public class Charge implements Serializable {
     /** Constructs a previously submitted charge from persisted data. */
     public Charge(String id, String restaurantId, String type, Double priority, String code,
     		String tagId, String tagMode,
-    		String amountRuleType, Integer amountRule, Integer amount) {
+    		String amountRuleType, Integer amountRule, Coupon coupon, Integer amount) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -55,14 +55,15 @@ public class Charge implements Serializable {
         this.tagMode = tagMode;
         this.amountRuleType = amountRuleType;
         this.amountRule = amountRule;
+        this.coupon = coupon;
         this.amount = amount;
     }
     
     /** Constructs a new charge to be submitted. */
     public Charge(String type, Double priority, String code,
     		String tagId, String tagMode,
-    		String amountRuleType, Integer amountRule) {
-    	this(null, null, type, priority, code, tagId, tagMode, amountRuleType, amountRule, null);
+    		String amountRuleType, Integer amountRule, Coupon coupon) {
+    	this(null, null, type, priority, code, tagId, tagMode, amountRuleType, amountRule, coupon, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -80,7 +81,7 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String type;
 
-    /** Charge priority. Higher means first in the list. */
+    /** Charge priority. Lower numbers appear first in the list. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Double priority = 0.0;
     

@@ -53,7 +53,7 @@ public class Category implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<String> itemIds = Collections.emptyList();
 
-    /** Order priority. Higher means first in the list. */
+    /** Order priority. Lower numbers appear first in the list. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Double priority = 0.0;
     
