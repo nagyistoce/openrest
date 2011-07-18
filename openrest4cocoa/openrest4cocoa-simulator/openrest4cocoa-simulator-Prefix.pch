@@ -1,0 +1,6 @@
+//
+// Prefix header for all source files of the 'openrest4cocoa-simulator' target in the 'openrest4cocoa-simulator' project
+//
+
+#ifdef __OBJC__
+#endif

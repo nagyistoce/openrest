@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		601A87951371562A00CA6F7E /* DeliveryInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87931371562A00CA6F7E /* DeliveryInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87961371562A00CA6F7E /* DeliveryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87941371562A00CA6F7E /* DeliveryInfo.m */; };
+		601A87991371585B00CA6F7E /* Area.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87971371585B00CA6F7E /* Area.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A879A1371585B00CA6F7E /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87981371585B00CA6F7E /* Area.m */; };
+		601A879D137160BB00CA6F7E /* WeeklyTimeWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A879B137160BA00CA6F7E /* WeeklyTimeWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A879E137160BB00CA6F7E /* WeeklyTimeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A879C137160BB00CA6F7E /* WeeklyTimeWindow.m */; };
+		601A87A11371615E00CA6F7E /* DateTimeWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A879F1371615B00CA6F7E /* DateTimeWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87A21371615E00CA6F7E /* DateTimeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A01371615C00CA6F7E /* DateTimeWindow.m */; };
+		601A87A5137164CF00CA6F7E /* Menu.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87A3137164C600CA6F7E /* Menu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87A6137164CF00CA6F7E /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A4137164CB00CA6F7E /* Menu.m */; };
+		601A87A91371663100CA6F7E /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87A71371662A00CA6F7E /* Utils.h */; settings = {ATTRIBUTES = (); }; };
+		601A87AA1371663100CA6F7E /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A81371662E00CA6F7E /* Utils.m */; };
+		601A87AD137169C900CA6F7E /* Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87AB137169BB00CA6F7E /* Item.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87AE137169C900CA6F7E /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87AC137169C300CA6F7E /* Item.m */; };
+		601A87B113716D0D00CA6F7E /* Variation.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87AF13716CFF00CA6F7E /* Variation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87B213716D0D00CA6F7E /* Variation.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B013716D0600CA6F7E /* Variation.m */; };
+		601A87B513716F8300CA6F7E /* Tag.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87B313716F7000CA6F7E /* Tag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87B613716F8300CA6F7E /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B413716F7900CA6F7E /* Tag.m */; };
+		601A87B9137170D200CA6F7E /* Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87B7137170BD00CA6F7E /* Category.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87BA137170D200CA6F7E /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B8137170C700CA6F7E /* Category.m */; };
+		601A87CF1371784C00CA6F7E /* Order.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87CD1371784600CA6F7E /* Order.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87D01371784C00CA6F7E /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87CE1371784900CA6F7E /* Order.m */; };
+		601A87D313717CE800CA6F7E /* Delivery.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D113717CDF00CA6F7E /* Delivery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87D413717CE800CA6F7E /* Delivery.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87D213717CE400CA6F7E /* Delivery.m */; };
+		601A87D713717EB600CA6F7E /* OrderItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D513717EA900CA6F7E /* OrderItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87D813717EB600CA6F7E /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87D613717EB100CA6F7E /* OrderItem.m */; };
+		601A87DB13737A5200CA6F7E /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D913737A4300CA6F7E /* Payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87DC13737A5200CA6F7E /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87DA13737A4A00CA6F7E /* Payment.m */; };
+		601A87DF13737A8900CA6F7E /* CreditCard.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87DD13737A7600CA6F7E /* CreditCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87E013737A8900CA6F7E /* CreditCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87DE13737A8200CA6F7E /* CreditCard.m */; };
+		601A87E313737D3300CA6F7E /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87E113737D1900CA6F7E /* User.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		601A87E413737D3300CA6F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87E213737D2500CA6F7E /* User.m */; };
+		604C1EC6136474FC008EFC19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 604C1EC4136474FC008EFC19 /* InfoPlist.strings */; };
+		604C1ED313647668008EFC19 /* OpenrestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED213647668008EFC19 /* OpenrestClient.m */; };
+		604C1EE213647675008EFC19 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED513647675008EFC19 /* Address.m */; };
+		604C1EE413647675008EFC19 /* ColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED913647675008EFC19 /* ColorScheme.m */; };
+		604C1EE513647675008EFC19 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDB13647675008EFC19 /* Contact.m */; };
+		604C1EE613647675008EFC19 /* LatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDD13647675008EFC19 /* LatLng.m */; };
+		604C1EE713647675008EFC19 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDF13647675008EFC19 /* Restaurant.m */; };
+		604C1EE813647675008EFC19 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EE113647675008EFC19 /* Status.m */; };
+		604C1EEA136476C9008EFC19 /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED413647675008EFC19 /* Address.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EEC136476D7008EFC19 /* ColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED813647675008EFC19 /* ColorScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EED136476DA008EFC19 /* Contact.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDA13647675008EFC19 /* Contact.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EEE136476DC008EFC19 /* LatLng.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDC13647675008EFC19 /* LatLng.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EEF136476DE008EFC19 /* Restaurant.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDE13647675008EFC19 /* Restaurant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EF0136476E0008EFC19 /* Status.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EE013647675008EFC19 /* Status.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1EF1136476E4008EFC19 /* OpenrestClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED113647668008EFC19 /* OpenrestClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		604C1F8E13647A6C008EFC19 /* OpenrestAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */; };
+		604C1F8F13647A90008EFC19 /* OpenrestAvailability.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED613647675008EFC19 /* OpenrestAvailability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6057A5E41394FBED00406F81 /* Stats.h in Headers */ = {isa = PBXBuildFile; fileRef = 6057A5E21394FBED00406F81 /* Stats.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6057A5E51394FBED00406F81 /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 6057A5E31394FBED00406F81 /* Stats.m */; };
+		6057A5E91394FC6900406F81 /* OpenRestDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6057A5E71394FC6700406F81 /* OpenRestDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6057A5EA1394FC6900406F81 /* OpenRestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6057A5E81394FC6800406F81 /* OpenRestDate.m */; };
+		6057A5EB1394FF2200406F81 /* Stats.h in Headers */ = {isa = PBXBuildFile; fileRef = 6057A5E21394FBED00406F81 /* Stats.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6057A5EC1394FF2200406F81 /* OpenRestDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6057A5E71394FC6700406F81 /* OpenRestDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6057A5ED139506CB00406F81 /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 6057A5E31394FBED00406F81 /* Stats.m */; };
+		6057A5EE139506CB00406F81 /* OpenRestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6057A5E81394FC6800406F81 /* OpenRestDate.m */; };
+		605B8D9E13745659003855D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 605B8D9C13745659003855D6 /* InfoPlist.strings */; };
+		605B8DA6137458E0003855D6 /* Address.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED413647675008EFC19 /* Address.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DA9137458FF003855D6 /* OpenrestAvailability.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED613647675008EFC19 /* OpenrestAvailability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DAA137458FF003855D6 /* ColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED813647675008EFC19 /* ColorScheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DAC137458FF003855D6 /* Contact.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDA13647675008EFC19 /* Contact.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DAE137458FF003855D6 /* LatLng.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDC13647675008EFC19 /* LatLng.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DB0137458FF003855D6 /* Restaurant.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EDE13647675008EFC19 /* Restaurant.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DB213745900003855D6 /* Status.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1EE013647675008EFC19 /* Status.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DB413745900003855D6 /* DeliveryInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87931371562A00CA6F7E /* DeliveryInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DB613745900003855D6 /* Area.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87971371585B00CA6F7E /* Area.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DB813745900003855D6 /* WeeklyTimeWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A879B137160BA00CA6F7E /* WeeklyTimeWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DBA13745900003855D6 /* DateTimeWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A879F1371615B00CA6F7E /* DateTimeWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DBC13745900003855D6 /* Menu.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87A3137164C600CA6F7E /* Menu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DBE13745900003855D6 /* Item.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87AB137169BB00CA6F7E /* Item.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DC013745900003855D6 /* Variation.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87AF13716CFF00CA6F7E /* Variation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DC213745900003855D6 /* Tag.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87B313716F7000CA6F7E /* Tag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DC413745900003855D6 /* Category.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87B7137170BD00CA6F7E /* Category.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DC613745900003855D6 /* Order.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87CD1371784600CA6F7E /* Order.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DC813745900003855D6 /* Delivery.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D113717CDF00CA6F7E /* Delivery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DCA13745900003855D6 /* OrderItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D513717EA900CA6F7E /* OrderItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DCC13745900003855D6 /* Payment.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87D913737A4300CA6F7E /* Payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DCE13745900003855D6 /* CreditCard.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87DD13737A7600CA6F7E /* CreditCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DD013745900003855D6 /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87E113737D1900CA6F7E /* User.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DD213745900003855D6 /* OpenrestResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 6072FA0713741572000ECDB6 /* OpenrestResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605B8DD513745938003855D6 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED513647675008EFC19 /* Address.m */; };
+		605B8DD613745938003855D6 /* OpenrestAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */; };
+		605B8DD913745938003855D6 /* ColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED913647675008EFC19 /* ColorScheme.m */; };
+		605B8DDB13745938003855D6 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDB13647675008EFC19 /* Contact.m */; };
+		605B8DDD13745938003855D6 /* LatLng.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDD13647675008EFC19 /* LatLng.m */; };
+		605B8DDF13745938003855D6 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EDF13647675008EFC19 /* Restaurant.m */; };
+		605B8DE113745938003855D6 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1EE113647675008EFC19 /* Status.m */; };
+		605B8DE313745938003855D6 /* DeliveryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87941371562A00CA6F7E /* DeliveryInfo.m */; };
+		605B8DE513745938003855D6 /* Area.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87981371585B00CA6F7E /* Area.m */; };
+		605B8DE713745938003855D6 /* WeeklyTimeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A879C137160BB00CA6F7E /* WeeklyTimeWindow.m */; };
+		605B8DE913745938003855D6 /* DateTimeWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A01371615C00CA6F7E /* DateTimeWindow.m */; };
+		605B8DEB13745938003855D6 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A4137164CB00CA6F7E /* Menu.m */; };
+		605B8DED13745938003855D6 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87AC137169C300CA6F7E /* Item.m */; };
+		605B8DEF13745938003855D6 /* Variation.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B013716D0600CA6F7E /* Variation.m */; };
+		605B8DF113745938003855D6 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B413716F7900CA6F7E /* Tag.m */; };
+		605B8DF313745938003855D6 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87B8137170C700CA6F7E /* Category.m */; };
+		605B8DF513745938003855D6 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87CE1371784900CA6F7E /* Order.m */; };
+		605B8DF713745938003855D6 /* Delivery.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87D213717CE400CA6F7E /* Delivery.m */; };
+		605B8DF913745938003855D6 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87D613717EB100CA6F7E /* OrderItem.m */; };
+		605B8DFB13745938003855D6 /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87DA13737A4A00CA6F7E /* Payment.m */; };
+		605B8DFD13745938003855D6 /* CreditCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87DE13737A8200CA6F7E /* CreditCard.m */; };
+		605B8DFF13745938003855D6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87E213737D2500CA6F7E /* User.m */; };
+		605B8E0113745938003855D6 /* OpenrestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6072FA0813741572000ECDB6 /* OpenrestResult.m */; };
+		605B8E02137459EE003855D6 /* OpenrestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED213647668008EFC19 /* OpenrestClient.m */; };
+		605B8E0513745A56003855D6 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FA13648759001C0B8F /* NSObject+SBJSON.m */; };
+		605B8E0713745A56003855D6 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FC13648759001C0B8F /* NSString+SBJSON.m */; };
+		605B8E0913745A56003855D6 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FE13648759001C0B8F /* NSString+URLEncoding.m */; };
+		605B8E0B13745A56003855D6 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40EE1364874A001C0B8F /* SBJsonBase.m */; };
+		605B8E0D13745A56003855D6 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F01364874A001C0B8F /* SBJsonParser.m */; };
+		605B8E0F13745A56003855D6 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F21364874A001C0B8F /* SBJsonWriter.m */; };
+		605B8E1013745A6B003855D6 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A81371662E00CA6F7E /* Utils.m */; };
+		6072FA0913741572000ECDB6 /* OpenrestResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 6072FA0713741572000ECDB6 /* OpenrestResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6072FA0A13741572000ECDB6 /* OpenrestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6072FA0813741572000ECDB6 /* OpenrestResult.m */; };
+		609E10DE13CC722F00F77E1E /* Charge.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10DC13CC722F00F77E1E /* Charge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609E10DF13CC722F00F77E1E /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10DD13CC722F00F77E1E /* Charge.m */; };
+		609E10E313CC76DE00F77E1E /* Coupon.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10E113CC76DD00F77E1E /* Coupon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609E10E413CC76DE00F77E1E /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10E213CC76DD00F77E1E /* Coupon.m */; };
+		60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40ED1364874A001C0B8F /* SBJsonBase.h */; settings = {ATTRIBUTES = (); }; };
+		60FD40F41364874A001C0B8F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40EE1364874A001C0B8F /* SBJsonBase.m */; };
+		60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40EF1364874A001C0B8F /* SBJsonParser.h */; settings = {ATTRIBUTES = (); }; };
+		60FD40F61364874A001C0B8F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F01364874A001C0B8F /* SBJsonParser.m */; };
+		60FD40F71364874A001C0B8F /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40F11364874A001C0B8F /* SBJsonWriter.h */; settings = {ATTRIBUTES = (); }; };
+		60FD40F81364874A001C0B8F /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F21364874A001C0B8F /* SBJsonWriter.m */; };
+		60FD40FF13648759001C0B8F /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40F913648759001C0B8F /* NSObject+SBJSON.h */; settings = {ATTRIBUTES = (); }; };
+		60FD410013648759001C0B8F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FA13648759001C0B8F /* NSObject+SBJSON.m */; };
+		60FD410113648759001C0B8F /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40FB13648759001C0B8F /* NSString+SBJSON.h */; settings = {ATTRIBUTES = (); }; };
+		60FD410213648759001C0B8F /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FC13648759001C0B8F /* NSString+SBJSON.m */; };
+		60FD410313648759001C0B8F /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40FD13648759001C0B8F /* NSString+URLEncoding.h */; settings = {ATTRIBUTES = (); }; };
+		60FD410413648759001C0B8F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40FE13648759001C0B8F /* NSString+URLEncoding.m */; };
+		60FD4106136487C2001C0B8F /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD4105136487C2001C0B8F /* JSON.h */; settings = {ATTRIBUTES = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		601A87931371562A00CA6F7E /* DeliveryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryInfo.h; path = "openrest4cocoa-api/DeliveryInfo.h"; sourceTree = "<group>"; };
+		601A87941371562A00CA6F7E /* DeliveryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryInfo.m; path = "openrest4cocoa-api/DeliveryInfo.m"; sourceTree = "<group>"; };
+		601A87971371585B00CA6F7E /* Area.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Area.h; path = "openrest4cocoa-api/Area.h"; sourceTree = "<group>"; };
+		601A87981371585B00CA6F7E /* Area.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Area.m; path = "openrest4cocoa-api/Area.m"; sourceTree = "<group>"; };
+		601A879B137160BA00CA6F7E /* WeeklyTimeWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeeklyTimeWindow.h; path = "openrest4cocoa-api/WeeklyTimeWindow.h"; sourceTree = "<group>"; };
+		601A879C137160BB00CA6F7E /* WeeklyTimeWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeeklyTimeWindow.m; path = "openrest4cocoa-api/WeeklyTimeWindow.m"; sourceTree = "<group>"; };
+		601A879F1371615B00CA6F7E /* DateTimeWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DateTimeWindow.h; path = "openrest4cocoa-api/DateTimeWindow.h"; sourceTree = "<group>"; };
+		601A87A01371615C00CA6F7E /* DateTimeWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DateTimeWindow.m; path = "openrest4cocoa-api/DateTimeWindow.m"; sourceTree = "<group>"; };
+		601A87A3137164C600CA6F7E /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = "openrest4cocoa-api/Menu.h"; sourceTree = "<group>"; };
+		601A87A4137164CB00CA6F7E /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = "openrest4cocoa-api/Menu.m"; sourceTree = "<group>"; };
+		601A87A71371662A00CA6F7E /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		601A87A81371662E00CA6F7E /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		601A87AB137169BB00CA6F7E /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = "openrest4cocoa-api/Item.h"; sourceTree = "<group>"; };
+		601A87AC137169C300CA6F7E /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = "openrest4cocoa-api/Item.m"; sourceTree = "<group>"; };
+		601A87AF13716CFF00CA6F7E /* Variation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Variation.h; path = "openrest4cocoa-api/Variation.h"; sourceTree = "<group>"; };
+		601A87B013716D0600CA6F7E /* Variation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Variation.m; path = "openrest4cocoa-api/Variation.m"; sourceTree = "<group>"; };
+		601A87B313716F7000CA6F7E /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = "openrest4cocoa-api/Tag.h"; sourceTree = "<group>"; };
+		601A87B413716F7900CA6F7E /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = "openrest4cocoa-api/Tag.m"; sourceTree = "<group>"; };
+		601A87B7137170BD00CA6F7E /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = "openrest4cocoa-api/Category.h"; sourceTree = "<group>"; };
+		601A87B8137170C700CA6F7E /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = "openrest4cocoa-api/Category.m"; sourceTree = "<group>"; };
+		601A87CD1371784600CA6F7E /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = "openrest4cocoa-api/Order.h"; sourceTree = "<group>"; };
+		601A87CE1371784900CA6F7E /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = "openrest4cocoa-api/Order.m"; sourceTree = "<group>"; };
+		601A87D113717CDF00CA6F7E /* Delivery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Delivery.h; path = "openrest4cocoa-api/Delivery.h"; sourceTree = "<group>"; };
+		601A87D213717CE400CA6F7E /* Delivery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Delivery.m; path = "openrest4cocoa-api/Delivery.m"; sourceTree = "<group>"; };
+		601A87D513717EA900CA6F7E /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderItem.h; path = "openrest4cocoa-api/OrderItem.h"; sourceTree = "<group>"; };
+		601A87D613717EB100CA6F7E /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderItem.m; path = "openrest4cocoa-api/OrderItem.m"; sourceTree = "<group>"; };
+		601A87D913737A4300CA6F7E /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = "openrest4cocoa-api/Payment.h"; sourceTree = "<group>"; };
+		601A87DA13737A4A00CA6F7E /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = "openrest4cocoa-api/Payment.m"; sourceTree = "<group>"; };
+		601A87DD13737A7600CA6F7E /* CreditCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditCard.h; path = "openrest4cocoa-api/CreditCard.h"; sourceTree = "<group>"; };
+		601A87DE13737A8200CA6F7E /* CreditCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditCard.m; path = "openrest4cocoa-api/CreditCard.m"; sourceTree = "<group>"; };
+		601A87E113737D1900CA6F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = "openrest4cocoa-api/User.h"; sourceTree = "<group>"; };
+		601A87E213737D2500CA6F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = "openrest4cocoa-api/User.m"; sourceTree = "<group>"; };
+		604C1EB0136474A6008EFC19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		604C1EB4136474A6008EFC19 /* openrest4cocoa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-Prefix.pch"; sourceTree = "<group>"; };
+		604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = openrest4cocoa.framework; path = "openrest4cocoa-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		604C1EBF136474FC008EFC19 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		604C1EC3136474FC008EFC19 /* openrest4cocoa-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "openrest4cocoa-Info.plist"; sourceTree = "<group>"; };
+		604C1EC5136474FC008EFC19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		604C1EC7136474FC008EFC19 /* openrest4cocoa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-Prefix.pch"; sourceTree = "<group>"; };
+		604C1ECB136475F1008EFC19 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		604C1ECD136475F9008EFC19 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		604C1ED113647668008EFC19 /* OpenrestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenrestClient.h; path = "openrest4cocoa-client/OpenrestClient.h"; sourceTree = "<group>"; };
+		604C1ED213647668008EFC19 /* OpenrestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestClient.m; path = "openrest4cocoa-client/OpenrestClient.m"; sourceTree = "<group>"; };
+		604C1ED413647675008EFC19 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Address.h; path = "openrest4cocoa-api/Address.h"; sourceTree = "<group>"; };
+		604C1ED513647675008EFC19 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Address.m; path = "openrest4cocoa-api/Address.m"; sourceTree = "<group>"; };
+		604C1ED613647675008EFC19 /* OpenrestAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenrestAvailability.h; path = "openrest4cocoa-api/OpenrestAvailability.h"; sourceTree = "<group>"; };
+		604C1ED813647675008EFC19 /* ColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorScheme.h; path = "openrest4cocoa-api/ColorScheme.h"; sourceTree = "<group>"; };
+		604C1ED913647675008EFC19 /* ColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorScheme.m; path = "openrest4cocoa-api/ColorScheme.m"; sourceTree = "<group>"; };
+		604C1EDA13647675008EFC19 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = "openrest4cocoa-api/Contact.h"; sourceTree = "<group>"; };
+		604C1EDB13647675008EFC19 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = "openrest4cocoa-api/Contact.m"; sourceTree = "<group>"; };
+		604C1EDC13647675008EFC19 /* LatLng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LatLng.h; path = "openrest4cocoa-api/LatLng.h"; sourceTree = "<group>"; };
+		604C1EDD13647675008EFC19 /* LatLng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LatLng.m; path = "openrest4cocoa-api/LatLng.m"; sourceTree = "<group>"; };
+		604C1EDE13647675008EFC19 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Restaurant.h; path = "openrest4cocoa-api/Restaurant.h"; sourceTree = "<group>"; };
+		604C1EDF13647675008EFC19 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Restaurant.m; path = "openrest4cocoa-api/Restaurant.m"; sourceTree = "<group>"; };
+		604C1EE013647675008EFC19 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Status.h; path = "openrest4cocoa-api/Status.h"; sourceTree = "<group>"; };
+		604C1EE113647675008EFC19 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Status.m; path = "openrest4cocoa-api/Status.m"; sourceTree = "<group>"; };
+		604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestAvailability.m; path = "openrest4cocoa-api/OpenrestAvailability.m"; sourceTree = "<group>"; };
+		6057A5E11394FACD00406F81 /* openrest4cocoa-simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "openrest4cocoa-simulator.framework"; path = "/Users/trilok/Desktop/Development/openrest/openrest4cocoa/build/Release-iphoneos/openrest4cocoa-simulator.framework"; sourceTree = "<absolute>"; };
+		6057A5E21394FBED00406F81 /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stats.h; path = "openrest4cocoa-api/Stats.h"; sourceTree = "<group>"; };
+		6057A5E31394FBED00406F81 /* Stats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stats.m; path = "openrest4cocoa-api/Stats.m"; sourceTree = "<group>"; };
+		6057A5E71394FC6700406F81 /* OpenRestDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenRestDate.h; path = "openrest4cocoa-api/OpenRestDate.h"; sourceTree = "<group>"; };
+		6057A5E81394FC6800406F81 /* OpenRestDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenRestDate.m; path = "openrest4cocoa-api/OpenRestDate.m"; sourceTree = "<group>"; };
+		605B8D9B13745659003855D6 /* openrest4cocoa-simulator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "openrest4cocoa-simulator-Info.plist"; sourceTree = "<group>"; };
+		605B8D9D13745659003855D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		605B8D9F13745659003855D6 /* openrest4cocoa-simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-simulator-Prefix.pch"; sourceTree = "<group>"; };
+		6072FA0713741572000ECDB6 /* OpenrestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenrestResult.h; path = "openrest4cocoa-api/OpenrestResult.h"; sourceTree = "<group>"; };
+		6072FA0813741572000ECDB6 /* OpenrestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestResult.m; path = "openrest4cocoa-api/OpenrestResult.m"; sourceTree = "<group>"; };
+		609E10DC13CC722F00F77E1E /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = "openrest4cocoa-api/Charge.h"; sourceTree = "<group>"; };
+		609E10DD13CC722F00F77E1E /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = "openrest4cocoa-api/Charge.m"; sourceTree = "<group>"; };
+		609E10E113CC76DD00F77E1E /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coupon.h; path = "openrest4cocoa-api/Coupon.h"; sourceTree = "<group>"; };
+		609E10E213CC76DD00F77E1E /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Coupon.m; path = "openrest4cocoa-api/Coupon.m"; sourceTree = "<group>"; };
+		60FD40ED1364874A001C0B8F /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		60FD40EE1364874A001C0B8F /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		60FD40EF1364874A001C0B8F /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		60FD40F01364874A001C0B8F /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		60FD40F11364874A001C0B8F /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		60FD40F21364874A001C0B8F /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		60FD40F913648759001C0B8F /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		60FD40FA13648759001C0B8F /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		60FD40FB13648759001C0B8F /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		60FD40FC13648759001C0B8F /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		60FD40FD13648759001C0B8F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		60FD40FE13648759001C0B8F /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		60FD4105136487C2001C0B8F /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		604C1EBB136474FC008EFC19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		605B8D9413745659003855D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		604C1EA2136474A5008EFC19 = {
+			isa = PBXGroup;
+			children = (
+				604C1EB2136474A6008EFC19 /* openrest4cocoa */,
+				604C1EC1136474FC008EFC19 /* openrest4cocoa */,
+				605B8D9913745659003855D6 /* openrest4cocoa-simulator */,
+				604C1EAF136474A6008EFC19 /* Frameworks */,
+				604C1EAE136474A6008EFC19 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		604C1EAE136474A6008EFC19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		604C1EAF136474A6008EFC19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				604C1ECB136475F1008EFC19 /* UIKit.framework */,
+				604C1ECD136475F9008EFC19 /* UIKit.framework */,
+				604C1EB0136474A6008EFC19 /* Foundation.framework */,
+				604C1EBF136474FC008EFC19 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		604C1EB2136474A6008EFC19 /* openrest4cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				60FD4105136487C2001C0B8F /* JSON.h */,
+				60FD40F913648759001C0B8F /* NSObject+SBJSON.h */,
+				60FD40FA13648759001C0B8F /* NSObject+SBJSON.m */,
+				60FD40FB13648759001C0B8F /* NSString+SBJSON.h */,
+				60FD40FC13648759001C0B8F /* NSString+SBJSON.m */,
+				60FD40FD13648759001C0B8F /* NSString+URLEncoding.h */,
+				60FD40FE13648759001C0B8F /* NSString+URLEncoding.m */,
+				60FD40ED1364874A001C0B8F /* SBJsonBase.h */,
+				60FD40EE1364874A001C0B8F /* SBJsonBase.m */,
+				60FD40EF1364874A001C0B8F /* SBJsonParser.h */,
+				60FD40F01364874A001C0B8F /* SBJsonParser.m */,
+				60FD40F11364874A001C0B8F /* SBJsonWriter.h */,
+				60FD40F21364874A001C0B8F /* SBJsonWriter.m */,
+				604C1ED01364762C008EFC19 /* openrest4cocoa-client */,
+				604C1ECF1364761B008EFC19 /* openrest4cocoa-api */,
+				604C1EB3136474A6008EFC19 /* Supporting Files */,
+				601A87A71371662A00CA6F7E /* Utils.h */,
+				601A87A81371662E00CA6F7E /* Utils.m */,
+			);
+			path = openrest4cocoa;
+			sourceTree = "<group>";
+		};
+		604C1EB3136474A6008EFC19 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				604C1EB4136474A6008EFC19 /* openrest4cocoa-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		604C1EC1136474FC008EFC19 /* openrest4cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				604C1EC2136474FC008EFC19 /* Supporting Files */,
+			);
+			path = openrest4cocoa;
+			sourceTree = "<group>";
+		};
+		604C1EC2136474FC008EFC19 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				604C1EC3136474FC008EFC19 /* openrest4cocoa-Info.plist */,
+				604C1EC4136474FC008EFC19 /* InfoPlist.strings */,
+				604C1EC7136474FC008EFC19 /* openrest4cocoa-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		604C1ECF1364761B008EFC19 /* openrest4cocoa-api */ = {
+			isa = PBXGroup;
+			children = (
+				604C1ED413647675008EFC19 /* Address.h */,
+				604C1ED513647675008EFC19 /* Address.m */,
+				604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */,
+				604C1ED613647675008EFC19 /* OpenrestAvailability.h */,
+				604C1ED813647675008EFC19 /* ColorScheme.h */,
+				604C1ED913647675008EFC19 /* ColorScheme.m */,
+				604C1EDA13647675008EFC19 /* Contact.h */,
+				604C1EDB13647675008EFC19 /* Contact.m */,
+				604C1EDC13647675008EFC19 /* LatLng.h */,
+				604C1EDD13647675008EFC19 /* LatLng.m */,
+				604C1EDE13647675008EFC19 /* Restaurant.h */,
+				604C1EDF13647675008EFC19 /* Restaurant.m */,
+				604C1EE013647675008EFC19 /* Status.h */,
+				604C1EE113647675008EFC19 /* Status.m */,
+				601A87931371562A00CA6F7E /* DeliveryInfo.h */,
+				601A87941371562A00CA6F7E /* DeliveryInfo.m */,
+				601A87971371585B00CA6F7E /* Area.h */,
+				601A87981371585B00CA6F7E /* Area.m */,
+				601A879B137160BA00CA6F7E /* WeeklyTimeWindow.h */,
+				601A879C137160BB00CA6F7E /* WeeklyTimeWindow.m */,
+				601A879F1371615B00CA6F7E /* DateTimeWindow.h */,
+				601A87A01371615C00CA6F7E /* DateTimeWindow.m */,
+				601A87A3137164C600CA6F7E /* Menu.h */,
+				601A87A4137164CB00CA6F7E /* Menu.m */,
+				601A87AB137169BB00CA6F7E /* Item.h */,
+				601A87AC137169C300CA6F7E /* Item.m */,
+				601A87AF13716CFF00CA6F7E /* Variation.h */,
+				601A87B013716D0600CA6F7E /* Variation.m */,
+				601A87B313716F7000CA6F7E /* Tag.h */,
+				601A87B413716F7900CA6F7E /* Tag.m */,
+				601A87B7137170BD00CA6F7E /* Category.h */,
+				601A87B8137170C700CA6F7E /* Category.m */,
+				601A87CD1371784600CA6F7E /* Order.h */,
+				601A87CE1371784900CA6F7E /* Order.m */,
+				601A87D113717CDF00CA6F7E /* Delivery.h */,
+				601A87D213717CE400CA6F7E /* Delivery.m */,
+				601A87D513717EA900CA6F7E /* OrderItem.h */,
+				601A87D613717EB100CA6F7E /* OrderItem.m */,
+				601A87D913737A4300CA6F7E /* Payment.h */,
+				601A87DA13737A4A00CA6F7E /* Payment.m */,
+				601A87DD13737A7600CA6F7E /* CreditCard.h */,
+				601A87DE13737A8200CA6F7E /* CreditCard.m */,
+				601A87E113737D1900CA6F7E /* User.h */,
+				601A87E213737D2500CA6F7E /* User.m */,
+				6072FA0713741572000ECDB6 /* OpenrestResult.h */,
+				6072FA0813741572000ECDB6 /* OpenrestResult.m */,
+				6057A5E21394FBED00406F81 /* Stats.h */,
+				6057A5E31394FBED00406F81 /* Stats.m */,
+				6057A5E71394FC6700406F81 /* OpenRestDate.h */,
+				6057A5E81394FC6800406F81 /* OpenRestDate.m */,
+				609E10DC13CC722F00F77E1E /* Charge.h */,
+				609E10DD13CC722F00F77E1E /* Charge.m */,
+				609E10E113CC76DD00F77E1E /* Coupon.h */,
+				609E10E213CC76DD00F77E1E /* Coupon.m */,
+			);
+			name = "openrest4cocoa-api";
+			sourceTree = "<group>";
+		};
+		604C1ED01364762C008EFC19 /* openrest4cocoa-client */ = {
+			isa = PBXGroup;
+			children = (
+				604C1ED113647668008EFC19 /* OpenrestClient.h */,
+				604C1ED213647668008EFC19 /* OpenrestClient.m */,
+			);
+			name = "openrest4cocoa-client";
+			sourceTree = "<group>";
+		};
+		605B8D9913745659003855D6 /* openrest4cocoa-simulator */ = {
+			isa = PBXGroup;
+			children = (
+				605B8D9A13745659003855D6 /* Supporting Files */,
+			);
+			path = "openrest4cocoa-simulator";
+			sourceTree = "<group>";
+		};
+		605B8D9A13745659003855D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				605B8D9B13745659003855D6 /* openrest4cocoa-simulator-Info.plist */,
+				605B8D9C13745659003855D6 /* InfoPlist.strings */,
+				605B8D9F13745659003855D6 /* openrest4cocoa-simulator-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		604C1EE913647696008EFC19 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				604C1EF1136476E4008EFC19 /* OpenrestClient.h in Headers */,
+				604C1F8F13647A90008EFC19 /* OpenrestAvailability.h in Headers */,
+				604C1EEA136476C9008EFC19 /* Address.h in Headers */,
+				604C1EEC136476D7008EFC19 /* ColorScheme.h in Headers */,
+				604C1EEE136476DC008EFC19 /* LatLng.h in Headers */,
+				604C1EEF136476DE008EFC19 /* Restaurant.h in Headers */,
+				604C1EF0136476E0008EFC19 /* Status.h in Headers */,
+				604C1EED136476DA008EFC19 /* Contact.h in Headers */,
+				601A87951371562A00CA6F7E /* DeliveryInfo.h in Headers */,
+				601A87991371585B00CA6F7E /* Area.h in Headers */,
+				601A879D137160BB00CA6F7E /* WeeklyTimeWindow.h in Headers */,
+				601A87A11371615E00CA6F7E /* DateTimeWindow.h in Headers */,
+				601A87A5137164CF00CA6F7E /* Menu.h in Headers */,
+				601A87AD137169C900CA6F7E /* Item.h in Headers */,
+				601A87B113716D0D00CA6F7E /* Variation.h in Headers */,
+				601A87B513716F8300CA6F7E /* Tag.h in Headers */,
+				601A87CF1371784C00CA6F7E /* Order.h in Headers */,
+				601A87D313717CE800CA6F7E /* Delivery.h in Headers */,
+				601A87D713717EB600CA6F7E /* OrderItem.h in Headers */,
+				601A87DB13737A5200CA6F7E /* Payment.h in Headers */,
+				6057A5E41394FBED00406F81 /* Stats.h in Headers */,
+				6057A5E91394FC6900406F81 /* OpenRestDate.h in Headers */,
+				601A87DF13737A8900CA6F7E /* CreditCard.h in Headers */,
+				601A87E313737D3300CA6F7E /* User.h in Headers */,
+				609E10DE13CC722F00F77E1E /* Charge.h in Headers */,
+				609E10E313CC76DE00F77E1E /* Coupon.h in Headers */,
+				6072FA0913741572000ECDB6 /* OpenrestResult.h in Headers */,
+				601A87B9137170D200CA6F7E /* Category.h in Headers */,
+				60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */,
+				60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */,
+				60FD40F71364874A001C0B8F /* SBJsonWriter.h in Headers */,
+				60FD40FF13648759001C0B8F /* NSObject+SBJSON.h in Headers */,
+				60FD410113648759001C0B8F /* NSString+SBJSON.h in Headers */,
+				601A87A91371663100CA6F7E /* Utils.h in Headers */,
+				60FD410313648759001C0B8F /* NSString+URLEncoding.h in Headers */,
+				60FD4106136487C2001C0B8F /* JSON.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		605B8DA5137458D1003855D6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				605B8DA6137458E0003855D6 /* Address.h in Headers */,
+				605B8DA9137458FF003855D6 /* OpenrestAvailability.h in Headers */,
+				605B8DAA137458FF003855D6 /* ColorScheme.h in Headers */,
+				605B8DAC137458FF003855D6 /* Contact.h in Headers */,
+				605B8DAE137458FF003855D6 /* LatLng.h in Headers */,
+				605B8DB0137458FF003855D6 /* Restaurant.h in Headers */,
+				605B8DB213745900003855D6 /* Status.h in Headers */,
+				605B8DB413745900003855D6 /* DeliveryInfo.h in Headers */,
+				605B8DB613745900003855D6 /* Area.h in Headers */,
+				605B8DB813745900003855D6 /* WeeklyTimeWindow.h in Headers */,
+				605B8DBA13745900003855D6 /* DateTimeWindow.h in Headers */,
+				605B8DBC13745900003855D6 /* Menu.h in Headers */,
+				605B8DBE13745900003855D6 /* Item.h in Headers */,
+				605B8DC013745900003855D6 /* Variation.h in Headers */,
+				605B8DC213745900003855D6 /* Tag.h in Headers */,
+				605B8DC413745900003855D6 /* Category.h in Headers */,
+				605B8DC613745900003855D6 /* Order.h in Headers */,
+				605B8DC813745900003855D6 /* Delivery.h in Headers */,
+				605B8DCA13745900003855D6 /* OrderItem.h in Headers */,
+				6057A5EB1394FF2200406F81 /* Stats.h in Headers */,
+				6057A5EC1394FF2200406F81 /* OpenRestDate.h in Headers */,
+				605B8DCC13745900003855D6 /* Payment.h in Headers */,
+				605B8DCE13745900003855D6 /* CreditCard.h in Headers */,
+				605B8DD013745900003855D6 /* User.h in Headers */,
+				605B8DD213745900003855D6 /* OpenrestResult.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		604C1EBD136474FC008EFC19 /* openrest4cocoa-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 604C1EC8136474FC008EFC19 /* Build configuration list for PBXNativeTarget "openrest4cocoa-ios" */;
+			buildPhases = (
+				604C1EBA136474FC008EFC19 /* Sources */,
+				604C1EBB136474FC008EFC19 /* Frameworks */,
+				604C1EBC136474FC008EFC19 /* Resources */,
+				604C1EE913647696008EFC19 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "openrest4cocoa-ios";
+			productName = openrest4cocoa;
+			productReference = 604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+		605B8D9613745659003855D6 /* openrest4cocoa-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 605B8DA013745659003855D6 /* Build configuration list for PBXNativeTarget "openrest4cocoa-simulator" */;
+			buildPhases = (
+				605B8D9313745659003855D6 /* Sources */,
+				605B8D9413745659003855D6 /* Frameworks */,
+				605B8D9513745659003855D6 /* Resources */,
+				605B8DA5137458D1003855D6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "openrest4cocoa-simulator";
+			productName = "openrest4cocoa-simulator";
+			productReference = 6057A5E11394FACD00406F81 /* openrest4cocoa-simulator.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		604C1EA4136474A5008EFC19 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 604C1EA7136474A5008EFC19 /* Build configuration list for PBXProject "openrest4cocoa" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 604C1EA2136474A5008EFC19;
+			productRefGroup = 604C1EAE136474A6008EFC19 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				604C1EBD136474FC008EFC19 /* openrest4cocoa-ios */,
+				605B8D9613745659003855D6 /* openrest4cocoa-simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		604C1EBC136474FC008EFC19 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				604C1EC6136474FC008EFC19 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		605B8D9513745659003855D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				605B8D9E13745659003855D6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		604C1EBA136474FC008EFC19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				604C1ED313647668008EFC19 /* OpenrestClient.m in Sources */,
+				604C1EE213647675008EFC19 /* Address.m in Sources */,
+				604C1EE413647675008EFC19 /* ColorScheme.m in Sources */,
+				604C1EE513647675008EFC19 /* Contact.m in Sources */,
+				604C1EE613647675008EFC19 /* LatLng.m in Sources */,
+				604C1EE713647675008EFC19 /* Restaurant.m in Sources */,
+				604C1EE813647675008EFC19 /* Status.m in Sources */,
+				604C1F8E13647A6C008EFC19 /* OpenrestAvailability.m in Sources */,
+				60FD40F41364874A001C0B8F /* SBJsonBase.m in Sources */,
+				60FD40F61364874A001C0B8F /* SBJsonParser.m in Sources */,
+				60FD40F81364874A001C0B8F /* SBJsonWriter.m in Sources */,
+				60FD410013648759001C0B8F /* NSObject+SBJSON.m in Sources */,
+				60FD410213648759001C0B8F /* NSString+SBJSON.m in Sources */,
+				60FD410413648759001C0B8F /* NSString+URLEncoding.m in Sources */,
+				601A87961371562A00CA6F7E /* DeliveryInfo.m in Sources */,
+				601A879A1371585B00CA6F7E /* Area.m in Sources */,
+				601A879E137160BB00CA6F7E /* WeeklyTimeWindow.m in Sources */,
+				601A87A21371615E00CA6F7E /* DateTimeWindow.m in Sources */,
+				601A87A6137164CF00CA6F7E /* Menu.m in Sources */,
+				601A87AA1371663100CA6F7E /* Utils.m in Sources */,
+				601A87AE137169C900CA6F7E /* Item.m in Sources */,
+				601A87B213716D0D00CA6F7E /* Variation.m in Sources */,
+				601A87B613716F8300CA6F7E /* Tag.m in Sources */,
+				601A87BA137170D200CA6F7E /* Category.m in Sources */,
+				601A87D01371784C00CA6F7E /* Order.m in Sources */,
+				601A87D413717CE800CA6F7E /* Delivery.m in Sources */,
+				601A87D813717EB600CA6F7E /* OrderItem.m in Sources */,
+				601A87DC13737A5200CA6F7E /* Payment.m in Sources */,
+				601A87E013737A8900CA6F7E /* CreditCard.m in Sources */,
+				601A87E413737D3300CA6F7E /* User.m in Sources */,
+				6072FA0A13741572000ECDB6 /* OpenrestResult.m in Sources */,
+				6057A5E51394FBED00406F81 /* Stats.m in Sources */,
+				6057A5EA1394FC6900406F81 /* OpenRestDate.m in Sources */,
+				609E10DF13CC722F00F77E1E /* Charge.m in Sources */,
+				609E10E413CC76DE00F77E1E /* Coupon.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		605B8D9313745659003855D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6057A5ED139506CB00406F81 /* Stats.m in Sources */,
+				6057A5EE139506CB00406F81 /* OpenRestDate.m in Sources */,
+				605B8E1013745A6B003855D6 /* Utils.m in Sources */,
+				605B8E0513745A56003855D6 /* NSObject+SBJSON.m in Sources */,
+				605B8E0713745A56003855D6 /* NSString+SBJSON.m in Sources */,
+				605B8E0913745A56003855D6 /* NSString+URLEncoding.m in Sources */,
+				605B8E0B13745A56003855D6 /* SBJsonBase.m in Sources */,
+				605B8E0D13745A56003855D6 /* SBJsonParser.m in Sources */,
+				605B8E0F13745A56003855D6 /* SBJsonWriter.m in Sources */,
+				605B8E02137459EE003855D6 /* OpenrestClient.m in Sources */,
+				605B8DD513745938003855D6 /* Address.m in Sources */,
+				605B8DD613745938003855D6 /* OpenrestAvailability.m in Sources */,
+				605B8DD913745938003855D6 /* ColorScheme.m in Sources */,
+				605B8DDB13745938003855D6 /* Contact.m in Sources */,
+				605B8DDD13745938003855D6 /* LatLng.m in Sources */,
+				605B8DDF13745938003855D6 /* Restaurant.m in Sources */,
+				605B8DE113745938003855D6 /* Status.m in Sources */,
+				605B8DE313745938003855D6 /* DeliveryInfo.m in Sources */,
+				605B8DE513745938003855D6 /* Area.m in Sources */,
+				605B8DE713745938003855D6 /* WeeklyTimeWindow.m in Sources */,
+				605B8DE913745938003855D6 /* DateTimeWindow.m in Sources */,
+				605B8DEB13745938003855D6 /* Menu.m in Sources */,
+				605B8DED13745938003855D6 /* Item.m in Sources */,
+				605B8DEF13745938003855D6 /* Variation.m in Sources */,
+				605B8DF113745938003855D6 /* Tag.m in Sources */,
+				605B8DF313745938003855D6 /* Category.m in Sources */,
+				605B8DF513745938003855D6 /* Order.m in Sources */,
+				605B8DF713745938003855D6 /* Delivery.m in Sources */,
+				605B8DF913745938003855D6 /* OrderItem.m in Sources */,
+				605B8DFB13745938003855D6 /* Payment.m in Sources */,
+				605B8DFD13745938003855D6 /* CreditCard.m in Sources */,
+				605B8DFF13745938003855D6 /* User.m in Sources */,
+				605B8E0113745938003855D6 /* OpenrestResult.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		604C1EC4136474FC008EFC19 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				604C1EC5136474FC008EFC19 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		605B8D9C13745659003855D6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				605B8D9D13745659003855D6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		604C1EB5136474A6008EFC19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		604C1EB6136474A6008EFC19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		604C1EC9136474FC008EFC19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "openrest4cocoa/openrest4cocoa-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "openrest4cocoa/openrest4cocoa-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		604C1ECA136474FC008EFC19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "openrest4cocoa/openrest4cocoa-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "openrest4cocoa/openrest4cocoa-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		605B8DA113745659003855D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "openrest4cocoa-simulator/openrest4cocoa-simulator-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "openrest4cocoa-simulator/openrest4cocoa-simulator-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		605B8DA213745659003855D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "openrest4cocoa-simulator/openrest4cocoa-simulator-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "openrest4cocoa-simulator/openrest4cocoa-simulator-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		604C1EA7136474A5008EFC19 /* Build configuration list for PBXProject "openrest4cocoa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				604C1EB5136474A6008EFC19 /* Debug */,
+				604C1EB6136474A6008EFC19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		604C1EC8136474FC008EFC19 /* Build configuration list for PBXNativeTarget "openrest4cocoa-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				604C1EC9136474FC008EFC19 /* Debug */,
+				604C1ECA136474FC008EFC19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		605B8DA013745659003855D6 /* Build configuration list for PBXNativeTarget "openrest4cocoa-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				605B8DA113745659003855D6 /* Debug */,
+				605B8DA213745659003855D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 604C1EA4136474A5008EFC19 /* Project object */;
+}
