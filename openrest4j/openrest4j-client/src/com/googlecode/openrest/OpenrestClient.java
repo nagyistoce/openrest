@@ -230,6 +230,12 @@ public class OpenrestClient {
                 ((accessToken != null) ? ("?access_token=" + accessToken) : "")),
                 new TypeReference<Response<Order>>() {});
     }
+    
+    public Order setOrder(String orderId, Order order) throws IOException, OpenrestException {
+        return set(new URL(restaurantUrl.toString() + "/orders/" + URLEncoder.encode(orderId, "UTF-8") +
+                "?access_token=" + accessToken),
+                order, new TypeReference<Response<Order>>() {});
+    }
 
     public OrderConfirmation addOrder(Order order) throws IOException, OpenrestException {
         return add(new URL(restaurantUrl.toString() + "/orders/"),
