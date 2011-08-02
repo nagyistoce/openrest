@@ -214,15 +214,39 @@ namespace com.googlecode.openrest
 
         ///////////////////////////////////////////////////////////////////////
 
-        public IList<Order> Orders
+        public IList<Order> GetOrders(string status, long? since, long? until, string userId,
+            string ordering, int? limit, bool? restaurantView)
         {
-            get
-            {
-                return Get<IList<Order>>(new Uri(restaurantUri + "/orders/" + "?access_token=" + accessToken));
-            }
+    	    QueryStringBuilder query = new QueryStringBuilder();
+    	    if (status != null) {
+    		    query.Append("status", status);
+    	    }
+    	    if (since.HasValue) {
+                query.Append("since", since.ToString());
+    	    }
+    	    if (until.HasValue) {
+                query.Append("until", until.ToString());
+    	    }
+    	    if (userId != null) {
+                query.Append("userId", userId);
+    	    }
+    	    if (ordering != null) {
+    		    query.Append("ordering", ordering);
+    	    }
+    	    if (limit.HasValue) {
+    		    query.Append("limit", limit.ToString());
+    	    }
+    	    if (restaurantView.HasValue) {
+    		    query.Append("restaurantView", restaurantView.ToString());
+    	    }
+    	    if (accessToken != null) {
+    		    query.Append("access_token", accessToken);
+    	    }
+
+            return Get<IList<Order>>(new Uri(restaurantUri + "/orders/" + query.ToString()));
         }
 
-        public Order Order(string orderId)
+        public Order GetOrder(string orderId)
         {
             return Get<Order>(new Uri(restaurantUri + "/orders/" + orderId + "?access_token=" + accessToken));
         }

@@ -5,15 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E254B74F-E2D7-402F-A19A-F12F6D29702D}</ProjectGuid>
+    <ProjectGuid>{065CC4A0-450A-43C3-AA25-9EDC017640BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>openrest4net_client</RootNamespace>
-    <AssemblyName>openrest4net-client</AssemblyName>
+    <RootNamespace>openrest4net_com</RootNamespace>
+    <AssemblyName>openrest4net-com</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,28 +31,30 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json.Net35">
-      <HintPath>.\Newtonsoft.Json.Net35.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="com\googlecode\openrest\Image.cs" />
-    <Compile Include="com\googlecode\openrest\OpenrestClient.cs" />
-    <Compile Include="com\googlecode\openrest\QueryStringBuilder.cs" />
-    <Compile Include="com\googlecode\openrest\RestJsonClient.cs" />
-    <Compile Include="com\googlecode\openrest\RestJsonHttpException.cs" />
-    <Compile Include="com\googlecode\openrest\StreamUtils.cs" />
+    <Compile Include="com\googlecode\openrest\COpenrestClient.cs" />
+    <Compile Include="com\googlecode\openrest\COrder.cs" />
+    <Compile Include="com\googlecode\openrest\COrders.cs" />
+    <Compile Include="com\googlecode\openrest\CPayment.cs" />
+    <Compile Include="com\googlecode\openrest\CPayments.cs" />
+    <Compile Include="com\googlecode\openrest\CCreditCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\openrest4net-api\openrest4net-api.csproj">
       <Project>{7B0A1D8E-7519-489A-B120-15099F794005}</Project>
       <Name>openrest4net-api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\openrest4net-client\openrest4net-client.csproj">
+      <Project>{E254B74F-E2D7-402F-A19A-F12F6D29702D}</Project>
+      <Name>openrest4net-client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
