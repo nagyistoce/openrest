@@ -43,7 +43,13 @@ public class OrderItem implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String comment;
 
-    /** Total price of the item and variations. */
+    /**
+     * The item's base price (@see Item.price) ignoring variations and counts.
+     * 
+     * Calculating the total "all-included" item price involves iterating the
+     * variationsChoices and recursively summing the prices for sub-items
+     * (multiplying by the correct counts, if needed).
+     */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer price = 0;
 
