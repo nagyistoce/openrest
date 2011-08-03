@@ -51,6 +51,16 @@ namespace com.googlecode.openrest
             return new CPayments(order.payments);
         }
 
+        public INullableInt GetTakeoutPacks()
+        {
+            return new CNullableInt(order.takeoutPacks);
+        }
+
+        public ICharges GetCharges()
+        {
+            return new CCharges(order.charges);
+        }
+
         public long GetCreated()
         {
             return order.created.Value;
@@ -74,6 +84,16 @@ namespace com.googlecode.openrest
         public string GetShareToken()
         {
             return order.shareToken;
+        }
+
+        public string GetAffiliate()
+        {
+            return order.affiliate;
+        }
+
+        public string GetRef()
+        {
+            return null; // TODO: order.ref
         }
 
         private readonly Order order;

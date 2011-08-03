@@ -15,10 +15,14 @@ namespace com.googlecode.openrest
         IDelivery GetDelivery();
         IContact GetContact();
         IPayments GetPayments();
+        INullableInt GetTakeoutPacks();
+        ICharges GetCharges();
         long GetCreated();
         long GetModified();
         IUser GetUser();
         string GetStatus();
         string GetShareToken();
+        string GetAffiliate();
+        string GetRef();
     }
 }

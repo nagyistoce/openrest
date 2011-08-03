@@ -63,6 +63,18 @@ namespace com.googlecode.openrest
         /* Payments. */
         public IList<Payment> payments = new List<Payment>();
 
+        /**
+         * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
+         * For environmental reasons, clients should be encouraged to set this to 0.
+         */
+        public int? takeoutPacks;
+
+        /**
+	     * Extra charges or discounts associated with the order, ordered by priority
+	     * in descending order.
+	     */
+        public IList<Charge> charges = new List<Charge>();
+
         /** The order's creation timestamp. */
         public long? created;
 
@@ -77,5 +89,16 @@ namespace com.googlecode.openrest
 
         /** The order's share-token. */
         public String shareToken;
+
+        /** Affiliate-id, for orders that came through affiliate marketing. */
+        public string affiliate;
+    
+        /**
+         * Affiliate-specific referrer-id for performance tracking, e.g. 
+         * Facebook campaign id, iPhone application id, self-service station id.
+         * 
+         * TODO: "ref" is reserved in C#
+         */
+        //public string ref;
     }
 }

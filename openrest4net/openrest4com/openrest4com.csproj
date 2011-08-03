@@ -39,7 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\googlecode\openrest\CAddress.cs" />
+    <Compile Include="com\googlecode\openrest\CCharge.cs" />
+    <Compile Include="com\googlecode\openrest\CCharges.cs" />
     <Compile Include="com\googlecode\openrest\CContact.cs" />
+    <Compile Include="com\googlecode\openrest\CCoupon.cs" />
     <Compile Include="com\googlecode\openrest\CCreditCard.cs" />
     <Compile Include="com\googlecode\openrest\CDelivery.cs" />
     <Compile Include="com\googlecode\openrest\CLatLng.cs" />
@@ -56,7 +59,10 @@
     <Compile Include="com\googlecode\openrest\CVariations.cs" />
     <Compile Include="com\googlecode\openrest\CVariationsChoices.cs" />
     <Compile Include="com\googlecode\openrest\IAddress.cs" />
+    <Compile Include="com\googlecode\openrest\ICharge.cs" />
+    <Compile Include="com\googlecode\openrest\ICharges.cs" />
     <Compile Include="com\googlecode\openrest\IContact.cs" />
+    <Compile Include="com\googlecode\openrest\ICoupon.cs" />
     <Compile Include="com\googlecode\openrest\ICreditCard.cs" />
     <Compile Include="com\googlecode\openrest\IDelivery.cs" />
     <Compile Include="com\googlecode\openrest\ILatLng.cs" />

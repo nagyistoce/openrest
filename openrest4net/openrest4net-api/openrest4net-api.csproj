@@ -45,8 +45,10 @@
     <Compile Include="com\googlecode\openrest\Area.cs" />
     <Compile Include="com\googlecode\openrest\Availability.cs" />
     <Compile Include="com\googlecode\openrest\Category.cs" />
+    <Compile Include="com\googlecode\openrest\Charge.cs" />
     <Compile Include="com\googlecode\openrest\ColorScheme.cs" />
     <Compile Include="com\googlecode\openrest\Contact.cs" />
+    <Compile Include="com\googlecode\openrest\Coupon.cs" />
     <Compile Include="com\googlecode\openrest\CreditCard.cs" />
     <Compile Include="com\googlecode\openrest\Date.cs" />
     <Compile Include="com\googlecode\openrest\DateTimeWindow.cs" />
