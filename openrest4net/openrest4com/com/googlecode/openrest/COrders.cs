@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace com.googlecode.openrest
 {
-    public class COrders
+    [ComVisible(true)]
+    public class COrders : IOrders
     {
         public COrders() { }
 
@@ -15,16 +17,16 @@ namespace com.googlecode.openrest
             int i = 0;
             foreach (Order order in orders)
             {
-                cOrders[i] = new COrder(order);
+                cOrders[i++] = new COrder(order);
             }
         }
 
-        public int Count()
+        public int GetCount()
         {
             return cOrders.Length;
         }
 
-        public COrder Get(int i)
+        public IOrder Get(int i)
         {
             return cOrders[i];
         }

@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace com.googlecode.openrest
 {
-    public class COpenrestClient
+    [ComVisible(true)]
+    public class COpenrestClient : IOpenrestClient
     {
         public COpenrestClient() {}
 
@@ -12,9 +13,14 @@ namespace com.googlecode.openrest
             client = new OpenrestClient(new Uri(restaurantUri), accessToken);
         }
 
-        public COrders GetNewOrders()
+        public IOrders GetNewOrders()
         {
             return new COrders(client.GetOrders(Order.ORDER_STATUS_NEW, null, null, null, "asc", null, true));
+        }
+
+        public IOrder SetOrderStatus(string orderId, string status)
+        {
+            return new COrder(client.SetOrderStatus(orderId, status));
         }
 
         private OpenrestClient client;

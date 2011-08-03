@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{065CC4A0-450A-43C3-AA25-9EDC017640BA}</ProjectGuid>
+    <ProjectGuid>{EB94DFC0-C504-43CB-99E1-C7603E20E02A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>openrest4net_com</RootNamespace>
-    <AssemblyName>openrest4net-com</AssemblyName>
+    <RootNamespace>openrest4com</RootNamespace>
+    <AssemblyName>openrest4com</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -22,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,12 +38,40 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="com\googlecode\openrest\CAddress.cs" />
+    <Compile Include="com\googlecode\openrest\CContact.cs" />
+    <Compile Include="com\googlecode\openrest\CCreditCard.cs" />
+    <Compile Include="com\googlecode\openrest\CDelivery.cs" />
+    <Compile Include="com\googlecode\openrest\CLatLng.cs" />
+    <Compile Include="com\googlecode\openrest\CNullableInt.cs" />
     <Compile Include="com\googlecode\openrest\COpenrestClient.cs" />
     <Compile Include="com\googlecode\openrest\COrder.cs" />
+    <Compile Include="com\googlecode\openrest\COrderItem.cs" />
+    <Compile Include="com\googlecode\openrest\COrderItems.cs" />
     <Compile Include="com\googlecode\openrest\COrders.cs" />
     <Compile Include="com\googlecode\openrest\CPayment.cs" />
     <Compile Include="com\googlecode\openrest\CPayments.cs" />
-    <Compile Include="com\googlecode\openrest\CCreditCard.cs" />
+    <Compile Include="com\googlecode\openrest\CUser.cs" />
+    <Compile Include="com\googlecode\openrest\CVariation.cs" />
+    <Compile Include="com\googlecode\openrest\CVariations.cs" />
+    <Compile Include="com\googlecode\openrest\CVariationsChoices.cs" />
+    <Compile Include="com\googlecode\openrest\IAddress.cs" />
+    <Compile Include="com\googlecode\openrest\IContact.cs" />
+    <Compile Include="com\googlecode\openrest\ICreditCard.cs" />
+    <Compile Include="com\googlecode\openrest\IDelivery.cs" />
+    <Compile Include="com\googlecode\openrest\ILatLng.cs" />
+    <Compile Include="com\googlecode\openrest\INullableInt.cs" />
+    <Compile Include="com\googlecode\openrest\IOpenrestClient.cs" />
+    <Compile Include="com\googlecode\openrest\IOrder.cs" />
+    <Compile Include="com\googlecode\openrest\IOrderItem.cs" />
+    <Compile Include="com\googlecode\openrest\IOrderItems.cs" />
+    <Compile Include="com\googlecode\openrest\IOrders.cs" />
+    <Compile Include="com\googlecode\openrest\IPayment.cs" />
+    <Compile Include="com\googlecode\openrest\IPayments.cs" />
+    <Compile Include="com\googlecode\openrest\IUser.cs" />
+    <Compile Include="com\googlecode\openrest\IVariation.cs" />
+    <Compile Include="com\googlecode\openrest\IVariations.cs" />
+    <Compile Include="com\googlecode\openrest\IVariationsChoices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,7 +84,6 @@
       <Name>openrest4net-client</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

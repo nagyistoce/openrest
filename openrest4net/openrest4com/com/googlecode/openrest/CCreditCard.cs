@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace com.googlecode.openrest
 {
-    public class CCreditCard
+    [ComVisible(true)]
+    public class CCreditCard : ICreditCard
     {
         public CCreditCard() { }
 
@@ -16,14 +18,14 @@ namespace com.googlecode.openrest
             return card.number;
         }
 
-        public int? GetExpireMonth()
+        public INullableInt GetExpireMonth()
         {
-            return card.expireMonth;
+            return new CNullableInt(card.expireMonth);
         }
 
-        public int? GetExpireYear()
+        public INullableInt GetExpireYear()
         {
-            return card.expireYear;
+            return new CNullableInt(card.expireYear);
         }
 
         public string GetHolderId()
@@ -36,9 +38,9 @@ namespace com.googlecode.openrest
             return card.holderName;
         }
 
-        public bool? GetAnonymized()
+        public bool GetAnonymized()
         {
-            return card.anonymized;
+            return card.anonymized.Value;
         }
 
         private readonly CreditCard card;

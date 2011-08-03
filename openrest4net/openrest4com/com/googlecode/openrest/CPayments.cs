@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace com.googlecode.openrest
 {
-    public class CPayments
+    [ComVisible(true)]
+    public class CPayments : IPayments
     {
-        public CPayments() { }
-
         public CPayments(IList<Payment> payments)
         {
             cPayments = new CPayment[payments.Count];
             int i = 0;
             foreach (Payment payment in payments)
             {
-                cPayments[i] = new CPayment(payment);
+                cPayments[i++] = new CPayment(payment);
             }
         }
 
-        public int Count()
+        public int GetCount()
         {
             return cPayments.Length;
         }
 
-        public CPayment Get(int i)
+        public IPayment Get(int i)
         {
             return cPayments[i];
         }

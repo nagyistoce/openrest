@@ -13,6 +13,9 @@ namespace com.googlecode.openrest
         {
             this.restaurantUri = restaurantUri;
             this.accessToken = accessToken;
+
+            // @see http://stackoverflow.com/questions/566437/http-post-returns-the-error-417-expectation-failed-c
+            System.Net.ServicePointManager.Expect100Continue = false;
         }
 
         public OpenrestClient(Uri restaurantUri) : this(restaurantUri, null) { }
@@ -249,6 +252,14 @@ namespace com.googlecode.openrest
         public Order GetOrder(string orderId)
         {
             return Get<Order>(new Uri(restaurantUri + "/orders/" + orderId + "?access_token=" + accessToken));
+        }
+
+        public Order SetOrderStatus(string orderId, string status)
+        {
+            Order order = new Order();
+            order.status = status;
+
+            return Set<Order>(new Uri(restaurantUri + "/orders/" + orderId + "?access_token=" + accessToken), order);
         }
 
         public OrderConfirmation AddOrder(Order order)

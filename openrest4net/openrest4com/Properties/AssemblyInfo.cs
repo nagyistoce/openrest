@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("openrest4net-com")]
+[assembly: AssemblyTitle("openrest4com")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("openrest4net-com")]
+[assembly: AssemblyProduct("openrest4com")]
 [assembly: AssemblyCopyright("Copyright ©  2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d057a818-407a-4ed0-9bfb-37b5ad64833a")]
+[assembly: Guid("cc23d301-4a21-41cb-bad1-3028118b5459")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -118,7 +118,7 @@ namespace com.googlecode.openrest
                     }
                 }
 
-                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     return StreamToObject<T>(response.GetResponseStream());
                 }
