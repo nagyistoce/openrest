@@ -225,9 +225,19 @@ public class OpenrestClient {
                 new TypeReference<Response<List<Order>>>() {});
     }
 
-    public Order order(String orderId) throws IOException, OpenrestException {
-        return get(new URL(restaurantUrl.toString() + "/orders/" + URLEncoder.encode(orderId, "UTF-8") +
-                ((accessToken != null) ? ("?access_token=" + accessToken) : "")),
+    public Order getOrder(String orderId, Boolean restaurantView, String shareToken) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	if (restaurantView != null) {
+    		query.append("restaurantView", restaurantView.toString());
+    	}
+    	if (shareToken != null) {
+    		query.append("shareToken", shareToken);
+    	}
+    	if (accessToken != null) {
+    		query.append("access_token", accessToken);
+    	}
+    	
+        return get(new URL(restaurantUrl.toString() + "/orders/" + URLEncoder.encode(orderId, "UTF-8") + query.toString()),
                 new TypeReference<Response<Order>>() {});
     }
     
