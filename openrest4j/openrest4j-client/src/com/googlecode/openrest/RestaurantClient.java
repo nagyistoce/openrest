@@ -81,6 +81,11 @@ public class RestaurantClient {
         return OpenrestProtocol.set(new URL(restaurantApiUrl.toString() + "/staff/" + "?access_token=" + accessToken),
                 staff, new TypeReference<Response<Staff>>() {});
     }
+    
+    public List<String> getFacebookAdmins() throws IOException, OpenrestException {
+        return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/staff/facebook"),
+                new TypeReference<Response<List<String>>>() {});
+    }
 
     ///////////////////////////////////////////////////////////////////////////
 
