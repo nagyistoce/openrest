@@ -3,6 +3,7 @@ package com.googlecode.openrest;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -14,10 +15,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item implements Serializable {
-    /** Constructs a previously submitted item from persisted data. */
+	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, String title, String description,
             Integer price, List<Variation> variations, Availability availability,
-            Boolean inactive, String picture) {
+            Boolean inactive, String picture, Map<String, String> externalIds) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -27,12 +28,13 @@ public class Item implements Serializable {
         this.availability = availability;
         this.inactive = inactive;
         this.picture = picture;
+        this.externalIds = externalIds;
     }
 
     /** Constructs a new item to be submitted. */
     public Item(String title, String description, Integer price, List<Variation> variations,
-            Availability availability, Boolean inactive) {
-        this(null, null, title, description, price, variations, availability, inactive, null);
+            Availability availability, Boolean inactive, Map<String, String> externalIds) {
+        this(null, null, title, description, price, variations, availability, inactive, null, externalIds);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -82,6 +84,15 @@ public class Item implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Status status;
     
+    /**
+     * Map of externally-defined item ids referring to this item.
+     * For example, the item-id in the restaurant's PoS system.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> externalIds = Collections.emptyMap();
+    
     @Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,6 +103,8 @@ public class Item implements Serializable {
 				+ ((availabilityStr == null) ? 0 : availabilityStr.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((externalIds == null) ? 0 : externalIds.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((inactive == null) ? 0 : inactive.hashCode());
@@ -129,6 +142,11 @@ public class Item implements Serializable {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
+			return false;
+		if (externalIds == null) {
+			if (other.externalIds != null)
+				return false;
+		} else if (!externalIds.equals(other.externalIds))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -172,6 +190,6 @@ public class Item implements Serializable {
 			return false;
 		return true;
 	}
-
+    
     private static final long serialVersionUID = 1L;
 }
