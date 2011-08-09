@@ -14,7 +14,7 @@ public class OpenrestProtocol {
         } catch (RestJsonHttpException e) {
             final Response<?> response = (Response<?>) e.value();
             if (response != null) {
-                throw new OpenrestException(e.httpErrorCode(), response.error, response.errorMessage, e);
+                throw new OpenrestException(response.error, response.errorMessage, e);
             } else {
                 throw e;
             }
@@ -27,7 +27,7 @@ public class OpenrestProtocol {
         } catch (RestJsonHttpException e) {
             final Response<?> response = (Response<?>) e.value();
             if (response != null) {
-                throw new OpenrestException(e.httpErrorCode(), response.error, response.errorMessage, e);
+                throw new OpenrestException(response.error, response.errorMessage, e);
             } else {
                 throw e;
             }
@@ -40,7 +40,7 @@ public class OpenrestProtocol {
         } catch (RestJsonHttpException e) {
             final Response<?> response = (Response<?>) e.value();
             if (response != null) {
-                throw new OpenrestException(e.httpErrorCode(), response.error, response.errorMessage, e);
+                throw new OpenrestException(response.error, response.errorMessage, e);
             } else {
                 throw e;
             }
@@ -53,7 +53,7 @@ public class OpenrestProtocol {
         } catch (RestJsonHttpException e) {
             final Response<?> response = (Response<?>) e.value();
             if (response != null) {
-                throw new OpenrestException(e.httpErrorCode(), response.error, response.errorMessage, e);
+                throw new OpenrestException(response.error, response.errorMessage, e);
             } else {
                 throw e;
             }
