@@ -39,6 +39,13 @@ public class OpenrestClient {
         return OpenrestProtocol.get(new URL(apiUrl + "/restaurants/" + query.toString()), new TypeReference<Response<List<Restaurant>>>() {});
     }
     
+    public List<RestaurantFullInfo> getRestaurantsFullInfo(List<String> restaurantIds) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("ids", restaurantIds);
+    	
+        return OpenrestProtocol.get(new URL(apiUrl + "/restaurants.full/" + query.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
+    }
+    
     public Map<String, Menu> getMenus(List<String> restaurantIds) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("restaurantIds", restaurantIds);
