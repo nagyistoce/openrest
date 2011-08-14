@@ -102,7 +102,7 @@ public class RestJsonClient {
 
     private static <T> T parseJsonResponse(HttpURLConnection conn, TypeReference<T> responseType) throws IOException {
         final int httpStatusCode = conn.getResponseCode();
-        if ((httpStatusCode / 100) == 2) { // TODO: 2xx status codes
+        if ((httpStatusCode / 100) == 2) { // 2xx status codes
             final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             try {
                 return streamToObject(br, responseType);
@@ -121,7 +121,7 @@ public class RestJsonClient {
 
     private static <T> Image parseImageResponse(HttpURLConnection conn, TypeReference<T> responseType) throws IOException {
         final int httpStatusCode = conn.getResponseCode();
-        if ((httpStatusCode / 100) == 2) { // TODO: 2xx status codes
+        if ((httpStatusCode / 100) == 2) { // 2xx status codes
             final String contentType = conn.getContentType();
             final byte[] content = new byte[conn.getContentLength()];
 
@@ -150,9 +150,7 @@ public class RestJsonClient {
         String line;
         while ((line = br.readLine()) != null) {
             if ((line.length() > 0) && (line.charAt(0) == '{')) {
-                try {
-                    response = mapper.readValue(line, responseType);
-                } catch(Exception e) {}
+                response = mapper.readValue(line, responseType);
             }
         }
         return response;
