@@ -13,6 +13,11 @@ namespace com.googlecode.openrest
             client = new OpenrestClient(new Uri(restaurantUri), accessToken);
         }
 
+        public IMenu GetMenu()
+        {
+            return new CMenu(client.Menu);
+        }
+
         public IOrders GetNewOrders()
         {
             return new COrders(client.GetOrders(Order.ORDER_STATUS_NEW, null, null, null, "asc", null, true));

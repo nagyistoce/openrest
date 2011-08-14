@@ -39,13 +39,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\googlecode\openrest\CAddress.cs" />
+    <Compile Include="com\googlecode\openrest\CCategories.cs" />
+    <Compile Include="com\googlecode\openrest\CCategory.cs" />
     <Compile Include="com\googlecode\openrest\CCharge.cs" />
     <Compile Include="com\googlecode\openrest\CCharges.cs" />
     <Compile Include="com\googlecode\openrest\CContact.cs" />
     <Compile Include="com\googlecode\openrest\CCoupon.cs" />
     <Compile Include="com\googlecode\openrest\CCreditCard.cs" />
     <Compile Include="com\googlecode\openrest\CDelivery.cs" />
+    <Compile Include="com\googlecode\openrest\CItem.cs" />
+    <Compile Include="com\googlecode\openrest\CItems.cs" />
     <Compile Include="com\googlecode\openrest\CLatLng.cs" />
+    <Compile Include="com\googlecode\openrest\CMenu.cs" />
     <Compile Include="com\googlecode\openrest\CNullableInt.cs" />
     <Compile Include="com\googlecode\openrest\COpenrestClient.cs" />
     <Compile Include="com\googlecode\openrest\COrder.cs" />
@@ -54,18 +59,25 @@
     <Compile Include="com\googlecode\openrest\COrders.cs" />
     <Compile Include="com\googlecode\openrest\CPayment.cs" />
     <Compile Include="com\googlecode\openrest\CPayments.cs" />
+    <Compile Include="com\googlecode\openrest\CTag.cs" />
+    <Compile Include="com\googlecode\openrest\CTags.cs" />
     <Compile Include="com\googlecode\openrest\CUser.cs" />
     <Compile Include="com\googlecode\openrest\CVariation.cs" />
     <Compile Include="com\googlecode\openrest\CVariations.cs" />
     <Compile Include="com\googlecode\openrest\CVariationsChoices.cs" />
     <Compile Include="com\googlecode\openrest\IAddress.cs" />
+    <Compile Include="com\googlecode\openrest\ICategories.cs" />
+    <Compile Include="com\googlecode\openrest\ICategory.cs" />
     <Compile Include="com\googlecode\openrest\ICharge.cs" />
     <Compile Include="com\googlecode\openrest\ICharges.cs" />
     <Compile Include="com\googlecode\openrest\IContact.cs" />
     <Compile Include="com\googlecode\openrest\ICoupon.cs" />
     <Compile Include="com\googlecode\openrest\ICreditCard.cs" />
     <Compile Include="com\googlecode\openrest\IDelivery.cs" />
+    <Compile Include="com\googlecode\openrest\IItem.cs" />
+    <Compile Include="com\googlecode\openrest\IItems.cs" />
     <Compile Include="com\googlecode\openrest\ILatLng.cs" />
+    <Compile Include="com\googlecode\openrest\IMenu.cs" />
     <Compile Include="com\googlecode\openrest\INullableInt.cs" />
     <Compile Include="com\googlecode\openrest\IOpenrestClient.cs" />
     <Compile Include="com\googlecode\openrest\IOrder.cs" />
@@ -74,6 +86,8 @@
     <Compile Include="com\googlecode\openrest\IOrders.cs" />
     <Compile Include="com\googlecode\openrest\IPayment.cs" />
     <Compile Include="com\googlecode\openrest\IPayments.cs" />
+    <Compile Include="com\googlecode\openrest\ITag.cs" />
+    <Compile Include="com\googlecode\openrest\Itags.cs" />
     <Compile Include="com\googlecode\openrest\IUser.cs" />
     <Compile Include="com\googlecode\openrest\IVariation.cs" />
     <Compile Include="com\googlecode\openrest\IVariations.cs" />

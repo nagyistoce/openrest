@@ -8,6 +8,8 @@ namespace com.googlecode.openrest
     public interface IOpenrestClient
     {
         void Init(string restaurantUri, string accessToken);
+
+        IMenu GetMenu();
         IOrders GetNewOrders();
         IOrder SetOrderStatus(string orderId, string status);
     }

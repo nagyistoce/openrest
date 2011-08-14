@@ -52,6 +52,14 @@ namespace com.googlecode.openrest
 
         /** Whether the item is deactivated (i.e. suspended or disabled). */
         public bool? inactive = false;
+        
+        /**
+         * Map of externally-defined item ids referring to this item.
+         * For example, the item-id in the restaurant's PoS system.
+         * 
+         * Developers should use unique keys, e.g. "com.company.product".
+         */
+        public IDictionary<string, string> externalIds = new Dictionary<string, string>();
 
         /** The current status. */
         public Status status;

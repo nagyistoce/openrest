@@ -273,13 +273,18 @@ namespace com.googlecode.openrest
         {
             try
             {
-                return RestJsonClient.Get<Response<T>>(uri).value;
+                Response<T> response = RestJsonClient.Get<Response<T>>(uri);
+                if (response.error != null)
+                {
+                    throw new OpenrestException(response.error, response.errorMessage);
+                }
+                return response.value;
             }
             catch (RestJsonHttpException<Response<T>> e) {
                 Response<T> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
@@ -292,13 +297,18 @@ namespace com.googlecode.openrest
         {
             try
             {
-                return RestJsonClient.Put<Response<T>>(uri, value).value;
+                Response<T> response = RestJsonClient.Put<Response<T>>(uri, value);
+                if (response.error != null)
+                {
+                    throw new OpenrestException(response.error, response.errorMessage);
+                }
+                return response.value;
             }
             catch (RestJsonHttpException<Response<T>> e) {
                 Response<T> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
@@ -316,13 +326,19 @@ namespace com.googlecode.openrest
         {
             try
             {
-                return RestJsonClient.Post<Response<R>>(uri, value).value;
+                Response<R> response = RestJsonClient.Post<Response<R>>(uri, value);
+                if (response.error != null)
+                {
+                    throw new OpenrestException(response.error, response.errorMessage);
+                }
+                return response.value;
+
             }
             catch (RestJsonHttpException<Response<R>> e) {
                 Response<R> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
@@ -335,13 +351,18 @@ namespace com.googlecode.openrest
         {
             try
             {
-                RestJsonClient.Delete<Response<object>>(uri);
+                Response<object> response = RestJsonClient.Delete<Response<object>>(uri);
+                if (response.error != null)
+                {
+                    throw new OpenrestException(response.error, response.errorMessage);
+                }
+
             }
             catch (RestJsonHttpException<Response<object>> e) {
                 Response<object> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
@@ -361,7 +382,7 @@ namespace com.googlecode.openrest
                 Response<object> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
@@ -381,7 +402,7 @@ namespace com.googlecode.openrest
                 Response<object> response = e.Value;
                 if (response != null)
                 {
-                    throw new OpenrestException(e.HttpStatusCode, response.error, response.errorMessage, e);
+                    throw new OpenrestException(response.error, response.errorMessage, e);
                 }
                 else
                 {
