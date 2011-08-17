@@ -33,7 +33,7 @@ public class Order implements Serializable {
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
-            User user, String status, String shareToken, String affiliate, String ref) {
+            User user, String status, String shareToken, String affiliate, String ref, List<LogEntry> log) {
 
         this.id = id;
         this.restaurantId = restaurantId;
@@ -52,6 +52,7 @@ public class Order implements Serializable {
         this.shareToken = shareToken;
         this.affiliate = affiliate;
         this.ref = ref;
+        this.log = log;
     }
 
     /** Constructs a new order to be submitted. */
@@ -59,7 +60,7 @@ public class Order implements Serializable {
             Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, String affiliate, String ref) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-        		takeoutPacks, charges, null, null, null, null, null, affiliate, ref);
+        		takeoutPacks, charges, null, null, null, null, null, affiliate, ref, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
@@ -148,6 +149,10 @@ public class Order implements Serializable {
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String ref;
+    
+    /** Change log for this order. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<LogEntry> log = Collections.emptyList();
 
     private static final long serialVersionUID = 1L;
 }
