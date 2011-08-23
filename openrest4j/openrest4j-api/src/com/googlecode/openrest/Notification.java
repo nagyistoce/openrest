@@ -10,14 +10,16 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notification implements Serializable {
-    /** Triggered when a new order is unhandled for some duration. */
+    /** Triggered when a new order is received. Duration is always 0. */
+    public static final String NOTIFICATION_TYPE_NEW_ORDER = "new_order";
+    /** Triggered when a new order is not handled for some duration. */
     public static final String NOTIFICATION_TYPE_DELAYED_ORDER = "delayed_order";
     /** Triggered when no one checks for existence of new orders for some duration. */
     public static final String NOTIFICATION_TYPE_OFFLINE = "offline";
 
     /** All known notification types. */
     public static final Set<String> ALL_NOTIFICATION_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-        NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_OFFLINE
+    		NOTIFICATION_TYPE_NEW_ORDER, NOTIFICATION_TYPE_DELAYED_ORDER, NOTIFICATION_TYPE_OFFLINE
     }));
 
     /** Constructs a previously submitted notification from persisted data. */
