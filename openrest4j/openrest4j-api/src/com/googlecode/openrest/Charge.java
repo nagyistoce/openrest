@@ -43,7 +43,8 @@ public class Charge implements Serializable {
     }));
 
     /** Constructs a previously submitted charge from persisted data. */
-    public Charge(String id, String restaurantId, String type, Double priority, String code,
+    public Charge(String id, String restaurantId, String type, Double priority,
+    		String code, String clubId,
     		String tagId, String tagMode,
     		String amountRuleType, Integer amountRule, Coupon coupon, Integer amount) {
     	this.id = id;
@@ -51,6 +52,7 @@ public class Charge implements Serializable {
         this.type = type;
         this.priority = priority;
         this.code = code;
+        this.clubId = clubId;
         this.tagId = tagId;
         this.tagMode = tagMode;
         this.amountRuleType = amountRuleType;
@@ -60,10 +62,10 @@ public class Charge implements Serializable {
     }
     
     /** Constructs a new charge to be submitted. */
-    public Charge(String type, Double priority, String code,
+    public Charge(String type, Double priority, String code, String clubId,
     		String tagId, String tagMode,
     		String amountRuleType, Integer amountRule, Coupon coupon) {
-    	this(null, null, type, priority, code, tagId, tagMode, amountRuleType, amountRule, coupon, null);
+    	this(null, null, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule, coupon, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -85,9 +87,13 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Double priority = 0.0;
     
-    /** Optional activation code, e.g. GoDaddy-style, member id. */
+    /** Optional activation code (GoDaddy-style). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String code;
+    
+    /** Optional internal club-id. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String clubId;
     
     /** Items for which the charge applies, null if applies for every item. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -154,6 +160,11 @@ public class Charge implements Serializable {
 			if (other.priority != null)
 				return false;
 		} else if (!priority.equals(other.priority))
+			return false;
+		if (clubId == null) {
+			if (other.clubId != null)
+				return false;
+		} else if (!clubId.equals(other.clubId))
 			return false;
 		if (tagId == null) {
 			if (other.tagId != null)

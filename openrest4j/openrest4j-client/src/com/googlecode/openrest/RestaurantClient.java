@@ -12,6 +12,9 @@ import org.codehaus.jackson.type.TypeReference;
  * @author DL
  */
 public class RestaurantClient {
+    private final URL restaurantApiUrl;
+    private final String accessToken;
+    
     public RestaurantClient(URL restaurantApiUrl, String accessToken) {
         this.restaurantApiUrl = restaurantApiUrl;
         this.accessToken = accessToken;
@@ -23,7 +26,7 @@ public class RestaurantClient {
 	
     ///////////////////////////////////////////////////////////////////////////
     
-    public Restaurant restaurant() throws IOException, OpenrestException {
+    public Restaurant getRestaurant() throws IOException, OpenrestException {
         return OpenrestProtocol.get(restaurantApiUrl, new TypeReference<Response<Restaurant>>() {});
     }
 
@@ -89,7 +92,7 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Notifications notifications() throws IOException, OpenrestException {
+    public Notifications getNotifications() throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/notifications/" + "?access_token=" + accessToken),
                 new TypeReference<Response<Notifications>>() {});
     }
@@ -101,11 +104,11 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Menu items() throws IOException, OpenrestException {
+    public Menu getItems() throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/items/"), new TypeReference<Response<Menu>>() {});
     }
 
-    public Item item(String itemId) throws IOException, OpenrestException {
+    public Item getItem(String itemId) throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/items/" + URLEncoder.encode(itemId, "UTF-8")),
                 new TypeReference<Response<Item>>() {});
     }
@@ -121,7 +124,7 @@ public class RestaurantClient {
                 item, new TypeReference<Response<Item>>() {});
     }
 
-    public Image itemImage(String itemId) throws IOException, OpenrestException {
+    public Image getItemImage(String itemId) throws IOException, OpenrestException {
         return RestJsonClient.getImage(new URL(restaurantApiUrl.toString() + "/items/" +
                 URLEncoder.encode(itemId, "UTF-8") + "/picture"),
                 new TypeReference<Response<Object>>() {});
@@ -140,11 +143,11 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Menu tags() throws IOException, OpenrestException {
+    public Menu getTags() throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/tags/"), new TypeReference<Response<Menu>>() {});
     }
 
-    public Tag tag(String tagId) throws IOException, OpenrestException {
+    public Tag getTag(String tagId) throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/tags/" + URLEncoder.encode(tagId, "UTF-8")),
                 new TypeReference<Response<Tag>>() {});
     }
@@ -167,7 +170,7 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Menu categories() throws IOException, OpenrestException {
+    public Menu getCategories() throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/categories/"), new TypeReference<Response<Menu>>() {});
     }
 
@@ -176,7 +179,7 @@ public class RestaurantClient {
                 categoriesMenu, new TypeReference<Response<Menu>>() {});
     }
 
-    public Category category(String categoryId) throws IOException, OpenrestException {
+    public Category getCategory(String categoryId) throws IOException, OpenrestException {
         return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/categories/" + URLEncoder.encode(categoryId, "UTF-8")),
                 new TypeReference<Response<Category>>() {});
     }
@@ -199,7 +202,7 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public List<Order> orders(String status, java.util.Date since, java.util.Date until, String userId,
+    public List<Order> getOrders(String status, java.util.Date since, java.util.Date until, String userId,
     		String ordering, Integer limit, Boolean restaurantView) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	if (status != null) {
@@ -257,7 +260,22 @@ public class RestaurantClient {
         return OpenrestProtocol.add(new URL(restaurantApiUrl.toString() + "/orders/"),
                 order, new TypeReference<Response<OrderConfirmation>>() {});
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
 
-    private final URL restaurantApiUrl;
-    private final String accessToken;
+    public ClubMembers getClubMembers() throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	if (accessToken != null) {
+    		query.append("access_token", accessToken);
+    	}
+        return OpenrestProtocol.get(new URL(restaurantApiUrl.toString() + "/club/" + query.toString()), new TypeReference<Response<ClubMembers>>() {});
+    }
+    
+    public ClubMembers setClubMembers(ClubMembers clubMembers) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	if (accessToken != null) {
+    		query.append("access_token", accessToken);
+    	}
+        return OpenrestProtocol.set(new URL(restaurantApiUrl.toString() + "/club/" + query.toString()), clubMembers, new TypeReference<Response<ClubMembers>>() {});
+    }
 }

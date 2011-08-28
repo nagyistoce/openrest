@@ -13,6 +13,9 @@ import org.codehaus.jackson.type.TypeReference;
  * @author DL
  */
 public class OpenrestClient {
+    private final URL apiUrl;
+    private final String accessToken;
+    
     public OpenrestClient(URL apiUrl, String accessToken) {
         this.apiUrl = apiUrl;
         this.accessToken = accessToken;
@@ -52,7 +55,4 @@ public class OpenrestClient {
     	
         return OpenrestProtocol.get(new URL(apiUrl + "/menus/" + query.toString()), new TypeReference<Response<Map<String, Menu>>>() {});
     }
-
-    private final URL apiUrl;
-    private final String accessToken;
 }
