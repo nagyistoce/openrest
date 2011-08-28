@@ -1,10 +1,14 @@
+
 package com.googlecode.openrest;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -16,12 +20,25 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant implements Serializable {
+	/** Restaurant system is used for demonstration only. Orders will not be handled. */
+    public static final String STATE_DEMO = "demo";
+    /** Restaurant system is under construction. Orders will not be handled. */
+    public static final String STATE_UNDER_CONSTRUCTION = "under_construction";
+    /** Restaurant system is operational. Orders are accepted. */
+    public static final String STATE_OPERATIONAL = "operational";
+    
+    /** All known statuses. */
+    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(new String[] {
+    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
+    }));
+	
     public Restaurant(String id, String name, String description, Contact contact,
             Address address, String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, String timezone,
             List<String> paymentTypes, Map<String, Integer> minPayments,
-            String link, String picture, String icon, Map<String, String> properties) {
+            String link, String picture, String icon, Map<String, String> properties,
+            String state) {
         
         this.id = id;
         this.name = name;
@@ -42,6 +59,7 @@ public class Restaurant implements Serializable {
         this.picture = picture;
         this.icon = icon;
         this.properties = properties;
+        this.state = state;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -152,6 +170,10 @@ public class Restaurant implements Serializable {
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> properties = Collections.emptyMap();
+    
+    /** @see ALL_STATES */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public String state = STATE_OPERATIONAL;
 
     private static final long serialVersionUID = 1L;
 }

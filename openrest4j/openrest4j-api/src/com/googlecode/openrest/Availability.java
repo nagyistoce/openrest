@@ -8,7 +8,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
- * TODO: document
+ * Time availability of some resource, e.g. a restaurant or an item.
+ * Supports regular weekly periods and specific date exceptions.
+ * 
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
