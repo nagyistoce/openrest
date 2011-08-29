@@ -33,7 +33,8 @@ public class Order implements Serializable {
     public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
-            User user, String status, String shareToken, String affiliate, String ref, List<LogEntry> log) {
+            User user, ClubMember clubMember, String status, String shareToken,
+            String affiliate, String ref, List<LogEntry> log) {
 
         this.id = id;
         this.restaurantId = restaurantId;
@@ -48,6 +49,7 @@ public class Order implements Serializable {
         this.created = ((created != null) ? created.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
         this.user = user;
+        this.clubMember = clubMember;
         this.status = status;
         this.shareToken = shareToken;
         this.affiliate = affiliate;
@@ -58,9 +60,10 @@ public class Order implements Serializable {
     /** Constructs a new order to be submitted. */
     public Order(List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, String affiliate, String ref) {
+            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref) {
         this(null, null, orderItems, comment, price, delivery, contact, payments,
-        		takeoutPacks, charges, null, null, null, null, null, affiliate, ref, Collections.<LogEntry>emptyList());
+        		takeoutPacks, charges, null, null, null, clubMember, null, null,
+        		affiliate, ref, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
@@ -130,6 +133,10 @@ public class Order implements Serializable {
     /** The ordering user. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public User user;
+    
+    /** The ordering club member. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public ClubMember clubMember;
 
     /** The order's status. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

@@ -126,7 +126,7 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer amount;
     
-	public boolean equalsIgnoreAmountAndCode(Charge other) {
+	public boolean equalsIgnoreAmount(Charge other) {
 		if (this == other)
 			return true;
 		if (other == null)
@@ -161,6 +161,11 @@ public class Charge implements Serializable {
 				return false;
 		} else if (!priority.equals(other.priority))
 			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
 		if (clubId == null) {
 			if (other.clubId != null)
 				return false;
@@ -181,6 +186,7 @@ public class Charge implements Serializable {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		
 		return true;
 	}
 
@@ -194,7 +200,7 @@ public class Charge implements Serializable {
 			return false;
 		Charge other = (Charge) obj;
 		
-		if (!equalsIgnoreAmountAndCode(other)) {
+		if (!equalsIgnoreAmount(other)) {
 			return false;
 		} else if (amount == null) {
 			if (other.amount != null) {
@@ -202,11 +208,7 @@ public class Charge implements Serializable {
 			}
 		} else if (!amount.equals(other.amount)) {
 			return false;
-		} else if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
+		}
 		
 		return true;
 	}
