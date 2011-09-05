@@ -17,26 +17,44 @@ import org.codehaus.jackson.type.TypeReference;
  * @author DL
  */
 public class RestJsonClient {
-    private RestJsonClient() {}
+    private static final ObjectMapper mapper = new ObjectMapper();
+    
+    private final Integer connectTimeout;
+    private final Integer readTimeout;
 
-    public static <T> T get(URL url, TypeReference<T> responseType) throws IOException {
+    public RestJsonClient(Integer connectTimeout, Integer readTimeout) {
+    	this.connectTimeout = connectTimeout;
+    	this.readTimeout = readTimeout;
+    }
+    
+    public RestJsonClient() {
+    	this(null, null);
+    }
+
+    public <T> T get(URL url, TypeReference<T> responseType) throws IOException {
         return go(url, "GET", null, responseType);
     }
 
-    public static <T> T put(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
+    public <T> T put(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
         return go(url, "PUT", requestObj, responseType);
     }
 
-    public static <T> T post(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
+    public <T> T post(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
         return go(url, "POST", requestObj, responseType);
     }
 
-    public static <T> T delete(URL url, TypeReference<T> responseType) throws IOException {
+    public <T> T delete(URL url, TypeReference<T> responseType) throws IOException {
         return go(url, "DELETE", null, responseType);
     }
 
-    public static <T> Image getImage(URL url, TypeReference<T> responseType) throws IOException {
+    public <T> Image getImage(URL url, TypeReference<T> responseType) throws IOException {
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if (connectTimeout != null) {
+        	conn.setConnectTimeout(connectTimeout.intValue());
+        }
+        if (readTimeout != null) {
+        	conn.setReadTimeout(readTimeout);
+        }
         conn.setRequestMethod("GET");
         conn.connect();
 
@@ -45,10 +63,16 @@ public class RestJsonClient {
         // Avoid conn.disconnect() so the underlying socket can be reused
     }
 
-    public static <T> T put(URL url, String imageFilename, Image image, TypeReference<T> responseType) throws IOException {
+    public <T> T put(URL url, String imageFilename, Image image, TypeReference<T> responseType) throws IOException {
         final String boundary = Long.toHexString(System.currentTimeMillis());
 
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if (connectTimeout != null) {
+        	conn.setConnectTimeout(connectTimeout.intValue());
+        }
+        if (readTimeout != null) {
+        	conn.setReadTimeout(readTimeout);
+        }
         conn.setRequestMethod("PUT");
         conn.setDoOutput(true);
         conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
@@ -76,8 +100,14 @@ public class RestJsonClient {
         // Avoid conn.disconnect() so the underlying socket can be reused
     }
 
-    private static <T> T go(URL url, String method, Object requestObj, TypeReference<T> responseType) throws IOException {
+    private <T> T go(URL url, String method, Object requestObj, TypeReference<T> responseType) throws IOException {
         final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        if (connectTimeout != null) {
+        	conn.setConnectTimeout(connectTimeout.intValue());
+        }
+        if (readTimeout != null) {
+        	conn.setReadTimeout(readTimeout);
+        }
         conn.setRequestMethod(method);
         conn.setRequestProperty("Accept", "application/json");
         if (requestObj != null) {
@@ -155,6 +185,4 @@ public class RestJsonClient {
         }
         return response;
     }
-
-    private static final ObjectMapper mapper = new ObjectMapper();
 }

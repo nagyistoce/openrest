@@ -15,10 +15,16 @@ import org.codehaus.jackson.type.TypeReference;
 public class OpenrestClient {
     private final URL apiUrl;
     private final String accessToken;
+    private final OpenrestProtocol protocol;
     
-    public OpenrestClient(URL apiUrl, String accessToken) {
+    public OpenrestClient(URL apiUrl, String accessToken, Integer connectTimeout, Integer readTimeout) {
         this.apiUrl = apiUrl;
         this.accessToken = accessToken;
+        protocol = new OpenrestProtocol(connectTimeout, readTimeout);
+    }
+    
+    public OpenrestClient(URL apiUrl, String accessToken) {
+    	this(apiUrl, accessToken, null, null);
     }
 
     public OpenrestClient(URL restaurantUrl) {
@@ -27,7 +33,7 @@ public class OpenrestClient {
     
     public RestaurantClient getRestaurantClient(String restaurantId) {
     	try {
-    		return new RestaurantClient(new URL(apiUrl.toString() + "/restaurants/" + restaurantId), accessToken);
+    		return new RestaurantClient(new URL(apiUrl.toString() + "/restaurants/" + restaurantId), accessToken, protocol);
     	} catch (MalformedURLException e) {
     		throw new RuntimeException(e);
     	}
@@ -39,20 +45,20 @@ public class OpenrestClient {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("ids", restaurantIds);
     	
-        return OpenrestProtocol.get(new URL(apiUrl + "/restaurants/" + query.toString()), new TypeReference<Response<List<Restaurant>>>() {});
+        return protocol.get(new URL(apiUrl + "/restaurants/" + query.toString()), new TypeReference<Response<List<Restaurant>>>() {});
     }
     
     public List<RestaurantFullInfo> getRestaurantsFullInfo(List<String> restaurantIds) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("ids", restaurantIds);
     	
-        return OpenrestProtocol.get(new URL(apiUrl + "/restaurants.full/" + query.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
+        return protocol.get(new URL(apiUrl + "/restaurants.full/" + query.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
     }
     
     public Map<String, Menu> getMenus(List<String> restaurantIds) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("restaurantIds", restaurantIds);
     	
-        return OpenrestProtocol.get(new URL(apiUrl + "/menus/" + query.toString()), new TypeReference<Response<Map<String, Menu>>>() {});
+        return protocol.get(new URL(apiUrl + "/menus/" + query.toString()), new TypeReference<Response<Map<String, Menu>>>() {});
     }
 }
