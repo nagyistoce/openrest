@@ -1,4 +1,4 @@
-package com.googlecode.openrest;
+package com.googlecode.openrest.v1_0;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package com.googlecode.openrest;
+package com.googlecode.openrest.v1_0;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
