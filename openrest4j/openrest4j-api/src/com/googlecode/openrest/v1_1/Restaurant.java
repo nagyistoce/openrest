@@ -1,5 +1,5 @@
 
-package com.googlecode.openrest.v1_0;
+package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,13 +27,18 @@ public class Restaurant implements Serializable {
     /** Restaurant system is operational. Orders are accepted. */
     public static final String STATE_OPERATIONAL = "operational";
     
+    /** The restaurant's welcome message. */
+    public static final String MESSAGE_TYPE_WELCOME = "welcome";
+    /** The restaurant's order confirmation message. */
+    public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
+    
     /** All known statuses. */
     public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(new String[] {
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
     }));
 	
-    public Restaurant(String id, String name, String description, Contact contact,
-            Address address, String welcomeMessage, String confirmationMessage,
+    public Restaurant(String id, Map<String, String> title, Map<String, String> description,
+    		Contact contact, Address address, Map<String, Map<String, String>> messages,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos,
             String timezone, String currency, String locale, List<String> locales,
@@ -42,12 +47,11 @@ public class Restaurant implements Serializable {
             String state) {
         
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.description = description;
         this.contact = contact;
         this.address = address;
-        this.welcomeMessage = welcomeMessage;
-        this.confirmationMessage = confirmationMessage;
+        this.messages = messages;
         this.colorScheme = colorScheme;
         this.openTimes = openTimes;
         this.deliveryTimes = deliveryTimes;
@@ -77,13 +81,13 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
 
-    /** The restaurant's name. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String name;
+    /** The restaurant's title in various locales. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> title = Collections.emptyMap();
 
-    /** The restaurant's description or tagline. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String description;
+    /** The restaurant's description or tagline in various locales. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> description = Collections.emptyMap();
 
     /** The restaurant's contact. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -92,14 +96,10 @@ public class Restaurant implements Serializable {
     /** The address of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Address address;
-
-    /** The restaurant's welcome message. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String welcomeMessage;
-
-    /** The default order confirmation message. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String confirmationMessage;
+    
+    /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, Map<String, String>> messages = Collections.emptyMap();
 
     /** The color scheme. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
