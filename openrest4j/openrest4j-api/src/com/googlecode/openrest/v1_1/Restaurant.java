@@ -40,7 +40,7 @@ public class Restaurant implements Serializable {
     public Restaurant(String id, Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, Map<String, Map<String, String>> messages,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
-            Boolean inactive, List<DeliveryInfo> deliveryInfos,
+            Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
             String timezone, String currency, String locale, List<String> locales,
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String picture, String icon, Map<String, String> properties,
@@ -57,6 +57,8 @@ public class Restaurant implements Serializable {
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
         this.deliveryInfos = deliveryInfos;
+        this.status = status;
+        this.deliveryStatus = deliveryStatus;
         this.timezone = timezone;
         this.currency = currency;
         this.locale = locale;

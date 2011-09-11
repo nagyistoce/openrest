@@ -70,11 +70,11 @@ public class Order implements Serializable {
     public Order() {}
     
     public java.util.Date created() {
-        return new java.util.Date(created.longValue());
+        return ((created != null) ? new java.util.Date(created.longValue()) : null);
     }
 
     public java.util.Date modified() {
-        return new java.util.Date(modified.longValue());
+        return ((modified != null) ? new java.util.Date(modified.longValue()) : null);
     }
 
     /** The order's unique id. */

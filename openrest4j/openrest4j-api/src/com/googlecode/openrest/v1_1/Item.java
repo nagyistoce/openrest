@@ -18,7 +18,7 @@ public class Item implements Serializable {
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
-    		Availability availability, Boolean inactive, String picture,
+    		Availability availability, Boolean inactive, String picture, Status status,
     		Map<String, String> externalIds) {
         this.id = id;
         this.restaurantId = restaurantId;
@@ -29,6 +29,7 @@ public class Item implements Serializable {
         this.availability = availability;
         this.inactive = inactive;
         this.picture = picture;
+        this.status = status;
         this.externalIds = externalIds;
     }
 
@@ -36,7 +37,7 @@ public class Item implements Serializable {
     public Item(Map<String, String> title, Map<String, String>description,
     		Integer price, List<Variation> variations, Availability availability,
     		Boolean inactive, Map<String, String> externalIds) {
-        this(null, null, title, description, price, variations, availability, inactive, null, externalIds);
+        this(null, null, title, description, price, variations, availability, inactive, null, null, externalIds);
     }
 
 	/** Default constructor for JSON deserialization. */
