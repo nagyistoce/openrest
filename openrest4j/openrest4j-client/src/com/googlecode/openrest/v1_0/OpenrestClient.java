@@ -42,22 +42,43 @@ public class OpenrestClient {
     ///////////////////////////////////////////////////////////////////////////
     
     public List<Restaurant> getRestaurants(List<String> restaurantIds) throws IOException, OpenrestException {
+    	return getRestaurants(restaurantIds, null);
+    }
+    
+    public List<Restaurant> getRestaurants(List<String> restaurantIds, String locale) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("ids", restaurantIds);
+    	if (locale != null) {
+        	query.append("locale", locale);
+    	}
     	
         return protocol.get(new URL(apiUrl + "/restaurants/" + query.toString()), new TypeReference<Response<List<Restaurant>>>() {});
     }
     
     public List<RestaurantFullInfo> getRestaurantsFullInfo(List<String> restaurantIds) throws IOException, OpenrestException {
+    	return getRestaurantsFullInfo(restaurantIds, null);
+    }
+    
+    public List<RestaurantFullInfo> getRestaurantsFullInfo(List<String> restaurantIds, String locale) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("ids", restaurantIds);
+    	if (locale != null) {
+        	query.append("locale", locale);
+    	}
     	
         return protocol.get(new URL(apiUrl + "/restaurants.full/" + query.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
     }
     
     public Map<String, Menu> getMenus(List<String> restaurantIds) throws IOException, OpenrestException {
+    	return getMenus(restaurantIds, null);
+    }
+    
+    public Map<String, Menu> getMenus(List<String> restaurantIds, String locale) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
     	query.append("restaurantIds", restaurantIds);
+    	if (locale != null) {
+        	query.append("locale", locale);
+    	}
     	
         return protocol.get(new URL(apiUrl + "/menus/" + query.toString()), new TypeReference<Response<Map<String, Menu>>>() {});
     }

@@ -9,6 +9,9 @@ public class QueryStringBuilder {
 	public QueryStringBuilder() {}
 	
 	public void append(String name, String value) {
+		if ((name == null) || (value == null)) {
+			return;
+		}
 		builder.append(first ? '?' : '&')
 			.append(urlEncode(name))
 			.append('=')
@@ -17,7 +20,7 @@ public class QueryStringBuilder {
 	}
 	
 	public void append(String name, List<String> values) {
-		if ((values == null) || (values.isEmpty())) {
+		if ((name == null) || (values == null) || (values.isEmpty())) {
 			return;
 		}
 		
