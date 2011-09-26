@@ -7,8 +7,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable {
-    public Address(String city, String street, String number, String apt,
-            String floor, String entrance, String comment, LatLng latLng) {
+    public Address(String country, String city, String street, String number,
+    		String apt, String floor, String entrance, String comment, LatLng latLng) {
+    	this.country = country;
         this.city = city;
         this.street = street;
         this.number = number;
@@ -23,9 +24,12 @@ public class Address implements Serializable {
     public Address() {}
 
     public String streetAddress() {
-        return street + ' ' + number + ", " + city;
+        return street + ' ' + number + ", " + city + ", " + country;
     }
 
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String country;
+    
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String city;
 
