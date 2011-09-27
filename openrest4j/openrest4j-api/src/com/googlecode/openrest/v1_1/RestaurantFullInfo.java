@@ -12,10 +12,11 @@ import com.googlecode.openrest.v1_1.Restaurant;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestaurantFullInfo implements Serializable {
-    public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges) {
+    public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges, Distributor distributor) {
     	this.restaurant = restaurant;
     	this.menu = menu;
     	this.charges = charges;
+    	this.distributor = distributor;
     }
     
     /** Default constructor for JSON deserialization. */
@@ -32,6 +33,10 @@ public class RestaurantFullInfo implements Serializable {
     /** The charges. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public List<Charge> charges;
+    
+    /** The distributor. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Distributor distributor;
     
     private static final long serialVersionUID = 1L;
 }

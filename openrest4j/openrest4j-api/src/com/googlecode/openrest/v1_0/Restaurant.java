@@ -32,7 +32,7 @@ public class Restaurant implements Serializable {
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
     }));
 	
-    public Restaurant(String id, String name, String description, Contact contact,
+    public Restaurant(String id, String distributorId, String name, String description, Contact contact,
             Address address, String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
@@ -42,6 +42,7 @@ public class Restaurant implements Serializable {
             String state) {
         
         this.id = id;
+        this.distributorId = distributorId;
         this.name = name;
         this.description = description;
         this.contact = contact;
@@ -78,6 +79,10 @@ public class Restaurant implements Serializable {
     /** The restaurant's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
+    
+    /** The distributor in charge of this restaurant. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String distributorId;
 
     /** The restaurant's name. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

@@ -1,7 +1,6 @@
 
 package com.googlecode.openrest.v1_1;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +18,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Restaurant implements Serializable {
+public class Restaurant extends Organization {
+    private static final long serialVersionUID = 1L;
+    
 	/** Restaurant system is used for demonstration only. Orders will not be handled. */
     public static final String STATE_DEMO = "demo";
     /** Restaurant system is under construction. Orders will not be handled. */
@@ -37,7 +38,7 @@ public class Restaurant implements Serializable {
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
     }));
 	
-    public Restaurant(String id, Map<String, String> title, Map<String, String> description,
+    public Restaurant(String id, String distributorId, Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, Map<String, Map<String, String>> messages,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
@@ -45,12 +46,9 @@ public class Restaurant implements Serializable {
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String picture, String icon, Map<String, String> properties,
             String state) {
+    	super(id, title, description, contact, address, locale, locales, link, picture, icon, properties);
         
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.contact = contact;
-        this.address = address;
+    	this.distributorId = distributorId;
         this.messages = messages;
         this.colorScheme = colorScheme;
         this.openTimes = openTimes;
@@ -61,43 +59,21 @@ public class Restaurant implements Serializable {
         this.deliveryStatus = deliveryStatus;
         this.timezone = timezone;
         this.currency = currency;
-        this.locale = locale;
-        this.locales = locales;
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
-        this.link = link;
-        this.picture = picture;
-        this.icon = icon;
-        this.properties = properties;
         this.state = state;
     }
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
 
-    public TimeZone getTimezone() {
+    public TimeZone timezone() {
         return TimeZone.getTimeZone(timezone);
     }
-    
-    /** The restaurant's unique id. */
+
+    /** The distributor in charge of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String id;
-
-    /** The restaurant's title in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
-
-    /** The restaurant's description or tagline in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> description = Collections.emptyMap();
-
-    /** The restaurant's contact. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Contact contact;
-
-    /** The address of this restaurant. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Address address;
+    public String distributorId;
     
     /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -142,14 +118,6 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String currency;
     
-    /** The restaurant's default locale, e.g. "en_US". */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String locale;
-    
-    /** The restaurant's supported locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> locales = Collections.emptyList();
-
     /** Available payment methods. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<String> paymentTypes = new ArrayList<String>(Payment.ALL_PAYMENT_TYPES);
@@ -162,28 +130,7 @@ public class Restaurant implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, Integer> minPayments = Collections.emptyMap();
 
-    /** Official restaurant web-site URL. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String link;
-    
-    /** Restaurant picture URL (direct link). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String picture;
-    
-    /** Restaurant icon URL (direct link). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String icon;
-    
-    /**
-     * Map of user-defined extended properties. Developers should use unique
-     * keys, e.g. "com.googlecode.openrestext".
-     */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> properties = Collections.emptyMap();
-    
     /** @see ALL_STATES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
-
-    private static final long serialVersionUID = 1L;
 }
