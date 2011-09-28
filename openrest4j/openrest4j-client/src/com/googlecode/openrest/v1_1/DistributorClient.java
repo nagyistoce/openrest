@@ -6,7 +6,7 @@ import java.net.URL;
 import org.codehaus.jackson.type.TypeReference;
 
 /**
- * The openrest client for a single distributer.
+ * The openrest client for a single distributor.
  * @author DL
  */
 public class DistributorClient {
@@ -20,8 +20,8 @@ public class DistributorClient {
         this.protocol = ((protocol != null) ? protocol : new OpenrestProtocol());
     }
 
-    public DistributorClient(URL distributerApiUrl) {
-        this(distributerApiUrl, null, null);
+    public DistributorClient(URL distributorApiUrl) {
+        this(distributorApiUrl, null, null);
     }
 	
     ///////////////////////////////////////////////////////////////////////////
