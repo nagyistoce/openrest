@@ -207,30 +207,22 @@ public class RestaurantClient {
     public List<Order> getOrders(String status, java.util.Date since, java.util.Date until, String userId,
     		String ordering, Integer limit, Boolean restaurantView) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
-    	if (status != null) {
-    		query.append("status", status);
-    	}
+		query.append("status", status);
     	if (since != null) {
     		query.append("since", Long.toString(since.getTime()));
     	}
     	if (until != null) {
     		query.append("until", Long.toString(until.getTime()));
     	}
-    	if (userId != null) {
-    		query.append("userId", userId);
-    	}
-    	if (ordering != null) {
-    		query.append("ordering", ordering);
-    	}
+		query.append("userId", userId);
+		query.append("ordering", ordering);
     	if (limit != null) {
     		query.append("limit", limit.toString());
     	}
     	if (restaurantView != null) {
     		query.append("restaurantView", restaurantView.toString());
     	}
-    	if (accessToken != null) {
-    		query.append("access_token", accessToken);
-    	}
+		query.append("access_token", accessToken);
     	
         return protocol.get(new URL(restaurantApiUrl.toString() + "/orders/" + query.toString()),
                 new TypeReference<Response<List<Order>>>() {});
@@ -241,12 +233,8 @@ public class RestaurantClient {
     	if (restaurantView != null) {
     		query.append("restaurantView", restaurantView.toString());
     	}
-    	if (shareToken != null) {
-    		query.append("shareToken", shareToken);
-    	}
-    	if (accessToken != null) {
-    		query.append("access_token", accessToken);
-    	}
+		query.append("shareToken", shareToken);
+		query.append("access_token", accessToken);
     	
         return protocol.get(new URL(restaurantApiUrl.toString() + "/orders/" + URLEncoder.encode(orderId, "UTF-8") + query.toString()),
                 new TypeReference<Response<Order>>() {});
@@ -267,17 +255,15 @@ public class RestaurantClient {
 
     public ClubMembers getClubMembers() throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
-    	if (accessToken != null) {
-    		query.append("access_token", accessToken);
-    	}
+		query.append("access_token", accessToken);
+
         return protocol.get(new URL(restaurantApiUrl.toString() + "/club/" + query.toString()), new TypeReference<Response<ClubMembers>>() {});
     }
     
     public ClubMembers setClubMembers(ClubMembers clubMembers) throws IOException, OpenrestException {
     	final QueryStringBuilder query = new QueryStringBuilder();
-    	if (accessToken != null) {
-    		query.append("access_token", accessToken);
-    	}
+    	query.append("access_token", accessToken);
+
         return protocol.set(new URL(restaurantApiUrl.toString() + "/club/" + query.toString()), clubMembers, new TypeReference<Response<ClubMembers>>() {});
     }
 }
