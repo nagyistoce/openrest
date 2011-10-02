@@ -30,7 +30,7 @@ public class Order implements Serializable {
     }));
 
     /** Constructs a previously submitted order from persisted data. */
-    public Order(String id, String restaurantId, List<OrderItem> orderItems, String comment,
+    public Order(String id, String restaurantId, String locale, List<OrderItem> orderItems, String comment,
             Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
             User user, ClubMember clubMember, String status, String shareToken,
@@ -38,6 +38,7 @@ public class Order implements Serializable {
 
         this.id = id;
         this.restaurantId = restaurantId;
+        this.locale = locale;
         this.orderItems = orderItems;
         this.comment = comment;
         this.price = price;
@@ -58,10 +59,10 @@ public class Order implements Serializable {
     }
 
     /** Constructs a new order to be submitted. */
-    public Order(List<OrderItem> orderItems, String comment, Integer price,
+    public Order(String locale, List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref) {
-        this(null, null, orderItems, comment, price, delivery, contact, payments,
+        this(null, null, locale, orderItems, comment, price, delivery, contact, payments,
         		takeoutPacks, charges, null, null, null, clubMember, null, null,
         		affiliate, ref, Collections.<LogEntry>emptyList());
     }
@@ -84,6 +85,10 @@ public class Order implements Serializable {
     /** The restaurant's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String restaurantId;
+    
+    /** The order's locale. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String locale;
 
     /** The ordered items. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -160,6 +165,6 @@ public class Order implements Serializable {
     /** Change log for this order. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<LogEntry> log = Collections.emptyList();
-
+    
     private static final long serialVersionUID = 1L;
 }
