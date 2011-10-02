@@ -71,13 +71,13 @@ public class RestaurantClient {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Menu menu() throws IOException, OpenrestException {
+    public Menu getMenu() throws IOException, OpenrestException {
         return protocol.get(new URL(restaurantApiUrl.toString() + "/menu"), new TypeReference<Response<Menu>>() {});
     }
 
     ///////////////////////////////////////////////////////////////////////////
 
-    public Staff staff() throws IOException, OpenrestException {
+    public Staff getStaff() throws IOException, OpenrestException {
         return protocol.get(new URL(restaurantApiUrl.toString() + "/staff/" + "?access_token=" + accessToken),
                 new TypeReference<Response<Staff>>() {});
     }
@@ -265,5 +265,25 @@ public class RestaurantClient {
     	query.append("access_token", accessToken);
 
         return protocol.set(new URL(restaurantApiUrl.toString() + "/club/" + query.toString()), clubMembers, new TypeReference<Response<ClubMembers>>() {});
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+
+    public List<Stats> getStats(Date since, Date until, String granularity,
+    		String ref) throws IOException, OpenrestException {
+    	
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("access_token", accessToken);
+    	if (since != null) {
+    		query.append("since", since.toString());
+    	}
+    	if (until != null) {
+    		query.append("until", until.toString());
+    	}
+		query.append("granularity", granularity);
+		query.append("ref", ref);
+    	
+        return protocol.get(new URL(restaurantApiUrl.toString() + "/stats" + query.toString()),
+        		new TypeReference<Response<List<Stats>>>() {});
     }
 }

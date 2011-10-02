@@ -9,7 +9,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Date implements Serializable {
-    public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute) {
+	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -33,6 +33,12 @@ public class Date implements Serializable {
                 day.intValue(), hour.intValue(), minute.intValue());
         return cal;
     }
+    
+    @Override
+	public String toString() {
+    	return String.format("%04d-%02d-%02d %02d:%02d",
+    			year, month, day, hour, minute);
+	}
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer year;
