@@ -15,12 +15,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Staff implements Serializable {
     public static final String STAFF_ADMIN = "admin";
+    public static final String STAFF_DISTRIBUTOR = "distributor";
     public static final String STAFF_MANAGER = "manager";
     public static final String STAFF_EMPLOYEE = "employee";
     
     /** All known staff types. */
     public static final Set<String> ALL_STAFFS = new HashSet<String>(Arrays.asList(new String[] {
-    		STAFF_ADMIN, STAFF_MANAGER, STAFF_EMPLOYEE
+    		STAFF_ADMIN, STAFF_DISTRIBUTOR, STAFF_MANAGER, STAFF_EMPLOYEE
     }));
 
     public Staff(Map<String, List<String>> staff) {
@@ -33,6 +34,12 @@ public class Staff implements Serializable {
     public static Staff createAdmins(List<String> adminStaff) {
         final Map<String, List<String>> staff = new HashMap<String, List<String>>(1);
         staff.put(STAFF_ADMIN, adminStaff);
+        return new Staff(staff);
+    }
+    
+    public static Staff createDistributors(List<String> distributorStaff) {
+        final Map<String, List<String>> staff = new HashMap<String, List<String>>(1);
+        staff.put(STAFF_DISTRIBUTOR, distributorStaff);
         return new Staff(staff);
     }
 
