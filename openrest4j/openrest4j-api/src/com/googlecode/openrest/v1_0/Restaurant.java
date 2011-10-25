@@ -1,4 +1,3 @@
-
 package com.googlecode.openrest.v1_0;
 
 import java.io.Serializable;
@@ -20,6 +19,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
 	/** Restaurant system is used for demonstration only. Orders will not be handled. */
     public static final String STATE_DEMO = "demo";
     /** Restaurant system is under construction. Orders will not be handled. */
@@ -39,7 +40,7 @@ public class Restaurant implements Serializable {
             String timezone, String currency, String locale, List<String> locales,
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String picture, String icon, Map<String, String> properties,
-            String state) {
+            String state, Double rank) {
         
         this.id = id;
         this.distributorId = distributorId;
@@ -67,6 +68,7 @@ public class Restaurant implements Serializable {
         this.icon = icon;
         this.properties = properties;
         this.state = state;
+        this.rank = rank;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -189,6 +191,8 @@ public class Restaurant implements Serializable {
     /** @see ALL_STATES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
-
-    private static final long serialVersionUID = 1L;
+    
+    /** The restaurant's Openrest rank. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Double rank;
 }

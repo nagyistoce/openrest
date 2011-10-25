@@ -15,11 +15,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, Boolean inactive, String picture, Status status,
-    		Map<String, String> externalIds) {
+    		Map<String, String> externalIds, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -31,13 +33,15 @@ public class Item implements Serializable {
         this.picture = picture;
         this.status = status;
         this.externalIds = externalIds;
+        this.rank = rank;
     }
 
     /** Constructs a new item to be submitted. */
     public Item(Map<String, String> title, Map<String, String>description,
     		Integer price, List<Variation> variations, Availability availability,
     		Boolean inactive, Map<String, String> externalIds) {
-        this(null, null, title, description, price, variations, availability, inactive, null, null, externalIds);
+        this(null, null, title, description, price, variations, availability, inactive,
+        		null, null, externalIds, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -92,8 +96,10 @@ public class Item implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> externalIds = Collections.emptyMap();
     
-    private static final long serialVersionUID = 1L;
-
+    /** The item's Openrest rank. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Double rank;
+    
 	@Override
 	public int hashCode() {
 		final int prime = 31;

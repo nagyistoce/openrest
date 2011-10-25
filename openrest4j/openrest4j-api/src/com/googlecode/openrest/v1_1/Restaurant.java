@@ -1,4 +1,3 @@
-
 package com.googlecode.openrest.v1_1;
 
 import java.util.ArrayList;
@@ -28,15 +27,15 @@ public class Restaurant extends Organization {
     /** Restaurant system is operational. Orders are accepted. */
     public static final String STATE_OPERATIONAL = "operational";
     
-    /** The restaurant's welcome message. */
-    public static final String MESSAGE_TYPE_WELCOME = "welcome";
-    /** The restaurant's order confirmation message. */
-    public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
-    
     /** All known statuses. */
     public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(new String[] {
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
     }));
+    
+    /** The restaurant's welcome message. */
+    public static final String MESSAGE_TYPE_WELCOME = "welcome";
+    /** The restaurant's order confirmation message. */
+    public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
 	
     public Restaurant(String id, String distributorId, Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, Map<String, Map<String, String>> messages,
@@ -45,7 +44,7 @@ public class Restaurant extends Organization {
             String timezone, String currency, String locale, List<String> locales,
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String picture, String icon, Map<String, String> properties,
-            String state) {
+            String state, Double rank) {
     	super(id, title, description, contact, address, locale, locales, link, picture, icon, properties);
         
     	this.distributorId = distributorId;
@@ -62,6 +61,7 @@ public class Restaurant extends Organization {
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
         this.state = state;
+        this.rank = rank;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -133,4 +133,8 @@ public class Restaurant extends Organization {
     /** @see ALL_STATES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
+    
+    /** The restaurant's Openrest rank. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Double rank;
 }
