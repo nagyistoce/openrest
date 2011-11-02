@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
- * Ditributor information.
+ * Distributor information.
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,11 +17,12 @@ public class Distributor extends Organization {
     /** Default constructor for JSON deserialization. */
     public Distributor() {}
     
-    public Distributor(String id, Map<String, String> title, Map<String, String> description,
-    		Contact contact, Address address, String locale, List<String> locales, String link,
-    		String picture, String icon, Map<String, String> properties,
+    public Distributor(String id, Long created, Map<String, String> title, Map<String, String> description,
+    		Contact contact, Address address, String timezone, String locale, List<String> locales,
+    		String link, String picture, String icon, Map<String, String> properties,
     		String facebookAppId, String domain, String noImagePicture) {
-    	super(id, title, description, contact, address, locale, locales, link, picture, icon, properties);
+    	super(id, created, title, description, contact, address, timezone, locale, locales,
+    			link, picture, icon, properties);
     	
     	this.facebookAppId = facebookAppId;
     	this.domain = domain;

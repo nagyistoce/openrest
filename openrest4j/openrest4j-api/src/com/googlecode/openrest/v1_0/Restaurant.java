@@ -33,8 +33,8 @@ public class Restaurant implements Serializable {
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
     }));
 	
-    public Restaurant(String id, String distributorId, String name, String description, Contact contact,
-            Address address, String welcomeMessage, String confirmationMessage,
+    public Restaurant(String id, Long created, String distributorId, String name, String description,
+    		Contact contact, Address address, String welcomeMessage, String confirmationMessage,
             ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
             String timezone, String currency, String locale, List<String> locales,
@@ -43,6 +43,7 @@ public class Restaurant implements Serializable {
             String state, Double rank) {
         
         this.id = id;
+        this.created = created;
         this.distributorId = distributorId;
         this.name = name;
         this.description = description;
@@ -81,6 +82,14 @@ public class Restaurant implements Serializable {
     /** The restaurant's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
+    
+    /** The restaurant's creation (NOT establishment!) timestamp. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Long created;
+    
+    public java.util.Date created() {
+        return ((created != null) ? new java.util.Date(created.longValue()) : null);
+    }
     
     /** The distributor in charge of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

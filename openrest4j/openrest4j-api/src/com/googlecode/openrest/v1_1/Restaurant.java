@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -37,15 +36,17 @@ public class Restaurant extends Organization {
     /** The restaurant's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
 	
-    public Restaurant(String id, String distributorId, Map<String, String> title, Map<String, String> description,
-    		Contact contact, Address address, Map<String, Map<String, String>> messages,
-            ColorScheme colorScheme, Availability openTimes, Availability deliveryTimes,
+    public Restaurant(String id, Long created, String distributorId, Map<String, String> title,
+    		Map<String, String> description, Contact contact, Address address,
+    		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
+    		Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
             String timezone, String currency, String locale, List<String> locales,
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String picture, String icon, Map<String, String> properties,
             String state, Double rank) {
-    	super(id, title, description, contact, address, locale, locales, link, picture, icon, properties);
+    	super(id, created, title, description, contact, address, timezone, locale, locales,
+    			link, picture, icon, properties);
         
     	this.distributorId = distributorId;
         this.messages = messages;
@@ -56,7 +57,6 @@ public class Restaurant extends Organization {
         this.deliveryInfos = deliveryInfos;
         this.status = status;
         this.deliveryStatus = deliveryStatus;
-        this.timezone = timezone;
         this.currency = currency;
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
@@ -66,10 +66,6 @@ public class Restaurant extends Organization {
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
-
-    public TimeZone timezone() {
-        return TimeZone.getTimeZone(timezone);
-    }
 
     /** The distributor in charge of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -107,13 +103,6 @@ public class Restaurant extends Organization {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Status deliveryStatus;
 
-    /**
-     * The restaurant's timezone.
-     * @see http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-     */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String timezone;
-    
     /** The restaurant's currency (ISO 4217). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String currency;
