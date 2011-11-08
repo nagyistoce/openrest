@@ -16,7 +16,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Restaurant extends Organization {
+public class Restaurant extends Organization implements Comparable<Restaurant> {
     private static final long serialVersionUID = 1L;
     
 	/** Restaurant system is used for demonstration only. Orders will not be handled. */
@@ -123,7 +123,16 @@ public class Restaurant extends Organization {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
     
-    /** The restaurant's Openrest rank. */
+    /** The restaurant's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Double rank;
+
+	@Override
+	public int compareTo(Restaurant other) {
+		if (rank != null) {
+			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
+		} else {
+			return ((other.rank == null) ? (0) : 1);
+		}
+	}
 }

@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item implements Serializable {
+public class Item implements Serializable, Comparable<Item> {
     private static final long serialVersionUID = 1L;
     
 	/** Constructs a previously submitted item from persisted data. */
@@ -94,7 +94,7 @@ public class Item implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> externalIds = Collections.emptyMap();
     
-    /** The item's Openrest rank. */
+    /** The item's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Double rank;
     
@@ -187,5 +187,14 @@ public class Item implements Serializable {
 		} else if (!variations.equals(other.variations))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int compareTo(Item other) {
+		if (rank != null) {
+			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
+		} else {
+			return ((other.rank == null) ? (0) : 1);
+		}
 	}
 }
