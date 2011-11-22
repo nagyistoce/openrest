@@ -18,6 +18,11 @@ public class Response<T> implements Serializable {
     public static final String RESPONSE_ERROR_INVALID_CC_NUMBER = "invalid_cc_number";
     /** User entered illegal date (e.g. 35/5/2010). */
     public static final String RESPONSE_ERROR_INVALID_DATE = "invalid_date";
+	/**
+	 * Order referred to invalid saved payment, e.g. wrong holderId or
+	 * non-logged user. User should choose a different payment method.
+	 */
+    public static final String RESPONSE_ERROR_INVALID_SAVED_PAYMENT = "invalid_saved_payment";
     /**
      * Order cannot be submitted, probably due to a very recent menu update.
      * Probably best thing to do is to forget the order (cookie?) and refresh the page.

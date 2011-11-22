@@ -22,7 +22,8 @@ public class Organization implements Serializable {
     
     protected Organization(String id, Long created, Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, String timezone, String locale, List<String> locales,
-    		String link, String picture, String icon, Map<String, String> properties) {
+    		String link, String picture, String icon, List<AppInfo> apps,
+    		Map<String, String> properties) {
     	this.id = id;
     	this.created = created;
     	this.title = title;
@@ -35,6 +36,7 @@ public class Organization implements Serializable {
     	this.link = link;
     	this.picture = picture;
     	this.icon = icon;
+    	this.apps = apps;
     	this.properties = properties;
     }
     
@@ -96,6 +98,10 @@ public class Organization implements Serializable {
     /** The organization's icon URL (direct link), or null if unavailable. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String icon;
+    
+    /** The organization's applications. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<AppInfo> apps = Collections.emptyList();
     
     /**
      * Map of user-defined extended properties. Developers should use unique
