@@ -19,24 +19,19 @@ public class Distributor extends Organization {
     
     public Distributor(String id, Long created, Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, String timezone, String locale, List<String> locales,
-    		String link, String picture, String icon, List<AppInfo> apps,
+    		String link, String domain, String picture, String icon, List<AppInfo> apps,
     		Map<String, String> properties, String facebookAppId,
-    		String domain, String noImagePicture) {
+    		String noImagePicture) {
     	super(id, created, title, description, contact, address, timezone, locale, locales,
-    			link, picture, icon, apps, properties);
+    			link, domain, picture, icon, apps, properties);
     	
     	this.facebookAppId = facebookAppId;
-    	this.domain = domain;
     	this.noImagePicture = noImagePicture;
     }
     
     /** The distributor's Facebook application id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String facebookAppId;
-    
-    /** The user facing domain. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String domain;
     
     /** The picture shown when a restaurant / item picture is missing. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
