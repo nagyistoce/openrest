@@ -45,7 +45,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String domain, String picture, String icon,
             List<AppInfo> apps, Map<String, String> properties,
-            String state, Double rank) {
+            String state, List<String> labels, Double rank) {
     	super(id, created, title, description, contact, address, timezone, locale, locales,
     			link, domain, picture, icon, apps, properties);
         
@@ -62,6 +62,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
         this.paymentTypes = paymentTypes;
         this.minPayments = minPayments;
         this.state = state;
+        this.labels = labels;
         this.rank = rank;
     }
 
@@ -123,6 +124,10 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     /** @see ALL_STATES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
+    
+    /** The restaurant's labels, e.g. "chinese", "kosher". */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<String> labels = Collections.emptyList();
     
     /** The restaurant's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

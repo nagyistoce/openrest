@@ -15,13 +15,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item implements Serializable, Comparable<Item> {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
 	/** Constructs a previously submitted item from persisted data. */
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, Boolean inactive, String picture, Status status,
-    		Map<String, String> externalIds, Double rank) {
+    		Map<String, String> externalIds, List<String> labels, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -33,15 +33,16 @@ public class Item implements Serializable, Comparable<Item> {
         this.picture = picture;
         this.status = status;
         this.externalIds = externalIds;
+        this.labels = labels;
         this.rank = rank;
     }
 
     /** Constructs a new item to be submitted. */
     public Item(Map<String, String> title, Map<String, String>description,
     		Integer price, List<Variation> variations, Availability availability,
-    		Boolean inactive, Map<String, String> externalIds) {
+    		Boolean inactive, Map<String, String> externalIds, List<String> labels) {
         this(null, null, title, description, price, variations, availability, inactive,
-        		null, null, externalIds, null);
+        		null, null, externalIds, labels, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -95,12 +96,16 @@ public class Item implements Serializable, Comparable<Item> {
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> externalIds = Collections.emptyMap();
+
+    /** The item's labels, e.g. "new", "spicy". */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<String> labels = Collections.emptyList();
     
     /** The item's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Double rank;
     
-	@Override
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -113,8 +118,10 @@ public class Item implements Serializable, Comparable<Item> {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((inactive == null) ? 0 : inactive.hashCode());
+		result = prime * result + ((labels == null) ? 0 : labels.hashCode());
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((rank == null) ? 0 : rank.hashCode());
 		result = prime * result
 				+ ((restaurantId == null) ? 0 : restaurantId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -158,6 +165,11 @@ public class Item implements Serializable, Comparable<Item> {
 				return false;
 		} else if (!inactive.equals(other.inactive))
 			return false;
+		if (labels == null) {
+			if (other.labels != null)
+				return false;
+		} else if (!labels.equals(other.labels))
+			return false;
 		if (picture == null) {
 			if (other.picture != null)
 				return false;
@@ -167,6 +179,11 @@ public class Item implements Serializable, Comparable<Item> {
 			if (other.price != null)
 				return false;
 		} else if (!price.equals(other.price))
+			return false;
+		if (rank == null) {
+			if (other.rank != null)
+				return false;
+		} else if (!rank.equals(other.rank))
 			return false;
 		if (restaurantId == null) {
 			if (other.restaurantId != null)
@@ -190,7 +207,7 @@ public class Item implements Serializable, Comparable<Item> {
 			return false;
 		return true;
 	}
-	
+    
 	@Override
 	public int compareTo(Item other) {
 		if (rank != null) {
