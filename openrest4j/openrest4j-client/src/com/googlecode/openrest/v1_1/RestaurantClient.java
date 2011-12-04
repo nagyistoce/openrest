@@ -41,7 +41,7 @@ public class RestaurantClient {
     	protocol.remove(new URL(restaurantApiUrl.toString() + "?access_token=" + accessToken));
     }
 
-    public Image image() throws IOException, OpenrestException {
+    public Image getImage() throws IOException, OpenrestException {
         return protocol.getRestJsonClient().getImage(new URL(restaurantApiUrl.toString() + "/picture"),
                 new TypeReference<Response<Object>>() {});
     }
@@ -55,7 +55,7 @@ public class RestaurantClient {
     	protocol.remove(new URL(restaurantApiUrl.toString() + "/picture" + "?access_token=" + accessToken));
     }
 
-    public Image icon() throws IOException, OpenrestException {
+    public Image getIcon() throws IOException, OpenrestException {
         return protocol.getRestJsonClient().getImage(new URL(restaurantApiUrl.toString() + "/picture?type=icon"),
                 new TypeReference<Response<Object>>() {});
     }

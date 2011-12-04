@@ -83,7 +83,7 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String type;
 
-    /** Charge priority. Lower numbers appear first in the list. */
+    /** Charge priority. Higher numbers appear first in the list. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Double priority = 0.0;
     
