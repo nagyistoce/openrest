@@ -113,7 +113,7 @@ public class Charge implements Serializable {
      * Charge amount rule (cents for fixed amounts, basis points for percentage
      * amounts, undefined for variable amounts).
      * 
-     * Basis points are 1/100th of a percentage, e.g. -500 bp referes to 5% discount. 
+     * Basis points are 1/100th of a percentage, e.g. -500 bp refers to 5% discount. 
      * 
      * Positive numbers are extra charges, negatives are discounts.
      */
