@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define STATUS_AVAILABLE     @"available"
+#define STATUS_UNAVAILABLE   @"unavailable"
 
 @interface Status : NSObject {
     NSString* status;

@@ -14,6 +14,7 @@
 @synthesize type;
 @synthesize amount;
 @synthesize card;
+@synthesize storedId;
 
 -(id)init
 {
@@ -40,6 +41,11 @@
             [self setCard:[[[CreditCard alloc] initWithDictionary:[data valueForKey:@"card"]]
                            autorelease]];
         }
+
+        if ([data valueForKey:@"id"] != nil)
+        {
+            [self setStoredId:[data valueForKey:@"id"]];
+        }
     }
     return self;
 }
@@ -49,10 +55,16 @@
     NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
 
     if (type != nil) {[ret setValue:type forKey:@"type"];}
-    if (amount == 0) {[ret setValue:[NSNumber numberWithInt:amount] forKey:@"amount"];}
+    if (amount != 0) {[ret setValue:[NSNumber numberWithInt:amount] forKey:@"amount"];}
     if (card != nil) {[ret setValue:card forKey:@"card"];}
+    if (storedId != nil) {[ret setValue:storedId forKey:@"id"];}
 
     return ret;
+}
+
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"Payment[[%@] %@ %d %@]", storedId, type, amount, card];
 }
 
 -(void)dealloc

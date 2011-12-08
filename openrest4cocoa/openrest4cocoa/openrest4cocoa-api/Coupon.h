@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LocalizedDictionary.h"
 
 #define COUPON_TYPE_DISCOUNT        @"discount"
 #define COUPON_TYPE_M_PLUS_N        @"m_plus_n"
@@ -17,10 +18,10 @@
     NSString* type;
     
     /** The coupon's user-friendly short name. */
-    NSString* title;
+    LocalizedDictionary* title;
     
     /** The coupon's user-friendly description. */
-    NSString* description;
+    LocalizedDictionary* description;
     
     /** Maximum number of times this coupon can be used in a single order. */
     NSNumber* maxNumAllowed;
@@ -30,8 +31,8 @@
 }
 
 @property (nonatomic, retain) NSString* type;
-@property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* description;
+@property (nonatomic, retain) LocalizedDictionary* title;
+@property (nonatomic, retain) LocalizedDictionary* description;
 @property (nonatomic, retain) NSNumber* maxNumAllowed;
 
 -(id)init;

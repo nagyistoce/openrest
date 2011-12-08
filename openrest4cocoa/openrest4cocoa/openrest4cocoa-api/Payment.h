@@ -14,11 +14,13 @@
 #define PAYMENT_TYPE_10BIS    @"10bis"
 
 @interface Payment : NSObject {
+    NSString* storedId;
     NSString* type;
     int amount;
     CreditCard* card;
 }
 
+@property (nonatomic, retain) NSString* storedId;
 @property (nonatomic, retain) NSString* type;
 @property (nonatomic) int amount;
 @property (nonatomic, retain) CreditCard* card;

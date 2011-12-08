@@ -65,6 +65,11 @@
     return ret;
 }
 
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"CreditCard[%@ %@/%@ %@ %@]", number, expireMonth, expireYear, holderId, holderName];
+}
+
 -(void)dealloc
 {
     [number release];

@@ -7,7 +7,7 @@
 //
 
 #import "Category.h"
-
+#import "Utils.h"
 
 @implementation Category
 
@@ -35,8 +35,8 @@
     {
         [self setCategoryId:[data valueForKey:@"id"]];
         [self setRestaurantId:[data valueForKey:@"restaurantId"]];
-        [self setTitle:[data valueForKey:@"title"]];
-        [self setDescription:[data valueForKey:@"description"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
+        [self setDescription:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"description"]]];
         [self setParentCategoryId:[data valueForKey:@"parentCategoryId"]];
         if ([data valueForKey:@"itemIds"] != nil)
         {
@@ -48,11 +48,6 @@
         }
     }
     return self;
-}
-
--(NSString*)description
-{
-    return [NSString stringWithFormat:@"Category[%@]: %@", categoryId, title];
 }
 
 -(void)dealloc

@@ -28,7 +28,7 @@
 {
     if ((self = [self init]))
     {
-        [self setTitle:[data valueForKey:@"title"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
         
         if ([data valueForKey:@"polygon"] != nil)
         {
@@ -42,7 +42,7 @@
 
 -(NSString *)description
 {
-    return title;
+    return [title objectForKey:[Utils getLocale]];
 }
 
 -(void)dealloc

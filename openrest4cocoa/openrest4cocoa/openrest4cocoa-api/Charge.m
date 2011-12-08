@@ -75,22 +75,22 @@
     return ret;
 }
 
--(NSString*)getTitle
+-(LocalizedDictionary*)getTitle
 {
     if (([type isEqualToString:CHARGE_TYPE_COUPON]) || ([type isEqualToString:CHARGE_TYPE_CLUB_COUPON]))
     {
         return [coupon title];
     }
-    return @"";
+    return [LocalizedDictionary dictionary];
 }
 
--(NSString*)getDescription
+-(LocalizedDictionary*)getDescription
 {
     if (([type isEqualToString:CHARGE_TYPE_COUPON]) || ([type isEqualToString:CHARGE_TYPE_CLUB_COUPON]))
     {
         return [coupon description];
     }
-    return @"";    
+    return [LocalizedDictionary dictionary];    
 }
 
 -(void)dealloc

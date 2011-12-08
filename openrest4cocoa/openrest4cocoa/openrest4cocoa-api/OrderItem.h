@@ -27,7 +27,7 @@
     /** Textual comment regarding the item. */
     NSString* comment;
     
-    /** Total price of the item and variations. */
+    /** price of the item. */
     int price;
     
     /** Number of times this order-item was ordered. */

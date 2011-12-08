@@ -11,6 +11,7 @@
 
 @implementation Utils
 
+
 +(NSArray*)refactorJsonArray:(NSArray*)array toClass:(NSString*)classStr
 {
     NSMutableArray* result = [NSMutableArray arrayWithCapacity:
@@ -50,6 +51,11 @@
         return [NSString stringWithFormat:@"%@&%@",url, query];
     }
     return url;
+}
+
++(NSString*)getLocale
+{
+    return @"he_IL"; //TODO!
 }
 
 @end

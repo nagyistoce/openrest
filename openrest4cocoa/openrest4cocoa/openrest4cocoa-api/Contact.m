@@ -48,4 +48,27 @@
     return ret;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (object == NULL) return FALSE;
+    if (![[object class] isSubclassOfClass:[self class]]) return FALSE;
+    Contact* other = (Contact*)object;
+    
+    if ([firstName isEqualToString:other.firstName])
+    {
+        if ([lastName isEqualToString:other.lastName])
+        {
+            if ([phone isEqualToString:other.phone])
+            {
+                if (([email length] + [other.email length] == 0) || ([email isEqualToString:other.email]))
+                {
+                    return TRUE;
+                }
+            }
+        }
+    }
+    
+    return FALSE;    
+}
+
 @end

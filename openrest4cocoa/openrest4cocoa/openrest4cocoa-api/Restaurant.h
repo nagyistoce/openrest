@@ -12,6 +12,10 @@
 #import "ColorScheme.h"
 #import "OpenrestAvailability.h"
 #import "Status.h"
+#import "LocalizedDictionary.h"
+
+#define MESSAGE_TYPE_WELCOME                @"welcome"
+#define MESSAGE_TYPE_ORDER_CONFIRMATION     @"order_confirmation"
 
 @interface Restaurant : NSObject {
 
@@ -19,10 +23,10 @@
     NSString* restaurantId;
     
     /** The restaurant's name. */
-    NSString* restaurantName;
+    LocalizedDictionary* title;
     
     /** The restaurant's description or tagline. */
-    NSString* restaurantDescription;
+    LocalizedDictionary* restaurantDescription;
     
     /** The restaurant's contact. */
     Contact* contact;
@@ -30,11 +34,7 @@
     /** The address of this restaurant. */
     Address* address;
     
-    /** The restaurant's welcome message. */
-    NSString* welcomeMessage;
-    
-    /** The default order confirmation message. */
-    NSString* confirmationMessage;
+    NSDictionary* messages;
     
     /** The color scheme. */
     ColorScheme* colorScheme;
@@ -53,12 +53,6 @@
     
     /** The current delivery status. */
     Status* deliveryStatus;
-    
-    /** Human readable status string. */
-    NSString* openTimesStr;
-    
-    /** Human readable delivery status string. */
-    NSString* deliveryTimesStr;
     
     /**
      * The restaurant's timezone.
@@ -93,26 +87,34 @@
      * keys, e.g. "com.googlecode.openrestext".
      */
     NSDictionary* properties;
+    
+    /* Locale attirbutes */
+    NSArray* locales;
+    NSString* locale;
+    
+    /* Currency */
+    NSString* currency;
+    
+    NSNumber* rank;
+    
+    NSArray* apps;
 }
 
 -(id)init;
 -(id)initWithDictionary:(NSDictionary*)data;
 
 @property (nonatomic, retain) NSString* restaurantId;
-@property (nonatomic, retain) NSString* restaurantName;
-@property (nonatomic, retain) NSString* restaurantDescription;
+@property (nonatomic, retain) LocalizedDictionary* title;
+@property (nonatomic, retain) LocalizedDictionary* restaurantDescription;
 @property (nonatomic, retain) Contact* contact;
 @property (nonatomic, retain) Address* address;
-@property (nonatomic, retain) NSString* welcomeMessage;
-@property (nonatomic, retain) NSString* confirmationMessage;
+@property (nonatomic, retain) NSDictionary* messages;
 @property (nonatomic, retain) ColorScheme* colorScheme;
 @property (nonatomic, retain) OpenrestAvailability* openTimes;
 @property (nonatomic, retain) OpenrestAvailability* deliveryTimes;
 @property (nonatomic) bool inactive;
 @property (nonatomic, retain) Status* status;
 @property (nonatomic, retain) Status* deliveryStatus;
-@property (nonatomic, retain) NSString* openTimesStr;
-@property (nonatomic, retain) NSString* deliveryTimesStr;
 @property (nonatomic, retain) NSString* timezone;
 @property (nonatomic, retain) NSArray* paymentTypes;
 @property (nonatomic, retain) NSDictionary* minPayments;
@@ -121,5 +123,9 @@
 @property (nonatomic, retain) NSString* icon;
 @property (nonatomic, retain) NSArray* deliveryInfos;
 @property (nonatomic, retain) NSDictionary* properties;
-
+@property (nonatomic, retain) NSArray* locales;
+@property (nonatomic, retain) NSString* locale;
+@property (nonatomic, retain) NSString* currency;
+@property (nonatomic, retain) NSNumber* rank;
+@property (nonatomic, retain) NSArray* apps;
 @end

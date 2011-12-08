@@ -24,4 +24,18 @@
     return self;
 }
 
+-(NSDictionary*)proxyForJson
+{    
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    [ret setValue:[NSNumber numberWithInt:minuteOfWeek] forKey:@"minuteOfWeek"];
+    [ret setValue:[NSNumber numberWithInt:durationMins] forKey:@"durationMins"];
+    
+    return ret;
+}
+
+-(void)dealloc
+{
+    [super dealloc];
+}
 @end

@@ -36,7 +36,7 @@
 {
     if ((self = [self init]))
     {
-        [self setTitle:[data valueForKey:@"title"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
         [self setTagId:[data valueForKey:@"tagId"]];
         if ([data valueForKey:@"minNumAllowed"] != nil)
         {

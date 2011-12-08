@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "LocalizedDictionary.h"
 
 @interface Area : NSObject {
-    NSString* title;
+    LocalizedDictionary* title;
     NSArray* polygon;
 }
 
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) LocalizedDictionary* title;
 @property (nonatomic, retain) NSArray* polygon;
 
 -(id)init;

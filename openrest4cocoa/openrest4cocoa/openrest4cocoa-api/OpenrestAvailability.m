@@ -35,6 +35,32 @@
     
     return self;
 }
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (weekly != nil) 
+    {
+        [ret setValue:weekly forKey:@"weekly"];
+    }
+    else
+    {
+        [ret setValue:[NSArray array] forKey:@"weekly"];        
+    }
+    
+    if (exceptions != nil) 
+    {
+        [ret setValue:exceptions forKey:@"exceptions"];
+    }
+    else
+    {
+        [ret setValue:[NSArray array] forKey:@"exceptions"];    
+    }
+    
+    return ret;
+}
+
 -(void)dealloc
 {
     [weekly release];

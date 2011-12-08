@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "OpenrestAvailability.h"
 #import "Status.h"
+#import "LocalizedDictionary.h"
 
 @interface Item : NSObject {
     /** The item's unique id. */
@@ -18,10 +19,10 @@
     NSString* restaurantId;
     
     /** The item's name. */
-    NSString* title;
+    LocalizedDictionary* title;
     
     /** The item's one line description. */
-    NSString* description;
+    LocalizedDictionary* itemDescription;
     
     /** The item's price, in "cents". */
     int price;
@@ -47,8 +48,8 @@
 
 @property (nonatomic, retain) NSString* itemId;
 @property (nonatomic, retain) NSString* restaurantId;
-@property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* description;
+@property (nonatomic, retain) LocalizedDictionary* title;
+@property (nonatomic, retain) LocalizedDictionary* itemDescription;
 @property (nonatomic) int price;
 @property (nonatomic, retain) NSArray* variations;
 @property (nonatomic, retain) OpenrestAvailability* availability;

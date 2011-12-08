@@ -19,7 +19,7 @@
     if ((self = [super init]))
     {
         [self setStatus:[data valueForKey:@"status"]];
-        [self setUntil:[data valueForKey:@"until"]];
+        [self setUntil:[data valueForKey:@"until"]];        
     }
     return self;
 }

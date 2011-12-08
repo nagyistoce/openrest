@@ -62,6 +62,12 @@
     
     /** Extra charges or discounts */
     NSArray* charges;
+    
+    /** Order's locale */
+    NSString* locale;
+    
+    /** Change log */
+    NSArray* log;
 }
 
 @property (nonatomic, retain) NSString* orderId;
@@ -79,6 +85,8 @@
 @property (nonatomic, retain) NSString* shareToken;
 @property (nonatomic, retain) NSNumber* takeoutPacks; 
 @property (nonatomic, retain) NSArray* charges;
+@property (nonatomic, retain) NSArray* log;
+@property (nonatomic, retain) NSString* locale;
 
 -(id)init;
 -(id)initWithDictionary:(NSDictionary*)data;

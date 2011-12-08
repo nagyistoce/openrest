@@ -20,5 +20,6 @@
 @property (nonatomic, retain) NSString* fwdIpAddresses;
 
 -(id)initWithDictionary:(NSDictionary*)data;
+-(NSDictionary*)proxyForJson;
 
 @end

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Area.h"
 
+#define DELIVERY_TYPE_DELIVERY   @"delivery"
+#define DELIVERY_TYPE_TAKEOUT    @"takeout"
+
 @interface DeliveryInfo : NSObject {
     NSString* type;
     Area* area;

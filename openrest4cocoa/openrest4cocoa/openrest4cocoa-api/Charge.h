@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Coupon.h"
+#import "LocalizedDictionary.h"
 
 #define CHARGE_TYPE_DELIVERY    @"delivery"
 #define CHARGE_TYPE_COUPON      @"coupon"
@@ -78,7 +79,7 @@
 -(id)initWithDictionary:(NSDictionary*)data;
 -(NSDictionary*)proxyForJson;
 
--(NSString*)getTitle;
--(NSString*)getDescription;
+-(LocalizedDictionary*)getTitle;
+-(LocalizedDictionary*)getDescription;
 
 @end

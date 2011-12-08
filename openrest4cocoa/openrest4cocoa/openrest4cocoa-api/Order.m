@@ -9,6 +9,7 @@
 #import "Order.h"
 #import "Utils.h"
 #import "OrderItem.h"
+#import "LogEntry.h"
 
 @implementation Order
 
@@ -27,6 +28,8 @@
 @synthesize shareToken;
 @synthesize takeoutPacks;
 @synthesize charges;
+@synthesize log;
+@synthesize locale;
 
 -(id)init
 {
@@ -36,6 +39,7 @@
         [self setPrice:0];
         [self setPayments:[NSArray array]];
         [self setCharges:[NSArray array]];
+        [self setLog:[NSArray array]];
     }
     return self;
 }
@@ -91,6 +95,12 @@
             [self setCharges:[Utils refactorJsonArray:[data valueForKey:@"charges"]
                                                toClass:@"Charge"]];
         }
+        if ([data valueForKey:@"log"] != nil)
+        {
+            [self setLog:[Utils refactorJsonArray:[data valueForKey:@"log"]
+                                              toClass:@"LogEntry"]];
+        }        
+        [self setLocale:[data valueForKey:@"locale"]];
         [self setShareToken:[data valueForKey:@"shareToken"]];
     }
     return self;
@@ -113,6 +123,7 @@
     [ret appendFormat:@"    - status: %@\n", status];
     [ret appendFormat:@"    - shareToken: %@\n", shareToken];
     [ret appendFormat:@"    - takeout packs: %@\n", takeoutPacks];
+    [ret appendFormat:@"    - log entry: %@\n", log];
 
     return ret;
 }
@@ -142,7 +153,9 @@
     if (payments != nil) { [ret setValue:payments forKey:@"payments"]; }
     if (status != nil) { [ret setValue:status forKey:@"status"]; }
     if (takeoutPacks != nil) { [ret setValue:takeoutPacks forKey:@"takeoutPacks"]; }
-    if (charges != nil) { [ret setValue:charges forKey:@"charge"];}
+    if (charges != nil) { [ret setValue:charges forKey:@"charges"];}
+    if (locale != nil) { [ret setValue:locale forKey:@"locale"];}
+    if (log != nil) { [ret setValue:log forKey:@"log"];}
     return ret;
 }
 
@@ -179,6 +192,8 @@
     [shareToken release];
     [takeoutPacks release];
     [charges release];
+    [log release];
+    [locale release];
     [super dealloc];
 }
 

@@ -14,7 +14,7 @@
 @synthesize itemId;
 @synthesize restaurantId;
 @synthesize title;
-@synthesize description;
+@synthesize itemDescription;
 @synthesize price;
 @synthesize variations;
 @synthesize availability;
@@ -41,8 +41,8 @@
     {
         [self setItemId:[data valueForKey:@"id"]];
         [self setRestaurantId:[data valueForKey:@"restaurantId"]];
-        [self setTitle:[data valueForKey:@"title"]];
-        [self setDescription:[data valueForKey:@"description"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
+        [self setItemDescription:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"description"]]];
         if ([data valueForKey:@"price"])
         {
             [self setPrice:[[data valueForKey:@"price"] intValue]];
@@ -70,17 +70,12 @@
     return self;
 }
 
--(NSString*)description
-{
-    return [NSString stringWithFormat:@"Item[%@]: %@", itemId, title];
-}
-
 -(void)dealloc
 {
     [itemId release];
     [restaurantId release];
     [title release];
-    [description release];
+    [itemDescription release];
     [variations release];
     [availability release];
     [availabilityStr release];

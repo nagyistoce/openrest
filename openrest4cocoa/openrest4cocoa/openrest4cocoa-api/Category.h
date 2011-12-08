@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "LocalizedDictionary.h"
 
 @interface Category : NSObject {
  
@@ -18,10 +18,10 @@
     NSString* restaurantId;
     
     /** The category's title. */
-    NSString* title;
+    LocalizedDictionary* title;
     
     /** The category's description. */
-    NSString* description;
+    LocalizedDictionary* description;
     
     /** The parent category's id. */
     NSString* parentCategoryId;
@@ -35,8 +35,8 @@
 
 @property (nonatomic, retain) NSString* categoryId;
 @property (nonatomic, retain) NSString* restaurantId;
-@property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSString* description;
+@property (nonatomic, retain) LocalizedDictionary* title;
+@property (nonatomic, retain) LocalizedDictionary* description;
 @property (nonatomic, retain) NSString* parentCategoryId;
 @property (nonatomic, retain) NSArray* itemIds;
 @property (nonatomic) double priority;

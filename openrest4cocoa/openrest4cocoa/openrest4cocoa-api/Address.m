@@ -11,6 +11,7 @@
 
 @implementation Address
 
+@synthesize country;
 @synthesize city;
 @synthesize street;
 @synthesize number;
@@ -19,11 +20,13 @@
 @synthesize entrance;
 @synthesize comment;
 @synthesize latLng;
+@synthesize countryCode;
 
 -(id)initWithDictionary:(NSDictionary*)data
 {
     if ((self = [super init]))
     {
+        [self setCountry:[data valueForKey:@"country"]];
         [self setCity:[data valueForKey:@"city"]];
         [self setStreet:[data valueForKey:@"street"]];
         [self setNumber:[data valueForKey:@"number"]];
@@ -31,6 +34,7 @@
         [self setFloor:[data valueForKey:@"floor"]];
         [self setEntrance:[data valueForKey:@"entrance"]];
         [self setComment:[data valueForKey:@"comment"]];
+        [self setCountryCode:[data valueForKey:@"countryCode"]];
         
         if ([data valueForKey:@"latLng"] != nil)
         {
@@ -45,6 +49,7 @@
 {
     NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
 
+    if (country != nil) {[ret setValue:country forKey:@"country"];}
     if (city != nil) {[ret setValue:city forKey:@"city"];}
     if (street != nil) {[ret setValue:street forKey:@"street"];}
     if (number != nil) {[ret setValue:number forKey:@"number"];}
@@ -53,9 +58,42 @@
     if (entrance != nil) {[ret setValue:entrance forKey:@"entrance"];}
     if (comment != nil) {[ret setValue:comment forKey:@"comment"];}
     if (latLng != nil) {[ret setValue:latLng forKey:@"latLng"];}
+    if (countryCode != nil) {[ret setValue:countryCode forKey:@"countryCode"];}
     
     return ret;
 }
+
+-(NSString*)description
+{
+    NSMutableString* string = [NSMutableString stringWithCapacity:0];
+    [string appendFormat:@"%@ %@, %@ %@", street, number, city, country];
+    if ((apt) && ([apt length] > 0)) { [string appendFormat:@" דירה: %@", apt]; }
+    if ((floor) && ([floor length] > 0)) { [string appendFormat:@" קומה: %@", floor]; }
+    if ((entrance) && ([entrance length] > 0)) { [string appendFormat:@" כניסה: %@", entrance]; }
+    if ((comment) && ([comment length] > 0)) { [string appendFormat:@" הערה: %@", comment]; }
+    return string;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == NULL) return FALSE;
+    if (![[object class] isSubclassOfClass:[self class]]) return FALSE;
+    Address* other = (Address*)object;
+    
+    if (![country isEqualToString:other.country]) return FALSE;
+    if (![city isEqualToString:other.city]) return FALSE;
+    if (![street isEqualToString:other.street]) return FALSE;
+    if (![number isEqualToString:other.number]) return FALSE;
+    
+    if (([apt length] + [other.apt length] == 0) || ([apt isEqualToString:other.apt]))
+        if (([floor length] + [other.floor length] == 0) || ([floor isEqualToString:other.floor]))
+            if (([entrance length] + [other.entrance length] == 0) || ([entrance isEqualToString:other.entrance]))
+                if (([comment length] + [other.comment length] == 0) || ([comment isEqualToString:other.comment]))
+                    return TRUE;
+    
+    return FALSE;
+}
+
 
 -(void)dealloc
 {

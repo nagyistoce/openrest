@@ -26,6 +26,17 @@
     return self;
 }
 
+-(NSDictionary*)proxyForJson
+{    
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (userId != nil) {[ret setValue:userId forKey:@"id"];}
+    if (ipAddress != nil) {[ret setValue:ipAddress forKey:@"ipAddress"];}
+    if (fwdIpAddresses != nil) {[ret setValue:fwdIpAddresses forKey:@"fwdIpAddresses"];}
+    
+    return ret;
+}
+
 -(void)dealloc
 {
     [userId release];

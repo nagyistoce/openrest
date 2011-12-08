@@ -31,8 +31,8 @@
     if ((self = [self init]))
     {
         [self setType:[data valueForKey:@"type"]];
-        [self setTitle:[data valueForKey:@"title"]];
-        [self setDescription:[data valueForKey:@"description"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
+        [self setDescription:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"description"]]];
         [self setMaxNumAllowed:[data valueForKey:@"maxNumAllowed"]];
         othersAllowed = ([[data valueForKey:@"othersAllowed"] intValue] == 1);
     }

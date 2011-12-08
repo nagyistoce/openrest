@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60095F76148CB8600023AB1C /* PostedOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 607963EA1405272F000843BC /* PostedOrder.m */; };
+		60095F78148CB8680023AB1C /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 60728EB3147BED7500C4E956 /* App.m */; };
+		60095F79148CB8700023AB1C /* LocalizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C301921438697D00DC45AB /* LocalizedDictionary.m */; };
 		601A87951371562A00CA6F7E /* DeliveryInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87931371562A00CA6F7E /* DeliveryInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		601A87961371562A00CA6F7E /* DeliveryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87941371562A00CA6F7E /* DeliveryInfo.m */; };
 		601A87991371585B00CA6F7E /* Area.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87971371585B00CA6F7E /* Area.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +42,23 @@
 		601A87E013737A8900CA6F7E /* CreditCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87DE13737A8200CA6F7E /* CreditCard.m */; };
 		601A87E313737D3300CA6F7E /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87E113737D1900CA6F7E /* User.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		601A87E413737D3300CA6F7E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87E213737D2500CA6F7E /* User.m */; };
+		60227F2D13D6DA34000E4CF1 /* RestaurantFull.h in Headers */ = {isa = PBXBuildFile; fileRef = 60227F2B13D6DA34000E4CF1 /* RestaurantFull.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60227F2E13D6DA34000E4CF1 /* RestaurantFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */; };
+		60227F3013D6DE88000E4CF1 /* RestaurantFull.h in Headers */ = {isa = PBXBuildFile; fileRef = 60227F2B13D6DA34000E4CF1 /* RestaurantFull.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60227F3113D6DEFA000E4CF1 /* Charge.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10DC13CC722F00F77E1E /* Charge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60227F3213D6DEFD000E4CF1 /* Coupon.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10E113CC76DD00F77E1E /* Coupon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60227F3313D6DF24000E4CF1 /* OpenrestClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 604C1ED113647668008EFC19 /* OpenrestClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60227F3413D6DF3C000E4CF1 /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40F913648759001C0B8F /* NSObject+SBJSON.h */; };
+		60227F3513D6DF42000E4CF1 /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40FB13648759001C0B8F /* NSString+SBJSON.h */; };
+		60227F3613D6DF47000E4CF1 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40FD13648759001C0B8F /* NSString+URLEncoding.h */; };
+		60227F3713D6DF4F000E4CF1 /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40ED1364874A001C0B8F /* SBJsonBase.h */; };
+		60227F3813D6DF55000E4CF1 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40EF1364874A001C0B8F /* SBJsonParser.h */; };
+		60227F3913D6DF59000E4CF1 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40F11364874A001C0B8F /* SBJsonWriter.h */; };
+		60227F3A13D6DF6B000E4CF1 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD4105136487C2001C0B8F /* JSON.h */; };
+		60227F3B13D6DF72000E4CF1 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 601A87A71371662A00CA6F7E /* Utils.h */; };
+		60227F3C13D6DF8E000E4CF1 /* RestaurantFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */; };
+		60227F3D13D6DF91000E4CF1 /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10DD13CC722F00F77E1E /* Charge.m */; };
+		60227F3E13D6DF94000E4CF1 /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10E213CC76DD00F77E1E /* Coupon.m */; };
 		604C1EC6136474FC008EFC19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 604C1EC4136474FC008EFC19 /* InfoPlist.strings */; };
 		604C1ED313647668008EFC19 /* OpenrestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED213647668008EFC19 /* OpenrestClient.m */; };
 		604C1EE213647675008EFC19 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED513647675008EFC19 /* Address.m */; };
@@ -119,12 +139,26 @@
 		605B8E0D13745A56003855D6 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F01364874A001C0B8F /* SBJsonParser.m */; };
 		605B8E0F13745A56003855D6 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40F21364874A001C0B8F /* SBJsonWriter.m */; };
 		605B8E1013745A6B003855D6 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 601A87A81371662E00CA6F7E /* Utils.m */; };
+		605DFA01148E641F0054E984 /* Feedback.h in Headers */ = {isa = PBXBuildFile; fileRef = 605DF9FF148E641F0054E984 /* Feedback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605DFA02148E641F0054E984 /* Feedback.h in Headers */ = {isa = PBXBuildFile; fileRef = 605DF9FF148E641F0054E984 /* Feedback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		605DFA03148E641F0054E984 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 605DFA00148E641F0054E984 /* Feedback.m */; };
+		605DFA04148E641F0054E984 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = 605DFA00148E641F0054E984 /* Feedback.m */; };
+		60728EB4147BED7500C4E956 /* App.h in Headers */ = {isa = PBXBuildFile; fileRef = 60728EB2147BED7400C4E956 /* App.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60728EB5147BED7500C4E956 /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 60728EB3147BED7500C4E956 /* App.m */; };
 		6072FA0913741572000ECDB6 /* OpenrestResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 6072FA0713741572000ECDB6 /* OpenrestResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6072FA0A13741572000ECDB6 /* OpenrestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6072FA0813741572000ECDB6 /* OpenrestResult.m */; };
+		607963EB1405272F000843BC /* PostedOrder.h in Headers */ = {isa = PBXBuildFile; fileRef = 607963E91405272E000843BC /* PostedOrder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		607963EC1405272F000843BC /* PostedOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 607963EA1405272F000843BC /* PostedOrder.m */; };
 		609E10DE13CC722F00F77E1E /* Charge.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10DC13CC722F00F77E1E /* Charge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		609E10DF13CC722F00F77E1E /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10DD13CC722F00F77E1E /* Charge.m */; };
 		609E10E313CC76DE00F77E1E /* Coupon.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10E113CC76DD00F77E1E /* Coupon.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		609E10E413CC76DE00F77E1E /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10E213CC76DD00F77E1E /* Coupon.m */; };
+		60AB152313FEBB9500A96E92 /* LogEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AB152113FEBB9500A96E92 /* LogEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60AB152413FEBB9500A96E92 /* LogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AB152213FEBB9500A96E92 /* LogEntry.m */; };
+		60AB152613FEBD3300A96E92 /* LogEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 60AB152113FEBB9500A96E92 /* LogEntry.h */; };
+		60AB152713FEBD4000A96E92 /* LogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AB152213FEBB9500A96E92 /* LogEntry.m */; };
+		60C301931438697F00DC45AB /* LocalizedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C301911438697C00DC45AB /* LocalizedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60C301941438697F00DC45AB /* LocalizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C301921438697D00DC45AB /* LocalizedDictionary.m */; };
 		60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40ED1364874A001C0B8F /* SBJsonBase.h */; settings = {ATTRIBUTES = (); }; };
 		60FD40F41364874A001C0B8F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40EE1364874A001C0B8F /* SBJsonBase.m */; };
 		60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40EF1364874A001C0B8F /* SBJsonParser.h */; settings = {ATTRIBUTES = (); }; };
@@ -173,6 +207,9 @@
 		601A87DE13737A8200CA6F7E /* CreditCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditCard.m; path = "openrest4cocoa-api/CreditCard.m"; sourceTree = "<group>"; };
 		601A87E113737D1900CA6F7E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = "openrest4cocoa-api/User.h"; sourceTree = "<group>"; };
 		601A87E213737D2500CA6F7E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = "openrest4cocoa-api/User.m"; sourceTree = "<group>"; };
+		60227F2A13D6D718000E4CF1 /* openrest4cocoa-simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "openrest4cocoa-simulator.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60227F2B13D6DA34000E4CF1 /* RestaurantFull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestaurantFull.h; path = "openrest4cocoa-api/RestaurantFull.h"; sourceTree = "<group>"; };
+		60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestaurantFull.m; path = "openrest4cocoa-api/RestaurantFull.m"; sourceTree = "<group>"; };
 		604C1EB0136474A6008EFC19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604C1EB4136474A6008EFC19 /* openrest4cocoa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-Prefix.pch"; sourceTree = "<group>"; };
 		604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = openrest4cocoa.framework; path = "openrest4cocoa-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,7 +235,6 @@
 		604C1EE013647675008EFC19 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Status.h; path = "openrest4cocoa-api/Status.h"; sourceTree = "<group>"; };
 		604C1EE113647675008EFC19 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Status.m; path = "openrest4cocoa-api/Status.m"; sourceTree = "<group>"; };
 		604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestAvailability.m; path = "openrest4cocoa-api/OpenrestAvailability.m"; sourceTree = "<group>"; };
-		6057A5E11394FACD00406F81 /* openrest4cocoa-simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "openrest4cocoa-simulator.framework"; path = "/Users/trilok/Desktop/Development/openrest/openrest4cocoa/build/Release-iphoneos/openrest4cocoa-simulator.framework"; sourceTree = "<absolute>"; };
 		6057A5E21394FBED00406F81 /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stats.h; path = "openrest4cocoa-api/Stats.h"; sourceTree = "<group>"; };
 		6057A5E31394FBED00406F81 /* Stats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Stats.m; path = "openrest4cocoa-api/Stats.m"; sourceTree = "<group>"; };
 		6057A5E71394FC6700406F81 /* OpenRestDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenRestDate.h; path = "openrest4cocoa-api/OpenRestDate.h"; sourceTree = "<group>"; };
@@ -206,12 +242,22 @@
 		605B8D9B13745659003855D6 /* openrest4cocoa-simulator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "openrest4cocoa-simulator-Info.plist"; sourceTree = "<group>"; };
 		605B8D9D13745659003855D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		605B8D9F13745659003855D6 /* openrest4cocoa-simulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-simulator-Prefix.pch"; sourceTree = "<group>"; };
+		605DF9FF148E641F0054E984 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Feedback.h; path = "openrest4cocoa-api/Feedback.h"; sourceTree = "<group>"; };
+		605DFA00148E641F0054E984 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Feedback.m; path = "openrest4cocoa-api/Feedback.m"; sourceTree = "<group>"; };
+		60728EB2147BED7400C4E956 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = "openrest4cocoa-api/App.h"; sourceTree = "<group>"; };
+		60728EB3147BED7500C4E956 /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = App.m; path = "openrest4cocoa-api/App.m"; sourceTree = "<group>"; };
 		6072FA0713741572000ECDB6 /* OpenrestResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenrestResult.h; path = "openrest4cocoa-api/OpenrestResult.h"; sourceTree = "<group>"; };
 		6072FA0813741572000ECDB6 /* OpenrestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestResult.m; path = "openrest4cocoa-api/OpenrestResult.m"; sourceTree = "<group>"; };
+		607963E91405272E000843BC /* PostedOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostedOrder.h; path = "openrest4cocoa-api/PostedOrder.h"; sourceTree = "<group>"; };
+		607963EA1405272F000843BC /* PostedOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostedOrder.m; path = "openrest4cocoa-api/PostedOrder.m"; sourceTree = "<group>"; };
 		609E10DC13CC722F00F77E1E /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = "openrest4cocoa-api/Charge.h"; sourceTree = "<group>"; };
 		609E10DD13CC722F00F77E1E /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = "openrest4cocoa-api/Charge.m"; sourceTree = "<group>"; };
 		609E10E113CC76DD00F77E1E /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coupon.h; path = "openrest4cocoa-api/Coupon.h"; sourceTree = "<group>"; };
 		609E10E213CC76DD00F77E1E /* Coupon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Coupon.m; path = "openrest4cocoa-api/Coupon.m"; sourceTree = "<group>"; };
+		60AB152113FEBB9500A96E92 /* LogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogEntry.h; path = "openrest4cocoa-api/LogEntry.h"; sourceTree = "<group>"; };
+		60AB152213FEBB9500A96E92 /* LogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogEntry.m; path = "openrest4cocoa-api/LogEntry.m"; sourceTree = "<group>"; };
+		60C301911438697C00DC45AB /* LocalizedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizedDictionary.h; sourceTree = "<group>"; };
+		60C301921438697D00DC45AB /* LocalizedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizedDictionary.m; sourceTree = "<group>"; };
 		60FD40ED1364874A001C0B8F /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		60FD40EE1364874A001C0B8F /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
 		60FD40EF1364874A001C0B8F /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
@@ -260,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */,
+				60227F2A13D6D718000E4CF1 /* openrest4cocoa-simulator.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,6 +343,8 @@
 				604C1EB3136474A6008EFC19 /* Supporting Files */,
 				601A87A71371662A00CA6F7E /* Utils.h */,
 				601A87A81371662E00CA6F7E /* Utils.m */,
+				60C301911438697C00DC45AB /* LocalizedDictionary.h */,
+				60C301921438697D00DC45AB /* LocalizedDictionary.m */,
 			);
 			path = openrest4cocoa;
 			sourceTree = "<group>";
@@ -333,8 +382,8 @@
 				604C1ED513647675008EFC19 /* Address.m */,
 				604C1F8D13647A6B008EFC19 /* OpenrestAvailability.m */,
 				604C1ED613647675008EFC19 /* OpenrestAvailability.h */,
-				604C1ED813647675008EFC19 /* ColorScheme.h */,
 				604C1ED913647675008EFC19 /* ColorScheme.m */,
+				604C1ED813647675008EFC19 /* ColorScheme.h */,
 				604C1EDA13647675008EFC19 /* Contact.h */,
 				604C1EDB13647675008EFC19 /* Contact.m */,
 				604C1EDC13647675008EFC19 /* LatLng.h */,
@@ -383,6 +432,16 @@
 				609E10DD13CC722F00F77E1E /* Charge.m */,
 				609E10E113CC76DD00F77E1E /* Coupon.h */,
 				609E10E213CC76DD00F77E1E /* Coupon.m */,
+				60227F2B13D6DA34000E4CF1 /* RestaurantFull.h */,
+				60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */,
+				60AB152113FEBB9500A96E92 /* LogEntry.h */,
+				60AB152213FEBB9500A96E92 /* LogEntry.m */,
+				607963E91405272E000843BC /* PostedOrder.h */,
+				607963EA1405272F000843BC /* PostedOrder.m */,
+				60728EB2147BED7400C4E956 /* App.h */,
+				60728EB3147BED7500C4E956 /* App.m */,
+				605DF9FF148E641F0054E984 /* Feedback.h */,
+				605DFA00148E641F0054E984 /* Feedback.m */,
 			);
 			name = "openrest4cocoa-api";
 			sourceTree = "<group>";
@@ -423,12 +482,12 @@
 			files = (
 				604C1EF1136476E4008EFC19 /* OpenrestClient.h in Headers */,
 				604C1F8F13647A90008EFC19 /* OpenrestAvailability.h in Headers */,
-				604C1EEA136476C9008EFC19 /* Address.h in Headers */,
 				604C1EEC136476D7008EFC19 /* ColorScheme.h in Headers */,
+				604C1EED136476DA008EFC19 /* Contact.h in Headers */,
 				604C1EEE136476DC008EFC19 /* LatLng.h in Headers */,
+				604C1EEA136476C9008EFC19 /* Address.h in Headers */,
 				604C1EEF136476DE008EFC19 /* Restaurant.h in Headers */,
 				604C1EF0136476E0008EFC19 /* Status.h in Headers */,
-				604C1EED136476DA008EFC19 /* Contact.h in Headers */,
 				601A87951371562A00CA6F7E /* DeliveryInfo.h in Headers */,
 				601A87991371585B00CA6F7E /* Area.h in Headers */,
 				601A879D137160BB00CA6F7E /* WeeklyTimeWindow.h in Headers */,
@@ -447,8 +506,14 @@
 				601A87E313737D3300CA6F7E /* User.h in Headers */,
 				609E10DE13CC722F00F77E1E /* Charge.h in Headers */,
 				609E10E313CC76DE00F77E1E /* Coupon.h in Headers */,
+				60227F2D13D6DA34000E4CF1 /* RestaurantFull.h in Headers */,
 				6072FA0913741572000ECDB6 /* OpenrestResult.h in Headers */,
 				601A87B9137170D200CA6F7E /* Category.h in Headers */,
+				607963EB1405272F000843BC /* PostedOrder.h in Headers */,
+				60AB152313FEBB9500A96E92 /* LogEntry.h in Headers */,
+				60C301931438697F00DC45AB /* LocalizedDictionary.h in Headers */,
+				605DFA01148E641F0054E984 /* Feedback.h in Headers */,
+				60728EB4147BED7500C4E956 /* App.h in Headers */,
 				60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */,
 				60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */,
 				60FD40F71364874A001C0B8F /* SBJsonWriter.h in Headers */,
@@ -464,11 +529,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				605B8DA6137458E0003855D6 /* Address.h in Headers */,
+				60227F3313D6DF24000E4CF1 /* OpenrestClient.h in Headers */,
 				605B8DA9137458FF003855D6 /* OpenrestAvailability.h in Headers */,
 				605B8DAA137458FF003855D6 /* ColorScheme.h in Headers */,
 				605B8DAC137458FF003855D6 /* Contact.h in Headers */,
 				605B8DAE137458FF003855D6 /* LatLng.h in Headers */,
+				605B8DA6137458E0003855D6 /* Address.h in Headers */,
 				605B8DB0137458FF003855D6 /* Restaurant.h in Headers */,
 				605B8DB213745900003855D6 /* Status.h in Headers */,
 				605B8DB413745900003855D6 /* DeliveryInfo.h in Headers */,
@@ -479,16 +545,29 @@
 				605B8DBE13745900003855D6 /* Item.h in Headers */,
 				605B8DC013745900003855D6 /* Variation.h in Headers */,
 				605B8DC213745900003855D6 /* Tag.h in Headers */,
-				605B8DC413745900003855D6 /* Category.h in Headers */,
 				605B8DC613745900003855D6 /* Order.h in Headers */,
 				605B8DC813745900003855D6 /* Delivery.h in Headers */,
 				605B8DCA13745900003855D6 /* OrderItem.h in Headers */,
+				605B8DCC13745900003855D6 /* Payment.h in Headers */,
 				6057A5EB1394FF2200406F81 /* Stats.h in Headers */,
 				6057A5EC1394FF2200406F81 /* OpenRestDate.h in Headers */,
-				605B8DCC13745900003855D6 /* Payment.h in Headers */,
 				605B8DCE13745900003855D6 /* CreditCard.h in Headers */,
 				605B8DD013745900003855D6 /* User.h in Headers */,
+				60227F3113D6DEFA000E4CF1 /* Charge.h in Headers */,
+				60227F3213D6DEFD000E4CF1 /* Coupon.h in Headers */,
+				60227F3013D6DE88000E4CF1 /* RestaurantFull.h in Headers */,
 				605B8DD213745900003855D6 /* OpenrestResult.h in Headers */,
+				605B8DC413745900003855D6 /* Category.h in Headers */,
+				605DFA02148E641F0054E984 /* Feedback.h in Headers */,
+				60AB152613FEBD3300A96E92 /* LogEntry.h in Headers */,
+				60227F3A13D6DF6B000E4CF1 /* JSON.h in Headers */,
+				60227F3413D6DF3C000E4CF1 /* NSObject+SBJSON.h in Headers */,
+				60227F3513D6DF42000E4CF1 /* NSString+SBJSON.h in Headers */,
+				60227F3613D6DF47000E4CF1 /* NSString+URLEncoding.h in Headers */,
+				60227F3713D6DF4F000E4CF1 /* SBJsonBase.h in Headers */,
+				60227F3813D6DF55000E4CF1 /* SBJsonParser.h in Headers */,
+				60227F3913D6DF59000E4CF1 /* SBJsonWriter.h in Headers */,
+				60227F3B13D6DF72000E4CF1 /* Utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +607,7 @@
 			);
 			name = "openrest4cocoa-simulator";
 			productName = "openrest4cocoa-simulator";
-			productReference = 6057A5E11394FACD00406F81 /* openrest4cocoa-simulator.framework */;
+			productReference = 60227F2A13D6D718000E4CF1 /* openrest4cocoa-simulator.framework */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -536,6 +615,9 @@
 /* Begin PBXProject section */
 		604C1EA4136474A5008EFC19 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 604C1EA7136474A5008EFC19 /* Build configuration list for PBXProject "openrest4cocoa" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -613,6 +695,12 @@
 				6057A5EA1394FC6900406F81 /* OpenRestDate.m in Sources */,
 				609E10DF13CC722F00F77E1E /* Charge.m in Sources */,
 				609E10E413CC76DE00F77E1E /* Coupon.m in Sources */,
+				60227F2E13D6DA34000E4CF1 /* RestaurantFull.m in Sources */,
+				60AB152413FEBB9500A96E92 /* LogEntry.m in Sources */,
+				607963EC1405272F000843BC /* PostedOrder.m in Sources */,
+				60C301941438697F00DC45AB /* LocalizedDictionary.m in Sources */,
+				60728EB5147BED7500C4E956 /* App.m in Sources */,
+				605DFA03148E641F0054E984 /* Feedback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +708,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60095F79148CB8700023AB1C /* LocalizedDictionary.m in Sources */,
+				60095F78148CB8680023AB1C /* App.m in Sources */,
 				6057A5ED139506CB00406F81 /* Stats.m in Sources */,
 				6057A5EE139506CB00406F81 /* OpenRestDate.m in Sources */,
 				605B8E1013745A6B003855D6 /* Utils.m in Sources */,
@@ -653,6 +743,12 @@
 				605B8DFD13745938003855D6 /* CreditCard.m in Sources */,
 				605B8DFF13745938003855D6 /* User.m in Sources */,
 				605B8E0113745938003855D6 /* OpenrestResult.m in Sources */,
+				60227F3D13D6DF91000E4CF1 /* Charge.m in Sources */,
+				60227F3E13D6DF94000E4CF1 /* Coupon.m in Sources */,
+				60227F3C13D6DF8E000E4CF1 /* RestaurantFull.m in Sources */,
+				60095F76148CB8600023AB1C /* PostedOrder.m in Sources */,
+				60AB152713FEBD4000A96E92 /* LogEntry.m in Sources */,
+				605DFA04148E641F0054E984 /* Feedback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,7 +807,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -737,7 +836,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

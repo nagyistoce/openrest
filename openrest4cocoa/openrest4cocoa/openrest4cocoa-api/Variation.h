@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LocalizedDictionary.h"
 
 #define VARIATION_DISPLAY_TYPE_DIFF @"diff"
 #define VARIATION_DISPLAY_TYPE_CHOICE @"choice"
 
 @interface Variation : NSObject {
     /** The variations's name, e.g. "sides", "degree of cooking". */
-    NSString* title;
+    LocalizedDictionary* title;
     
     /** The set's name, e.g. "drink", "sides". */
     NSString* tagId;
@@ -34,7 +35,7 @@
     NSString* displayType;
 }
 
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) LocalizedDictionary* title;
 @property (nonatomic, retain) NSString* tagId;
 @property (nonatomic) int minNumAllowed;
 @property (nonatomic) int maxNumAllowed;

@@ -32,7 +32,7 @@
     {
         [self setTagId:[data valueForKey:@"id"]];
         [self setRestaurantId:[data valueForKey:@"restaurantId"]];
-        [self setTitle:[data valueForKey:@"title"]];
+        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
         if ([data valueForKey:@"itemIds"] != nil)
         {
             [self setItemIds:[data valueForKey:@"itemIds"]];
