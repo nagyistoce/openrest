@@ -65,11 +65,23 @@ public class OpenrestClient {
     
     ///////////////////////////////////////////////////////////////////////////
     
-    public List<Restaurant> getRestaurants(List<String> restaurantIds) throws IOException, OpenrestException {
-    	final QueryStringBuilder query = new QueryStringBuilder();
-    	query.append("ids", restaurantIds);
+    public List<Restaurant> getRestaurants(List<String> restaurantIds, String distributorId, List<String> state,
+    		LatLng latLng, Double radius, List<String> labels, String query, List<String> fields, Integer limit)
+    		throws IOException, OpenrestException {
     	
-        return protocol.get(new URL(apiUrl + "/restaurants/" + query.toString()), new TypeReference<Response<List<Restaurant>>>() {});
+    	final QueryStringBuilder urlQuery = new QueryStringBuilder();
+    	urlQuery.append("ids", restaurantIds);
+    	urlQuery.append("distributorId", distributorId);
+    	urlQuery.append("state", state);
+    	urlQuery.append("lat", ((latLng != null) ? latLng.lat.toString() : null));
+    	urlQuery.append("lng", ((latLng != null) ? latLng.lng.toString() : null));
+    	urlQuery.append("radius", ((radius != null) ? radius.toString() : null));
+    	urlQuery.append("labels", labels);
+    	urlQuery.append("query", query);
+    	urlQuery.append("fields", fields);
+    	urlQuery.append("limit", ((limit != null) ? limit.toString() : null));
+    	
+        return protocol.get(new URL(apiUrl + "/restaurants/" + urlQuery.toString()), new TypeReference<Response<List<Restaurant>>>() {});
     }
     
     public Restaurant addRestaurant(Restaurant restaurant) throws IOException, OpenrestException {
