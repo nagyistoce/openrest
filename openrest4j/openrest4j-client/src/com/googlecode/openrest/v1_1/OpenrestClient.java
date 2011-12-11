@@ -91,11 +91,23 @@ public class OpenrestClient {
         return protocol.add(new URL(apiUrl + "/restaurants/" + query.toString()), restaurant, new TypeReference<Response<Restaurant>>() {});
     }
     
-    public List<RestaurantFullInfo> getRestaurantsFullInfo(List<String> restaurantIds) throws IOException, OpenrestException {
-    	final QueryStringBuilder query = new QueryStringBuilder();
-    	query.append("ids", restaurantIds);
+    public List<RestaurantFullInfo> getRestaurantsFullInfo(
+    		List<String> restaurantIds, String distributorId, List<String> state,
+    		LatLng latLng, Double radius, List<String> labels, String query, Integer limit)
+    		throws IOException, OpenrestException {
     	
-        return protocol.get(new URL(apiUrl + "/restaurants.full/" + query.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
+    	final QueryStringBuilder urlQuery = new QueryStringBuilder();
+    	urlQuery.append("ids", restaurantIds);
+    	urlQuery.append("distributorId", distributorId);
+    	urlQuery.append("state", state);
+    	urlQuery.append("lat", ((latLng != null) ? latLng.lat.toString() : null));
+    	urlQuery.append("lng", ((latLng != null) ? latLng.lng.toString() : null));
+    	urlQuery.append("radius", ((radius != null) ? radius.toString() : null));
+    	urlQuery.append("labels", labels);
+    	urlQuery.append("query", query);
+    	urlQuery.append("limit", ((limit != null) ? limit.toString() : null));
+    	
+        return protocol.get(new URL(apiUrl + "/restaurants.full/" + urlQuery.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});
     }
     
     public Map<String, Menu> getMenus(List<String> restaurantIds) throws IOException, OpenrestException {
