@@ -268,6 +268,33 @@ public class RestaurantClient {
     }
     
     ///////////////////////////////////////////////////////////////////////////
+    
+    public Billing getBilling(Integer year, Integer month) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+		query.append("access_token", accessToken);
+		query.append("year", ((year != null) ? year.toString() : null));
+		query.append("month", ((month != null) ? month.toString() : null));
+
+        return protocol.get(new URL(restaurantApiUrl.toString() + "/billing" + query.toString()), new TypeReference<Response<Billing>>() {});
+    }
+    
+    public Billing setBilling(Billing billing) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("access_token", accessToken);
+
+        return protocol.set(new URL(restaurantApiUrl.toString() + "/billing" + query.toString()),
+        		billing, new TypeReference<Response<Billing>>() {});
+    }
+    
+    public Cost addCost(Cost cost) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("access_token", accessToken);
+
+        return protocol.add(new URL(restaurantApiUrl.toString() + "/billing/costs/" + query.toString()),
+        		cost, new TypeReference<Response<Cost>>() {});
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
 
     public List<Stats> getStats(Date since, Date until, String granularity,
     		String ref) throws IOException, OpenrestException {
