@@ -66,7 +66,8 @@ public class OpenrestClient {
     ///////////////////////////////////////////////////////////////////////////
     
     public List<Restaurant> getRestaurants(List<String> restaurantIds, String distributorId, List<String> state,
-    		LatLng latLng, Double radius, List<String> labels, String query, List<String> fields, Integer limit)
+    		LatLng latLng, Double radius, List<String> labels, String query, Long modified,
+    		List<String> fields, Integer limit)
     		throws IOException, OpenrestException {
     	
     	final QueryStringBuilder urlQuery = new QueryStringBuilder();
@@ -78,6 +79,7 @@ public class OpenrestClient {
     	urlQuery.append("radius", ((radius != null) ? radius.toString() : null));
     	urlQuery.append("labels", labels);
     	urlQuery.append("query", query);
+    	urlQuery.append("modified", ((modified != null) ? modified.toString() : null));
     	urlQuery.append("fields", fields);
     	urlQuery.append("limit", ((limit != null) ? limit.toString() : null));
     	
@@ -93,8 +95,8 @@ public class OpenrestClient {
     
     public List<RestaurantFullInfo> getRestaurantsFullInfo(
     		List<String> restaurantIds, String distributorId, List<String> state,
-    		LatLng latLng, Double radius, List<String> labels, String query, Integer limit)
-    		throws IOException, OpenrestException {
+    		LatLng latLng, Double radius, List<String> labels, String query, Long modified,
+    		Integer limit) throws IOException, OpenrestException {
     	
     	final QueryStringBuilder urlQuery = new QueryStringBuilder();
     	urlQuery.append("ids", restaurantIds);
@@ -105,6 +107,7 @@ public class OpenrestClient {
     	urlQuery.append("radius", ((radius != null) ? radius.toString() : null));
     	urlQuery.append("labels", labels);
     	urlQuery.append("query", query);
+    	urlQuery.append("modified", ((modified != null) ? modified.toString() : null));
     	urlQuery.append("limit", ((limit != null) ? limit.toString() : null));
     	
         return protocol.get(new URL(apiUrl + "/restaurants.full/" + urlQuery.toString()), new TypeReference<Response<List<RestaurantFullInfo>>>() {});

@@ -36,7 +36,8 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     /** The restaurant's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
 	
-    public Restaurant(String id, Long created, String distributorId, Map<String, String> title,
+    public Restaurant(String id, Long created, Long modified,
+    		String distributorId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
@@ -46,8 +47,8 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
             String link, String domain, String picture, String icon,
             List<AppInfo> apps, Map<String, String> properties,
             String state, List<String> labels, Double rank) {
-    	super(id, created, title, description, contact, address, timezone, locale, locales,
-    			link, domain, picture, icon, apps, properties);
+    	super(id, created, modified, title, description, contact, address, timezone,
+    			locale, locales, link, domain, picture, icon, apps, properties);
         
     	this.distributorId = distributorId;
         this.messages = messages;

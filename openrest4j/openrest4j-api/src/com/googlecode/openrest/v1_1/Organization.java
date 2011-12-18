@@ -20,12 +20,14 @@ public class Organization implements Serializable {
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
-    protected Organization(String id, Long created, Map<String, String> title, Map<String, String> description,
+    protected Organization(String id, Long created, Long modified,
+    		Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, String timezone, String locale, List<String> locales,
     		String link, String domain, String picture, String icon, List<AppInfo> apps,
     		Map<String, String> properties) {
     	this.id = id;
     	this.created = created;
+    	this.modified = modified;
     	this.title = title;
     	this.description = description;
     	this.contact = contact;
@@ -49,8 +51,16 @@ public class Organization implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Long created;
     
+    /** The organization's last modification timestamp. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Long modified;
+    
     public java.util.Date created() {
         return ((created != null) ? new java.util.Date(created.longValue()) : null);
+    }
+    
+    public java.util.Date modified() {
+        return ((modified != null) ? new java.util.Date(modified.longValue()) : null);
     }
     
     /** The organization's title in various locales. */
