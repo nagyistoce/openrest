@@ -118,6 +118,7 @@ public class Order implements Serializable {
      * Number of "takeout packs" (e.g. cutlery and condiments) to deliver with the order.
      * For environmental reasons, clients should be encouraged to set this to 0.
      */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer takeoutPacks;
     
     /**
