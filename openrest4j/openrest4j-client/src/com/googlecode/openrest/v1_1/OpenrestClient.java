@@ -119,4 +119,28 @@ public class OpenrestClient {
     	
         return protocol.get(new URL(apiUrl + "/menus/" + query.toString()), new TypeReference<Response<Map<String, Menu>>>() {});
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
+
+    public List<Order> getOrders(String distributorId, List<String> restaurantIds, java.util.Date since, java.util.Date until,
+    		String status, String ref, String userId, String ordering, Integer limit, Boolean restaurantView, List<String> fields)
+    		throws IOException, OpenrestException {
+    	
+    	final QueryStringBuilder query = new QueryStringBuilder();
+		query.append("distributorId", distributorId);
+		query.append("restaurantIds", restaurantIds);
+		query.append("since", ((since != null) ? Long.toString(since.getTime()) : null));
+		query.append("until", ((until != null) ? Long.toString(until.getTime()) : null));
+		query.append("status", status);
+		query.append("ref", ref);
+		query.append("userId", userId);
+		query.append("ordering", ordering);
+		query.append("limit", ((limit != null) ? limit.toString() : null));
+		query.append("restaurantView", restaurantView.toString());
+		query.append("fields", fields);
+		query.append("access_token", accessToken);
+    	
+        return protocol.get(new URL(apiUrl.toString() + "/orders/" + query.toString()),
+                new TypeReference<Response<List<Order>>>() {});
+    }
 }
