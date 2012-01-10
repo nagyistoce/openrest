@@ -25,11 +25,12 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     public static final String STATE_UNDER_CONSTRUCTION = "under_construction";
     /** Restaurant system is operational. Orders are accepted. */
     public static final String STATE_OPERATIONAL = "operational";
+    /** Restaurant system is permanently closed. Orders will not be handled. */
+    public static final String STATE_CLOSED = "closed";
     
     /** All known statuses. */
-    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(new String[] {
-    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL
-    }));
+    public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
+    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED));
     
     /** The restaurant's welcome message. */
     public static final String MESSAGE_TYPE_WELCOME = "welcome";
@@ -46,7 +47,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
             List<String> paymentTypes, Map<String, Integer> minPayments,
             String link, String domain, String picture, String icon,
             List<AppInfo> apps, Map<String, String> properties,
-            String state, List<String> labels, Double rank) {
+            String state, List<String> labels, Map<String, String> externalIds, Double rank) {
     	super(id, created, modified, title, description, contact, address, timezone,
     			locale, locales, link, domain, picture, icon, apps, properties);
         
@@ -64,6 +65,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
         this.minPayments = minPayments;
         this.state = state;
         this.labels = labels;
+        this.externalIds = externalIds;
         this.rank = rank;
     }
 
@@ -129,6 +131,15 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     /** The restaurant's labels, e.g. "chinese", "kosher". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<String> labels = Collections.emptyList();
+    
+    /**
+     * Map of externally-defined ids referring to this restaurant.
+     * For example, the restaurant-id in some external billing system.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> externalIds = Collections.emptyMap();
     
     /** The restaurant's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
