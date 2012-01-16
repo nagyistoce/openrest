@@ -23,8 +23,8 @@ public class Organization implements Serializable {
     protected Organization(String id, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, String timezone, String locale, List<String> locales,
-    		String link, String domain, String picture, String icon, List<AppInfo> apps,
-    		Map<String, String> properties) {
+    		String link, String domain, List<String> altDomains, String picture, String icon,
+    		List<AppInfo> apps, Map<String, String> properties) {
     	this.id = id;
     	this.created = created;
     	this.modified = modified;
@@ -37,6 +37,7 @@ public class Organization implements Serializable {
     	this.locales = locales;
     	this.link = link;
     	this.domain = domain;
+    	this.altDomains = altDomains;
     	this.picture = picture;
     	this.icon = icon;
     	this.apps = apps;
@@ -105,6 +106,13 @@ public class Organization implements Serializable {
     /** The organization's online ordering domain. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String domain;
+    
+    /**
+     * The organization's online ordering alternative / legacy domains.
+     * These should redirect to the main domain.
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<String> altDomains = Collections.emptyList(); 
     
     /** The organization's picture URL (direct link), or null if unavailable. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

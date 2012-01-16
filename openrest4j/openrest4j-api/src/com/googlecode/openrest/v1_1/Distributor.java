@@ -20,11 +20,11 @@ public class Distributor extends Organization {
     public Distributor(String id, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		Contact contact, Address address, String timezone, String locale, List<String> locales,
-    		String link, String domain, String picture, String icon, List<AppInfo> apps,
+    		String link, String domain, List<String> altDomains, String picture, String icon, List<AppInfo> apps,
     		Map<String, String> properties, String facebookAppId,
     		String noImagePicture) {
     	super(id, created, modified, title, description, contact, address, timezone,
-    			locale, locales, link, domain, picture, icon, apps, properties);
+    			locale, locales, link, domain, altDomains, picture, icon, apps, properties);
     	
     	this.facebookAppId = facebookAppId;
     	this.noImagePicture = noImagePicture;

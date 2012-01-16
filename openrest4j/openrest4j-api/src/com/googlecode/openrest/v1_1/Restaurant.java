@@ -45,11 +45,11 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
             String timezone, String currency, String locale, List<String> locales,
             List<String> paymentTypes, Map<String, Integer> minPayments,
-            String link, String domain, String picture, String icon,
+            String link, String domain, List<String> altDomains, String picture, String icon,
             List<AppInfo> apps, Map<String, String> properties,
             String state, List<String> labels, Map<String, String> externalIds, Double rank) {
     	super(id, created, modified, title, description, contact, address, timezone,
-    			locale, locales, link, domain, picture, icon, apps, properties);
+    			locale, locales, link, domain, altDomains, picture, icon, apps, properties);
         
     	this.distributorId = distributorId;
         this.messages = messages;
