@@ -21,7 +21,8 @@ public class Item implements Serializable, Comparable<Item> {
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, Boolean inactive, String picture, Status status,
-    		Map<String, String> externalIds, List<String> labels, Double rank) {
+    		Map<String, String> externalIds, List<String> labels,
+    		Map<String, String> properties, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -34,15 +35,17 @@ public class Item implements Serializable, Comparable<Item> {
         this.status = status;
         this.externalIds = externalIds;
         this.labels = labels;
+        this.properties = properties;
         this.rank = rank;
     }
 
     /** Constructs a new item to be submitted. */
     public Item(Map<String, String> title, Map<String, String>description,
     		Integer price, List<Variation> variations, Availability availability,
-    		Boolean inactive, Map<String, String> externalIds, List<String> labels) {
+    		Boolean inactive, Map<String, String> externalIds, List<String> labels,
+    		Map<String, String> properties) {
         this(null, null, title, description, price, variations, availability, inactive,
-        		null, null, externalIds, labels, null);
+        		null, null, externalIds, labels, properties, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -100,6 +103,13 @@ public class Item implements Serializable, Comparable<Item> {
     /** The item's labels, e.g. "new", "spicy". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<String> labels = Collections.emptyList();
+    
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> properties = Collections.emptyMap();
     
     /** The item's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

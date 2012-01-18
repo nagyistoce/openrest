@@ -17,6 +17,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tag implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
 	/** Inclusive: tag refers to given items. */
 	public static final String TAG_MODE_INCLUDE = "include";
     /** Exclusive: tag refers to anything but the given items. */
@@ -28,16 +30,18 @@ public class Tag implements Serializable {
     }));
 	
     /** Constructs a previously submitted tag from persisted data. */
-    public Tag(String id, String restaurantId, Map<String, String> title, List<String> itemIds) {
+    public Tag(String id, String restaurantId, Map<String, String> title,
+    		List<String> itemIds, Map<String, String> properties) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
         this.itemIds = itemIds;
+        this.properties = properties;
     }
 
     /** Constructs a new tag to be submitted. */
-    public Tag(Map<String, String> title, List<String> itemIds) {
-        this(null, null, title, itemIds);
+    public Tag(Map<String, String> title, List<String> itemIds, Map<String, String> properties) {
+        this(null, null, title, itemIds, properties);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -59,5 +63,10 @@ public class Tag implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<String> itemIds = Collections.emptyList();
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> properties = Collections.emptyMap();
 }

@@ -15,7 +15,7 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 	/** Constructs a previously submitted category from persisted data. */
     public Category(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, String parentCategoryId,
-    		List<String> itemIds, Double priority) {
+    		List<String> itemIds, Double priority, Map<String, String> properties) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.title = title;
@@ -23,12 +23,14 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
         this.parentCategoryId = parentCategoryId;
         this.itemIds = itemIds;
         this.priority = priority;
+        this.properties = properties;
     }
 
     /** Constructs a new category to be submitted. */
     public Category(Map<String, String> title, Map<String, String> description,
-    		String parentCategoryId, List<String> itemIds, Double priority) {
-        this(null, null, title, description, parentCategoryId, itemIds, priority);
+    		String parentCategoryId, List<String> itemIds, Double priority,
+    		Map<String, String> properties) {
+        this(null, null, title, description, parentCategoryId, itemIds, priority, properties);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -41,7 +43,8 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
     			((description != null) ? new HashMap<String, String>(description) : null),
     			parentCategoryId,
     			((itemIds != null) ? new ArrayList<String>(itemIds) : null),
-    			priority);
+    			priority,
+    			((properties != null) ? new HashMap<String, String>(properties) : null));
 	}
 	
 	@Override
@@ -152,6 +155,13 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
     /** Order priority. Lower numbers appear first in the list. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Double priority = 0.0;
+    
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> properties = Collections.emptyMap();
     
     private static final long serialVersionUID = 1L;
 }
