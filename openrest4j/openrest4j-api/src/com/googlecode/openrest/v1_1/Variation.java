@@ -2,6 +2,7 @@ package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -92,13 +93,19 @@ public class Variation implements Serializable {
         if (this.prices != other.prices && (this.prices == null || !this.prices.equals(other.prices))) {
             return false;
         }
-        if (this.defaults != other.defaults && (this.defaults == null || !this.defaults.equals(other.defaults))) {
+        if (this.defaults != other.defaults && (this.defaults == null || !haveSameElements(this.defaults, other.defaults))) {
             return false;
         }
         if ((this.displayType == null) ? (other.displayType != null) : !this.displayType.equals(other.displayType)) {
             return false;
         }
         return true;
+    }
+    
+    private static <T> boolean haveSameElements(Collection<T> c1, Collection<T> c2) {
+    	final Set<T> s1 = new HashSet<T>(c1);
+    	final Set<T> s2 = new HashSet<T>(c2);
+    	return s1.equals(s2);
     }
 
     @Override
