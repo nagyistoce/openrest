@@ -7,9 +7,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Address implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     public Address(String country, String city, String street, String number,
     		String apt, String floor, String entrance, String comment, LatLng latLng,
-    		String countryCode) {
+    		String countryCode, String postalCode) {
     	this.country = country;
         this.city = city;
         this.street = street;
@@ -20,13 +22,27 @@ public class Address implements Serializable {
         this.comment = comment;
         this.latLng = latLng;
         this.countryCode = countryCode;
+        this.postalCode = postalCode;
     }
 
     /** Default constructor for JSON deserialization. */
     public Address() {}
 
-    public String streetAddress() {
-        return street + ' ' + number + ", " + city + ", " + country;
+    public String streetAddress(boolean useCountry) {
+    	final StringBuilder builder = new StringBuilder();
+    	
+    	builder.append(street).append(' ').append(number);
+    	builder.append(", ").append(city);
+    	
+    	if ((postalCode != null) && (!postalCode.isEmpty())) {
+    		builder.append(" ").append(postalCode);
+    	}
+    	
+    	if ((useCountry) && (country != null) && (!country.isEmpty())) {
+    		builder.append(", ").append(country);
+    	}
+    	
+    	return builder.toString();
     }
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -63,5 +79,6 @@ public class Address implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String countryCode;
     
-    private static final long serialVersionUID = 1L;
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String postalCode;
 }
