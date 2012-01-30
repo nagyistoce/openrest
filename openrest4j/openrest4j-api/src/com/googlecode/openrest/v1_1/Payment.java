@@ -20,9 +20,9 @@ public class Payment implements Serializable {
     public static final String PAYMENT_TYPE_10BIS = "10bis";
 
     /** All known payment methods. */
-    public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(new String[] {
+    public static final Set<String> ALL_PAYMENT_TYPES = new HashSet<String>(Arrays.asList(
     		PAYMENT_TYPE_CASH, PAYMENT_TYPE_CREDIT, PAYMENT_TYPE_DEBIT, PAYMENT_TYPE_10BIS
-    }));
+    ));
 
     /** Constructs a new one-time payment. */
     public Payment(String type, Integer amount, CreditCard card) {

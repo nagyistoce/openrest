@@ -1,6 +1,5 @@
 package com.googlecode.openrest.v1_1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,22 +37,24 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
 	
     public Restaurant(String id, Long created, Long modified,
-    		String distributorId, Map<String, String> title,
+    		String distributorId, String chainId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
-            String timezone, String currency, String locale, List<String> locales,
-            List<String> paymentTypes, Map<String, Integer> minPayments,
-            String link, String domain, List<String> altDomains, String picture, String icon,
+            String timezone, String currency, String locale, Set<String> locales,
+            Set<String> paymentTypes, Map<String, Integer> minPayments,
+            String link, String domain, Set<String> altDomains,
+            String picture, String icon, String noImagePicture,
             List<AppInfo> apps, Map<String, String> properties,
-            String state, List<String> labels, Map<String, String> externalIds, Double rank) {
-    	super(id, created, modified, title, description, contact, address, timezone,
-    			locale, locales, link, domain, altDomains, picture, icon, apps, properties);
+            String state, Set<String> labels, Map<String, String> externalIds, Double rank) {
+    	super(id, created, modified, title, description, locale, locales, colorScheme,
+    			contact, address, timezone, link, domain, altDomains, apps, properties,
+    			picture, icon, noImagePicture);
         
     	this.distributorId = distributorId;
+    	this.chainId = chainId;
         this.messages = messages;
-        this.colorScheme = colorScheme;
         this.openTimes = openTimes;
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
@@ -76,13 +77,13 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String distributorId;
     
+    /** The chain this restaurant is part of. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String chainId;
+    
     /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, Map<String, String>> messages = Collections.emptyMap();
-
-    /** The color scheme. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public ColorScheme colorScheme;
 
     /** Restaurant availability. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -114,7 +115,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     
     /** Available payment methods. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> paymentTypes = new ArrayList<String>(Payment.ALL_PAYMENT_TYPES);
+    public Set<String> paymentTypes = Collections.emptySet();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
@@ -130,7 +131,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     
     /** The restaurant's labels, e.g. "chinese", "kosher". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> labels = Collections.emptyList();
+    public Set<String> labels = Collections.emptySet();
     
     /**
      * Map of externally-defined ids referring to this restaurant.

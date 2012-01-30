@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -22,26 +23,30 @@ public class Organization implements Serializable {
     
     protected Organization(String id, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
-    		Contact contact, Address address, String timezone, String locale, List<String> locales,
-    		String link, String domain, List<String> altDomains, String picture, String icon,
-    		List<AppInfo> apps, Map<String, String> properties) {
+    		String locale, Set<String> locales, ColorScheme colorScheme,
+    		Contact contact, Address address, String timezone, 
+    		String link, String domain, Set<String> altDomains,
+    		List<AppInfo> apps, Map<String, String> properties,
+    		String picture, String icon, String noImagePicture) {
     	this.id = id;
     	this.created = created;
     	this.modified = modified;
     	this.title = title;
     	this.description = description;
+    	this.locale = locale;
+    	this.locales = locales;
+    	this.colorScheme = colorScheme;
     	this.contact = contact;
     	this.address = address;
     	this.timezone = timezone;
-    	this.locale = locale;
-    	this.locales = locales;
     	this.link = link;
     	this.domain = domain;
     	this.altDomains = altDomains;
-    	this.picture = picture;
-    	this.icon = icon;
     	this.apps = apps;
     	this.properties = properties;
+    	this.picture = picture;
+    	this.icon = icon;
+    	this.noImagePicture = noImagePicture;
     }
     
     /** The organization's unique id. */
@@ -71,6 +76,10 @@ public class Organization implements Serializable {
     /** The organization's description or tagline in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> description = Collections.emptyMap();
+    
+    /** The color scheme. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public ColorScheme colorScheme;
 
     /** The organization's contact. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -97,7 +106,7 @@ public class Organization implements Serializable {
     
     /** The organization's supported locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> locales = Collections.emptyList();
+    public Set<String> locales = Collections.emptySet();
     
     /** The organization's main web-site URL. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -112,7 +121,7 @@ public class Organization implements Serializable {
      * These should redirect to the main domain.
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> altDomains = Collections.emptyList(); 
+    public Set<String> altDomains = Collections.emptySet(); 
     
     /** The organization's picture URL (direct link), or null if unavailable. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -121,6 +130,10 @@ public class Organization implements Serializable {
     /** The organization's icon URL (direct link), or null if unavailable. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String icon;
+    
+    /** The picture shown when a picture is missing. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String noImagePicture;
     
     /** The organization's applications. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)

@@ -7,6 +7,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Contact implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     public Contact(String firstName, String lastName, String email, String phone, String fax) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -83,6 +85,4 @@ public class Contact implements Serializable {
 			return false;
 		return true;
 	}
-    
-    private static final long serialVersionUID = 1L;
 }

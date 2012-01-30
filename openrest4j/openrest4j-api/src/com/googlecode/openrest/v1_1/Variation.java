@@ -2,10 +2,8 @@ package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,12 +21,11 @@ public class Variation implements Serializable {
     public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
     
     /** All known variation display types. */
-    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-    		VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE
-    }));
+    public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(
+    		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE));
 
     public Variation(Map<String, String> title, String tagId, Integer minNumAllowed,
-    		Integer maxNumAllowed, Map<String, Integer> prices, List<String> defaults, String displayType) {
+    		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType) {
         this.title = title;
         this.tagId = tagId;
         this.minNumAllowed = minNumAllowed;
@@ -63,7 +60,7 @@ public class Variation implements Serializable {
 
     /** Default selected item ids. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> defaults = Collections.emptyList();
+    public Set<String> defaults = Collections.emptySet();
 
     /** Display type for human-readable printing. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -93,7 +90,7 @@ public class Variation implements Serializable {
         if (this.prices != other.prices && (this.prices == null || !this.prices.equals(other.prices))) {
             return false;
         }
-        if (this.defaults != other.defaults && (this.defaults == null || !haveSameElements(this.defaults, other.defaults))) {
+        if (this.defaults != other.defaults && (this.defaults == null || !this.defaults.equals(other.defaults))) {
             return false;
         }
         if ((this.displayType == null) ? (other.displayType != null) : !this.displayType.equals(other.displayType)) {
@@ -102,12 +99,6 @@ public class Variation implements Serializable {
         return true;
     }
     
-    private static <T> boolean haveSameElements(Collection<T> c1, Collection<T> c2) {
-    	final Set<T> s1 = new HashSet<T>(c1);
-    	final Set<T> s2 = new HashSet<T>(c2);
-    	return s1.equals(s2);
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -120,6 +111,6 @@ public class Variation implements Serializable {
         hash = 97 * hash + (this.displayType != null ? this.displayType.hashCode() : 0);
         return hash;
     }
-
+    
     private static final long serialVersionUID = 1L;
 }

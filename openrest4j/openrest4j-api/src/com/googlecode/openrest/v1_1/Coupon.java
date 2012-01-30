@@ -18,9 +18,8 @@ public class Coupon implements Serializable {
     public static final String COUPON_TYPE_M_PLUS_N = "m_plus_n";
     
     /** All known coupouns. */
-    public static final Set<String> ALL_COUPON_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-    		COUPON_TYPE_DISCOUNT, COUPON_TYPE_M_PLUS_N
-    }));
+    public static final Set<String> ALL_COUPON_TYPES = new HashSet<String>(
+    		Arrays.asList(COUPON_TYPE_DISCOUNT, COUPON_TYPE_M_PLUS_N));
    
     public Coupon(String type, Map<String, String> title, Map<String, String> description,
     		Integer maxNumAllowed, Boolean othersAllowed) {
