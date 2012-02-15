@@ -113,7 +113,6 @@ public class Category implements Serializable, Cloneable, Comparable<Category> {
 		return true;
 	}
 
-	@Override
 	public int compareTo(Category other) {
 		return Double.compare(
 				((priority != null) ? priority.doubleValue() : 0),

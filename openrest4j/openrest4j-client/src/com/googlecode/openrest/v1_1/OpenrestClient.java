@@ -65,14 +65,31 @@ public class OpenrestClient {
     
     ///////////////////////////////////////////////////////////////////////////
     
-    public List<Restaurant> getRestaurants(List<String> restaurantIds, String distributorId, List<String> state,
-    		LatLng latLng, Double radius, List<String> labels, String query, Long modified,
-    		List<String> fields, Integer limit)
+    public List<Chain> getChains(List<String> chainIds) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("ids", chainIds);
+    	
+        return protocol.get(new URL(apiUrl + "/chains/" + query.toString()), new TypeReference<Response<List<Chain>>>() {});
+    }
+    
+    public Chain addChain(Chain chain) throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+    	query.append("access_token", accessToken);
+    	
+        return protocol.add(new URL(apiUrl + "/chains/" + query.toString()), chain, new TypeReference<Response<Chain>>() {});
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public List<Restaurant> getRestaurants(List<String> restaurantIds, String distributorId, String chainId,
+    		List<String> state, LatLng latLng, Double radius, List<String> labels, String query,
+    		Long modified, List<String> fields, Integer limit)
     		throws IOException, OpenrestException {
     	
     	final QueryStringBuilder urlQuery = new QueryStringBuilder();
     	urlQuery.append("ids", restaurantIds);
     	urlQuery.append("distributorId", distributorId);
+    	urlQuery.append("chainId", chainId);
     	urlQuery.append("state", state);
     	urlQuery.append("lat", ((latLng != null) ? latLng.lat.toString() : null));
     	urlQuery.append("lng", ((latLng != null) ? latLng.lng.toString() : null));

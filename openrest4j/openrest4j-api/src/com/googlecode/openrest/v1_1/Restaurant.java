@@ -146,7 +146,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Double rank;
 
-	@Override
 	public int compareTo(Restaurant other) {
 		if (rank != null) {
 			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);

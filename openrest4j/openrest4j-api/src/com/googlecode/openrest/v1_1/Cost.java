@@ -94,7 +94,6 @@ public class Cost implements Serializable, Comparable<Cost> {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer minimum = 0;
     
-    @Override
 	public int compareTo(Cost other) {
     	if (priority == null) {
     		return ((other.priority == null) ? 0 : 1);

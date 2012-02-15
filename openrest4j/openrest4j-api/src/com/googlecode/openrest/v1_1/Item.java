@@ -218,7 +218,6 @@ public class Item implements Serializable, Comparable<Item> {
 		return true;
 	}
     
-	@Override
 	public int compareTo(Item other) {
 		if (rank != null) {
 			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
