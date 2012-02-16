@@ -46,6 +46,14 @@ public class OpenrestClient {
     		throw new RuntimeException(e);
     	}
     }
+    
+    public ChainClient getChainClient(String chainId) {
+    	try {
+    		return new ChainClient(new URL(apiUrl.toString() + "/chains/" + chainId), accessToken, protocol);
+    	} catch (MalformedURLException e) {
+    		throw new RuntimeException(e);
+    	}
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     
