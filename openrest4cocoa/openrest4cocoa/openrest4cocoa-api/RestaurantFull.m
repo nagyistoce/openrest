@@ -43,6 +43,25 @@
     return ret;
 }
 
+-(NSUInteger)hash
+{
+    return [restaurant hash] + [menu hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    RestaurantFull* other = (RestaurantFull*)object; 
+    
+    if (![restaurant isEqual:other.restaurant]) return FALSE;
+    if (![menu isEqual:other.menu]) return FALSE;
+
+    return TRUE;
+}
+
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"\n\tRestaurant: %@\n\tMenu: %@\n\tCharges: %@:", restaurant, menu, charges];

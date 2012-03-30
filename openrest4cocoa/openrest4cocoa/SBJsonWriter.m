@@ -94,6 +94,10 @@ static NSMutableCharacterSet *kEscapeChars;
     } else if ([fragment isKindOfClass:[NSArray class]]) {
         if (![self appendArray:fragment into:json])
             return NO;
+
+    } else if ([fragment isKindOfClass:[NSSet class]]) {
+        if (![self appendArray:[fragment allObjects] into:json])
+            return NO;
         
     } else if ([fragment isKindOfClass:[NSString class]]) {
         if (![self appendString:fragment into:json])

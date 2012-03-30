@@ -33,14 +33,8 @@
     /** Time windows in which this item is regularly available. */
     OpenrestAvailability* availability;
     
-    /** Human readable availability NSString*. */
-    NSString* availabilityStr;
-    
     /** Whether the item is deactivated (i.e. suspended or disabled). */
     bool inactive;
-    
-    /** The current status. */
-    Status* status;
     
     /** Item picture URL (direct link). */
     NSString* picture;
@@ -53,9 +47,7 @@
 @property (nonatomic) int price;
 @property (nonatomic, retain) NSArray* variations;
 @property (nonatomic, retain) OpenrestAvailability* availability;
-@property (nonatomic, retain) NSString* availabilityStr;
 @property (nonatomic) bool inactive;
-@property (nonatomic, retain) Status* status;
 @property (nonatomic, retain) NSString* picture;
 
 -(id)init;

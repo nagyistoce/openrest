@@ -48,10 +48,16 @@
     return ret;
 }
 
+-(NSUInteger)hash
+{
+    return [firstName hash] + [lastName hash];
+}
+
 -(BOOL)isEqual:(id)object
 {
+    if (self == object) return FALSE;
     if (object == NULL) return FALSE;
-    if (![[object class] isSubclassOfClass:[self class]]) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
     Contact* other = (Contact*)object;
     
     if ([firstName isEqualToString:other.firstName])

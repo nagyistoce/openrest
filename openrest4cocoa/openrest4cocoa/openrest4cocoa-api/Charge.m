@@ -22,6 +22,7 @@
 @synthesize amountRule;
 @synthesize coupon;
 @synthesize amount;
+@synthesize clubId;
 
 -(id)init
 {
@@ -43,12 +44,16 @@
         [self setType:[data valueForKey:@"type"]];
         [self setPriority:[data valueForKey:@"priority"]];
         [self setCode:[data valueForKey:@"code"]];
+        [self setClubId:[data valueForKey:@"clubId"]];
         [self setTagId:[data valueForKey:@"tagId"]];
         [self setTagMode:[data valueForKey:@"tagMode"]];
         [self setAmountRuleType:[data valueForKey:@"amountRuleType"]];
         [self setAmountRule:[data valueForKey:@"amountRule"]];
-        [self setCoupon:[[[Coupon alloc] initWithDictionary:
-                                  [data valueForKey:@"coupon"]] autorelease]];
+        if (([type isEqualToString:CHARGE_TYPE_COUPON]) || ([type isEqualToString:CHARGE_TYPE_CLUB_COUPON]))
+        {
+            [self setCoupon:[[[Coupon alloc] initWithDictionary:
+                                    [data valueForKey:@"coupon"]] autorelease]];
+        }
         [self setAmount:[data valueForKey:@"amount"]];
     }
     
@@ -59,12 +64,12 @@
 {   
     NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    if (type != nil) {[ret setValue:type forKey:@"type"];}
     if (chargeId != nil) {[ret setValue:chargeId forKey:@"id"];}
     if (restaurantId != nil) {[ret setValue:restaurantId forKey:@"restaurantId"];}
     if (type != nil) {[ret setValue:type forKey:@"type"];}
     if (priority != nil) {[ret setValue:priority forKey:@"priority"];}
     if (code != nil) {[ret setValue:code forKey:@"code"];}
+    if (clubId != nil) {[ret setValue:clubId forKey:@"clubId"];}
     if (tagId != nil) {[ret setValue:tagId forKey:@"tagId"];}
     if (tagMode != nil) {[ret setValue:tagMode forKey:@"tagMode"];}
     if (amountRuleType != nil) {[ret setValue:amountRuleType forKey:@"amountRuleType"];}
@@ -75,22 +80,34 @@
     return ret;
 }
 
--(LocalizedDictionary*)getTitle
+-(BOOL)isEqual:(id)object
 {
-    if (([type isEqualToString:CHARGE_TYPE_COUPON]) || ([type isEqualToString:CHARGE_TYPE_CLUB_COUPON]))
-    {
-        return [coupon title];
-    }
-    return [LocalizedDictionary dictionary];
+    if (self == object) return TRUE;
+    
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    
+    Charge* other = (Charge*)object;
+
+    if ((chargeId != other.chargeId) && (![chargeId isEqual:other.chargeId])) return FALSE;
+    if ((restaurantId != other.restaurantId) && (![restaurantId isEqual:other.type])) return FALSE;
+    if ((type != other.type) && (![type isEqual:other.type])) return FALSE;
+    if ((clubId != other.clubId) && (![clubId isEqual:other.clubId])) return FALSE;
+    if ((priority != other.priority) && (![priority isEqual:other.priority])) return FALSE;
+    if ((tagId != other.tagId) && (![tagId isEqual:other.tagMode])) return FALSE;
+    if ((tagMode != other.tagMode) && (![tagMode isEqual:other.type])) return FALSE;
+    if ((amountRuleType != other.amountRuleType) && (![amountRuleType isEqual:other.amountRuleType])) return FALSE;
+    if ((amountRule != other.amountRule) && (![amountRule isEqual:other.amountRule])) return FALSE;
+    if ((coupon != other.coupon) && (![coupon isEqual:other.coupon])) return FALSE;
+    
+    return TRUE;
 }
 
--(LocalizedDictionary*)getDescription
+-(NSUInteger)hash
 {
-    if (([type isEqualToString:CHARGE_TYPE_COUPON]) || ([type isEqualToString:CHARGE_TYPE_CLUB_COUPON]))
-    {
-        return [coupon description];
-    }
-    return [LocalizedDictionary dictionary];    
+    NSUInteger ret = [chargeId hash] + [restaurantId hash];
+    return ret;
 }
 
 -(void)dealloc
@@ -100,6 +117,7 @@
     [type release];
     [priority release];
     [code release];
+    [clubId release];
     [tagId release];
     [tagMode release];
     [amountRuleType release];

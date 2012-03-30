@@ -49,6 +49,25 @@
     return self;
 }
 
+-(NSUInteger)hash
+{
+    return [items hash] + [tags hash] + [categories hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    Menu* other = (Menu*)object;
+    if (![items isEqualToArray:other.items]) return FALSE;
+    if (![tags isEqualToArray:other.tags]) return FALSE;
+    if (![categories isEqualToArray:other.categories]) return FALSE;
+    
+    return TRUE;
+}
+
 -(Item*)itemById:(NSString*)itemId
 {
     for (int i = 0 ; i < [items count] ; i++)
@@ -71,6 +90,18 @@
     [ret appendFormat:@"Categories: %@\n", categories];
     return ret;
 }
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (items != nil) {[ret setValue:items forKey:@"items"];}
+    if (tags != nil) {[ret setValue:tags forKey:@"tags"];}
+    if (categories != nil) {[ret setValue:categories forKey:@"categories"];}
+    
+    return ret;
+}
+
 
 -(void)dealloc
 {

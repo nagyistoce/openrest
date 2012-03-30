@@ -13,6 +13,7 @@
 #define CHARGE_TYPE_DELIVERY    @"delivery"
 #define CHARGE_TYPE_COUPON      @"coupon"
 #define CHARGE_TYPE_CLUB_COUPON @"club_coupon"
+#define CHARGE_TYPE_TAX         @"tax"
 
 #define CHARGE_AMOUNT_RULE_TYPE_FIXED          @"fixed"
 #define CHARGE_AMOUNT_RULE_TYPE_PERCENTAGE     @"percentage"
@@ -36,6 +37,8 @@
     
     /** Optional activation code, e.g. GoDaddy-style, member id. */
     NSString* code;
+    
+    NSString* clubId;
     
     /** Items for which the charge applies, null if applies for every item. */
     NSString* tagId;
@@ -68,6 +71,7 @@
 @property (nonatomic, retain) NSString* type;
 @property (nonatomic, retain) NSNumber* priority;
 @property (nonatomic, retain) NSString* code;
+@property (nonatomic, retain) NSString* clubId;
 @property (nonatomic, retain) NSString* tagId;
 @property (nonatomic, retain) NSString* tagMode;
 @property (nonatomic, retain) NSString* amountRuleType;
@@ -78,8 +82,5 @@
 -(id)init;
 -(id)initWithDictionary:(NSDictionary*)data;
 -(NSDictionary*)proxyForJson;
-
--(LocalizedDictionary*)getTitle;
--(LocalizedDictionary*)getDescription;
 
 @end

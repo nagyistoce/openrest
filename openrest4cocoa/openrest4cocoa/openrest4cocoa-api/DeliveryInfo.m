@@ -65,6 +65,47 @@
     return [NSString stringWithFormat:@"DeliveryInfo(%@): Area: %@ min: %d charge: %d, delay: %d, inactive: %d", type, area, minOrderPrice, charge, delayMins, inactive];
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    
+    DeliveryInfo* other = (DeliveryInfo*)object;
+
+    if (![type isEqualToString:other.type]) return FALSE;
+    if ((area != other.area) && (![area isEqual:other.area])) return FALSE;
+    if (minOrderPrice != other.minOrderPrice) return FALSE;
+    if (charge != other.charge) return FALSE;
+    if (delayMins != other.delayMins) return FALSE;
+    if (inactive != other.inactive) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (type != nil) {[ret setValue:type forKey:@"type"];}
+    if (area != nil) {[ret setValue:area forKey:@"area"];}
+    [ret setValue:[NSNumber numberWithInt:minOrderPrice] forKey:@"minOrderPrice"];
+    [ret setValue:[NSNumber numberWithInt:charge] forKey:@"charge"];
+    [ret setValue:[NSNumber numberWithInt:delayMins] forKey:@"delayMins"];
+    [ret setValue:[NSNumber numberWithBool:inactive] forKey:@"inactive"];
+
+    return ret;
+}
+
+
+-(NSUInteger)hash
+{
+    NSUInteger ret = [type hash] + [area hash] + minOrderPrice + charge + delayMins;
+    return ret;
+}
+
 -(void)dealloc
 {
     [type release];

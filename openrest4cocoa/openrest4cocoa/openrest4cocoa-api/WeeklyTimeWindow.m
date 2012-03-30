@@ -34,6 +34,25 @@
     return ret;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    WeeklyTimeWindow* other = (WeeklyTimeWindow*)object;
+    if (minuteOfWeek != other.minuteOfWeek) return FALSE;
+    if (durationMins != other.durationMins) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSUInteger)hash
+{
+    return minuteOfWeek + durationMins;
+}
+
 -(void)dealloc
 {
     [super dealloc];

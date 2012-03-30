@@ -41,9 +41,41 @@
     return self;
 }
 
+-(NSUInteger)hash
+{
+    return [tagId hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    Tag* other = (Tag*)object;
+
+    if (![tagId isEqualToString:other.tagId]) return FALSE;
+    if (![restaurantId isEqualToString:other.restaurantId]) return FALSE;
+    if (![title isEqual:other.title]) return FALSE;
+    if (![itemIds isEqualToArray:other.itemIds]) return FALSE;
+
+    return TRUE;
+}
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+
+    if (tagId != nil) {[ret setValue:tagId forKey:@"id"];}
+    if (restaurantId != nil) {[ret setValue:restaurantId forKey:@"restaurantId"];}
+    if (title != nil) {[ret setValue:title forKey:@"title"];}
+    if (itemIds != nil) {[ret setValue:itemIds forKey:@"itemIds"];}
+    
+    return ret;
+}
+
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"Tag[%@]: %@", tagId, title];
+    return [NSString stringWithFormat:@"Tag[%@]: %@ %@ %@", tagId, title, restaurantId, itemIds];
 }
 
 -(void)dealloc

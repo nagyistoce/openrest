@@ -16,9 +16,20 @@
 @synthesize weekly;
 @synthesize exceptions;
 
--(id)initWithDictionary:(NSDictionary*)data
+-(id)init
 {
     if ((self = [super init]))
+    {
+        [self setWeekly:[NSArray array]];
+        [self setExceptions:[NSArray array]];
+    }
+    
+    return self;
+}
+
+-(id)initWithDictionary:(NSDictionary*)data
+{
+    if ((self = [self init]))
     {
         if ([data valueForKey:@"weekly"] != nil)
         {
@@ -34,6 +45,25 @@
     }
     
     return self;
+}
+
+-(NSUInteger)hash
+{
+    return [weekly hash] + [exceptions hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[OpenrestAvailability class]]) return FALSE;
+    
+    OpenrestAvailability* other = (OpenrestAvailability*)object;
+    
+    if ((weekly != other.weekly) && (![weekly isEqualToArray:other.weekly])) return FALSE;
+    if ((exceptions != other.exceptions) && (![exceptions isEqualToArray:other.exceptions])) return FALSE;
+
+    return TRUE;
 }
 
 -(NSDictionary*)proxyForJson

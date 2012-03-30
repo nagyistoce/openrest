@@ -15,6 +15,7 @@
 @synthesize title;
 @synthesize description;
 @synthesize maxNumAllowed;
+@synthesize othersAllowed;
 
 -(id)init
 {
@@ -34,7 +35,11 @@
         [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
         [self setDescription:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"description"]]];
         [self setMaxNumAllowed:[data valueForKey:@"maxNumAllowed"]];
-        othersAllowed = ([[data valueForKey:@"othersAllowed"] intValue] == 1);
+        othersAllowed = TRUE;
+        if ([data valueForKey:@"othersAllowed"] != NULL)
+        {
+            othersAllowed = ([[data valueForKey:@"othersAllowed"] boolValue]);
+        }
     }
     return self; 
 }
@@ -47,15 +52,34 @@
     if (title != nil) {[ret setValue:title forKey:@"title"];}
     if (description != nil) {[ret setValue:description forKey:@"description"];}
     if (maxNumAllowed != nil) {[ret setValue:maxNumAllowed forKey:@"maxNumAllowed"];}
-    if (othersAllowed) 
-    {
-        [ret setValue:@"true" forKey:@"othersAllowed"];
-    }
-    else
-    {
-        [ret setValue:@"false" forKey:@"othersAllowed"];        
-    }
+    [ret setValue:[NSNumber numberWithBool:othersAllowed] forKey:@"othersAllowed"]; 
+
     
+    return ret;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    
+    Coupon* other = (Coupon*)object;
+    
+    if ((type != other.type) && (![type isEqual:other.type])) return FALSE;
+    if ((title != other.title) && (![title isEqual:other.title])) return FALSE;
+    if ((description != other.description) && (![description isEqual:other.description])) return FALSE;
+    if ((maxNumAllowed != other.maxNumAllowed) && (![maxNumAllowed isEqual:other.maxNumAllowed])) return FALSE;
+    if (othersAllowed != other.othersAllowed) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSUInteger)hash
+{
+    NSUInteger ret = [title hash] + [type hash];
     return ret;
 }
 

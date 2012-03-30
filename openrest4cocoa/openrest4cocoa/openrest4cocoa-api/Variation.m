@@ -26,7 +26,7 @@
         [self setMinNumAllowed:0];
         [self setMaxNumAllowed:INT32_MAX];
         [self setPrices:[NSDictionary dictionary]];
-        [self setDefaults:[NSArray array]];
+        [self setDefaults:[NSSet set]];
         [self setDisplayType:VARIATION_DISPLAY_TYPE_CHOICE];
     }
     return self;
@@ -52,7 +52,7 @@
         }
         if ([data valueForKey:@"defaults"] != nil)
         {
-            [self setDefaults:[data valueForKey:@"defaults"]];
+            [self setDefaults:[NSSet setWithArray:[data valueForKey:@"defaults"]]];
         }
         if ([data valueForKey:@"displayType"] != nil)
         {
@@ -60,6 +60,30 @@
         }
     }
     return self;
+}
+
+-(NSUInteger)hash
+{
+    return [title hash]+[tagId hash]+minNumAllowed+maxNumAllowed+[prices hash]+[defaults hash]+[displayType hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    
+    Variation* other = (Variation*)object;
+
+    if (![title isEqual:other.title]) return FALSE;
+    if (![tagId isEqualToString:other.tagId]) return FALSE;
+    if (minNumAllowed != other.minNumAllowed) return FALSE;
+    if (maxNumAllowed != other.maxNumAllowed) return FALSE;
+    if (![prices isEqualToDictionary:other.prices]) return FALSE;
+    if (![defaults isEqualToSet:other.defaults]) return FALSE;
+    if (![displayType isEqualToString:other.displayType]) return FALSE;
+    
+    return TRUE;
 }
 
 -(NSDictionary*)proxyForJson

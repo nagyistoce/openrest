@@ -18,9 +18,7 @@
 @synthesize price;
 @synthesize variations;
 @synthesize availability;
-@synthesize availabilityStr;
 @synthesize inactive;
-@synthesize status;
 @synthesize picture;
 
 -(id)init
@@ -56,18 +54,56 @@
         {
             [self setAvailability:[[[OpenrestAvailability alloc] initWithDictionary:[data valueForKey:@"availability"]] autorelease]];
         }
-        [self setAvailabilityStr:[data valueForKey:@"availabilityStr"]];
         if ([data valueForKey:@"inactive"])
         {
             [self setInactive:([[data valueForKey:@"inactive"] intValue] == 1)];
         }
-        if ([data valueForKey:@"status"])
-        {
-            [self setStatus:[[[Status alloc] initWithDictionary:[data valueForKey:@"status"]] autorelease]];
-        }
         [self setPicture:[data valueForKey:@"picture"]];
     }
     return self;
+}
+
+-(NSUInteger)hash
+{
+    return [itemId hash];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+
+    Item* other = (Item*)object;
+    if (![itemId isEqualToString:other.itemId]) return FALSE;
+    if (![restaurantId isEqualToString:other.restaurantId]) return FALSE;
+    if (![title isEqual:other.title]) return FALSE;
+    if (![itemDescription isEqual:other.itemDescription]) return FALSE;
+    if (price != other.price) return FALSE;
+    if ((variations != other.variations) && (![variations isEqualToArray:other.variations])) return FALSE;
+    if ((availability !=other.availability) && (![availability isEqual:other.availability])) return FALSE;
+    if (inactive != other.inactive) return FALSE;
+    if ((picture != other.picture) && (![picture isEqualToString:other.picture])) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+
+    if (itemId != nil) {[ret setValue:itemId forKey:@"id"];}
+    if (restaurantId != nil) {[ret setValue:restaurantId forKey:@"restaurantId"];}
+    if (title != nil) {[ret setValue:title forKey:@"title"];}
+    if (itemDescription != nil) {[ret setValue:itemDescription forKey:@"description"];}
+    [ret setValue:[NSNumber numberWithInt:price] forKey:@"price"];
+    if (variations != nil) {[ret setValue:variations forKey:@"variations"];}
+    if (availability != nil) {[ret setValue:availability forKey:@"availability"];}
+    [ret setValue:[NSNumber numberWithBool:inactive] forKey:@"inactive"];
+    if (picture != nil) {[ret setValue:picture forKey:@"picture"];}
+
+    
+    return ret;
 }
 
 -(void)dealloc
@@ -78,8 +114,6 @@
     [itemDescription release];
     [variations release];
     [availability release];
-    [availabilityStr release];
-    [status release];
     [picture release];
     [super dealloc];
 }

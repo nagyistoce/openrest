@@ -29,7 +29,7 @@
     NSDictionary* prices;
     
     /** Default selected item ids. */
-    NSArray* defaults;
+    NSSet* defaults;
     
     /** Display type for human-readable printing. */
     NSString* displayType;
@@ -40,7 +40,7 @@
 @property (nonatomic) int minNumAllowed;
 @property (nonatomic) int maxNumAllowed;
 @property (nonatomic, retain) NSDictionary* prices;
-@property (nonatomic, retain) NSArray* defaults;
+@property (nonatomic, retain) NSSet* defaults;
 @property (nonatomic, retain) NSString* displayType;
 
 -(id)init;

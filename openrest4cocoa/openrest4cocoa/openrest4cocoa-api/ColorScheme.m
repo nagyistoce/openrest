@@ -77,6 +77,63 @@
                            alpha:alpha];  
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[ColorScheme class]]) return FALSE;
+    
+    ColorScheme* other = (ColorScheme*)object;
+    
+    if (![theme isEqualToString:other.theme]) return FALSE;
+    if (![background isEqualToString:other.background]) return FALSE;
+    if (![font isEqualToString:other.font]) return FALSE;
+    if (![border isEqualToString:other.border]) return FALSE;
+    if (![imageBackground isEqualToString:other.imageBackground]) return FALSE;
+    if (![imageBorder isEqualToString:other.imageBorder]) return FALSE;
+    if (![buttonFont isEqualToString:other.buttonFont]) return FALSE;
+    if (![buttonUp isEqualToString:other.buttonUp]) return FALSE;
+    if (![buttonDown isEqualToString:other.buttonDown]) return FALSE;
+    if (![buttonOver isEqualToString:other.buttonOver]) return FALSE;
+    if (![categoryFont isEqualToString:other.categoryFont]) return FALSE;
+    if (![categoryUp isEqualToString:other.categoryUp]) return FALSE;
+    if (![categoryDown isEqualToString:other.categoryDown]) return FALSE;
+    if (![categoryOver isEqualToString:other.categoryOver]) return FALSE;
+
+    return TRUE;
+}
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    if (theme != nil) {[ret setValue:theme forKey:@"theme"];}
+    if (background != nil) {[ret setValue:background forKey:@"background"];}
+    if (font != nil) {[ret setValue:font forKey:@"font"];}
+    if (border != nil) {[ret setValue:border forKey:@"border"];}
+    if (imageBackground != nil) {[ret setValue:imageBackground forKey:@"imageBackground"];}
+    if (imageBorder != nil) {[ret setValue:imageBorder forKey:@"imageBorder"];}
+    if (buttonFont != nil) {[ret setValue:buttonFont forKey:@"buttonFont"];}
+    if (buttonUp != nil) {[ret setValue:buttonUp forKey:@"buttonUp"];}
+    if (buttonDown != nil) {[ret setValue:buttonDown forKey:@"buttonDown"];}
+    if (buttonOver != nil) {[ret setValue:buttonOver forKey:@"buttonOver"];}
+    if (categoryFont != nil) {[ret setValue:categoryFont forKey:@"categoryFont"];}
+    if (categoryUp != nil) {[ret setValue:categoryUp forKey:@"categoryUp"];}
+    if (categoryDown != nil) {[ret setValue:categoryDown forKey:@"categoryDown"];}
+    if (categoryOver != nil) {[ret setValue:categoryOver forKey:@"categoryOver"];}
+    
+    return ret;
+}
+
+
+-(NSUInteger)hash
+{
+    return [theme hash] + [background hash] + [font hash] + [border hash] + 
+    [imageBackground hash] + [imageBorder hash] + [buttonFont hash] + [buttonUp hash] + 
+    [buttonDown hash] + [buttonOver hash] + [categoryFont hash] + [categoryUp hash] + 
+    [categoryDown hash] + [categoryOver hash];
+}
+
 -(void)dealloc
 {
     [theme release];

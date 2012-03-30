@@ -34,6 +34,7 @@
 @property (nonatomic, retain) LocalizedDictionary* title;
 @property (nonatomic, retain) LocalizedDictionary* description;
 @property (nonatomic, retain) NSNumber* maxNumAllowed;
+@property (assign) bool othersAllowed;
 
 -(id)init;
 -(id)initWithDictionary:(NSDictionary*)data;

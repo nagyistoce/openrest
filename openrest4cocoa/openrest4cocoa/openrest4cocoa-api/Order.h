@@ -10,6 +10,7 @@
 #import "Delivery.h"
 #import "Contact.h"
 #import "User.h"
+#import "ClubMember.h"
 
 #define ORDER_STATUS_PENDING    @"pending"
 #define ORDER_STATUS_NEW        @"new"
@@ -63,6 +64,8 @@
     /** Extra charges or discounts */
     NSArray* charges;
     
+    ClubMember* clubMember;
+    
     /** Order's locale */
     NSString* locale;
     
@@ -85,6 +88,7 @@
 @property (nonatomic, retain) NSString* shareToken;
 @property (nonatomic, retain) NSNumber* takeoutPacks; 
 @property (nonatomic, retain) NSArray* charges;
+@property (nonatomic, retain) ClubMember* clubMember;
 @property (nonatomic, retain) NSArray* log;
 @property (nonatomic, retain) NSString* locale;
 

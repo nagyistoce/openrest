@@ -10,12 +10,12 @@
 
 
 @interface LatLng : NSObject {
-    double lat;
-    double lng;
+    NSNumber* lat;
+    NSNumber* lng;
 }
 
-@property (nonatomic) double lat;
-@property (nonatomic) double lng;
+@property (nonatomic, retain) NSNumber* lat;
+@property (nonatomic, retain) NSNumber* lng;
 
 -(id)initWithDictionary:(NSDictionary*)data;
 -(NSDictionary*)proxyForJson;

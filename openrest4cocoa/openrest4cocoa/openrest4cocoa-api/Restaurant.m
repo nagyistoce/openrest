@@ -12,49 +12,29 @@
 
 @implementation Restaurant
 
-@synthesize restaurantId;
-@synthesize title;
-@synthesize restaurantDescription;
-@synthesize contact;
-@synthesize address;
 @synthesize messages;
-@synthesize colorScheme;
 @synthesize openTimes;
 @synthesize deliveryTimes;
 @synthesize inactive;
-@synthesize status;
-@synthesize deliveryStatus;
-@synthesize timezone;
 @synthesize paymentTypes;
 @synthesize minPayments;
-@synthesize link;
-@synthesize picture;
-@synthesize icon;
 @synthesize deliveryInfos;
-@synthesize properties;
-@synthesize locales;
-@synthesize locale;
 @synthesize currency;
 @synthesize rank;
-@synthesize apps;
+@synthesize distributorId;
 
 -(id)init
 {
     if ((self = [super init]))
     {
         // Setup defaults
-        [self setTitle:[LocalizedDictionary dictionary]];
-        [self setRestaurantDescription:[LocalizedDictionary dictionary]];
         [self setOpenTimes:[[[OpenrestAvailability alloc] init] autorelease]];
         [self setDeliveryTimes:[[[OpenrestAvailability alloc] init] autorelease]];
         [self setInactive:false];
-        [self setDeliveryInfos:[NSArray array]];
-        [self setPaymentTypes:[NSArray array]];
+        [self setDeliveryInfos:[NSSet set]];
+        [self setPaymentTypes:[NSSet set]];
         [self setMinPayments:[NSDictionary dictionary]];
-        [self setProperties:[NSDictionary dictionary]];
-        [self setLocales:[NSArray array]];
         [self setMessages:[NSDictionary dictionary]];
-        [self setApps:[NSArray array]];
     }
     
     return self;
@@ -62,18 +42,9 @@
 
 -(id)initWithDictionary:(NSDictionary*)data
 {
-    if ((self = [self init]))
+    if ((self = [super initWithDictionary:data]))
     {
-        [self setRestaurantId:[data valueForKey:@"id"]];
-        [self setTitle:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"title"]]];
-        [self setRestaurantDescription:[LocalizedDictionary dictionaryWithDictionary:[data valueForKey:@"description"]]];
-        [self setContact:[[[Contact alloc] initWithDictionary:
-                           [data valueForKey:@"contact"]] autorelease]];
-        [self setAddress:[[[Address alloc] initWithDictionary:
-                           [data valueForKey:@"address"]] autorelease]];
         [self setMessages:[data valueForKey:@"messages"]];
-        [self setColorScheme:[[[ColorScheme alloc] initWithDictionary:
-                           [data valueForKey:@"colorScheme"]] autorelease]];
         if ([data valueForKey:@"openTimes"] != nil)
         {
             [self setOpenTimes:[[[OpenrestAvailability alloc] initWithDictionary:
@@ -88,41 +59,22 @@
         {
             [self setInactive:([[data valueForKey:@"inactive"] intValue] == 1)];
         }
-        [self setStatus:[[[Status alloc] initWithDictionary:
-                          [data valueForKey:@"status"]] autorelease]];
-        [self setDeliveryStatus:[[[Status alloc] initWithDictionary:
-                                  [data valueForKey:@"deliveryStatus"]] autorelease]];
-        [self setTimezone:[data valueForKey:@"timezone"]];
         if ([data valueForKey:@"paymentTypes"] != nil)
         {
-            [self setPaymentTypes:[data valueForKey:@"paymentTypes"]];
+            [self setPaymentTypes:[NSSet setWithArray:[data valueForKey:@"paymentTypes"]]];
         }
         if ([data valueForKey:@"minPayments"] != nil)
         {
             [self setMinPayments:[data valueForKey:@"minPayments"]];
-        }
-        [self setLink:[data valueForKey:@"link"]];
-        [self setPicture:[data valueForKey:@"picture"]];
-        [self setIcon:[data valueForKey:@"icon"]];
-        if ([data valueForKey:@"properties"] != nil)
-        {        
-            [self setProperties:[data valueForKey:@"properties"]];
-        }
-        
+        }       
         if ([data valueForKey:@"deliveryInfos"] != nil)
         {
-            [self setDeliveryInfos:[Utils refactorJsonArray:[data valueForKey:@"deliveryInfos"]
+            [self setDeliveryInfos:[Utils refactorJsonArrayToSet:[data valueForKey:@"deliveryInfos"]
                                                     toClass:@"DeliveryInfo"]];
         }
-        [self setLocales:[data valueForKey:@"locales"]];
-        [self setLocale:[data valueForKey:@"locale"]];        
         [self setCurrency:[data valueForKey:@"currency"]];        
         [self setRank:[data valueForKey:@"rank"]];        
-        if ([data valueForKey:@"apps"] != nil)
-        {
-            [self setApps:[Utils refactorJsonArray:[data valueForKey:@"apps"]
-                                                    toClass:@"App"]];
-        }
+        [self setDistributorId:[data valueForKey:@"distributorId"]];        
     }
     
     return self;
@@ -130,55 +82,77 @@
 
 -(NSString *)description
 {
-    NSMutableString* ret = [NSMutableString stringWithCapacity:0];
-    [ret appendFormat:@"\n%@ (%@)\n", restaurantId, title];
-    [ret appendFormat:@"   - RestaurantDescription: %@\n", restaurantDescription];
-    [ret appendFormat:@"   - Contact: %@\n", contact];
-    [ret appendFormat:@"   - Address: %@\n", address];
+    NSMutableString* ret = (NSMutableString*)[super description];
+ 
     [ret appendFormat:@"   - Messages: %@\n", messages];
-    [ret appendFormat:@"   - ColorScheme: %@\n", colorScheme];
     [ret appendFormat:@"   - OpenTimes: %@\n", openTimes];
     [ret appendFormat:@"   - DeliveryTimes: %@\n", deliveryTimes];
     [ret appendFormat:@"   - Inactive: %d\n", inactive];
-    [ret appendFormat:@"   - Status: %@\n", status];
-    [ret appendFormat:@"   - DeliveryStatus: %@\n", deliveryStatus];
-    [ret appendFormat:@"   - Timezone: %@\n", timezone];
     [ret appendFormat:@"   - PaymentTypes: %@\n", paymentTypes];
     [ret appendFormat:@"   - MinPayments: %@\n", minPayments];
-    [ret appendFormat:@"   - Link: %@\n", link];
-    [ret appendFormat:@"   - Picture: %@\n", picture];
-    [ret appendFormat:@"   - Icon: %@\n", icon];
     [ret appendFormat:@"   - DeliveryInfos: %@\n", deliveryInfos];
-    [ret appendFormat:@"   - Properties: %@\n", properties];
     [ret appendFormat:@"   - Rank: %@\n", rank];
+    [ret appendFormat:@"   - DistributorId: %@\n", distributorId];
     return ret;
 }
 
 -(void)dealloc
 {
-    [restaurantId release];
-    [title release];
-    [restaurantDescription release];
-    [contact release];
-    [address release];
-    [messages release];
-    [colorScheme release];
-    [openTimes release];
-    [deliveryTimes release];
-    [status release];
-    [deliveryStatus release];
-    [timezone release];
-    [paymentTypes release];
-    [minPayments release];
-    [link release];
-    [picture release];
-    [icon release];
-    [properties release];
-    [deliveryInfos release];
-    [locales release];
-    [locale release];
-    [currency release];
+    self.messages = nil;
+    self.openTimes = nil;
+    self.deliveryTimes = nil;
+    self.inactive = nil;
+    self.paymentTypes = nil;
+    self.minPayments = nil;
+    self.deliveryInfos = nil;
+    self.currency = nil;
+    self.rank = nil;
+    self.distributorId = nil;
+
     [super dealloc];
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[Restaurant class]]) return FALSE;
+    if (![super isEqual:object]) return FALSE;
+        
+    Restaurant* other = (Restaurant*)object;
+    
+    if (![messages isEqualToDictionary:other.messages]) return FALSE;
+    if (![openTimes isEqual:other.openTimes]) return FALSE;
+    if (![deliveryTimes isEqual:other.deliveryTimes]) return FALSE;;
+    if (inactive != other.inactive) return FALSE;;
+    if (![paymentTypes isEqualToSet:other.paymentTypes]) return FALSE;
+    if (![minPayments isEqualToDictionary:other.minPayments]) return FALSE;
+    if (![deliveryInfos isEqualToSet:other.deliveryInfos]) return FALSE;
+    if (![currency isEqualToString:other.currency]) return FALSE;
+    if (![rank isEqualToNumber:other.rank]) return FALSE;
+    if (![distributorId isEqualToString:other.distributorId]) return FALSE;
+    
+    return TRUE;
+}
+
+
+-(NSDictionary*)proxyForJson
+{
+    NSMutableDictionary* ret = (NSMutableDictionary*)[super proxyForJson];
+    
+    if (messages != nil) {[ret setValue:messages forKey:@"messages"];}
+    if (openTimes != nil) {[ret setValue:openTimes forKey:@"openTimes"];}
+    if (deliveryTimes != nil) {[ret setValue:deliveryTimes forKey:@"deliveryTimes"];}
+    [ret setValue:[NSNumber numberWithBool:inactive] forKey:@"inactive"];
+    if (paymentTypes != nil) {[ret setValue:paymentTypes forKey:@"paymentTypes"];}
+    if (minPayments != nil) {[ret setValue:minPayments forKey:@"minPayments"];}
+    if (deliveryInfos != nil) {[ret setValue:deliveryInfos forKey:@"deliveryInfos"];}
+    if (currency != nil) {[ret setValue:currency forKey:@"currency"];}
+    if (rank != nil) {[ret setValue:rank forKey:@"rank"];}
+    if (distributorId != nil) {[ret setValue:distributorId forKey:@"distributorId"];}
+
+    return ret;
 }
 
 @end

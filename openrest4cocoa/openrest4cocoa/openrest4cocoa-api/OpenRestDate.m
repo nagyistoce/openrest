@@ -43,6 +43,27 @@
     return ret;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (object == self) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    OpenRestDate* other = (OpenRestDate*)object;
+   
+    if (year != other.year) return FALSE;
+    if (month != other.month) return FALSE;
+    if (day != other.day) return FALSE;
+    if (hour != other.hour) return FALSE;
+    if (minute != other.minute) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSUInteger)hash
+{
+    return year+month+day+hour+minute;
+}
+
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"%d/%d/%d %d:%d", day, month, year, hour, minute];

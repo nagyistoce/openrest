@@ -66,7 +66,7 @@
 -(NSString*)description
 {
     NSMutableString* string = [NSMutableString stringWithCapacity:0];
-    [string appendFormat:@"%@ %@, %@ %@", street, number, city, country];
+    [string appendFormat:@"%@ %@, %@", street, number, city];
     if ((apt) && ([apt length] > 0)) { [string appendFormat:@" דירה: %@", apt]; }
     if ((floor) && ([floor length] > 0)) { [string appendFormat:@" קומה: %@", floor]; }
     if ((entrance) && ([entrance length] > 0)) { [string appendFormat:@" כניסה: %@", entrance]; }
@@ -74,10 +74,16 @@
     return string;
 }
 
+-(NSUInteger)hash
+{
+    return [[self description] hash];
+}
+
 -(BOOL)isEqual:(id)object
 {
+    if (self == object) return TRUE;
     if (object == NULL) return FALSE;
-    if (![[object class] isSubclassOfClass:[self class]]) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
     Address* other = (Address*)object;
     
     if (![country isEqualToString:other.country]) return FALSE;

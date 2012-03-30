@@ -65,6 +65,28 @@
     return ret;
 }
 
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    CreditCard* other = (CreditCard*)object;
+
+    if ((number != other.number) && (![number isEqualToString:other.number])) return FALSE;
+    if ((expireMonth != other.expireMonth) && (![expireMonth isEqualToNumber:other.expireMonth])) return FALSE;
+    if ((expireYear != other.expireYear) && (![expireYear isEqualToNumber:other.expireYear])) return FALSE;
+    if ((holderId != other.holderId) && (![holderId isEqualToString:other.holderId])) return FALSE;
+    if ((holderName != other.holderName) && (![holderName isEqualToString:other.holderName])) return FALSE;
+    if (anonymized != other.anonymized) return FALSE;
+    
+    return TRUE;
+}
+
+-(NSUInteger)hash
+{
+    return [number hash] + [expireYear hash] + [expireMonth hash];
+}
+
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"CreditCard[%@ %@/%@ %@ %@]", number, expireMonth, expireYear, holderId, holderName];

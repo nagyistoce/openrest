@@ -28,6 +28,7 @@
 @synthesize shareToken;
 @synthesize takeoutPacks;
 @synthesize charges;
+@synthesize clubMember;
 @synthesize log;
 @synthesize locale;
 
@@ -82,6 +83,11 @@
             [self setUser:[[[User alloc] initWithDictionary:
                                [data valueForKey:@"user"]] autorelease]];
         }      
+        if ([data valueForKey:@"clubMember"] != nil)
+        {
+            [self setClubMember:[[[ClubMember alloc] initWithDictionary:
+                            [data valueForKey:@"clubMember"]] autorelease]];
+        }    
         if ([data valueForKey:@"status"] != nil)
         {
             [self setStatus:[data valueForKey:@"status"]];
@@ -154,6 +160,7 @@
     if (status != nil) { [ret setValue:status forKey:@"status"]; }
     if (takeoutPacks != nil) { [ret setValue:takeoutPacks forKey:@"takeoutPacks"]; }
     if (charges != nil) { [ret setValue:charges forKey:@"charges"];}
+    if (clubMember != nil) { [ret setValue:clubMember forKey:@"clubMember"];}
     if (locale != nil) { [ret setValue:locale forKey:@"locale"];}
     if (log != nil) { [ret setValue:log forKey:@"log"];}
     return ret;

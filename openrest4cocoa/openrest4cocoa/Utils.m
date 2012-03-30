@@ -11,6 +11,17 @@
 
 @implementation Utils
 
++(NSSet*)refactorJsonArrayToSet:(NSArray*)array toClass:(NSString*)classStr
+{
+    NSMutableSet* result = [NSMutableSet setWithCapacity:[array count]];
+    
+    for (int i = 0 ; i < [array count] ; i++)
+    {
+        [result addObject:[[[NSClassFromString(classStr) alloc] initWithDictionary:[array objectAtIndex:i]] autorelease]];
+    }
+    
+    return result;  
+}
 
 +(NSArray*)refactorJsonArray:(NSArray*)array toClass:(NSString*)classStr
 {

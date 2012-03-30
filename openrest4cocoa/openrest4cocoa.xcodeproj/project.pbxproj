@@ -149,6 +149,18 @@
 		6072FA0A13741572000ECDB6 /* OpenrestResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6072FA0813741572000ECDB6 /* OpenrestResult.m */; };
 		607963EB1405272F000843BC /* PostedOrder.h in Headers */ = {isa = PBXBuildFile; fileRef = 607963E91405272E000843BC /* PostedOrder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		607963EC1405272F000843BC /* PostedOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 607963EA1405272F000843BC /* PostedOrder.m */; };
+		609491F414D9393900686C19 /* Distributor.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491F214D9393800686C19 /* Distributor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609491F514D9393900686C19 /* Distributor.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491F214D9393800686C19 /* Distributor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609491F614D9393900686C19 /* Distributor.m in Sources */ = {isa = PBXBuildFile; fileRef = 609491F314D9393800686C19 /* Distributor.m */; };
+		609491F714D9393900686C19 /* Distributor.m in Sources */ = {isa = PBXBuildFile; fileRef = 609491F314D9393800686C19 /* Distributor.m */; };
+		609491FB14D939DA00686C19 /* Chain.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491F914D939DA00686C19 /* Chain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609491FC14D939DA00686C19 /* Chain.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491F914D939DA00686C19 /* Chain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		609491FD14D939DA00686C19 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 609491FA14D939DA00686C19 /* Chain.m */; };
+		609491FE14D939DA00686C19 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 609491FA14D939DA00686C19 /* Chain.m */; };
+		6094920114D93B4C00686C19 /* Organization.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491FF14D93B4C00686C19 /* Organization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6094920214D93B4C00686C19 /* Organization.h in Headers */ = {isa = PBXBuildFile; fileRef = 609491FF14D93B4C00686C19 /* Organization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6094920314D93B4C00686C19 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6094920014D93B4C00686C19 /* Organization.m */; };
+		6094920414D93B4C00686C19 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6094920014D93B4C00686C19 /* Organization.m */; };
 		609E10DE13CC722F00F77E1E /* Charge.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10DC13CC722F00F77E1E /* Charge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		609E10DF13CC722F00F77E1E /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10DD13CC722F00F77E1E /* Charge.m */; };
 		609E10E313CC76DE00F77E1E /* Coupon.h in Headers */ = {isa = PBXBuildFile; fileRef = 609E10E113CC76DD00F77E1E /* Coupon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -159,6 +171,10 @@
 		60AB152713FEBD4000A96E92 /* LogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AB152213FEBB9500A96E92 /* LogEntry.m */; };
 		60C301931438697F00DC45AB /* LocalizedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C301911438697C00DC45AB /* LocalizedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60C301941438697F00DC45AB /* LocalizedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C301921438697D00DC45AB /* LocalizedDictionary.m */; };
+		60C501DF1504BE47005E27CA /* ClubMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C501DD1504BE46005E27CA /* ClubMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60C501E01504BE47005E27CA /* ClubMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C501DD1504BE46005E27CA /* ClubMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		60C501E11504BE47005E27CA /* ClubMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C501DE1504BE46005E27CA /* ClubMember.m */; };
+		60C501E21504BE47005E27CA /* ClubMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C501DE1504BE46005E27CA /* ClubMember.m */; };
 		60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40ED1364874A001C0B8F /* SBJsonBase.h */; settings = {ATTRIBUTES = (); }; };
 		60FD40F41364874A001C0B8F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 60FD40EE1364874A001C0B8F /* SBJsonBase.m */; };
 		60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 60FD40EF1364874A001C0B8F /* SBJsonParser.h */; settings = {ATTRIBUTES = (); }; };
@@ -250,6 +266,12 @@
 		6072FA0813741572000ECDB6 /* OpenrestResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OpenrestResult.m; path = "openrest4cocoa-api/OpenrestResult.m"; sourceTree = "<group>"; };
 		607963E91405272E000843BC /* PostedOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostedOrder.h; path = "openrest4cocoa-api/PostedOrder.h"; sourceTree = "<group>"; };
 		607963EA1405272F000843BC /* PostedOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostedOrder.m; path = "openrest4cocoa-api/PostedOrder.m"; sourceTree = "<group>"; };
+		609491F214D9393800686C19 /* Distributor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Distributor.h; path = "openrest4cocoa-api/Distributor.h"; sourceTree = "<group>"; };
+		609491F314D9393800686C19 /* Distributor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Distributor.m; path = "openrest4cocoa-api/Distributor.m"; sourceTree = "<group>"; };
+		609491F914D939DA00686C19 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = "openrest4cocoa-api/Chain.h"; sourceTree = "<group>"; };
+		609491FA14D939DA00686C19 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chain.m; path = "openrest4cocoa-api/Chain.m"; sourceTree = "<group>"; };
+		609491FF14D93B4C00686C19 /* Organization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Organization.h; path = "openrest4cocoa-api/Organization.h"; sourceTree = "<group>"; };
+		6094920014D93B4C00686C19 /* Organization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Organization.m; path = "openrest4cocoa-api/Organization.m"; sourceTree = "<group>"; };
 		609E10DC13CC722F00F77E1E /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Charge.h; path = "openrest4cocoa-api/Charge.h"; sourceTree = "<group>"; };
 		609E10DD13CC722F00F77E1E /* Charge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Charge.m; path = "openrest4cocoa-api/Charge.m"; sourceTree = "<group>"; };
 		609E10E113CC76DD00F77E1E /* Coupon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coupon.h; path = "openrest4cocoa-api/Coupon.h"; sourceTree = "<group>"; };
@@ -258,6 +280,8 @@
 		60AB152213FEBB9500A96E92 /* LogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogEntry.m; path = "openrest4cocoa-api/LogEntry.m"; sourceTree = "<group>"; };
 		60C301911438697C00DC45AB /* LocalizedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizedDictionary.h; sourceTree = "<group>"; };
 		60C301921438697D00DC45AB /* LocalizedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizedDictionary.m; sourceTree = "<group>"; };
+		60C501DD1504BE46005E27CA /* ClubMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClubMember.h; path = "openrest4cocoa-api/ClubMember.h"; sourceTree = "<group>"; };
+		60C501DE1504BE46005E27CA /* ClubMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClubMember.m; path = "openrest4cocoa-api/ClubMember.m"; sourceTree = "<group>"; };
 		60FD40ED1364874A001C0B8F /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		60FD40EE1364874A001C0B8F /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
 		60FD40EF1364874A001C0B8F /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
@@ -442,6 +466,14 @@
 				60728EB3147BED7500C4E956 /* App.m */,
 				605DF9FF148E641F0054E984 /* Feedback.h */,
 				605DFA00148E641F0054E984 /* Feedback.m */,
+				609491F214D9393800686C19 /* Distributor.h */,
+				609491F314D9393800686C19 /* Distributor.m */,
+				609491F914D939DA00686C19 /* Chain.h */,
+				609491FA14D939DA00686C19 /* Chain.m */,
+				609491FF14D93B4C00686C19 /* Organization.h */,
+				6094920014D93B4C00686C19 /* Organization.m */,
+				60C501DD1504BE46005E27CA /* ClubMember.h */,
+				60C501DE1504BE46005E27CA /* ClubMember.m */,
 			);
 			name = "openrest4cocoa-api";
 			sourceTree = "<group>";
@@ -513,7 +545,11 @@
 				60AB152313FEBB9500A96E92 /* LogEntry.h in Headers */,
 				60C301931438697F00DC45AB /* LocalizedDictionary.h in Headers */,
 				605DFA01148E641F0054E984 /* Feedback.h in Headers */,
+				609491F414D9393900686C19 /* Distributor.h in Headers */,
+				609491FB14D939DA00686C19 /* Chain.h in Headers */,
+				6094920114D93B4C00686C19 /* Organization.h in Headers */,
 				60728EB4147BED7500C4E956 /* App.h in Headers */,
+				60C501DF1504BE47005E27CA /* ClubMember.h in Headers */,
 				60FD40F31364874A001C0B8F /* SBJsonBase.h in Headers */,
 				60FD40F51364874A001C0B8F /* SBJsonParser.h in Headers */,
 				60FD40F71364874A001C0B8F /* SBJsonWriter.h in Headers */,
@@ -558,7 +594,11 @@
 				60227F3013D6DE88000E4CF1 /* RestaurantFull.h in Headers */,
 				605B8DD213745900003855D6 /* OpenrestResult.h in Headers */,
 				605B8DC413745900003855D6 /* Category.h in Headers */,
+				609491F514D9393900686C19 /* Distributor.h in Headers */,
+				609491FC14D939DA00686C19 /* Chain.h in Headers */,
+				6094920214D93B4C00686C19 /* Organization.h in Headers */,
 				605DFA02148E641F0054E984 /* Feedback.h in Headers */,
+				60C501E01504BE47005E27CA /* ClubMember.h in Headers */,
 				60AB152613FEBD3300A96E92 /* LogEntry.h in Headers */,
 				60227F3A13D6DF6B000E4CF1 /* JSON.h in Headers */,
 				60227F3413D6DF3C000E4CF1 /* NSObject+SBJSON.h in Headers */,
@@ -701,6 +741,10 @@
 				60C301941438697F00DC45AB /* LocalizedDictionary.m in Sources */,
 				60728EB5147BED7500C4E956 /* App.m in Sources */,
 				605DFA03148E641F0054E984 /* Feedback.m in Sources */,
+				609491F614D9393900686C19 /* Distributor.m in Sources */,
+				609491FD14D939DA00686C19 /* Chain.m in Sources */,
+				6094920314D93B4C00686C19 /* Organization.m in Sources */,
+				60C501E11504BE47005E27CA /* ClubMember.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +793,10 @@
 				60095F76148CB8600023AB1C /* PostedOrder.m in Sources */,
 				60AB152713FEBD4000A96E92 /* LogEntry.m in Sources */,
 				605DFA04148E641F0054E984 /* Feedback.m in Sources */,
+				609491F714D9393900686C19 /* Distributor.m in Sources */,
+				609491FE14D939DA00686C19 /* Chain.m in Sources */,
+				6094920414D93B4C00686C19 /* Organization.m in Sources */,
+				60C501E21504BE47005E27CA /* ClubMember.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

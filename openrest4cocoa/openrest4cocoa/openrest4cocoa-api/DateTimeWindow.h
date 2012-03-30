@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OpenRestDate.h"
 
+@interface DateTimeWindow : NSObject 
+{}
 
-@interface DateTimeWindow : NSObject {
-    /* TODO */
-}
+@property (nonatomic, retain) OpenRestDate* start;
+@property (nonatomic, retain) OpenRestDate* end;
+@property (assign) BOOL available;
+
 
 -(id)initWithDictionary:(NSDictionary*)data;
 

@@ -31,6 +31,8 @@
     
     /** Order priority. Higher means first in the list. */
     double priority;
+    
+    NSDictionary* properties;
 }
 
 @property (nonatomic, retain) NSString* categoryId;
@@ -40,6 +42,7 @@
 @property (nonatomic, retain) NSString* parentCategoryId;
 @property (nonatomic, retain) NSArray* itemIds;
 @property (nonatomic) double priority;
+@property (nonatomic, retain) NSDictionary* properties;
 
 -(id)init;
 -(id)initWithDictionary:(NSDictionary*)data;

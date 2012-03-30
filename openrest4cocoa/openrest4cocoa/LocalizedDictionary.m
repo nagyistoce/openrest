@@ -22,6 +22,7 @@ static NSString* locale;
 
 +(void)setDefaultLocale:(NSString*)_locale
 {
+    NSLog(@"LocaliedDictionary, setting language: %@", _locale);
     [locale release];
     locale = [_locale retain];
 }
@@ -62,6 +63,19 @@ static NSString* locale;
 -(NSDictionary*)proxyForJson
 {
     return dictionary;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) return TRUE;
+    if (object == NULL) return FALSE;
+    if (![object isKindOfClass:[self class]]) return FALSE;
+    return [self.dictionary isEqualToDictionary:((LocalizedDictionary*)object).dictionary];
+}
+
+-(NSUInteger)hash
+{
+    return [self.dictionary hash];
 }
 
 @end
