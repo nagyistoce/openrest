@@ -43,13 +43,13 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     		Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
             String timezone, String currency, String locale, Set<String> locales,
-            Set<String> paymentTypes, Map<String, Integer> minPayments,
+            Set<String> paymentTypes, Map<String, CardInfo> cardInfos, Map<String, Integer> minPayments,
             String link, String domain, Set<String> altDomains,
             String picture, String icon, String noImagePicture,
-            List<AppInfo> apps, Map<String, String> properties,
+            List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Set<String> labels, Map<String, String> externalIds, Double rank) {
     	super(id, created, modified, title, description, locale, locales, colorScheme,
-    			contact, address, timezone, link, domain, altDomains, apps, properties,
+    			contact, address, timezone, link, domain, altDomains, apps, seo, properties,
     			picture, icon, noImagePicture);
         
     	this.distributorId = distributorId;
@@ -63,6 +63,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
         this.deliveryStatus = deliveryStatus;
         this.currency = currency;
         this.paymentTypes = paymentTypes;
+        this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.state = state;
         this.labels = labels;
@@ -116,6 +117,18 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     /** Available payment methods. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Set<String> paymentTypes = Collections.emptySet();
+    
+    /**
+     * Maps credit card networks (e.g. "visa", "amex" etc) to the information
+     * required to clear cards of that network.
+     * 
+     * Networks that do not appear here are not supported by the restaurant.
+     * 
+     * For the complete list of credit card networks, see
+     * http://code.google.com/p/creditcard/
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, CardInfo> cardInfos = Collections.emptyMap();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.

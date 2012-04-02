@@ -23,10 +23,10 @@ public class Distributor extends Organization {
     		String locale, Set<String> locales, ColorScheme colorScheme,
     		Contact contact, Address address, String timezone, 
     		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Map<String, String> properties, String facebookAppId,
+    		List<AppInfo> apps, Seo seo, Map<String, String> properties, String facebookAppId,
     		String picture, String icon, String noImagePicture) {
     	super(id, created, modified, title, description, locale, locales, colorScheme,
-    			contact, address, timezone, link, domain, altDomains, apps, properties,
+    			contact, address, timezone, link, domain, altDomains, apps, seo, properties,
     			picture, icon, noImagePicture);
     	
     	this.facebookAppId = facebookAppId;

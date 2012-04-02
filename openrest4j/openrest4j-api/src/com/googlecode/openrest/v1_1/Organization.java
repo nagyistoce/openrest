@@ -26,7 +26,7 @@ public class Organization implements Serializable {
     		String locale, Set<String> locales, ColorScheme colorScheme,
     		Contact contact, Address address, String timezone, 
     		String link, String domain, Set<String> altDomains,
-    		List<AppInfo> apps, Map<String, String> properties,
+    		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String noImagePicture) {
     	this.id = id;
     	this.created = created;
@@ -43,6 +43,7 @@ public class Organization implements Serializable {
     	this.domain = domain;
     	this.altDomains = altDomains;
     	this.apps = apps;
+    	this.seo = seo;
     	this.properties = properties;
     	this.picture = picture;
     	this.icon = icon;
@@ -138,6 +139,10 @@ public class Organization implements Serializable {
     /** The organization's applications. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<AppInfo> apps = Collections.emptyList();
+    
+    /** SEO information. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Seo seo;
     
     /**
      * Map of user-defined extended properties. Developers should use unique
