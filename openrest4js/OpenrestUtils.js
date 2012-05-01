@@ -27,7 +27,7 @@ function ORDeserializeProperties(properties)
     {
         for (var i in properties)
         {
-            ret[i] = dojo.fromJson(this.properties[i]);
+            ret[i] = JSON.parse(properties[i]);
         }
     }
 
@@ -41,7 +41,7 @@ function ORSerializeProperties(properties)
     {
         for (var i in properties)
         {
-            ret[i] = dojo.toJson(this.properties[i]);
+            ret[i] = JSON.stringify(properties[i]);
         }
     }
 
