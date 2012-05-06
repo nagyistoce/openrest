@@ -22,6 +22,7 @@
 @synthesize currency;
 @synthesize rank;
 @synthesize distributorId;
+@synthesize cardInfos;
 
 -(id)init
 {
@@ -72,6 +73,12 @@
             [self setDeliveryInfos:[Utils refactorJsonArrayToSet:[data valueForKey:@"deliveryInfos"]
                                                     toClass:@"DeliveryInfo"]];
         }
+        if ([data valueForKey:@"cardInfos"] != nil)
+        {
+            [self setCardInfos:[Utils refactorJsonHash:[data valueForKey:@"cardInfos"]
+                                                toClass:@"CardInfo"]];
+        }
+        
         [self setCurrency:[data valueForKey:@"currency"]];        
         [self setRank:[data valueForKey:@"rank"]];        
         [self setDistributorId:[data valueForKey:@"distributorId"]];        
@@ -108,6 +115,7 @@
     self.currency = nil;
     self.rank = nil;
     self.distributorId = nil;
+    self.cardInfos = nil;
 
     [super dealloc];
 }
@@ -132,7 +140,8 @@
     if (![currency isEqualToString:other.currency]) return FALSE;
     if (![rank isEqualToNumber:other.rank]) return FALSE;
     if (![distributorId isEqualToString:other.distributorId]) return FALSE;
-    
+    if (![cardInfos isEqualToDictionary:other.cardInfos]) return FALSE;
+
     return TRUE;
 }
 
@@ -151,6 +160,7 @@
     if (currency != nil) {[ret setValue:currency forKey:@"currency"];}
     if (rank != nil) {[ret setValue:rank forKey:@"rank"];}
     if (distributorId != nil) {[ret setValue:distributorId forKey:@"distributorId"];}
+    if (cardInfos != nil) {[ret setValue:cardInfos forKey:@"cardInfos"];}
 
     return ret;
 }

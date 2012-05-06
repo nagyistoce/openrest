@@ -36,6 +36,18 @@
     return result;
 }
 
++(NSDictionary*)refactorJsonHash:(NSDictionary*)hash toClass:(NSString*)classStr
+{
+    NSMutableDictionary* result = [NSMutableDictionary dictionaryWithCapacity:[hash count]];
+    
+    [hash enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        [result setObject:[[NSClassFromString(classStr) alloc] initWithDictionary:obj] forKey:key];
+    }];
+    
+    return result;
+}
+
 +(NSArray*)refactorJsonArrayOfArray:(NSArray *)array toClass:(NSString *)classStr
 {
     NSMutableArray* result = [NSMutableArray arrayWithCapacity:

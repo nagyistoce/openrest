@@ -59,6 +59,10 @@
 		60227F3C13D6DF8E000E4CF1 /* RestaurantFull.m in Sources */ = {isa = PBXBuildFile; fileRef = 60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */; };
 		60227F3D13D6DF91000E4CF1 /* Charge.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10DD13CC722F00F77E1E /* Charge.m */; };
 		60227F3E13D6DF94000E4CF1 /* Coupon.m in Sources */ = {isa = PBXBuildFile; fileRef = 609E10E213CC76DD00F77E1E /* Coupon.m */; };
+		602F1C671552C42000416864 /* CardInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 602F1C651552C42000416864 /* CardInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		602F1C681552C42000416864 /* CardInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 602F1C651552C42000416864 /* CardInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		602F1C691552C42000416864 /* CardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 602F1C661552C42000416864 /* CardInfo.m */; };
+		602F1C6A1552C42000416864 /* CardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 602F1C661552C42000416864 /* CardInfo.m */; };
 		604C1EC6136474FC008EFC19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 604C1EC4136474FC008EFC19 /* InfoPlist.strings */; };
 		604C1ED313647668008EFC19 /* OpenrestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED213647668008EFC19 /* OpenrestClient.m */; };
 		604C1EE213647675008EFC19 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 604C1ED513647675008EFC19 /* Address.m */; };
@@ -226,6 +230,8 @@
 		60227F2A13D6D718000E4CF1 /* openrest4cocoa-simulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "openrest4cocoa-simulator.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60227F2B13D6DA34000E4CF1 /* RestaurantFull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestaurantFull.h; path = "openrest4cocoa-api/RestaurantFull.h"; sourceTree = "<group>"; };
 		60227F2C13D6DA34000E4CF1 /* RestaurantFull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestaurantFull.m; path = "openrest4cocoa-api/RestaurantFull.m"; sourceTree = "<group>"; };
+		602F1C651552C42000416864 /* CardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardInfo.h; path = "openrest4cocoa-api/CardInfo.h"; sourceTree = "<group>"; };
+		602F1C661552C42000416864 /* CardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardInfo.m; path = "openrest4cocoa-api/CardInfo.m"; sourceTree = "<group>"; };
 		604C1EB0136474A6008EFC19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		604C1EB4136474A6008EFC19 /* openrest4cocoa-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "openrest4cocoa-Prefix.pch"; sourceTree = "<group>"; };
 		604C1EBE136474FC008EFC19 /* openrest4cocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = openrest4cocoa.framework; path = "openrest4cocoa-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -474,6 +480,8 @@
 				6094920014D93B4C00686C19 /* Organization.m */,
 				60C501DD1504BE46005E27CA /* ClubMember.h */,
 				60C501DE1504BE46005E27CA /* ClubMember.m */,
+				602F1C651552C42000416864 /* CardInfo.h */,
+				602F1C661552C42000416864 /* CardInfo.m */,
 			);
 			name = "openrest4cocoa-api";
 			sourceTree = "<group>";
@@ -512,6 +520,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602F1C671552C42000416864 /* CardInfo.h in Headers */,
 				604C1EF1136476E4008EFC19 /* OpenrestClient.h in Headers */,
 				604C1F8F13647A90008EFC19 /* OpenrestAvailability.h in Headers */,
 				604C1EEC136476D7008EFC19 /* ColorScheme.h in Headers */,
@@ -565,6 +574,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602F1C681552C42000416864 /* CardInfo.h in Headers */,
 				60227F3313D6DF24000E4CF1 /* OpenrestClient.h in Headers */,
 				605B8DA9137458FF003855D6 /* OpenrestAvailability.h in Headers */,
 				605B8DAA137458FF003855D6 /* ColorScheme.h in Headers */,
@@ -745,6 +755,7 @@
 				609491FD14D939DA00686C19 /* Chain.m in Sources */,
 				6094920314D93B4C00686C19 /* Organization.m in Sources */,
 				60C501E11504BE47005E27CA /* ClubMember.m in Sources */,
+				602F1C691552C42000416864 /* CardInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +808,7 @@
 				609491FE14D939DA00686C19 /* Chain.m in Sources */,
 				6094920414D93B4C00686C19 /* Organization.m in Sources */,
 				60C501E21504BE47005E27CA /* ClubMember.m in Sources */,
+				602F1C6A1552C42000416864 /* CardInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

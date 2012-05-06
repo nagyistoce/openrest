@@ -33,5 +33,6 @@
 @property (nonatomic, retain) NSString* currency;
 @property (nonatomic, retain) NSNumber* rank;
 @property (nonatomic, retain) NSString* distributorId;
+@property (nonatomic, retain) NSDictionary* cardInfos;
 
 @end

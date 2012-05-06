@@ -17,6 +17,8 @@
 @synthesize holderId;
 @synthesize holderName;
 @synthesize anonymized;  
+@synthesize type;
+@synthesize csc;
 
 -(id)init
 {
@@ -36,6 +38,8 @@
         [self setExpireYear:[data valueForKey:@"expireYear"]];
         [self setHolderId:[data valueForKey:@"holderId"]];
         [self setHolderName:[data valueForKey:@"holderName"]];
+        [self setType:[data valueForKey:@"type"]];
+        [self setCsc:[data valueForKey:@"csc"]];
         if ([data valueForKey:@"anonymized"] != nil)
         {
             [self setAnonymized:([[data valueForKey:@"anonymized"] intValue] == 1)];
@@ -53,6 +57,8 @@
     if (expireYear != nil) {[ret setValue:expireYear forKey:@"expireYear"];}
     if (holderId != nil) {[ret setValue:holderId forKey:@"holderId"];}
     if (holderName != nil) {[ret setValue:holderName forKey:@"holderName"];}
+    if (type != nil) {[ret setValue:type forKey:@"type"];}
+    if (csc != nil) {[ret setValue:csc forKey:@"csc"];}
     if (anonymized) 
     {
         [ret setValue:@"true" forKey:@"anonymized"];
@@ -77,6 +83,8 @@
     if ((expireYear != other.expireYear) && (![expireYear isEqualToNumber:other.expireYear])) return FALSE;
     if ((holderId != other.holderId) && (![holderId isEqualToString:other.holderId])) return FALSE;
     if ((holderName != other.holderName) && (![holderName isEqualToString:other.holderName])) return FALSE;
+    if ((type != other.type) && (![type isEqualToString:other.type])) return FALSE;    
+    if ((csc != other.csc) && (![csc isEqualToString:other.csc])) return FALSE;    
     if (anonymized != other.anonymized) return FALSE;
     
     return TRUE;
@@ -89,7 +97,7 @@
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"CreditCard[%@ %@/%@ %@ %@]", number, expireMonth, expireYear, holderId, holderName];
+    return [NSString stringWithFormat:@"CreditCard[%@ - %@ %@/%@ %@ %@]", type, number, expireMonth, expireYear, holderId, holderName];
 }
 
 -(void)dealloc
@@ -99,6 +107,8 @@
     [expireYear release];
     [holderId release];
     [holderName release];
+    [type release];
+    [csc release];
     [super dealloc];
 }
 

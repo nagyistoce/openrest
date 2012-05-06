@@ -16,6 +16,8 @@
     NSNumber* expireYear;
     NSString* holderId;
     NSString* holderName;
+    NSString* csc;
+    NSString* type;
     bool anonymized;   
 }
 @property (nonatomic, retain) NSString* number;
@@ -23,6 +25,8 @@
 @property (nonatomic, retain) NSNumber* expireYear;
 @property (nonatomic, retain) NSString* holderId;
 @property (nonatomic, retain) NSString* holderName;
+@property (nonatomic, retain) NSString* type;
+@property (nonatomic, retain) NSString* csc;
 @property (nonatomic) bool anonymized;   
 
 -(id)init;
