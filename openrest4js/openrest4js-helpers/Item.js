@@ -11,10 +11,10 @@ Item.prototype.getItemImage = function(size, distributor, refresh)
     return ret;
 }
 
-Item.prototype.getAvailabilityStr = function()
+Item.prototype.getAvailabilityStr = function(i18n)
 {
-    var printer = new AvailabilityPrinter();
-    return printer.prettyPrint(SPICE_STR("${AvailabilityAlways}"), this.availability);
+    var printer = new AvailabilityPrinter(i18n);
+    return printer.prettyPrint(i18n.get("Always"), this.availability);
 }
 
 Item.prototype.doesFitOrderMinimum = function(orderCost)
@@ -36,7 +36,7 @@ Item.prototype.getStatus = function(timezone)
 {
     if (this.inactive)
     {
-        return {'status': STATUS_TEMPORARY_UNAVAILABLE, until:Number.MAX_VALUE}; 
+        return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
     }
 
     var now = new timezoneJS.Date();
@@ -47,7 +47,7 @@ Item.prototype.getStatus = function(timezone)
     if (!util.hasNext())
     {
         console.log("TimeWindowsIterator >> item availability hasNext returned false!");
-        return {'status': STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
+        return {'status': OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
     }
 
     var availability = util.next();
