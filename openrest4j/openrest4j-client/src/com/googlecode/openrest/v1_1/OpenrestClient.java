@@ -168,4 +168,30 @@ public class OpenrestClient {
         return protocol.get(new URL(apiUrl.toString() + "/orders/" + query.toString()),
                 new TypeReference<Response<List<Order>>>() {});
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public List<Role> getUserRoles() throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+		query.append("access_token", accessToken);
+    	
+        return protocol.get(new URL(apiUrl.toString() + "/me/roles/" + query.toString()),
+                new TypeReference<Response<List<Role>>>() {});
+    }
+    
+    public ClientInfo getUserInfo() throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+		query.append("access_token", accessToken);
+    	
+        return protocol.get(new URL(apiUrl.toString() + "/me/info" + query.toString()),
+                new TypeReference<Response<ClientInfo>>() {});
+    }
+    
+    public List<Payment> getUserPayments() throws IOException, OpenrestException {
+    	final QueryStringBuilder query = new QueryStringBuilder();
+		query.append("access_token", accessToken);
+    	
+        return protocol.get(new URL(apiUrl.toString() + "/me/payments/" + query.toString()),
+                new TypeReference<Response<List<Payment>>>() {});
+    }
 }
