@@ -6,8 +6,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Address implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Address implements Serializable, Cloneable {
+	private static final long serialVersionUID = 1L;
 
     public Address(String country, String city, String street, String number,
     		String apt, String floor, String entrance, String comment, LatLng latLng,
@@ -27,6 +27,13 @@ public class Address implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Address() {}
+    
+    @Override
+	public Object clone() {
+    	return new Address(country, city, street, number, apt, floor, entrance, comment,
+    			((latLng != null) ? (LatLng) latLng.clone() : null),
+    			countryCode, postalCode);
+	}
 
     public String streetAddress(boolean useCountry) {
     	final StringBuilder builder = new StringBuilder();

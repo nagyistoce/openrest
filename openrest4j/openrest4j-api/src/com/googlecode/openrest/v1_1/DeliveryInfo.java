@@ -10,7 +10,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DeliveryInfo implements Serializable {
+public class DeliveryInfo implements Serializable, Cloneable {
 	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
 			Integer delayMins, Boolean inactive) {
     	this.type = type;
@@ -23,6 +23,13 @@ public class DeliveryInfo implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public DeliveryInfo() {}
+    
+	@Override
+	public Object clone() {
+		return new DeliveryInfo(type,
+				((area != null) ? (Area) area.clone() : null),
+				minOrderPrice, charge, delayMins, inactive);
+	}
     
     /** Delivery type, one of Delivery.ALL_DELIVERY_TYPES. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

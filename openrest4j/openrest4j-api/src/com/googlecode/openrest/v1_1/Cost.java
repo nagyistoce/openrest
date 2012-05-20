@@ -21,6 +21,7 @@ public class Cost implements Serializable, Comparable<Cost> {
     public static final String COST_KEY_COMMISSION_PORTAL = "portal";
     public static final String COST_KEY_CHANNEL_FAX = "fax";
     public static final String COST_KEY_CHANNEL_SMS = "sms";
+    public static final String COST_KEY_CHANNEL_VOICE = "voice";
     public static final String COST_KEY_OTHER_ADWORDS = "adwords";
     public static final String COST_KEY_OTHER_DOMAIN = "domain";
     

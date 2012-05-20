@@ -6,8 +6,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Contact implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Contact implements Serializable, Cloneable {
+	private static final long serialVersionUID = 1L;
     
     public Contact(String firstName, String lastName, String email, String phone, String fax) {
         this.firstName = firstName;
@@ -19,6 +19,11 @@ public class Contact implements Serializable {
     
     /** Default constructor for JSON deserialization. */
     public Contact() {}
+    
+    @Override
+	public Object clone() {
+		return new Contact(firstName, lastName, email, phone, fax);
+	}
 
 	@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String firstName;

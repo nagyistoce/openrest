@@ -1,6 +1,7 @@
 package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,8 +13,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClubMember implements Serializable {
-    /** Default constructor for JSON deserialization. */
+public class ClubMember implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
+	/** Default constructor for JSON deserialization. */
     public ClubMember(String restaurantId, String memberId, String phone, List<String> clubIds) {
     	this.restaurantId = restaurantId;
     	this.memberId = memberId;
@@ -23,6 +26,12 @@ public class ClubMember implements Serializable {
     
     /** Default constructor for JSON deserialization. */
     public ClubMember() {}
+    
+    @Override
+	public Object clone() {
+    	return new ClubMember(restaurantId, memberId, phone,
+    			((clubIds != null) ? new ArrayList<String>(clubIds) : null));
+	}
     
     /** The restaurant's id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -38,6 +47,4 @@ public class ClubMember implements Serializable {
     
     /** The internal club ids of which the client is a member of. */
     public List<String> clubIds = Collections.emptyList();
-    
-    private static final long serialVersionUID = 1L;
 }

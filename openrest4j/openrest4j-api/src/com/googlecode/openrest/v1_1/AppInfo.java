@@ -13,8 +13,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AppInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class AppInfo implements Serializable, Cloneable {
+	private static final long serialVersionUID = 1L;
     
     /** Android platform. */
     public static final String PLATFORM_ANDROID = "android";
@@ -47,6 +47,11 @@ public class AppInfo implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public AppInfo() {}
+    
+    @Override
+	public Object clone() {
+    	return new AppInfo(type, platform, id, version, link);
+	}
 
     /** Application type (@see ALL_APP_TYPES) */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

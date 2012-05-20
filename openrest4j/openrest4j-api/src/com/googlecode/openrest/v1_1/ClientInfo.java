@@ -1,7 +1,9 @@
 package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +14,8 @@ import com.googlecode.openrest.v1_1.Address;
 import com.googlecode.openrest.v1_1.Contact;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClientInfo implements Serializable {
-    public ClientInfo(List<Contact> contacts, List<Address> addresses,
+public class ClientInfo implements Serializable, Cloneable {
+	public ClientInfo(List<Contact> contacts, List<Address> addresses,
     		List<ClubMember> memberships, Map<String, String> properties) {
     	this.contacts = contacts;
     	this.addresses = addresses;
@@ -23,6 +25,42 @@ public class ClientInfo implements Serializable {
     
     /** Default constructor for JSON deserialization. */
     public ClientInfo() {}
+    
+    @Override
+	public Object clone() {
+    	final List<Contact> clonedContacts;
+    	if (contacts != null) {
+    		clonedContacts = new ArrayList<Contact>(contacts.size());
+    		for (Contact contact : contacts) {
+    			clonedContacts.add((Contact) contact.clone());
+    		}
+    	} else {
+    		clonedContacts = null;
+    	}
+    	
+    	final List<Address> clonedAddresses;
+    	if (addresses != null) {
+    		clonedAddresses = new ArrayList<Address>(addresses.size());
+    		for (Address address : addresses) {
+    			clonedAddresses.add((Address) address.clone());
+    		}
+    	} else {
+    		clonedAddresses = null;
+    	}
+    	
+    	final List<ClubMember> clonedMemberships;
+    	if (memberships != null) {
+    		clonedMemberships = new ArrayList<ClubMember>(memberships.size());
+    		for (ClubMember membership : memberships) {
+    			clonedMemberships.add((ClubMember) membership.clone());
+    		}
+    	} else {
+    		clonedMemberships = null;
+    	}
+    	
+    	return new ClientInfo(clonedContacts, clonedAddresses, clonedMemberships,
+    			((properties != null) ? new HashMap<String, String>(properties) : null));
+	}
     
     /** Saved contact details. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)

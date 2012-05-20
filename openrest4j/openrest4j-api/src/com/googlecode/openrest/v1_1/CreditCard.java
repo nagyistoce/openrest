@@ -15,16 +15,24 @@ public class CreditCard implements Serializable, Cloneable {
     /** (number & expireMonth & expireYear) */
     public static final String FORM_STANDARD = "standard"; 
     /** FORM_STANDARD & holderId */
-    public static final String FORM_STANDARD_WITH_HOLDER_ID = "standard_id";
+    public static final String FORM_STANDARD_HOLDERID = "standard_id";
     /** FORM_STANDARD & (issueNumber | (validFromMonth & validFromYear)) */
     public static final String FORM_MAESTRO = "maestro";
+    /** FORM_STANDARD_HOLDERID & csc */
+    public static final String FORM_STANDARD_HOLDERID_CSC = "standard_id_csc";
+    /** FORM_STANDARD & billingAddress & billingPostalCode */
+    public static final String FORM_STANDARD_ADDRESS = "standard_address";
+    /** FORM_MAESTRO & billingAddress & billingPostalCode */
+    public static final String FORM_MAESTRO_ADDRESS = "maestro_address";
     
     public static final Set<String> ALL_FORMS = new HashSet<String>(Arrays.asList(
-    		FORM_STANDARD, FORM_STANDARD_WITH_HOLDER_ID, FORM_MAESTRO));
+    		FORM_STANDARD, FORM_STANDARD_HOLDERID, FORM_MAESTRO,
+    		FORM_STANDARD_HOLDERID_CSC, FORM_STANDARD_ADDRESS, FORM_MAESTRO_ADDRESS));
     
 	public CreditCard(String type, String number, Integer expireMonth, Integer expireYear,
             String holderId, String holderName,
             Integer validFromMonth, Integer validFromYear, String issueNumber,
+            String billingAddress, String billingPostalCode, String csc,
             Boolean anonymized) {
 		this.type = type;
         this.number = number;
@@ -35,6 +43,9 @@ public class CreditCard implements Serializable, Cloneable {
         this.validFromMonth = validFromMonth;
         this.validFromYear = validFromYear;
         this.issueNumber = issueNumber;
+        this.billingAddress = billingAddress;
+        this.billingPostalCode = billingPostalCode;
+        this.csc = csc;
         this.anonymized = anonymized;
     }
 
@@ -44,7 +55,8 @@ public class CreditCard implements Serializable, Cloneable {
     @Override
 	public Object clone() {
     	return new CreditCard(type, number, expireMonth, expireYear, holderId, holderName,
-    			validFromMonth, validFromYear, issueNumber, anonymized);
+    			validFromMonth, validFromYear, issueNumber, billingAddress, billingPostalCode,
+    			csc, anonymized);
 	}
 
     /** The card type, e.g. "visa", "mastercard", "maestro". */
@@ -82,6 +94,21 @@ public class CreditCard implements Serializable, Cloneable {
     /** Card issue number, e.g for Maestro. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String issueNumber;
+    
+    /** Card billing address. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String billingAddress;
+
+    /** Card billing postal code. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String billingPostalCode;
+
+    /**
+     * Card security code.
+     * @see http://en.wikipedia.org/wiki/Card_security_code
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String csc;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean anonymized = Boolean.FALSE;

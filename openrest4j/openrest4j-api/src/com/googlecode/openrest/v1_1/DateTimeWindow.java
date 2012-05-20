@@ -8,8 +8,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DateTimeWindow implements Serializable {
-    public DateTimeWindow(Date start, Date end, Boolean available) {
+public class DateTimeWindow implements Serializable, Cloneable {
+	public DateTimeWindow(Date start, Date end, Boolean available) {
         this.start = start;
         this.end = end;
         this.available = available;
@@ -21,6 +21,14 @@ public class DateTimeWindow implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public DateTimeWindow() {}
+    
+    @Override
+	protected Object clone() {
+    	return new DateTimeWindow(
+    			((start != null) ? (Date) start.clone() : null),
+    			((end != null) ? (Date) end.clone() : null),
+    			available);
+	}
 
     public Calendar start(TimeZone tz) {
         return start.calendar(tz);

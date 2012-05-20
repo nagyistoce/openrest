@@ -1,7 +1,9 @@
 package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +15,31 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Area implements Serializable {
-    public Area(Map<String, String> title, List<LatLng> polygon) {
+public class Area implements Serializable, Cloneable {
+	public Area(Map<String, String> title, List<LatLng> polygon) {
     	this.title = title;
     	this.polygon = polygon;
     }
 
     /** Default constructor for JSON deserialization. */
     public Area() {}
+    
+    @Override
+	public Object clone() {
+    	final List<LatLng> clonedPolygon;
+    	if (polygon != null) {
+    		clonedPolygon = new ArrayList<LatLng>(polygon.size());
+    		for (LatLng latLng : polygon) {
+    			clonedPolygon.add((LatLng) latLng.clone());
+    		}
+    	} else {
+    		clonedPolygon = null;
+    	}
+    	
+    	return new Area(
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			clonedPolygon);
+	}
     
     /** The area's human-readable title in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)

@@ -9,8 +9,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ColorScheme implements Serializable {
-    public static final String THEME_LIGHT = "light";
+public class ColorScheme implements Serializable, Cloneable {
+	public static final String THEME_LIGHT = "light";
     public static final String THEME_DARK = "dark";
     
     /** All known themes. */
@@ -41,6 +41,13 @@ public class ColorScheme implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public ColorScheme() {}
+    
+    @Override
+	public Object clone() {
+    	return new ColorScheme(theme, background, font, border, imageBackground,
+    			imageBorder, buttonFont, buttonUp, buttonDown, buttonOver,
+    			categoryFont, categoryUp, categoryDown, categoryOver);
+	}
 
     @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     public String theme;

@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Status implements Serializable {
+public class Status implements Serializable, Cloneable {
 	/** Available. */
     public static final String STATUS_AVAILABLE = "available";
     /** Unavailable. */
@@ -19,14 +19,19 @@ public class Status implements Serializable {
     public static final Set<String> ALL_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
     		STATUS_AVAILABLE, STATUS_UNAVAILABLE
     }));
-
+    
     public Status(String status, java.util.Date until) {
-        this.status = status;
-        this.until = ((until != null) ? until.getTime() : null);
+    	this.status = status;
+    	this.until = ((until != null) ? until.getTime() : null);
     }
 
     /** Default constructor for JSON deserialization. */
     public Status() {}
+    
+	@Override
+	public Object clone() {
+		return new Status(status, until());
+	}
 
     public java.util.Date until() {
         return ((until != null) ? new java.util.Date(until) : null);

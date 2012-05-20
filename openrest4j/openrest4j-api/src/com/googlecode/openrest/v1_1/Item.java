@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -21,7 +22,7 @@ public class Item implements Serializable, Comparable<Item> {
     public Item(String id, String restaurantId, Map<String, String> title,
     		Map<String, String> description, Integer price, List<Variation> variations,
     		Availability availability, Boolean inactive, String picture, Status status,
-    		Map<String, String> externalIds, List<String> labels,
+    		Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties, Double rank) {
         this.id = id;
         this.restaurantId = restaurantId;
@@ -42,7 +43,7 @@ public class Item implements Serializable, Comparable<Item> {
     /** Constructs a new item to be submitted. */
     public Item(Map<String, String> title, Map<String, String>description,
     		Integer price, List<Variation> variations, Availability availability,
-    		Boolean inactive, Map<String, String> externalIds, List<String> labels,
+    		Boolean inactive, Map<String, String> externalIds, Set<String> labels,
     		Map<String, String> properties) {
         this(null, null, title, description, price, variations, availability, inactive,
         		null, null, externalIds, labels, properties, null);
@@ -102,7 +103,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /** The item's labels, e.g. "new", "spicy". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<String> labels = Collections.emptyList();
+    public Set<String> labels = Collections.emptySet();
     
     /**
      * Map of user-defined extended properties. Developers should use unique

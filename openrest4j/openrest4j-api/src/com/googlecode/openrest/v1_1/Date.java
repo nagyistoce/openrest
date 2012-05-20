@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Date implements Serializable {
+public class Date implements Serializable, Cloneable {
 	public Date(Integer year, Integer month, Integer day, Integer hour, Integer minute) {
         this.year = year;
         this.month = month;
@@ -26,6 +26,11 @@ public class Date implements Serializable {
     /** Default constructor for JSON deserialization. */
     public Date() {}
 
+	@Override
+	public Object clone() {
+		return new Date(year, month, day, hour, minute);
+	}
+    
     public Calendar calendar(TimeZone tz) {
         final Calendar cal = Calendar.getInstance(tz);
         cal.clear();

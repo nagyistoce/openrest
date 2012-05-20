@@ -1,10 +1,13 @@
 package com.googlecode.openrest.v1_1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -15,8 +18,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Restaurant extends Organization implements Comparable<Restaurant> {
-    private static final long serialVersionUID = 1L;
+public class Restaurant extends Organization implements Comparable<Restaurant>, Cloneable {
+	private static final long serialVersionUID = 1L;
     
 	/** Restaurant system is used for demonstration only. Orders will not be handled. */
     public static final String STATE_DEMO = "demo";
@@ -26,10 +29,12 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
     public static final String STATE_OPERATIONAL = "operational";
     /** Restaurant system is permanently closed. Orders will not be handled. */
     public static final String STATE_CLOSED = "closed";
+    /** Restaurant system is operational, but only used to display information. */
+    public static final String STATE_INFO = "info";
     
     /** All known statuses. */
     public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
-    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED));
+    		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED, STATE_INFO));
     
     /** The restaurant's welcome message. */
     public static final String MESSAGE_TYPE_WELCOME = "welcome";
@@ -73,6 +78,77 @@ public class Restaurant extends Organization implements Comparable<Restaurant> {
 
     /** Default constructor for JSON deserialization. */
     public Restaurant() {}
+    
+    /** @return a shallow copy of this object. */
+    @Override
+	public Object clone() {
+    	final Map<String, CardInfo> clonedCardInfos;
+    	if (cardInfos != null) {
+    		clonedCardInfos = new HashMap<String, CardInfo>(cardInfos.size());
+    		for (Entry<String, CardInfo> entry : cardInfos.entrySet()) {
+    			clonedCardInfos.put(entry.getKey(), (CardInfo) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedCardInfos = null;
+    	}
+    	
+    	final List<AppInfo> clonedApps;
+    	if (apps != null) {
+    		clonedApps = new ArrayList<AppInfo>(apps.size());
+    		for (AppInfo app : apps) {
+    			clonedApps.add((AppInfo) app.clone());
+    		}
+    	} else {
+    		clonedApps = null;
+    	}
+    	
+    	final Map<String, Map<String, String>> clonedMessages;
+    	if (messages != null) {
+    		clonedMessages = new HashMap<String, Map<String, String>>(messages.size());
+    		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
+    			clonedMessages.put(entry.getKey(), new HashMap<String, String>(entry.getValue()));
+    		}
+    	} else {
+    		clonedMessages = null;
+    	}
+    	
+    	final List<DeliveryInfo> clonedDeliveryInfos;
+    	if (deliveryInfos != null) {
+    		clonedDeliveryInfos = new ArrayList<DeliveryInfo>(deliveryInfos.size());
+    		for (DeliveryInfo deliveryInfo : deliveryInfos) {
+    			clonedDeliveryInfos.add((DeliveryInfo) deliveryInfo.clone());
+    		}
+    	} else {
+    		clonedDeliveryInfos = null;
+    	}
+    	
+    	return new Restaurant(id, created, modified, distributorId, chainId,
+    			((title != null) ? new HashMap<String, String>(title) : null),
+    			((description != null) ? new HashMap<String, String>(description) : null),
+    			((contact != null) ? (Contact)contact.clone() : null),
+    			((address != null) ? (Address)address.clone() : null),
+    			clonedMessages,
+    			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
+    			((openTimes != null) ? (Availability) openTimes.clone() : null),
+    			((deliveryTimes != null) ? (Availability) deliveryTimes.clone() : null),
+    			inactive, clonedDeliveryInfos,
+    			((status != null) ? (Status) status.clone() : null),
+    			((deliveryStatus != null) ? (Status) deliveryStatus.clone() : null),
+    			timezone, currency, locale,
+    			((locales != null) ? new HashSet<String>(locales) : null),
+    			((paymentTypes != null) ? new HashSet<String>(paymentTypes) : null),
+    			clonedCardInfos,
+    			((minPayments != null) ? new HashMap<String, Integer>(minPayments) : null),
+    			link, domain,
+    			((altDomains != null) ? new HashSet<String>(altDomains) : null),
+    			picture, icon, noImagePicture,
+    			clonedApps,
+    			((seo != null) ? (Seo) seo.clone() : null),
+    			((properties != null) ? new HashMap<String, String>(properties) : null), state,
+    			((labels != null) ? new HashSet<String>(labels) : null),
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null), rank);
+	}
+    
 
     /** The distributor in charge of this restaurant. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

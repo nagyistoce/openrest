@@ -1,6 +1,7 @@
 package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,14 +15,39 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author DL
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Availability implements Serializable {
-    public Availability(List<WeeklyTimeWindow> weekly, List<DateTimeWindow> exceptions) {
+public class Availability implements Serializable, Cloneable {
+	public Availability(List<WeeklyTimeWindow> weekly, List<DateTimeWindow> exceptions) {
         this.weekly = weekly;
         this.exceptions = exceptions;
     }
     
     /** Default constructor for JSON deserialization. */
     public Availability() {}
+    
+    @Override
+	public Object clone() {
+    	final List<WeeklyTimeWindow> clonedWeekly;
+    	if (weekly != null) {
+    		clonedWeekly = new ArrayList<WeeklyTimeWindow>(weekly.size());
+    		for (WeeklyTimeWindow w : weekly) {
+    			clonedWeekly.add((WeeklyTimeWindow) w.clone());
+    		}
+    	} else {
+    		clonedWeekly = null;
+    	}
+    	
+    	final List<DateTimeWindow> clonedExceptions;
+    	if (exceptions != null) {
+    		clonedExceptions = new ArrayList<DateTimeWindow>(exceptions.size());
+    		for (DateTimeWindow w : exceptions) {
+    			clonedExceptions.add((DateTimeWindow) w.clone());
+    		}
+    	} else {
+    		clonedExceptions = null;
+    	}
+    	
+    	return new Availability(clonedWeekly, clonedExceptions);
+	}
     
     /** Weekly availability times. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
