@@ -3,8 +3,10 @@ package com.googlecode.openrest.v1_1;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -21,15 +23,15 @@ public class Chain extends Organization implements Cloneable {
     /** Default constructor for JSON deserialization. */
     public Chain() {}
     
-    public Chain(String id, String distributorId, Long created, Long modified,
+    public Chain(String id, Map<String, String> externalIds, String distributorId, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, ColorScheme colorScheme,
-    		Contact contact, Address address, String timezone,
+    		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String noImagePicture) {
-    	super(id, created, modified, title, description, locale, locales, colorScheme,
-    			contact, address, timezone, link, domain, altDomains, apps, seo, properties,
+    	super(id, externalIds, created, modified, title, description, locale, locales, colorScheme,
+    			contact, externalContacts, address, timezone, link, domain, altDomains, apps, seo, properties,
     			picture, icon, noImagePicture);
     	
     	this.distributorId = distributorId;
@@ -47,13 +49,25 @@ public class Chain extends Organization implements Cloneable {
     		clonedApps = null;
     	}
     	
-    	return new Chain(id, distributorId, created, modified,
+    	final Map<String, Contact> clonedExternalContacts;
+    	if (externalContacts != null) {
+    		clonedExternalContacts = new LinkedHashMap<String, Contact>(externalContacts.size());
+    		for (Entry<String, Contact> entry : externalContacts.entrySet()) {
+    			clonedExternalContacts.put(entry.getKey(), (Contact) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedExternalContacts = null;
+    	}    	
+    	
+    	return new Chain(id,
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),    			
+    			distributorId, created, modified,
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((description != null) ? new HashMap<String, String>(description) : null),
     			locale,
     			((locales != null) ? new HashSet<String>(locales) : null),
     			((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
-    			((contact != null) ? (Contact) contact.clone() : null),
+    			((contact != null) ? (Contact) contact.clone() : null), clonedExternalContacts,
     			((address != null) ? (Address) address.clone() : null),
     			timezone, link, domain,
     			((altDomains != null) ? new HashSet<String>(altDomains) : null),

@@ -21,14 +21,16 @@ public class Organization implements Serializable {
     /** Default constructor for JSON deserialization. */
     public Organization() {}
     
-    protected Organization(String id, Long created, Long modified,
+    protected Organization(String id, Map<String, String> externalIds, Long created, Long modified,
     		Map<String, String> title, Map<String, String> description,
     		String locale, Set<String> locales, ColorScheme colorScheme,
-    		Contact contact, Address address, String timezone, 
+    		Contact contact, Map<String, Contact> externalContacts,
+    		Address address, String timezone, 
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
     		String picture, String icon, String noImagePicture) {
     	this.id = id;
+    	this.externalIds = externalIds;
     	this.created = created;
     	this.modified = modified;
     	this.title = title;
@@ -37,6 +39,7 @@ public class Organization implements Serializable {
     	this.locales = locales;
     	this.colorScheme = colorScheme;
     	this.contact = contact;
+    	this.externalContacts = externalContacts;
     	this.address = address;
     	this.timezone = timezone;
     	this.link = link;
@@ -53,6 +56,15 @@ public class Organization implements Serializable {
     /** The organization's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
+    
+    /**
+     * Map of externally-defined ids referring to this organization.
+     * For example, the organization-id in some external billing system.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> externalIds = Collections.emptyMap();
     
     /** The organization's creation (NOT establishment!) timestamp. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -85,6 +97,15 @@ public class Organization implements Serializable {
     /** The organization's contact. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Contact contact;
+    
+    /**
+     * Map of externally-defined contact information for this organization.
+     * For example, a redirect phone number in some portal.
+     * 
+     * Developers should use unique keys, e.g. "com.company.product".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, Contact> externalContacts = Collections.emptyMap();
 
     /** The address of this organization. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

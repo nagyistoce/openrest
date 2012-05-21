@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -41,9 +42,9 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     /** The restaurant's order confirmation message. */
     public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
 	
-    public Restaurant(String id, Long created, Long modified,
+    public Restaurant(String id, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, String chainId, Map<String, String> title,
-    		Map<String, String> description, Contact contact, Address address,
+    		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
     		Map<String, Map<String, String>> messages, ColorScheme colorScheme,
     		Availability openTimes, Availability deliveryTimes,
             Boolean inactive, List<DeliveryInfo> deliveryInfos, Status status, Status deliveryStatus,
@@ -52,9 +53,9 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
             String link, String domain, Set<String> altDomains,
             String picture, String icon, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Set<String> labels, Map<String, String> externalIds, Double rank) {
-    	super(id, created, modified, title, description, locale, locales, colorScheme,
-    			contact, address, timezone, link, domain, altDomains, apps, seo, properties,
+            String state, Set<String> labels, Double rank) {
+    	super(id, externalIds, created, modified, title, description, locale, locales, colorScheme,
+    			contact, externalContacts, address, timezone, link, domain, altDomains, apps, seo, properties,
     			picture, icon, noImagePicture);
         
     	this.distributorId = distributorId;
@@ -72,7 +73,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
         this.minPayments = minPayments;
         this.state = state;
         this.labels = labels;
-        this.externalIds = externalIds;
         this.rank = rank;
     }
 
@@ -122,10 +122,22 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     		clonedDeliveryInfos = null;
     	}
     	
-    	return new Restaurant(id, created, modified, distributorId, chainId,
+    	final Map<String, Contact> clonedExternalContacts;
+    	if (externalContacts != null) {
+    		clonedExternalContacts = new LinkedHashMap<String, Contact>(externalContacts.size());
+    		for (Entry<String, Contact> entry : externalContacts.entrySet()) {
+    			clonedExternalContacts.put(entry.getKey(), (Contact) entry.getValue().clone());
+    		}
+    	} else {
+    		clonedExternalContacts = null;
+    	}    	
+
+    	return new Restaurant(id,
+    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null),    			
+    			created, modified, distributorId, chainId,
     			((title != null) ? new HashMap<String, String>(title) : null),
     			((description != null) ? new HashMap<String, String>(description) : null),
-    			((contact != null) ? (Contact)contact.clone() : null),
+    			((contact != null) ? (Contact)contact.clone() : null), clonedExternalContacts,
     			((address != null) ? (Address)address.clone() : null),
     			clonedMessages,
     			((colorScheme != null) ? (ColorScheme) colorScheme.clone() : null),
@@ -145,8 +157,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null), state,
-    			((labels != null) ? new HashSet<String>(labels) : null),
-    			((externalIds != null) ? new HashMap<String, String>(externalIds) : null), rank);
+    			((labels != null) ? new HashSet<String>(labels) : null), rank);
 	}
     
 
@@ -222,24 +233,45 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Set<String> labels = Collections.emptySet();
     
-    /**
-     * Map of externally-defined ids referring to this restaurant.
-     * For example, the restaurant-id in some external billing system.
-     * 
-     * Developers should use unique keys, e.g. "com.company.product".
-     */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> externalIds = Collections.emptyMap();
-    
     /** The restaurant's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Double rank;
+    
+    public static int compareRank(Double rank1, Double rank2) {
+		if (rank1 != null) {
+			return ((rank2 != null) ? -rank1.compareTo(rank2) : -1);
+		} else {
+			return ((rank2 == null) ? (0) : 1);
+		}
+    }
+    
+    public static int compareState(String state1, String state2) {
+    	return getStateRank(state1) - getStateRank(state2);
+    }
+    
+    private static Map<String, Integer> getStateRanksMap() {
+    	final Map<String, Integer> ranks = new HashMap<String, Integer>();
+    	ranks.put(STATE_OPERATIONAL, 0);
+    	ranks.put(STATE_INFO, 1);
+    	ranks.put(STATE_UNDER_CONSTRUCTION, 2);
+    	ranks.put(STATE_DEMO, 3);
+    	ranks.put(STATE_CLOSED, 4);
+    	return Collections.unmodifiableMap(ranks);
+    }
+    private static Map<String, Integer> STATE_RANKS = getStateRanksMap();
+    private static int getStateRank(String state) {
+    	if (state == null) {
+    		return Integer.MAX_VALUE;
+    	}
+    	final Integer rank = STATE_RANKS.get(state);
+    	return ((rank != null) ? rank.intValue() : Integer.MAX_VALUE);
+    }
 
 	public int compareTo(Restaurant other) {
-		if (rank != null) {
-			return ((other.rank != null) ? -rank.compareTo(other.rank) : -1);
-		} else {
-			return ((other.rank == null) ? (0) : 1);
+		int result = compareRank(rank, other.rank);
+		if (result == 0) {
+			result = compareState(state, other.state);
 		}
+		return result;
 	}
 }
