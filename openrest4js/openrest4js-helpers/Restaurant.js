@@ -3,6 +3,15 @@ openrest = openrest || {};
 openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 	var self = {};
 
+    self.getOneLineAddress = function(restaurant)
+    {
+        var s = restaurant.address.street+" "+restaurant.address.number+" "+restaurant.address.city;
+        if (restaurant.address.postalCode)
+        {
+            s += " "+restaurant.address.postalCode;
+        }
+        return s;
+    }
     self.getStatus = function(restaurant)
     {
         if (restaurant.inactive)
@@ -14,7 +23,8 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         now.setTimezone(restaurant.timezone);
         now.setTimestampToNow();
 
-        var util = new TimeWindowsIterator(now, restaurant.openTimes);
+        var times = restaurant.openTimes || {weekly:[], exceptions:[]};
+        var util = new TimeWindowsIterator(now, times);
         if (!util.hasNext())
         {
             return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
@@ -36,7 +46,8 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         now.setTimezone(restaurant.timezone);
         now.setTimestampToNow();
 
-        var util = new TimeWindowsIterator(now, restaurant.deliveryTimes);
+        var times = restaurant.deliveryTimes || {weekly:[], exceptions:[]};
+        var util = new TimeWindowsIterator(now, times);
         if (!util.hasNext())
         {
             return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
@@ -81,6 +92,27 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         var info = self.getDeliveryInfoWithMinCharge(data);
         if (typeof(info) == "undefined") return 0;
         return info.charge;
+    }
+
+    self.getMinMinPricedInfoContainingGecode = function(restaurant, geocode)
+    {
+        var best = undefined;
+
+        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        {
+            var deliveryInfo = restaurant.deliveryInfos[i];
+
+            if (deliveryInfo.type != "delivery") continue;
+            if (deliveryInfo.inactive) continue;
+            if ((best) && (best.minOrderPrice < deliveryInfo.minOrderPrice)) continue;
+
+            if (isInPolygon(deliveryInfo.area.polygon, geocode))
+            {
+                best = deliveryInfo;
+            }
+        }
+
+        return best;
     }
 
     self.getMaxDeliveryChargePossible = function(data)
@@ -182,6 +214,65 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         }
 
         return false;
+    }
+
+    function isInPolygon(pol, point)
+    {
+        var i, j;
+        var c = false;
+        var nvert = pol.length;
+        var lat = point.lat;
+        var lng = point.lng;
+    
+        for (i = 0 , j = nvert - 1 ; i < nvert ; j = i++)
+        {
+            var vertex1 = pol[i];
+            var vertex2 = pol[j];
+
+            if (vertex1.lng < lng && vertex2.lng >= lng || vertex2.lng < lng && vertex1.lng >= lng)  {
+                if (vertex1.lat + (lng - vertex1.lng) / (vertex2.lng - vertex1.lng) * (vertex2.lat - vertex1.lat) < lat) 
+                {
+                    c = !c;
+                }
+            }
+        }
+    
+        return c;
+    }
+
+    self.getDeliveryInfo = function(total, restaurant, geocode)
+    {
+        if (!geocode)
+        {
+            for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+            {
+                var deliveryInfo = restaurant.deliveryInfos[i];
+                if (deliveryInfo.type == "takeout") 
+                {
+                    return deliveryInfo;
+                }
+            }
+            return undefined;
+        }
+
+        var best = undefined;
+
+        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        {
+            var deliveryInfo = restaurant.deliveryInfos[i];
+
+            if (deliveryInfo.type != "delivery") continue;
+            if (deliveryInfo.inactive) continue;
+            if (total < deliveryInfo.minOrderPrice) continue;
+            if ((best) && (best.charge < deliveryInfo.charge)) continue;
+
+            if (isInPolygon(deliveryInfo.area.polygon, geocode))
+            {
+                best = deliveryInfo;
+            }
+        }
+
+        return best;
     }
 
 	return self;

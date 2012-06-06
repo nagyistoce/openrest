@@ -27,7 +27,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
 
         for (var i in charges)
         {
-            if (charges[i].isApplicable(order.orderItems, this.clubMember))
+            if (ChargeFromObj(charges[i]).isApplicable(order.orderItems, clubMember))
             {
                 res.push(charges[i]);
             }
@@ -49,7 +49,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var charges = self.getAllApplicableCharges(params);
         for (var i in charges)
         {
-            var charge = charges[i];
+            var charge = ChargeFromObj(charges[i]);
             if ((charge.type == CHARGE_TYPE_COUPON) || (charge.type == CHARGE_TYPE_CLUB_COUPON))
             {
                 price += charge.calculateAmount(orderItems, total);
