@@ -1,1 +1,1 @@
-java -jar ../tools/compiler.jar --js src/*.js --js_output_file=dist/openrest4js-client-1.1.0.js
+java -jar ../tools/compiler.jar --js src/*.js --js_output_file=dist/openrest4js-client.js
