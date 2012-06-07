@@ -53,6 +53,7 @@ Order.prototype.toOpenRestObj = function()
         if (this.clubMember) ret['clubMember'] = this.clubMember;
         if (this.log) ret['log'] = this.log;
         if (this.locale) ret['locale'] = this.locale;
+        if (this.ref) ret['ref'] = this.ref;
 
     return ret;
 }

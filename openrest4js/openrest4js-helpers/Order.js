@@ -25,12 +25,15 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var charges = params.charges;
         var clubMember = params.clubMember;
+        var tagMap = params.tagMap;
 
         var res = [];
 
         for (var i in charges)
         {
-            if (ChargeFromObj(charges[i]).isApplicable(order.orderItems, clubMember))
+            var charge = charges[i];
+            if (openrest.ChargeHelper.isApplicable({charge:charge, orderItems:order.orderItems, 
+                clubMember:clubMember, tagMap:tagMap}))
             {
                 res.push(charges[i]);
             }
@@ -44,6 +47,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var charges = params.charges;
         var withoutTax = params.withoutTax;
+        var tagMap = params.tagMap;
 
         var total = self.calculateTotalOrderWithoutCoupons(params);
         Ti.API.timestamp("OrderHelper.calculatTotalOrder >> W/o Coupons = "+total);
@@ -52,14 +56,18 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var charges = self.getAllApplicableCharges(params);
         for (var i in charges)
         {
-            var charge = ChargeFromObj(charges[i]);
+            var charge = charges[i];
             if ((charge.type == CHARGE_TYPE_COUPON) || (charge.type == CHARGE_TYPE_CLUB_COUPON))
             {
-                price += charge.calculateAmount(orderItems, total);
+                price += openrest.ChargeHelper.calculateAmount({charge:charge, 
+                    orderItems:order.orderItems, maxDiscount:total, extraCost:0,
+                      tagMap:tagMap});
             }
             if ((!withoutTax) && (charge.type == CHARGE_TYPE_TAX))
             {
-                price += charge.calculateAmount(orderItems, total);
+                price += openrest.ChargeHelper.calculateAmount({charge:charge, 
+                    orderItems:order.orderItems, maxDiscount:total, extraCost:0,
+                      tagMap:tagMap});
             }
         }
 

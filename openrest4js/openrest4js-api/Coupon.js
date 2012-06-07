@@ -14,7 +14,6 @@ function Coupon(type, title, description, maxNumAllowed, othersAllowed)
     this.type = type;
     this.title = title;
     this.description = description;
-    if ((!this.description) || (trimString(this.description[spiceI18n.locale]) == null)) delete this.description;
     this.maxNumAllowed = maxNumAllowed;
     if (typeof(this.maxNumAllowed) == "undefined") this.maxNumAllowed = 2147483647;
     this.othersAllowed = othersAllowed;
@@ -25,7 +24,7 @@ Coupon.prototype.toOpenRestObj = function()
 {
     var ret = dojo.fromJson(dojo.toJson(this));
 
-    if ((!ret.description) || (trimString(ret.description[spiceI18n.locale]) == null)) delete ret.description;
+    if (!('description' in ret)) delete ret.description;
     if (typeof(ret.maxNumAllowed) == "undefined") ret.maxNumAllowed = 2147483647;
     if (typeof(ret.othersAllowed) == "undefined") ret.othersAllowed = true;
 

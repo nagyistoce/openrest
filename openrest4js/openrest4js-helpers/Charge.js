@@ -1,113 +1,148 @@
-Charge.prototype.isApplicable = function(orderItems, clubMember)
-{
-    if ((this.type) && (this.type == CHARGE_TYPE_CLUB_COUPON))
+openrest = openrest || {};
+
+openrest.ChargeHelper = openrest.ChargeHelper || (function() {
+
+	var self = {};
+
+    self.isApplicable = function(params)
     {
-        if (typeof(clubMember) == "undefined") return false;
-        if (typeof(clubMember.clubIds) == "undefined") return false;
-        if (typeof(this.clubId) == "undefined") return false;
-        if (dojo.indexOf(clubMember.clubIds, this.clubId) == -1) return false;
-        return true;
-    }
+        var charge = params.charge;
+        var orderItems = params.orderItems;
+        var clubMember = params.clubMember;
 
-    if ((this.type) && (this.type == CHARGE_TYPE_COUPON))
-    {
-        return true;
-    }
-    
-    if ((this.type) && (this.type == CHARGE_TYPE_TAX))
-    {
-        return true;
-    }
-
-    // TODO: Others!!!
-    return false;
-}
-
-Charge.prototype.calculateAmount = function(orderItems, maxDiscount, extraCost)
-{
-    if (typeof(maxDiscount) == "undefined") maxDiscount = Number.MAX_VALUE;
-
-    if ((this.amountRuleType) && (this.amountRuleType == AMOUNT_RULE_TYPE_FIXED))
-    {
-        return Math.min(this.amountRule, maxDiscount);
-    }
-    else if ((this.amountRuleType) && (this.amountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
-    {
-        return Math.min(this.calculateChargeValuePercentage(orderItems, extraCost), maxDiscount);
-    }
-
-    // TODO: Variables!!
-
-    return 0;
-}
-
-Charge.prototype.calculateChargeValuePercentage = function(orderItems, extraCost)
-{
-    var percentage = parseInt(this.amountRule);
-    var total = 0;
-    if (typeof(orderItems) != "undefined")
-    {
-        for (var i in orderItems)
+        if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))
         {
-            var item = orderItems[i];
-            if (this.isApplicableItem(item.itemId))
+            if (typeof(clubMember) == "undefined") return false;
+            if (typeof(clubMember.clubIds) == "undefined") return false;
+            if (typeof(charge.clubId) == "undefined") return false;
+            if (dojo.indexOf(clubMember.clubIds, charge.clubId) == -1) return false;
+            return true;
+        }
+
+        if ((charge.type) && (charge.type == CHARGE_TYPE_COUPON))
+        {
+            return true;
+        }
+    
+        if ((charge.type) && (charge.type == CHARGE_TYPE_TAX))
+        {
+            return true;
+        }
+
+        // TODO: Others!!!
+        return false;
+    }
+
+    self.calculateAmount = function(params)
+    {
+        var charge = params.charge;
+        var orderItems = params.orderItems;
+        var maxDiscount = params.maxDiscount;
+        var extraCost = params.extraCost;
+        var tagMap = params.tagMap;
+
+        if (typeof(maxDiscount) == "undefined") maxDiscount = Number.MAX_VALUE;
+
+        if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_FIXED))
+        {
+            return Math.min(charge.amountRule, maxDiscount);
+        }
+        else if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
+        {
+            return Math.min(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap}), maxDiscount);
+        }
+
+        // TODO: Variables!!
+
+        return 0;
+    }
+
+    self.calculateChargeValuePercentage = function(params)
+    {
+        var charge = params.charge;
+        var orderItems = params.orderItems;
+        var extraCost = params.extraCost;
+        var tagMap = params.tagMap;
+
+        var percentage = parseInt(charge.amountRule);
+        var total = 0;
+        if (typeof(orderItems) != "undefined")
+        {
+            for (var i in orderItems)
             {
-                total += item.getTotalPrice() * percentage / 10000;
+                var item = orderItems[i];
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                {
+                    total += item.gTotalPrice() * percentage / 10000;
+                }
             }
         }
+
+        if (extraCost)
+        {
+            total += extraCost * percentage / 10000;
+        }
+
+        return parseInt(total);
     }
 
-    if (extraCost)
+    self.isApplicableItem = function(params)
     {
-        total += extraCost * percentage / 10000;
+        var charge = params.charge;
+        var itemId = params.itemId;
+        var tagMap = params.tagMap;
+
+        if (typeof(charge.tagId) == "undefined") return true;
+
+        var items = tagMap[charge.tagId].itemIds;
+
+        if (items.indexOf(itemId) == -1)
+        {
+            return (charge.tagMode == TAG_MODE_EXCLUDE);
+        }
+        return (charge.tagMode == TAG_MODE_INCLUDE);
+
+
     }
 
-    return parseInt(total);
-}
-
-Charge.prototype.isApplicableItem = function(itemId)
-{
-    if (typeof(this.tagId) == "undefined") return true;
-        
-    var items = this.restaurantClient.getTagById(this.tagId).itemIds;
-
-    if (dojo.indexOf(items, itemId) == -1)
+    self.getTitle = function(params)
     {
-        return (this.tagMode == TAG_MODE_EXCLUDE);
+        var charge = params.charge;
+        var i18n = params.i18n;
+
+        if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))
+        {
+            return charge.coupon.title[i18n.getLocale()];
+        }
+        if ((charge.type) && (charge.type == CHARGE_TYPE_COUPON))
+        {
+            return charge.coupon.title[i18n.getLocale()];
+        }
+        if ((charge.type) && (charge.type == CHARGE_TYPE_TAX))
+        {
+            return i18n.get("OrderConfTax");
+        }
+
+        return "";
     }
-    return (this.tagMode == TAG_MODE_INCLUDE);
-    
 
-}
-
-Charge.prototype.getTitle = function()
-{
-    if ((this.type) && (this.type == CHARGE_TYPE_CLUB_COUPON))
+    self.getDescription = function(params)
     {
-        return this.coupon.title[spiceI18n.locale];
-    }
-    if ((this.type) && (this.type == CHARGE_TYPE_COUPON))
-    {
-        return this.coupon.title[spiceI18n.locale];
-    }
-    if ((this.type) && (this.type == CHARGE_TYPE_TAX))
-    {
-        return SPICE_STR("${OrderConfTax}");
-    }
+        var charge = params.charge;
+        var i18n = params.i18n;
 
-    return "";
-}
+        if ((charge.type) && ((charge.type == CHARGE_TYPE_CLUB_COUPON) || (charge.type == CHARGE_TYPE_COUPON)))
+        {
+            var ret = "";
 
-Charge.prototype.getDescription = function()
-{
-    if ((this.type) && ((this.type == CHARGE_TYPE_CLUB_COUPON) || (this.type == CHARGE_TYPE_COUPON)))
-    {
-        var ret = "";
-        
-        if (this.coupon.description) ret = this.coupon.description[spiceI18n.locale];
+            if (charge.coupon.description) ret = charge.coupon.description[i18n.getLocale()];
 
-        return ret;
+            return ret;
+        }
+
+        return undefined;
     }
 
-    return undefined;
-}
+    return self;
+}());
+
