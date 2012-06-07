@@ -6,9 +6,12 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
     self.calculateTotalOrderWithoutCoupons = function(params)
     {
         var order = params.order;
+        if (!order) return 0;
+
+        var orderItems = params.order.orderItems || [];
 
         var total = 0;
-        for (var i = 0 ; i < order.orderItems.length; i++) 
+        for (var i = 0 ; i < orderItems.length; i++) 
         {
             var orderItem = order.orderItems[i];
             total += orderItem.gTotalPrice();

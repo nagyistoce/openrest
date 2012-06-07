@@ -14,7 +14,7 @@ OrderItem.prototype.gTotalPrice = function()
     }
 
     var count = this.count;
-    if (!count) {
+    if (typeof(count) === "undefined") {
         count = 1;
     }
     price = price * count;
