@@ -3,8 +3,10 @@ package com.googlecode.openrest.v1_1;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -13,11 +15,16 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable {
     /**
+     * The order has been submitted by the user, and awaits her final approval.
+     * The restaurant is not made of the order.
+     */
+    public static final String ORDER_STATUS_SUBMITTED = "submitted";
+    /**
      * The restaurant required further confirmation before the order is submitted
      * (e.g. validating the user's phone number by SMS).
      */
     public static final String ORDER_STATUS_PENDING = "pending";
-    /** The order has been submitted, and awaits processing by the restaurant. */
+    /** The order has been approved by the user, and awaits processing by the restaurant. */
     public static final String ORDER_STATUS_NEW = "new";
     /** The order has been processed and accepted by the restaurant. */
     public static final String ORDER_STATUS_ACCEPTED = "accepted";
@@ -26,17 +33,18 @@ public class Order implements Serializable {
     
     /** All known order statuses. */
     public static final Set<String> ALL_ORDER_STATUSES = new HashSet<String>(Arrays.asList(new String[] {
-    		ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
+    		ORDER_STATUS_SUBMITTED, ORDER_STATUS_PENDING, ORDER_STATUS_NEW, ORDER_STATUS_ACCEPTED, ORDER_STATUS_CANCELLED
     }));
 
     /** Constructs a previously submitted order from persisted data. */
-    public Order(String id, String restaurantId, String locale, List<OrderItem> orderItems, String comment,
-            Integer price, Delivery delivery, Contact contact, List<Payment> payments,
+    public Order(String id, Map<String, String> externalIds, String restaurantId, String locale, List<OrderItem> orderItems,
+    		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
             User user, ClubMember clubMember, String status, String shareToken,
-            String affiliate, String ref, List<LogEntry> log) {
+            String affiliate, String ref, Boolean legacyHierarchy, List<LogEntry> log) {
 
         this.id = id;
+        this.externalIds = externalIds;
         this.restaurantId = restaurantId;
         this.locale = locale;
         this.orderItems = orderItems;
@@ -55,16 +63,18 @@ public class Order implements Serializable {
         this.shareToken = shareToken;
         this.affiliate = affiliate;
         this.ref = ref;
+        this.legacyHierarchy = legacyHierarchy;
         this.log = log;
     }
 
     /** Constructs a new order to be submitted. */
     public Order(String locale, List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref) {
-        this(null, null, locale, orderItems, comment, price, delivery, contact, payments,
+            Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref,
+            Boolean legacyHierarchy) {
+        this(null, new HashMap<String, String>(), null, locale, orderItems, comment, price, delivery, contact, payments,
         		takeoutPacks, charges, null, null, null, clubMember, null, null,
-        		affiliate, ref, Collections.<LogEntry>emptyList());
+        		affiliate, ref, legacyHierarchy, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
@@ -81,6 +91,9 @@ public class Order implements Serializable {
     /** The order's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> externalIds = new HashMap<String, String>();
 
     /** The restaurant's unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -99,8 +112,8 @@ public class Order implements Serializable {
     public String comment;
 
     /** Total price of the order. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Integer price = 0;
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Integer price;
 
     /* Delivery method. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -163,9 +176,20 @@ public class Order implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String ref;
     
+    /**
+     * Whether or not the order was submitted and should be displayed with a
+     * legacy "2-level hierarchy".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean legacyHierarchy = Boolean.FALSE;
+    
     /** Change log for this order. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<LogEntry> log = Collections.emptyList();
+    
+    /** The order in HTML format. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String html;
     
     private static final long serialVersionUID = 1L;
 }

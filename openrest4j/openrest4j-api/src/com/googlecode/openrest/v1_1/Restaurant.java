@@ -53,7 +53,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
             String link, String domain, Set<String> altDomains,
             String picture, String icon, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Set<String> labels, Double rank) {
+            String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
     	super(id, externalIds, created, modified, title, description, locale, locales, colorScheme,
     			contact, externalContacts, address, timezone, link, domain, altDomains, apps, seo, properties,
     			picture, icon, noImagePicture);
@@ -72,7 +72,8 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.state = state;
-        this.labels = labels;
+        this.features = features;
+        this.legacyHierarchy = legacyHierarchy;
         this.rank = rank;
     }
 
@@ -157,7 +158,8 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null), state,
-    			((labels != null) ? new HashSet<String>(labels) : null), rank);
+    			((features != null) ? new HashMap<String, Double>(features) : null),
+    			legacyHierarchy, rank);
 	}
     
 
@@ -229,9 +231,22 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public String state = STATE_OPERATIONAL;
     
-    /** The restaurant's labels, e.g. "chinese", "kosher". */
+    /**
+     * Maps feature-IDs to their values. The values correspond to how strongly the feature
+     * is relevant for the restaurant, which influences its position in search results.
+     * 
+     * For example, a restaurant with "hamburger" feature = 3.7 will appear before a
+     * restaurant with the same feature = 2.3 when customers search for hamburgers.
+     */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Set<String> labels = Collections.emptySet();
+    public Map<String, Double> features = new HashMap<String, Double>();
+    
+    /**
+     * Whether or not the restaurant's orders should be submitted / displayed
+     * with a legacy "2-level hierarchy".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean legacyHierarchy = Boolean.FALSE;
     
     /** The restaurant's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -266,7 +281,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>, 
     	final Integer rank = STATE_RANKS.get(state);
     	return ((rank != null) ? rank.intValue() : Integer.MAX_VALUE);
     }
-
+    
 	public int compareTo(Restaurant other) {
 		int result = compareRank(rank, other.rank);
 		if (result == 0) {
