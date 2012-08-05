@@ -2,6 +2,8 @@ package com.googlecode.openrest.v1_1;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -9,10 +11,21 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DateTimeWindow implements Serializable, Cloneable {
-	public DateTimeWindow(Date start, Date end, Boolean available) {
+    private static final long serialVersionUID = 1L;
+    
+	/** Generic reason, e.g. item out of stock. */
+	public static final String REASON_TEMPORARY = "temporary";
+	
+	public DateTimeWindow(Date start, Date end, Boolean available, String reason, Map<String, String> comment) {
         this.start = start;
         this.end = end;
         this.available = available;
+        this.reason = reason;
+        this.comment = comment;
+    }
+	
+	public DateTimeWindow(Date start, Date end, Boolean available) {
+		this(start, end, available, null, new HashMap<String, String>());
     }
     
     public DateTimeWindow(Calendar start, Calendar end, Boolean available) {
@@ -47,5 +60,11 @@ public class DateTimeWindow implements Serializable, Cloneable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Boolean available;
     
-    private static final long serialVersionUID = 1L;
+    /** See possible reasons above. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String reason;
+    
+    /** Additional reason information (localized free-text). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> comment = new HashMap<String, String>();
 }

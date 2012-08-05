@@ -33,7 +33,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = GetAppMappedObjectRequest.class, name = "get_app_mapped_object"),
 	@Type(value = GetBlobRequest.class, name = "get_blob"),
 	@Type(value = SetBlobRequest.class, name = "set_blob"),
-	@Type(value = GetRolesRequest.class, name = "get_roles")
+	@Type(value = GetRolesRequest.class, name = "get_roles"),
+	@Type(value = SetAvailabilityExceptionsRequest.class, name = "set_availability_exceptions")
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;

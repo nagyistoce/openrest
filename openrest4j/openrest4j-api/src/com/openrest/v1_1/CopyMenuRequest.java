@@ -10,10 +10,11 @@ public class CopyMenuRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public CopyMenuRequest() {}
     
-    public CopyMenuRequest(String accessToken, String fromRestaurantId, String toRestaurantId) {
+    public CopyMenuRequest(String accessToken, String fromRestaurantId, String toRestaurantId, Boolean optimize) {
     	this.accessToken = accessToken;
     	this.fromRestaurantId = fromRestaurantId;
     	this.toRestaurantId = toRestaurantId;
+    	this.optimize = optimize;
     }
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -24,4 +25,7 @@ public class CopyMenuRequest extends Request {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String toRestaurantId;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean optimize = Boolean.FALSE;
 }

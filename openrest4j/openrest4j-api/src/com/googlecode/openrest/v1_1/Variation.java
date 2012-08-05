@@ -19,10 +19,15 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class Variation implements Serializable {
     public static final String VARIATION_DISPLAY_TYPE_DIFF = "diff";
     public static final String VARIATION_DISPLAY_TYPE_CHOICE = "choice";
+    /**
+     * Variations that are not displayed to the customer, just to the restaurant.
+     * Similar to a hidden field in an HTML form.
+     */
+    public static final String VARIATION_DISPLAY_TYPE_HIDDEN = "hidden";
     
     /** All known variation display types. */
     public static final Set<String> ALL_VARIATION_DISPLAY_TYPES = new HashSet<String>(
-    		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE));
+    		Arrays.asList(VARIATION_DISPLAY_TYPE_DIFF, VARIATION_DISPLAY_TYPE_CHOICE, VARIATION_DISPLAY_TYPE_HIDDEN));
 
     public Variation(Map<String, String> title, String tagId, Integer minNumAllowed,
     		Integer maxNumAllowed, Map<String, Integer> prices, Set<String> defaults, String displayType) {
