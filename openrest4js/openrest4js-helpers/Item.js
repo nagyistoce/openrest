@@ -34,31 +34,12 @@ Item.prototype.doesFitOrderMinimum = function(orderCost)
 
 Item.prototype.getStatus = function(timezone)
 {
-    if (this.inactive)
-    {
-        return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
-    }
-
-    var now = new timezoneJS.Date();
-    now.setTimezone(timezone);
-    now.setTimestampToNow();
-
-    var util = new TimeWindowsIterator(now, this.availability);
-    if (!util.hasNext())
-    {
-        console.log("TimeWindowsIterator >> item availability hasNext returned false!");
-        return {'status': OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
-    }
-
-    var availability = util.next();
-    if (typeof(availability.until) == "undefined") availability.until = Number.MAX_VALUE;
-    return availability;
+    return openrest.ItemHelper.getStatus(this, timezone);
 }
 
 Item.prototype.getUrl = function(local, distributorId)
 {
-    var base = getBaseSpiceUrl(distributorId);
-    return base+"/restaurants/"+this.restaurantId+"/items/"+this.id;
+    return openrest.ItemHelper.getUrl(this, local, distributorId);
 }
 
 Item.prototype.getPriceRange = function(tagMap)
@@ -136,3 +117,41 @@ Item.prototype.getMinimumPriceRange = function(variation, tagMap)
             return [0];
     }
 }
+
+var openrest = openrest || {};
+
+openrest.ItemHelper = openrest.ItemHelper || (function() {
+	var self = {};
+
+    self.getStatus = function(item, timezone)
+    {
+        if (item.inactive)
+        {
+            return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
+        }
+
+        var now = new timezoneJS.Date();
+        now.setTimezone(timezone);
+        now.setTimestampToNow();
+
+        var util = new TimeWindowsIterator(now, item.availability);
+        if (!util.hasNext())
+        {
+            console.log("TimeWindowsIterator >> item availability hasNext returned false!");
+            return {'status': OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
+        }
+
+        var availability = util.next();
+        if (typeof(availability.until) == "undefined") availability.until = Number.MAX_VALUE;
+        return availability;
+    };
+
+    self.getUrl = function(item, local, distributorId)
+    {
+        var base = getBaseSpiceUrl(distributorId);
+        return base+"/restaurants/"+item.restaurantId+"/items/"+item.id;
+    };
+
+	return self;
+}());
+

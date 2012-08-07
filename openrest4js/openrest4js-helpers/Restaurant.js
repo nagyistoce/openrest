@@ -91,6 +91,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var info = self.getDeliveryInfoWithMinCharge(data);
         if (typeof(info) == "undefined") return 0;
+        if (typeof(info.charge) == "undefined") return 0;
         return info.charge;
     }
 

@@ -37,7 +37,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
     {
         var charge = params.charge;
         var orderItems = params.orderItems;
-        var maxDiscount = params.maxDiscount;
+        var maxDiscount = params.maxDiscount || 0;
         var extraCost = params.extraCost;
         var tagMap = params.tagMap;
 

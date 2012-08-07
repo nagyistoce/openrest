@@ -9,7 +9,7 @@ function OrderItemFromObj(data)
         }
     }
     return new OrderItem(data.itemId, data.price, data.variations, choices, 
-            data.comment, data.count);
+            data.comment, typeof(data.count) === "undefined" ? 1 : data.count);
 }
 
 function OrderItem(itemId, price, variations, variationsChoices, comment, count)
