@@ -1,7 +1,7 @@
 function AvailabilityFromObj(data)
 {
     return new Availability(ORJSArrayFromJsonArray(data.weekly, WeeklyTimeWindowFromObj), 
-            ORJSArrayFromJsonArray(data.exceptions, DateTimeWindow));
+            ORJSArrayFromJsonArray(data.exceptions, DateTimeWindowFromObj));
 }
 
 function Availability(weekly, exceptions)

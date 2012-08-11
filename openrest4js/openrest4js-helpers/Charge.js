@@ -96,11 +96,13 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
         var items = tagMap[charge.tagId].itemIds;
 
+        charge.tagMode = charge.tagMode || TAG_MODE_INCLUDE;
+
         if (items.indexOf(itemId) == -1)
         {
-            return (charge.tagMode == TAG_MODE_EXCLUDE);
+            return (charge.tagMode === TAG_MODE_EXCLUDE);
         }
-        return (charge.tagMode == TAG_MODE_INCLUDE);
+        return (charge.tagMode === TAG_MODE_INCLUDE);
 
 
     }
