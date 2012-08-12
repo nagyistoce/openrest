@@ -21,7 +21,9 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = Chain.class, name = "chain"),
 	@Type(value = Distributor.class, name = "distributor"),
 	@Type(value = Portal.class, name = "portal"),
-	@Type(value = RestaurantFullInfo.class, name = "restaurant_full")
+	@Type(value = RestaurantFullInfo.class, name = "restaurant_full"),
+	@Type(value = ChainFullInfo.class, name = "chain_full"),
+	@Type(value = PortalFullInfo.class, name = "portal_full")
 })
 public abstract class OpenrestObject implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -31,10 +31,13 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = RegisterForEventRequest.class, name = "register_event"),
 	@Type(value = SetAppMappingRequest.class, name = "set_app_mapping"),
 	@Type(value = GetAppMappedObjectRequest.class, name = "get_app_mapped_object"),
+	@Type(value = SetDomainMappingRequest.class, name = "set_domain_mapping"),
+	@Type(value = GetDomainMappedObjectRequest.class, name = "get_domain_mapped_object"),
 	@Type(value = GetBlobRequest.class, name = "get_blob"),
 	@Type(value = SetBlobRequest.class, name = "set_blob"),
 	@Type(value = GetRolesRequest.class, name = "get_roles"),
-	@Type(value = SetAvailabilityExceptionsRequest.class, name = "set_availability_exceptions")
+	@Type(value = SetAvailabilityExceptionsRequest.class, name = "set_availability_exceptions"),
+	@Type(value = QueryEmailRequest.class, name = "query_email"),
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;

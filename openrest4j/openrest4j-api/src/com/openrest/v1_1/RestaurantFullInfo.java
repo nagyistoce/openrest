@@ -14,11 +14,12 @@ public class RestaurantFullInfo extends OpenrestObject {
     private static final long serialVersionUID = 1L;
     
     public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges,
-    		Distributor distributor, List<String> fbAdmins) {
+    		Chain chain, Distributor distributor, List<String> fbAdmins) {
     	this.restaurant = restaurant;
     	this.menu = menu;
     	this.charges = charges;
     	this.distributor = distributor;
+    	this.chain = chain;
     	this.fbAdmins = fbAdmins;
     }
     
@@ -40,6 +41,10 @@ public class RestaurantFullInfo extends OpenrestObject {
     /** The distributor. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Distributor distributor;
+    
+    /** The chain. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Chain chain;
     
     /** The restaurant's Facebook admins. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)

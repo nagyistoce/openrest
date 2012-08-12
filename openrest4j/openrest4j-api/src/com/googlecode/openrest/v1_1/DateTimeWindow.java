@@ -40,7 +40,9 @@ public class DateTimeWindow implements Serializable, Cloneable {
     	return new DateTimeWindow(
     			((start != null) ? (Date) start.clone() : null),
     			((end != null) ? (Date) end.clone() : null),
-    			available);
+    			available,
+    			reason,
+    			((comment != null) ? new HashMap<String, String>(comment) : null));
 	}
 
     public Calendar start(TimeZone tz) {

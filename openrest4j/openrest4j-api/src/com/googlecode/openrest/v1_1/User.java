@@ -11,6 +11,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     public User(String id, String ipAddress, String fwdIpAddresses) {
         this.id = id;
         this.ipAddress = ipAddress;
@@ -23,6 +25,10 @@ public class User implements Serializable {
     /** The user's Facebook id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String id;
+    
+    /** Whether the user's Facebook id is inferred (as opposed to verified). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean idIsInferred = Boolean.FALSE;
 
     /**
      * The immediate client's IP address. If the real client is separated from the
@@ -37,6 +43,4 @@ public class User implements Serializable {
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String fwdIpAddresses;
-
-    private static final long serialVersionUID = 1L;
 }

@@ -40,7 +40,8 @@ public class Status implements Serializable, Cloneable {
     
 	@Override
 	public Object clone() {
-		return new Status(status, until());
+		return new Status(status, until(), reason,
+				((comment != null) ? new HashMap<String, String>(comment) : null));
 	}
 
     public java.util.Date until() {
