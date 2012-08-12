@@ -2,7 +2,7 @@ function DateTimeWindowFromObj(data)
 {
     return new DateTimeWindow(data.start ? OpenrestDateFromObj(data.start) : undefined,
             data.end ? OpenrestDateFromObj(data.end) : undefined,
-            data.available || true, data.reason, data.comment);
+            typeof(data.available) === "undefined" ? true : data.available, data.reason, data.comment);
 }
 
 function DateTimeWindow(start, end, available, reason, comment)
