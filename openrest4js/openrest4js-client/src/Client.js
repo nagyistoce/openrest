@@ -7,6 +7,8 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 	
 	var self = {};
 	
+	var protocol = new openrest.Protocol();
+	
 	self.getAccessToken = function() {
 		return accessToken;
 	};
@@ -19,7 +21,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/me/roles/" + query.toString(),
 			callback : params.callback
 		});
@@ -29,7 +31,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/me/info" + query.toString(),
 			callback : params.callback
 		});
@@ -39,7 +41,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.set({
+		protocol.set({
 			url : apiUrl + "/me/info" + query.toString(),
             obj: params.obj,
 			callback : params.callback
@@ -50,7 +52,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/me/payments/" + query.toString(),
 			callback : params.callback
 		});
@@ -61,7 +63,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.remove({
+		protocol.remove({
 			url : apiUrl + "/me/payments/"+params.id + query.toString(),
 			callback : params.callback
 		});
@@ -71,7 +73,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 		var query = new openrest.QueryStringBuilder(params.params);
 		query.append("access_token", accessToken);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/orders/" + query.toString(),
 			callback : params.callback
 		});
@@ -87,7 +89,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 	self.getRestaurants = function(params) {
 		var query = new openrest.QueryStringBuilder(params.params);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/restaurants/" + query.toString(),
 			callback : params.callback
 		});
@@ -96,7 +98,7 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 	self.search = function(params) {
 		var query = new openrest.QueryStringBuilder(params.params);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/search" + query.toString(),
 			callback : params.callback
 		});
@@ -105,18 +107,18 @@ openrest.Client = openrest.Client || function(params) { return (function(params)
 	self.getRestaurantsFull = function(params) {
 		var query = new openrest.QueryStringBuilder(params.params);
 		
-		openrest.Protocol.get({
+		protocol.get({
 			url : apiUrl + "/restaurants.full/" + query.toString(),
 			callback : params.callback
 		});
 	};
 	
 	self.request = function(params) {
-		var params = params || {};
+		params = params || {};
 		var request = params.request || {};
 		var callback = params.callback || function(e){};
 		
-		openrest.Protocol.add({
+		protocol.add({
 			url : apiUrl,
 			obj : request,
 			callback : callback
