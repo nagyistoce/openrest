@@ -2,15 +2,20 @@ package com.openrest.v1_1;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpContent;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpResponse;
+import com.google.api.client.http.InputStreamContent;
 
 /**
  * A client for a RESTful web-service that supports JSON representations.
@@ -21,157 +26,103 @@ public class RestJsonClient {
     
     private final Integer connectTimeout;
     private final Integer readTimeout;
+    private final HttpRequestFactory requestFactory;
 
-    public RestJsonClient(Integer connectTimeout, Integer readTimeout) {
+    public RestJsonClient(HttpRequestFactory requestFactory, Integer connectTimeout, Integer readTimeout) {
+    	this.requestFactory = requestFactory;
     	this.connectTimeout = connectTimeout;
     	this.readTimeout = readTimeout;
     }
     
-    public RestJsonClient() {
-    	this(null, null);
+    public RestJsonClient(HttpRequestFactory requestFactory) {
+    	this(requestFactory, null, null);
     }
+    
 
-    public <T> T get(URL url, TypeReference<T> responseType) throws IOException {
-        return go(url, "GET", null, responseType);
-    }
-
-    public <T> T put(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
-        return go(url, "PUT", requestObj, responseType);
-    }
-
-    public <T> T post(URL url, Object requestObj, TypeReference<T> responseType) throws IOException {
-        return go(url, "POST", requestObj, responseType);
-    }
-
-    public <T> T delete(URL url, TypeReference<T> responseType) throws IOException {
-        return go(url, "DELETE", null, responseType);
-    }
-
-    public <T> Image getImage(URL url, TypeReference<T> responseType) throws IOException {
-        final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    public <T> T post(String url, Object requestObj, TypeReference<T> responseType) throws IOException {
+    	final HttpContent content;
+    	final ByteArrayInputStream bais = new ByteArrayInputStream(mapper.writeValueAsString(requestObj).getBytes("UTF-8"));
+    	try {
+    		content = new InputStreamContent("application/json", bais);
+    	} finally {
+    		bais.close();
+    	}
+    	
+    	final HttpRequest request = requestFactory.buildPostRequest(new GenericUrl(url), content);
         if (connectTimeout != null) {
-        	conn.setConnectTimeout(connectTimeout.intValue());
+        	request.setConnectTimeout(connectTimeout.intValue());
         }
         if (readTimeout != null) {
-        	conn.setReadTimeout(readTimeout);
+        	request.setReadTimeout(readTimeout);
         }
-        conn.setRequestMethod("GET");
-        conn.connect();
+        request.getHeaders().setAccept("application/json");
 
-        return parseImageResponse(conn, responseType);
-
-        // Avoid conn.disconnect() so the underlying socket can be reused
-    }
-
-    public <T> T put(URL url, String imageFilename, Image image, TypeReference<T> responseType) throws IOException {
-        final String boundary = Long.toHexString(System.currentTimeMillis());
-
-        final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        if (connectTimeout != null) {
-        	conn.setConnectTimeout(connectTimeout.intValue());
-        }
-        if (readTimeout != null) {
-        	conn.setReadTimeout(readTimeout);
-        }
-        conn.setRequestMethod("PUT");
-        conn.setDoOutput(true);
-        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
-        conn.connect();
-
-        final PrintStream printer = new PrintStream(conn.getOutputStream(), false, "UTF-8");
+        request.setThrowExceptionOnExecuteError(false);
+        final HttpResponse response = request.execute();
         try {
-            // Send binary file.
-            printer.println("--" + boundary);
-            printer.println("Content-Disposition: form-data; name=\"source\"; filename=\"" + imageFilename + "\"");
-            printer.println("Content-Type: " + image.contentType());
-            printer.println("Content-Transfer-Encoding: binary");
-            printer.println();
-            printer.write(image.content());
-            printer.println();
-
-            // End of multipart/form-data.
-            printer.println("--" + boundary + "--");
+            return parseJsonResponse(response, responseType);
         } finally {
-            printer.close();
+        	response.ignore();
         }
-
-        return parseJsonResponse(conn, responseType);
-        
-        // Avoid conn.disconnect() so the underlying socket can be reused
     }
 
-    private <T> T go(URL url, String method, Object requestObj, TypeReference<T> responseType) throws IOException {
-        final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    public <T> Image getImage(String url, TypeReference<T> responseType) throws IOException {
+		final HttpRequest request = requestFactory.buildGetRequest(new GenericUrl(url));
         if (connectTimeout != null) {
-        	conn.setConnectTimeout(connectTimeout.intValue());
+        	request.setConnectTimeout(connectTimeout.intValue());
         }
         if (readTimeout != null) {
-        	conn.setReadTimeout(readTimeout);
-        }
-        conn.setRequestMethod(method);
-        conn.setRequestProperty("Accept", "application/json");
-        if (requestObj != null) {
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        }
-        conn.connect();
-
-        if (requestObj != null) {
-            final OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
-            try {
-                mapper.writeValue(writer, requestObj);
-            } finally {
-                writer.close();
-            }
+        	request.setReadTimeout(readTimeout);
         }
 
-        return parseJsonResponse(conn, responseType);
-
-        // Avoid conn.disconnect() so the underlying socket can be reused
-    }
-
-    private static <T> T parseJsonResponse(HttpURLConnection conn, TypeReference<T> responseType) throws IOException {
-        final int httpStatusCode = conn.getResponseCode();
-        if ((httpStatusCode / 100) == 2) { // 2xx status codes
-            final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-            try {
-                return streamToObject(br, responseType);
-            } finally {
-                br.close();
-            }
-        } else {
-            final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
-            try {
-                throw new RestJsonHttpException(httpStatusCode, streamToObject(br, responseType));
-            } finally {
-                br.close();
-            }
+        request.setThrowExceptionOnExecuteError(false);
+        final HttpResponse response = request.execute();
+        try {
+            return parseImageResponse(response, responseType);
+        } finally {
+        	response.ignore();
         }
     }
 
-    private static <T> Image parseImageResponse(HttpURLConnection conn, TypeReference<T> responseType) throws IOException {
-        final int httpStatusCode = conn.getResponseCode();
-        if ((httpStatusCode / 100) == 2) { // 2xx status codes
-            final String contentType = conn.getContentType();
-            final byte[] content = new byte[conn.getContentLength()];
-
-            final DataInputStream dis = new DataInputStream(new BufferedInputStream(conn.getInputStream()));
+    private static <T> T parseJsonResponse(HttpResponse response, TypeReference<T> responseType) throws IOException {
+    	if (!response.isSuccessStatusCode()) {
+            final BufferedReader br = new BufferedReader(new InputStreamReader(response.getContent(), "UTF-8"));
             try {
-                dis.readFully(content);
-            } finally {
-                dis.close();
-            }
-
-            return new Image(contentType, content);
-            
-        } else {
-            final BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "UTF-8"));
-            try {
-                throw new RestJsonHttpException(httpStatusCode, streamToObject(br, responseType));
+                throw new RestJsonHttpException(response.getStatusCode(), streamToObject(br, responseType));
             } finally {
                 br.close();
             }
+    	}
+    	
+        final BufferedReader br = new BufferedReader(new InputStreamReader(response.getContent(), "UTF-8"));
+        try {
+            return streamToObject(br, responseType);
+        } finally {
+            br.close();
         }
+    }
+
+    private static <T> Image parseImageResponse(HttpResponse response, TypeReference<T> responseType) throws IOException {
+    	if (!response.isSuccessStatusCode()) {
+            final BufferedReader br = new BufferedReader(new InputStreamReader(response.getContent(), "UTF-8"));
+            try {
+                throw new RestJsonHttpException(response.getStatusCode(), streamToObject(br, responseType));
+            } finally {
+                br.close();
+            }
+    	}
+    	
+        final String contentType = response.getContentType();
+        final byte[] content = new byte[response.getHeaders().getContentLength().intValue()];
+
+        final DataInputStream dis = new DataInputStream(new BufferedInputStream(response.getContent()));
+        try {
+            dis.readFully(content);
+        } finally {
+            dis.close();
+        }
+
+        return new Image(contentType, content);
     }
 
     private static <T> T streamToObject(BufferedReader br, TypeReference<T> responseType) throws IOException {

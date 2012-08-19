@@ -5,5 +5,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/openrest4j-api"/>
 	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.2.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.2.jar"/>
+	<classpathentry kind="lib" path="lib/google-http-client-1.10.3-beta.jar"/>
+	<classpathentry kind="lib" path="lib/guava-13.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

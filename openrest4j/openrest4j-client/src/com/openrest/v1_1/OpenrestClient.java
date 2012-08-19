@@ -1,10 +1,10 @@
 package com.openrest.v1_1;
 
 import java.io.IOException;
-import java.net.URL;
 
 import org.codehaus.jackson.type.TypeReference;
 
+import com.google.api.client.http.HttpRequestFactory;
 import com.googlecode.openrest.v1_1.OpenrestException;
 import com.googlecode.openrest.v1_1.Response;
 
@@ -13,16 +13,16 @@ import com.googlecode.openrest.v1_1.Response;
  * @author DL
  */
 public class OpenrestClient {
-    private final URL apiUrl;
+    private final String apiUrl;
     private final OpenrestProtocol protocol;
     
-    public OpenrestClient(URL apiUrl, Integer connectTimeout, Integer readTimeout) {
+    public OpenrestClient(HttpRequestFactory requestFactory, String apiUrl, Integer connectTimeout, Integer readTimeout) {
         this.apiUrl = apiUrl;
-        protocol = new OpenrestProtocol(connectTimeout, readTimeout);
+        protocol = new OpenrestProtocol(requestFactory, connectTimeout, readTimeout);
     }
     
-    public OpenrestClient(URL apiUrl) {
-        this(apiUrl, null, null);
+    public OpenrestClient(HttpRequestFactory requestFactory, String apiUrl) {
+        this(requestFactory, apiUrl, null, null);
     }
     
     public <T> T request(Request request, TypeReference<Response<T>> responseType) throws IOException, OpenrestException {
