@@ -38,6 +38,11 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = GetRolesRequest.class, name = "get_roles"),
 	@Type(value = SetAvailabilityExceptionsRequest.class, name = "set_availability_exceptions"),
 	@Type(value = QueryEmailRequest.class, name = "query_email"),
+	@Type(value = DeferredRequest.class, name = "deferred_request"),
+	@Type(value = SetItemRequest.class, name = "set_item"),
+	@Type(value = GetStatsRequest.class, name = "get_stats"),
+	@Type(value = GetStaffRequest.class, name = "get_staff"),
+	@Type(value = SetStaffRequest.class, name = "set_staff")
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;

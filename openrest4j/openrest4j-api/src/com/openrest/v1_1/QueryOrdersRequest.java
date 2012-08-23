@@ -14,10 +14,11 @@ public class QueryOrdersRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public QueryOrdersRequest() {}
     
-    public QueryOrdersRequest(String accessToken, String distributorId, Collection<String> restaurantIds, String userId,
+    public QueryOrdersRequest(String accessToken, String distributorId, String chainId, Collection<String> restaurantIds, String userId,
     		String status, String ref, Long since, Long until, Boolean restaurantView, String ordering, Set<String> fields, Integer limit) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
+    	this.chainId = chainId;
     	this.restaurantIds = restaurantIds;
     	this.userId = userId;
     	this.status = status;
@@ -35,6 +36,9 @@ public class QueryOrdersRequest extends Request {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String distributorId;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String chainId;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Collection<String> restaurantIds;
