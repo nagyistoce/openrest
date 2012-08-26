@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace com.openrest.v1_1
 {
@@ -8,7 +9,11 @@ namespace com.openrest.v1_1
 
         public OpenrestProtocol()
         {
-            restJsonClient = new RestJsonClient();
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.Converters.Add(new OpenrestObjectJsonConvertor());
+            settings.Converters.Add(new RequestJsonConvertor());
+
+            restJsonClient = new RestJsonClient(settings);
         }
 
         public T Post<T>(Uri uri, Object obj)

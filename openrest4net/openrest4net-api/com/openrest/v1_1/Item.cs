@@ -11,17 +11,22 @@ namespace com.openrest.v1_1
     */
     public class Item
     {
-        public Item(string id, string restaurantId, string title, string description,
-            int price, IList<Variation> variations, Availability availability, bool inactive, string picture)
+        public Item(string id, IDictionary<string, string> externalIds, string restaurantId,
+            IDictionary<string, string> title, IDictionary<string, string> description,
+            int price, IList<Variation> variations, Availability availability, bool inactive, IList<string> labels,
+            IDictionary<string, string> properties)
         {
             this.id = id;
+            this.externalIds = externalIds;
             this.restaurantId = restaurantId;
             this.title = title;
             this.description = description;
+            this.price = price;
             this.variations = variations;
             this.availability = availability;
             this.inactive = inactive;
-            this.picture = picture;
+            this.labels = labels;
+            this.properties = properties;
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
@@ -33,11 +38,11 @@ namespace com.openrest.v1_1
         /** The restaurant's id. */
         public string restaurantId;
 
-        /** The item's name. */
-        public string title;
+        /** The item's title in various locales. */
+        public IDictionary<string, string> title = new Dictionary<string, string>();
 
-        /** The item's one line description. */
-        public string description;
+        /** The item's one line description in various locales. */
+        public IDictionary<string, string> description = new Dictionary<string, string>();
 
         /** The item's price, in "cents". */
         public int? price = 0;
@@ -48,11 +53,11 @@ namespace com.openrest.v1_1
         /** Time windows in which this item is regularly available. */
         public Availability availability = new Availability();
 
-        /** Human readable availability string. */
-        public string availabilityStr;
-
         /** Whether the item is deactivated (i.e. suspended or disabled). */
         public bool? inactive = false;
+
+        /** Item picture URL (direct link). */
+        public string picture;
         
         /**
          * Map of externally-defined item ids referring to this item.
@@ -62,10 +67,16 @@ namespace com.openrest.v1_1
          */
         public IDictionary<string, string> externalIds = new Dictionary<string, string>();
 
-        /** The current status. */
-        public Status status;
+        /** The item's labels, e.g. "new", "spicy". */
+        public IList<string> labels = new List<string>();
 
-        /** Item picture URL (direct link). */
-        public string picture;
+        /**
+         * Map of user-defined extended properties. Developers should use unique
+         * keys, e.g. "com.googlecode.openrestext".
+         */
+        public IDictionary<string, string> properties = new Dictionary<string, string>();
+
+        /** The item's Openrest rank (higher is better). */
+        public double? rank = 0.0;
     }
 }

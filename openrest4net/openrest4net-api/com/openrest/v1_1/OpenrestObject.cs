@@ -5,10 +5,11 @@ namespace com.openrest.v1_1
 {
     public class OpenrestObject
     {
-        protected OpenrestObject(string type) {
+        public string type;
+
+        protected OpenrestObject(string type)
+        {
             this.type = type;
         }
-
-        public string type;
     }
 }

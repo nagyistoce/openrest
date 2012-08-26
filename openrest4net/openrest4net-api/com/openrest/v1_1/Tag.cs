@@ -17,7 +17,8 @@ namespace com.openrest.v1_1
         /** All known tag modes */
         public static readonly IList<string> ALL_TAG_MODES = new List<String> { TAG_MODE_INCLUDE, TAG_MODE_EXCLUDE };
 
-        public Tag(string id, string restaurantId, string title, IList<string> itemIds, IDictionary<string, string> properties)
+        public Tag(string id, string restaurantId, IDictionary<string, string> title, IList<string> itemIds,
+            IDictionary<string, string> properties)
         {
             this.id = id;
             this.restaurantId = restaurantId;
@@ -35,8 +36,8 @@ namespace com.openrest.v1_1
         /** The restaurant's id. */
         public string restaurantId;
 
-        /** The tag's name, e.g. "drink", "sides". */
-        public string title;
+        /** The tag's name in various locales, e.g. "drink", "sides". */
+        public IDictionary<string, string> title = new Dictionary<string, string>();
 
         /** Item ids. */
         public IList<string> itemIds = new List<string>();

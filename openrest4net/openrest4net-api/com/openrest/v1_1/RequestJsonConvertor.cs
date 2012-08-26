@@ -6,13 +6,13 @@ using System.Runtime.Serialization.Formatters;
 
 namespace com.openrest.v1_1
 {
-    public class OpenrestObjectJsonConvertor : JsonConverter
+    public class RequestJsonConvertor : JsonConverter
     {
         private const string TYPE_PROPERTY = "type";
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(OpenrestObject).IsAssignableFrom(objectType);
+            return typeof(Request).IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType,
@@ -51,8 +51,6 @@ namespace com.openrest.v1_1
                     return typeof(Portal);
                 case Distributor.TYPE:
                     return typeof(Distributor);
-                case RestaurantFullInfo.TYPE:
-                    return typeof(RestaurantFullInfo);
             }
 
             throw new ApplicationException(String.Format("Unknown object type: {0}", typeStr));

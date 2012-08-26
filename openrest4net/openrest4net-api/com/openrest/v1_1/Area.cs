@@ -10,7 +10,7 @@ namespace com.openrest.v1_1
      */
     public class Area
     {
-        public Area(string title, IList<LatLng> polygon)
+        public Area(IDictionary<string, string> title, IList<LatLng> polygon)
         {
             this.title = title;
             this.polygon = polygon;
@@ -19,8 +19,8 @@ namespace com.openrest.v1_1
         /** Empty constructor required for initialization from JSON-encoded string. */
         public Area() { }
 
-        /** The area's human-readable title. */
-        public string title;
+        /** The area's human-readable title in various locales. */
+        public IDictionary<string, string> title = new Dictionary<string, string>();
     
         /** The area (polygon vertices). */
         public IList<LatLng> polygon = new List<LatLng>();

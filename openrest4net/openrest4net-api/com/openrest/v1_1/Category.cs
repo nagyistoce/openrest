@@ -5,7 +5,7 @@ namespace com.openrest.v1_1
 {
     public class Category
     {
-        public Category(string id, string restaurantId, string title, string description,
+        public Category(string id, string restaurantId, IDictionary<string, string> title, IDictionary<string, string> description,
             string parentCategoryId, IList<string> itemIds, double priority)
         {
             this.id = id;
@@ -26,11 +26,11 @@ namespace com.openrest.v1_1
         /** The restaurant's id. */
         public string restaurantId;
 
-        /** The category's title. */
-        public string title;
+        /** The category's title in various locales. */
+        public IDictionary<string, string> title = new Dictionary<string, string>();
 
-        /** The category's description. */
-        public string description;
+        /** The category's description in various locales. */
+        public IDictionary<string, string> description = new Dictionary<string, string>();
 
         /** The parent category's id. */
         public string parentCategoryId;

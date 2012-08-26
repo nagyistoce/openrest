@@ -14,7 +14,12 @@ namespace com.openrest.v1_1
      */
     class RestJsonClient
     {
-        public RestJsonClient() { }
+        private readonly JsonSerializerSettings settings;
+
+        public RestJsonClient(JsonSerializerSettings settings)
+        {
+            this.settings = settings;
+        }
 
         public T Get<T>(Uri uri)
         {
@@ -36,7 +41,7 @@ namespace com.openrest.v1_1
             return Go<T>(uri, "DELETE", null);
         }
 
-        private static T Go<T>(Uri uri, string method, object requestObj)
+        private T Go<T>(Uri uri, string method, object requestObj)
         {
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(uri);
             request.Method = method;
@@ -46,7 +51,7 @@ namespace com.openrest.v1_1
                 if (requestObj != null)
                 {
                     request.ContentType = "application/json; charset=UTF-8";
-                    byte[] content = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(requestObj));
+                    byte[] content = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(requestObj, settings));
                     request.ContentLength = content.Length;
 
                     using (Stream stream = request.GetRequestStream())
@@ -67,12 +72,12 @@ namespace com.openrest.v1_1
             }
         }
 
-        private static T StreamToObject<T>(Stream stream)
+        private T StreamToObject<T>(Stream stream)
         {
             using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
             {
                 string str = reader.ReadToEnd();
-                return (T) JsonConvert.DeserializeObject(str, typeof(T));
+                return (T) JsonConvert.DeserializeObject(str, typeof(T), settings);
             }
         }
 
