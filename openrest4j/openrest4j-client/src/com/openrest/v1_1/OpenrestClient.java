@@ -5,8 +5,6 @@ import java.io.IOException;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.google.api.client.http.HttpRequestFactory;
-import com.googlecode.openrest.v1_1.OpenrestException;
-import com.googlecode.openrest.v1_1.Response;
 
 /**
  * The Openrest client.

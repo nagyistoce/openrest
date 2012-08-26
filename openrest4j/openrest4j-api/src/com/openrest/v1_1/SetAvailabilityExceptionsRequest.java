@@ -6,8 +6,6 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.DateTimeWindow;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetAvailabilityExceptionsRequest extends Request {
     private static final long serialVersionUID = 1L;

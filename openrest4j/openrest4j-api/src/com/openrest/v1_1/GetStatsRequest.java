@@ -5,8 +5,6 @@ import java.util.Set;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Date;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetStatsRequest extends Request {
     private static final long serialVersionUID = 1L;

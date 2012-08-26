@@ -42,7 +42,9 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = SetItemRequest.class, name = "set_item"),
 	@Type(value = GetStatsRequest.class, name = "get_stats"),
 	@Type(value = GetStaffRequest.class, name = "get_staff"),
-	@Type(value = SetStaffRequest.class, name = "set_staff")
+	@Type(value = SetStaffRequest.class, name = "set_staff"),
+	@Type(value = GetNotificationsRequest.class, name = "get_notifications"),
+	@Type(value = SetNotificationsRequest.class, name = "set_notifications")
 })
 public abstract class Request implements Serializable {
     private static final long serialVersionUID = 1L;

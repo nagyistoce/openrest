@@ -13,12 +13,6 @@ import java.util.TimeZone;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Address;
-import com.googlecode.openrest.v1_1.AppInfo;
-import com.googlecode.openrest.v1_1.ColorScheme;
-import com.googlecode.openrest.v1_1.Contact;
-import com.googlecode.openrest.v1_1.Seo;
-
 /**
  * Base class for Restaurants, Chains, Distributers, etc.
  * @author DL

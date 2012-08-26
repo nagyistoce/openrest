@@ -14,16 +14,6 @@ import java.util.Set;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Address;
-import com.googlecode.openrest.v1_1.AppInfo;
-import com.googlecode.openrest.v1_1.Availability;
-import com.googlecode.openrest.v1_1.CardInfo;
-import com.googlecode.openrest.v1_1.ColorScheme;
-import com.googlecode.openrest.v1_1.Contact;
-import com.googlecode.openrest.v1_1.DeliveryInfo;
-import com.googlecode.openrest.v1_1.Seo;
-import com.googlecode.openrest.v1_1.Status;
-
 /**
  * Restaurant information.
  * @author DL

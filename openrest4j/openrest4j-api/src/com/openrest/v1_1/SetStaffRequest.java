@@ -3,8 +3,6 @@ package com.openrest.v1_1;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Staff;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetStaffRequest extends Request {
     private static final long serialVersionUID = 1L;

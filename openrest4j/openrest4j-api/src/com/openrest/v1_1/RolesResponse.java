@@ -1,12 +1,10 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.googlecode.openrest.v1_1.Role;
 
 public class RolesResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,5 +21,5 @@ public class RolesResponse implements Serializable {
 	public String userId;
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-	public List<Role> roles = Collections.emptyList();
+	public List<Role> roles = new ArrayList<Role>();
 }

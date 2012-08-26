@@ -8,8 +8,6 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Item;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TopItem implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
