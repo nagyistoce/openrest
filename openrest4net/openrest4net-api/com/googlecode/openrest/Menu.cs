@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using com.openrest.v1_1;
 
 namespace com.googlecode.openrest
 {

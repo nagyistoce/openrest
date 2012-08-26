@@ -33,47 +33,62 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json.Net35">
-      <HintPath>.\Newtonsoft.Json.Net35.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="com\googlecode\openrest\Address.cs" />
+    <Compile Include="com\openrest\v1_1\Address.cs" />
     <Compile Include="com\googlecode\openrest\Area.cs" />
     <Compile Include="com\googlecode\openrest\Availability.cs" />
     <Compile Include="com\googlecode\openrest\Category.cs" />
-    <Compile Include="com\googlecode\openrest\Charge.cs" />
-    <Compile Include="com\googlecode\openrest\ColorScheme.cs" />
-    <Compile Include="com\googlecode\openrest\Contact.cs" />
-    <Compile Include="com\googlecode\openrest\Coupon.cs" />
-    <Compile Include="com\googlecode\openrest\CreditCard.cs" />
+    <Compile Include="com\openrest\v1_1\Chain.cs" />
+    <Compile Include="com\openrest\v1_1\Charge.cs" />
+    <Compile Include="com\openrest\v1_1\ColorScheme.cs" />
+    <Compile Include="com\openrest\v1_1\Contact.cs" />
+    <Compile Include="com\openrest\v1_1\ClubMember.cs" />
+    <Compile Include="com\openrest\v1_1\AppInfo.cs" />
+    <Compile Include="com\openrest\v1_1\Seo.cs" />
+    <Compile Include="com\openrest\v1_1\Distributor.cs" />
+    <Compile Include="com\openrest\v1_1\LogEntry.cs" />
+    <Compile Include="com\openrest\v1_1\Coupon.cs" />
+    <Compile Include="com\openrest\v1_1\CreditCard.cs" />
     <Compile Include="com\googlecode\openrest\Date.cs" />
     <Compile Include="com\googlecode\openrest\DateTimeWindow.cs" />
-    <Compile Include="com\googlecode\openrest\Delivery.cs" />
+    <Compile Include="com\openrest\v1_1\Delivery.cs" />
     <Compile Include="com\googlecode\openrest\DeliveryInfo.cs" />
     <Compile Include="com\googlecode\openrest\Item.cs" />
-    <Compile Include="com\googlecode\openrest\LatLng.cs" />
+    <Compile Include="com\openrest\v1_1\LatLng.cs" />
     <Compile Include="com\googlecode\openrest\Menu.cs" />
     <Compile Include="com\googlecode\openrest\Notification.cs" />
     <Compile Include="com\googlecode\openrest\Notifications.cs" />
     <Compile Include="com\googlecode\openrest\OpenrestException.cs" />
-    <Compile Include="com\googlecode\openrest\Order.cs" />
     <Compile Include="com\googlecode\openrest\OrderConfirmation.cs" />
-    <Compile Include="com\googlecode\openrest\OrderItem.cs" />
-    <Compile Include="com\googlecode\openrest\Payment.cs" />
+    <Compile Include="com\openrest\v1_1\OpenrestObject.cs" />
+    <Compile Include="com\openrest\v1_1\OpenrestObjectJsonConvertor.cs" />
+    <Compile Include="com\openrest\v1_1\Payment.cs" />
     <Compile Include="com\googlecode\openrest\Response.cs" />
-    <Compile Include="com\googlecode\openrest\Restaurant.cs" />
     <Compile Include="com\googlecode\openrest\Staff.cs" />
     <Compile Include="com\googlecode\openrest\Stats.cs" />
     <Compile Include="com\googlecode\openrest\Status.cs" />
-    <Compile Include="com\googlecode\openrest\Tag.cs" />
-    <Compile Include="com\googlecode\openrest\User.cs" />
+    <Compile Include="com\openrest\v1_1\Portal.cs" />
+    <Compile Include="com\openrest\v1_1\Restaurant.cs" />
+    <Compile Include="com\openrest\v1_1\Tag.cs" />
+    <Compile Include="com\openrest\v1_1\User.cs" />
     <Compile Include="com\googlecode\openrest\Utils.cs" />
-    <Compile Include="com\googlecode\openrest\Variation.cs" />
+    <Compile Include="com\openrest\v1_1\Variation.cs" />
     <Compile Include="com\googlecode\openrest\WeeklyTimeWindow.cs" />
+    <Compile Include="com\openrest\v1_1\Order.cs" />
+    <Compile Include="com\openrest\v1_1\OrderItem.cs" />
+    <Compile Include="com\openrest\v1_1\OrdersResponse.cs" />
+    <Compile Include="com\openrest\v1_1\QueryEmailRequest.cs" />
+    <Compile Include="com\openrest\v1_1\Organization.cs" />
+    <Compile Include="com\openrest\v1_1\QueryOrdersRequest.cs" />
+    <Compile Include="com\openrest\v1_1\Request.cs" />
+    <Compile Include="com\openrest\v1_1\SetOrderStatusRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

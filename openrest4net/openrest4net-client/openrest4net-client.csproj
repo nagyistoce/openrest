@@ -33,20 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json.Net35">
-      <HintPath>.\Newtonsoft.Json.Net35.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="com\googlecode\openrest\Image.cs" />
-    <Compile Include="com\googlecode\openrest\OpenrestClient.cs" />
-    <Compile Include="com\googlecode\openrest\QueryStringBuilder.cs" />
-    <Compile Include="com\googlecode\openrest\RestJsonClient.cs" />
-    <Compile Include="com\googlecode\openrest\RestJsonHttpException.cs" />
-    <Compile Include="com\googlecode\openrest\StreamUtils.cs" />
+    <Compile Include="com\openrest\v1_1\OpenrestClient.cs" />
+    <Compile Include="com\openrest\v1_1\OpenrestProtocol.cs" />
+    <Compile Include="com\openrest\v1_1\RestJsonClient.cs" />
+    <Compile Include="com\openrest\v1_1\RestJsonHttpException.cs" />
+    <Compile Include="com\openrest\v1_1\StreamUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
