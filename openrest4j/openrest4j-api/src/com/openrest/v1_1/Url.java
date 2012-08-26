@@ -1,4 +1,4 @@
-package com.googlecode.openrest.v1_1;
+package com.openrest.v1_1;
 
 import java.io.Serializable;
 
@@ -6,16 +6,16 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Picture implements Serializable {
+public class Url implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    public Picture(String id) {
-    	this.id = id;
+    public Url(String url) {
+    	this.url = url;
     }
     
     /** Default constructor for JSON deserialization. */
-    public Picture() {}
+    public Url() {}
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String id;
+    public String url;
 }

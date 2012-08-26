@@ -7,7 +7,7 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import com.googlecode.openrest.v1_1.Charge;
+import com.openrest.v1_1.Charge;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cost implements Serializable, Comparable<Cost> {
