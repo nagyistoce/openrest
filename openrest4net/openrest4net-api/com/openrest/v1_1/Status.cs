@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace com.googlecode.openrest
+namespace com.openrest.v1_1
 {
     public class Status
     {

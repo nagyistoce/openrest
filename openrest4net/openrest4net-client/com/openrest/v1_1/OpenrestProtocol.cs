@@ -1,5 +1,4 @@
 ﻿using System;
-using com.googlecode.openrest;
 
 namespace com.openrest.v1_1
 {

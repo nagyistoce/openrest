@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using com.openrest.v1_1;
 
-namespace com.googlecode.openrest
+namespace com.openrest.v1_1
 {
     /**
      * An item that can be ordered, e.g. a main dish ("hamburger"), a side ("fries")

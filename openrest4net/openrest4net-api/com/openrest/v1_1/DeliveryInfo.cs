@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace com.googlecode.openrest
+namespace com.openrest.v1_1
 {
     /**
      * Information regarding a delivery destination: type, area, requirements, etc.

@@ -42,9 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\openrest\v1_1\Address.cs" />
-    <Compile Include="com\googlecode\openrest\Area.cs" />
-    <Compile Include="com\googlecode\openrest\Availability.cs" />
-    <Compile Include="com\googlecode\openrest\Category.cs" />
+    <Compile Include="com\openrest\v1_1\Area.cs" />
+    <Compile Include="com\openrest\v1_1\Availability.cs" />
+    <Compile Include="com\openrest\v1_1\CardInfo.cs" />
+    <Compile Include="com\openrest\v1_1\Category.cs" />
     <Compile Include="com\openrest\v1_1\Chain.cs" />
     <Compile Include="com\openrest\v1_1\Charge.cs" />
     <Compile Include="com\openrest\v1_1\ColorScheme.cs" />
@@ -56,31 +57,31 @@
     <Compile Include="com\openrest\v1_1\LogEntry.cs" />
     <Compile Include="com\openrest\v1_1\Coupon.cs" />
     <Compile Include="com\openrest\v1_1\CreditCard.cs" />
-    <Compile Include="com\googlecode\openrest\Date.cs" />
-    <Compile Include="com\googlecode\openrest\DateTimeWindow.cs" />
+    <Compile Include="com\openrest\v1_1\Date.cs" />
+    <Compile Include="com\openrest\v1_1\DateTimeWindow.cs" />
     <Compile Include="com\openrest\v1_1\Delivery.cs" />
-    <Compile Include="com\googlecode\openrest\DeliveryInfo.cs" />
-    <Compile Include="com\googlecode\openrest\Item.cs" />
+    <Compile Include="com\openrest\v1_1\DeliveryInfo.cs" />
+    <Compile Include="com\openrest\v1_1\Item.cs" />
     <Compile Include="com\openrest\v1_1\LatLng.cs" />
-    <Compile Include="com\googlecode\openrest\Menu.cs" />
-    <Compile Include="com\googlecode\openrest\Notification.cs" />
-    <Compile Include="com\googlecode\openrest\Notifications.cs" />
-    <Compile Include="com\googlecode\openrest\OpenrestException.cs" />
-    <Compile Include="com\googlecode\openrest\OrderConfirmation.cs" />
+    <Compile Include="com\openrest\v1_1\Menu.cs" />
+    <Compile Include="com\openrest\v1_1\Notification.cs" />
+    <Compile Include="com\openrest\v1_1\Notifications.cs" />
+    <Compile Include="com\openrest\v1_1\OpenrestException.cs" />
+    <Compile Include="com\openrest\v1_1\OrderConfirmation.cs" />
     <Compile Include="com\openrest\v1_1\OpenrestObject.cs" />
     <Compile Include="com\openrest\v1_1\OpenrestObjectJsonConvertor.cs" />
     <Compile Include="com\openrest\v1_1\Payment.cs" />
-    <Compile Include="com\googlecode\openrest\Response.cs" />
-    <Compile Include="com\googlecode\openrest\Staff.cs" />
-    <Compile Include="com\googlecode\openrest\Stats.cs" />
-    <Compile Include="com\googlecode\openrest\Status.cs" />
+    <Compile Include="com\openrest\v1_1\Response.cs" />
+    <Compile Include="com\openrest\v1_1\Staff.cs" />
+    <Compile Include="com\openrest\v1_1\Stats.cs" />
+    <Compile Include="com\openrest\v1_1\Status.cs" />
     <Compile Include="com\openrest\v1_1\Portal.cs" />
     <Compile Include="com\openrest\v1_1\Restaurant.cs" />
     <Compile Include="com\openrest\v1_1\Tag.cs" />
     <Compile Include="com\openrest\v1_1\User.cs" />
-    <Compile Include="com\googlecode\openrest\Utils.cs" />
+    <Compile Include="com\openrest\v1_1\Utils.cs" />
     <Compile Include="com\openrest\v1_1\Variation.cs" />
-    <Compile Include="com\googlecode\openrest\WeeklyTimeWindow.cs" />
+    <Compile Include="com\openrest\v1_1\WeeklyTimeWindow.cs" />
     <Compile Include="com\openrest\v1_1\Order.cs" />
     <Compile Include="com\openrest\v1_1\OrderItem.cs" />
     <Compile Include="com\openrest\v1_1\OrdersResponse.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="com\openrest\v1_1\SetOrderStatusRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace com.googlecode.openrest
+namespace com.openrest.v1_1
 {
     public class Notifications
     {
