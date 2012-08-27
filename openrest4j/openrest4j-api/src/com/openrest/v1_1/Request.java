@@ -35,6 +35,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = GetDomainMappedObjectRequest.class, name = "get_domain_mapped_object"),
 	@Type(value = GetBlobRequest.class, name = "get_blob"),
 	@Type(value = SetBlobRequest.class, name = "set_blob"),
+	@Type(value = GetBlobUploadUrlRequest.class, name = "get_blob_upload_url"),
 	@Type(value = GetRolesRequest.class, name = "get_roles"),
 	@Type(value = SetAvailabilityExceptionsRequest.class, name = "set_availability_exceptions"),
 	@Type(value = QueryEmailRequest.class, name = "query_email"),

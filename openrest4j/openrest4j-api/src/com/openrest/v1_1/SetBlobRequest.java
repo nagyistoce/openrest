@@ -10,9 +10,10 @@ public class SetBlobRequest extends Request {
     /** Default constructor for JSON deserialization. */
     public SetBlobRequest() {}
     
-    public SetBlobRequest(String accessToken, String organizationId, String blobType, String blobId) {
+    public SetBlobRequest(String accessToken, String organizationId, String itemId, String blobType, String blobId) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
+    	this.itemId = itemId;
     	this.blobType = blobType;
     	this.blobId = blobId;
     }
@@ -22,6 +23,9 @@ public class SetBlobRequest extends Request {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String organizationId;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String itemId;
 
     /** One of Organization.ALL_BLOB_TYPES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

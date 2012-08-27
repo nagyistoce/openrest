@@ -4,17 +4,21 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBlobRequest extends Request {
+public class GetBlobUploadUrlRequest extends Request {
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public GetBlobRequest() {}
+    public GetBlobUploadUrlRequest() {}
     
-    public GetBlobRequest(String organizationId, String itemId, String blobType) {
+    public GetBlobUploadUrlRequest(String accessToken, String organizationId, String itemId, String blobType) {
+    	this.accessToken = accessToken;
     	this.organizationId = organizationId;
     	this.itemId = itemId;
     	this.blobType = blobType;
     }
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String accessToken;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String organizationId;
