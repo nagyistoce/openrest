@@ -16,9 +16,19 @@ namespace com.openrest.v1_1
             return order.id;
         }
 
+        public IStringMap GetExternalIds()
+        {
+            return new CStringMap(order.externalIds);
+        }
+
         public string GetRestaurantId()
         {
             return order.restaurantId;
+        }
+
+        public string GetLocale()
+        {
+            return order.locale;
         }
 
         public IOrderItems GetOrderItems()

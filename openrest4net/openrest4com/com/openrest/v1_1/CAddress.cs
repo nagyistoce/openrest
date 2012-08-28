@@ -7,9 +7,16 @@ namespace com.openrest.v1_1
     [ComVisible(true)]
     public class CAddress : IAddress
     {
+        private readonly Address address;
+
         public CAddress(Address address)
         {
             this.address = address;
+        }
+
+        public string GetCountry()
+        {
+            return address.country;
         }
 
         public string GetCity()
@@ -52,6 +59,14 @@ namespace com.openrest.v1_1
             return new CLatLng(address.latLng);
         }
 
-        private readonly Address address;
+        public string GetCountryCode()
+        {
+            return address.countryCode;
+        }
+
+        public string GetPostalCode()
+        {
+            return address.postalCode;
+        }
     }
 }

@@ -10,9 +10,6 @@ namespace com.openrest.v1_1
         /** The organization's unique id. */
         public string id;
 
-        /** The restaurant's name. */
-        public string name;
-
         /**
          * Map of externally-defined ids referring to this organization.
          * For example, the organization-id in some external billing system.

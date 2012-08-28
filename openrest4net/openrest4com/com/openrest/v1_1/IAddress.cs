@@ -7,6 +7,7 @@ namespace com.openrest.v1_1
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IAddress
     {
+        string GetCountry();
         string GetCity();
         string GetStreet();
         string GetNumber();
@@ -15,5 +16,7 @@ namespace com.openrest.v1_1
         string GetEntrance();
         string GetComment();
         ILatLng GetLatLng();
+        string GetCountryCode();
+        string GetPostalCode();
     }
 }

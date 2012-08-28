@@ -1,13 +1,15 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace com.openrest.v1_1
 {
     public class Address
     {
-        public Address(string city, string street, string number, string apt,
-            string floor, string entrance, string comment, LatLng latLng)
+        public Address(string country, string city, string street, string number, string apt,
+            string floor, string entrance, string comment, LatLng latLng, string countryCode, string postalCode)
         {
+            this.country = country;
             this.city = city;
             this.street = street;
             this.number = number;
@@ -16,18 +18,31 @@ namespace com.openrest.v1_1
             this.entrance = entrance;
             this.comment = comment;
             this.latLng = latLng;
+            this.countryCode = countryCode;
+            this.postalCode = postalCode;
         }
 
         /** Empty constructor required for initialization from JSON-encoded string. */
         public Address() { }
 
-        [JsonIgnore]
-        public string StreetAddress
+        public string GetStreetAddress(bool useCountry)
         {
-            get
+            StringBuilder builder = new StringBuilder();
+
+            builder.Append(street).Append(' ').Append(number);
+            builder.Append(", ").Append(city);
+
+            if ((postalCode != null) && (postalCode.Length != 0))
             {
-                return street + ' ' + number + ", " + city;
+                builder.Append(" ").Append(postalCode);
             }
+
+            if ((useCountry) && (country != null) && (country.Length != 0))
+            {
+                builder.Append(", ").Append(country);
+            }
+
+            return builder.ToString();
         }
 
         public string country;

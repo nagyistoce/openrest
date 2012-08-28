@@ -9,15 +9,14 @@ namespace com.openrest.v1_1
     {
         string GetId();
         string GetRestaurantId();
-        //string GetTitle();
-        //string GetDescription();
+        IStringMap GetTitle();
+        IStringMap GetDescription();
         int GetPrice();
         IVariations GetVariations();
         //IAvailability GetAvailability();
-        //string GetAvailabilityStr();
         bool GetInactive();
         //Status GetStatus();
         string GetPicture();
-        string GetExternalId(string key);
+        IStringMap GetExternalIds();
     }
 }

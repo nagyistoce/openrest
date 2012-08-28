@@ -9,8 +9,8 @@ namespace com.openrest.v1_1
     {
         string GetId();
         string GetRestaurantId();
-        //string GetTitle();
-        //string GetDescription();
+        IStringMap GetTitle();
+        IStringMap GetDescription();
         string GetParentCategoryId();
         string[] GetItemIds();
         double GetPriority();

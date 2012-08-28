@@ -7,12 +7,10 @@ namespace com.openrest.v1_1
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
     public interface IOpenrestClient
     {
-        void Init(string restaurantUri, string accessToken);
+        void Init(string apiUri);
 
-        /*
-        IMenu GetMenu();
-        IOrders GetNewOrders();
-        IOrder SetOrderStatus(string orderId, string status);
-        */
+        IRestaurantFullInfo GetRestaurantFullInfo(string restaurantId);
+        //IOrders QueryOrders(IQueryOrdersRequest request);
+        //IOrder SetOrderStatus(ISetOrderStatusRequest request);
     }
 }

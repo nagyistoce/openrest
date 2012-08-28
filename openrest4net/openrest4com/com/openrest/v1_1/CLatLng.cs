@@ -6,6 +6,8 @@ namespace com.openrest.v1_1
     [ComVisible(true)]
     public class CLatLng : ILatLng
     {
+        private readonly LatLng latLng;
+
         public CLatLng(LatLng latLng)
         {
             this.latLng = latLng;
@@ -20,7 +22,5 @@ namespace com.openrest.v1_1
         {
             return latLng.lng.Value;
         }
-
-        private readonly LatLng latLng;
     }
 }

@@ -8,7 +8,9 @@ namespace com.openrest.v1_1
     public interface IOrder
     {
         string GetId();
+        IStringMap GetExternalIds();
         string GetRestaurantId();
+        string GetLocale();
         IOrderItems GetOrderItems();
         string GetComment();
         int GetPrice();
@@ -20,6 +22,7 @@ namespace com.openrest.v1_1
         long GetCreated();
         long GetModified();
         IUser GetUser();
+        // IClubMember GetClubMember();
         string GetStatus();
         string GetShareToken();
         string GetAffiliate();

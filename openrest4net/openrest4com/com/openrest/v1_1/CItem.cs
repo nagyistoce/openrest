@@ -6,6 +6,8 @@ namespace com.openrest.v1_1
     [ComVisible(true)]
     public class CItem : IItem
     {
+        private readonly Item item;
+
         public CItem(Item item)
         {
             this.item = item;
@@ -21,16 +23,15 @@ namespace com.openrest.v1_1
             return item.restaurantId;
         }
 
-        /*
-        public string GetTitle()
+        public IStringMap GetTitle()
         {
-            return item.title;
+            return new CStringMap(item.title);
         }
 
-        public string GetDescription()
+        public IStringMap GetDescription()
         {
-            return item.description;
-        }*/
+            return new CStringMap(item.description);
+        }
 
         public int GetPrice()
         {
@@ -52,11 +53,9 @@ namespace com.openrest.v1_1
             return item.picture;
         }
 
-        public string GetExternalId(string key)
+        public IStringMap GetExternalIds()
         {
-            return (item.externalIds.ContainsKey(key) ? item.externalIds[key] : null);
+            return new CStringMap(item.externalIds);
         }
-
-        private readonly Item item;
     }
 }

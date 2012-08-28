@@ -21,16 +21,15 @@ namespace com.openrest.v1_1
             return category.restaurantId;
         }
 
-        /*
-        public string GetTitle()
+        public IStringMap GetTitle()
         {
-            return category.title;
+            return new CStringMap(category.title);
         }
 
-        public string GetDescription()
+        public IStringMap GetDescription()
         {
-            return category.description;
-        }*/
+            return new CStringMap(category.description);
+        }
 
         public string GetParentCategoryId()
         {
