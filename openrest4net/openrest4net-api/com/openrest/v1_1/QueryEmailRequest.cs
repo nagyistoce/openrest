@@ -4,7 +4,7 @@ namespace com.openrest.v1_1
 {
     public class QueryEmailRequest : Request
     {
-        private static readonly string TYPE = "query_email";
+        public const string TYPE = "query_email";
 
         public string email;
 

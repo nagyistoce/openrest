@@ -52,6 +52,7 @@
     <Compile Include="com\openrest\v1_1\Contact.cs" />
     <Compile Include="com\openrest\v1_1\ClubMember.cs" />
     <Compile Include="com\openrest\v1_1\AppInfo.cs" />
+    <Compile Include="com\openrest\v1_1\GetOrganizationRequest.cs" />
     <Compile Include="com\openrest\v1_1\RequestJsonConvertor.cs" />
     <Compile Include="com\openrest\v1_1\GetOrganizationFullRequest.cs" />
     <Compile Include="com\openrest\v1_1\RestaurantFullInfo.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="com\openrest\v1_1\Status.cs" />
     <Compile Include="com\openrest\v1_1\Portal.cs" />
     <Compile Include="com\openrest\v1_1\Restaurant.cs" />
+    <Compile Include="com\openrest\v1_1\SubmitOrderRequest.cs" />
     <Compile Include="com\openrest\v1_1\Tag.cs" />
     <Compile Include="com\openrest\v1_1\User.cs" />
     <Compile Include="com\openrest\v1_1\Utils.cs" />

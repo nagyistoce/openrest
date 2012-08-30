@@ -43,14 +43,14 @@ namespace com.openrest.v1_1
 
             switch (typeStr)
             {
-                case Restaurant.TYPE:
-                    return typeof(Restaurant);
-                case Chain.TYPE:
-                    return typeof(Chain);
-                case Portal.TYPE:
-                    return typeof(Portal);
-                case Distributor.TYPE:
-                    return typeof(Distributor);
+                case GetOrganizationRequest.TYPE:
+                    return typeof(GetOrganizationRequest);
+                case GetOrganizationFullRequest.TYPE:
+                    return typeof(GetOrganizationFullRequest);
+                case SubmitOrderRequest.TYPE:
+                    return typeof(SubmitOrderRequest);
+                case QueryEmailRequest.TYPE:
+                    return typeof(QueryEmailRequest);
             }
 
             throw new ApplicationException(String.Format("Unknown object type: {0}", typeStr));
