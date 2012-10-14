@@ -2,7 +2,6 @@ package com.openrest.v1_1;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,12 +9,12 @@ import java.io.InputStreamReader;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import com.google.api.client.http.ByteArrayContent;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
-import com.google.api.client.http.InputStreamContent;
 
 /**
  * A client for a RESTful web-service that supports JSON representations.
@@ -40,13 +39,7 @@ public class RestJsonClient {
     
 
     public <T> T post(String url, Object requestObj, TypeReference<T> responseType) throws IOException {
-    	final HttpContent content;
-    	final ByteArrayInputStream bais = new ByteArrayInputStream(mapper.writeValueAsString(requestObj).getBytes("UTF-8"));
-    	try {
-    		content = new InputStreamContent("application/json", bais);
-    	} finally {
-    		bais.close();
-    	}
+    	final HttpContent content = new ByteArrayContent("application/json", mapper.writeValueAsString(requestObj).getBytes("UTF-8"));
     	
     	final HttpRequest request = requestFactory.buildPostRequest(new GenericUrl(url), content);
         if (connectTimeout != null) {
