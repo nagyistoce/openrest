@@ -5,6 +5,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PortalFullInfo extends OpenrestObject {
+	public static final String TYPE = "portal_full";
+	
     private static final long serialVersionUID = 1L;
     
     public PortalFullInfo(Portal portal, Distributor distributor) {

@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetDistributorsRequest extends Request {
+	public static final String TYPE = "get_distributors";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

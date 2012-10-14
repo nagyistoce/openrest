@@ -1,20 +1,24 @@
 package com.openrest.v1_1;
 
+import java.util.Set;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SetNotificationsRequest extends Request {
-	public static final String TYPE = "set_notifications";
+public class GetBillingRequest extends Request {
+	public static final String TYPE = "get_billing";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public SetNotificationsRequest() {}
+    public GetBillingRequest() {}
     
-    public SetNotificationsRequest(String accessToken, String organizationId, Notifications notifications) {
+    public GetBillingRequest(String accessToken, String organizationId, Integer year, Integer month, Set<String> fields) {
     	this.accessToken = accessToken;
     	this.organizationId = organizationId;
-    	this.notifications = notifications;
+    	this.year = year;
+    	this.month = month;
+    	this.fields = fields;
     }
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -24,5 +28,11 @@ public class SetNotificationsRequest extends Request {
     public String organizationId;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Notifications notifications;
+    public Integer year;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Integer month;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+	public Set<String> fields;
 }

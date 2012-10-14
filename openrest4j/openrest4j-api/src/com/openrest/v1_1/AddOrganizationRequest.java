@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddOrganizationRequest extends Request {
+	public static final String TYPE = "add_organization";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

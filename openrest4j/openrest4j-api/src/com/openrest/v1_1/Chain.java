@@ -18,6 +18,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Chain extends Organization {
+	public static final String TYPE = "chain";
+	
 	private static final long serialVersionUID = 1L;
 	
     /** Default constructor for JSON deserialization. */
@@ -25,20 +27,30 @@ public class Chain extends Organization {
     
     public Chain(String id, Map<String, String> externalIds, Long created, Long modified, String distributorId,
     		Map<String, String> title, Map<String, String> description,
-    		String locale, Set<String> locales, ColorScheme colorScheme,
-    		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone,
+    		String locale, Set<String> locales, Map<String, Map<String, String>> messages, ColorScheme colorScheme,
+    		Contact contact, Map<String, Contact> externalContacts, Address address, String timezone, String currency,
     		String link, String domain, Set<String> altDomains,
     		List<AppInfo> apps, Seo seo, Map<String, String> properties,
-    		String picture, String icon, String noImagePicture) {
-    	super(id, externalIds, created, modified, title, description, locale, locales, colorScheme,
-    			contact, externalContacts, address, timezone, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, noImagePicture);
+    		String picture, String icon, String noImagePicture, Double rank) {
+    	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
+    			picture, icon, noImagePicture, rank);
     	
     	this.distributorId = distributorId;
     }
     
     @Override
 	public Object clone() {
+    	final Map<String, Map<String, String>> clonedMessages;
+    	if (messages != null) {
+    		clonedMessages = new HashMap<String, Map<String, String>>(messages.size());
+    		for (Entry<String, Map<String, String>> entry : messages.entrySet()) {
+    			clonedMessages.put(entry.getKey(), new HashMap<String, String>(entry.getValue()));
+    		}
+    	} else {
+    		clonedMessages = null;
+    	}
+    	
     	final List<AppInfo> clonedApps;
     	if (apps != null) {
     		clonedApps = new ArrayList<AppInfo>(apps.size());
@@ -66,15 +78,16 @@ public class Chain extends Organization {
     			((description != null) ? new HashMap<String, String>(description) : null),
     			locale,
     			((locales != null) ? new HashSet<String>(locales) : null),
+    			clonedMessages,
     			((colorScheme != null) ? (ColorScheme)colorScheme.clone() : null),
     			((contact != null) ? (Contact) contact.clone() : null), clonedExternalContacts,
     			((address != null) ? (Address) address.clone() : null),
-    			timezone, link, domain,
+    			timezone, currency, link, domain,
     			((altDomains != null) ? new HashSet<String>(altDomains) : null),
     			clonedApps,
     			((seo != null) ? (Seo) seo.clone() : null),
     			((properties != null) ? new HashMap<String, String>(properties) : null),
-    			picture, icon, noImagePicture);
+    			picture, icon, noImagePicture, rank);
 	}
     
     /** The distributor in charge of this chain. */

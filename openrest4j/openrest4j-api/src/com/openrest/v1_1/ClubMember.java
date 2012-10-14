@@ -1,9 +1,8 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -17,11 +16,12 @@ public class ClubMember implements Serializable, Cloneable {
     private static final long serialVersionUID = 1L;
     
 	/** Default constructor for JSON deserialization. */
-    public ClubMember(String restaurantId, String memberId, String phone, List<String> clubIds) {
-    	this.restaurantId = restaurantId;
+    public ClubMember(String organizationId, String memberId, String phone, Set<String> clubIds) {
+    	this.organizationId = organizationId;
     	this.memberId = memberId;
     	this.phone = phone;
     	this.clubIds = clubIds;
+    	this.restaurantId = organizationId; // for backwards compatibility
     }
     
     /** Default constructor for JSON deserialization. */
@@ -29,11 +29,16 @@ public class ClubMember implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new ClubMember(restaurantId, memberId, phone,
-    			((clubIds != null) ? new ArrayList<String>(clubIds) : null));
+    	return new ClubMember(organizationId, memberId, phone,
+    			((clubIds != null) ? new LinkedHashSet<String>(clubIds) : null));
 	}
     
+    /** The organization's id. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String organizationId;
+    
     /** The restaurant's id. */
+    @Deprecated
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String restaurantId;
     
@@ -46,5 +51,5 @@ public class ClubMember implements Serializable, Cloneable {
     public String phone;
     
     /** The internal club ids of which the client is a member of. */
-    public List<String> clubIds = Collections.emptyList();
+    public Set<String> clubIds = new LinkedHashSet<String>();
 }

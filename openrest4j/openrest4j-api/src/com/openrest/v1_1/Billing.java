@@ -28,6 +28,10 @@ public class Billing implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String restaurantId;
     
+    /** Whether the organization is not billed (or billed as part of a different organization). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean notBilled = Boolean.FALSE;
+    
     /** The costs. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<Cost> costs = new ArrayList<Cost>();
@@ -43,4 +47,8 @@ public class Billing implements Serializable {
     /** The restaurant unique id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer month;
+    
+    /** The billing in HTML format. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String html;
 }

@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetStaffRequest extends Request {
+	public static final String TYPE = "set_staff";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

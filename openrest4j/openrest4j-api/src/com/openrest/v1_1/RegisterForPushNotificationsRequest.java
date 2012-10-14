@@ -4,21 +4,21 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SetOrganizationRequest extends Request {
-    public static final String TYPE = "set_organization";
+public class RegisterForPushNotificationsRequest extends Request {
+    public static final String TYPE = "register_push_notifications";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public SetOrganizationRequest() {}
+    public RegisterForPushNotificationsRequest() {}
     
-    public SetOrganizationRequest(String accessToken, Organization organization) {
+    public RegisterForPushNotificationsRequest(String accessToken, PushNotification pushNotification) {
     	this.accessToken = accessToken;
-    	this.organization = organization;
+    	this.pushNotification = pushNotification;
     }
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String accessToken;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Organization organization;
+    public PushNotification pushNotification;
 }

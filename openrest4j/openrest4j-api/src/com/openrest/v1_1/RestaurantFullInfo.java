@@ -8,6 +8,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RestaurantFullInfo extends OpenrestObject {
+	public static final String TYPE = "restaurant_full";
+	
     private static final long serialVersionUID = 1L;
     
     public RestaurantFullInfo(Restaurant restaurant, Menu menu, List<Charge> charges,

@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetDomainMappedObjectRequest extends Request {
+	public static final String TYPE = "get_domain_mapped_object";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

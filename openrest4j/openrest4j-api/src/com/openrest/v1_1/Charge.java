@@ -12,7 +12,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * An extra charge or a discount associated with an order.
  * Examples: delivery charge, state tax, discount coupon.
  * 
- * TODO: time availability ("happy hour"), geography filter (delivery charge).
+ * TODO: geography filter (delivery charge).
  * 
  * @author DL
  */
@@ -48,7 +48,9 @@ public class Charge implements Serializable {
     public Charge(String id, String restaurantId, String type, Double priority,
     		String code, String clubId,
     		String tagId, String tagMode,
-    		String amountRuleType, Integer amountRule, Coupon coupon, Integer amount) {
+    		String amountRuleType, Integer amountRule, Coupon coupon,
+    		Availability availability, Boolean inactive, Set<String> refs,
+    		Integer amount) {
     	this.id = id;
     	this.restaurantId = restaurantId;
         this.type = type;
@@ -60,14 +62,19 @@ public class Charge implements Serializable {
         this.amountRuleType = amountRuleType;
         this.amountRule = amountRule;
         this.coupon = coupon;
+        this.availability = availability;
+        this.inactive = inactive;
+        this.refs = refs;
         this.amount = amount;
     }
     
     /** Constructs a new charge to be submitted. */
     public Charge(String type, Double priority, String code, String clubId,
     		String tagId, String tagMode,
-    		String amountRuleType, Integer amountRule, Coupon coupon) {
-    	this(null, null, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule, coupon, null);
+    		String amountRuleType, Integer amountRule, Coupon coupon,
+    		Availability availability, Boolean inactive, Set<String> refs) {
+    	this(null, null, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule, coupon,
+    			availability, inactive, refs, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -124,6 +131,18 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Coupon coupon;
     
+    /** The time windows in which this charge can / should be applied. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Availability availability = new Availability();
+    
+    /** Whether or not the charge is deactivated (i.e. suspended or disabled). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Boolean inactive = Boolean.FALSE;
+    
+    /** The referrer-ids this charge applies to (null means any). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Set<String> refs;
+    
     /** Bottom-line charge amount (in cents). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer amount;
@@ -147,6 +166,21 @@ public class Charge implements Serializable {
 			if (other.coupon != null)
 				return false;
 		} else if (!coupon.equals(other.coupon))
+			return false;
+		if (availability == null) {
+			if (other.availability != null)
+				return false;
+		} else if (!availability.equals(other.availability))
+			return false;
+		if (inactive == null) {
+			if (other.inactive != null)
+				return false;
+		} else if (!inactive.equals(other.inactive))
+			return false;
+		if (refs == null) {
+			if (other.refs != null)
+				return false;
+		} else if (!refs.equals(other.refs))
 			return false;
 		if (id == null) {
 			if (other.id != null)

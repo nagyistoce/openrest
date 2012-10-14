@@ -7,19 +7,21 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchRequest extends Request {
+	public static final String TYPE = "search";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
     public SearchRequest() {}
     
     public SearchRequest(String distributorId, String chainId, LatLng latLng, Set<String> states, Set<String> features, String query,
-    		Set<String> fields, Integer limit, Set<String> excludeIds) {
+    		Set<String> chargeTypes, Set<String> fields, Integer limit, Set<String> excludeIds) {
     	this.distributorId = distributorId;
     	this.chainId = chainId;
     	this.latLng = latLng;
     	this.states = states;
     	this.features = features;
     	this.query = query;
+    	this.chargeTypes = chargeTypes;
     	this.fields = fields;
     	this.limit = limit;
     	this.excludeIds = excludeIds;
@@ -42,6 +44,9 @@ public class SearchRequest extends Request {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String query;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Set<String> chargeTypes;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Set<String> fields;

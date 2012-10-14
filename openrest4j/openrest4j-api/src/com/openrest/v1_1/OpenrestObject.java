@@ -17,13 +17,13 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	    include = JsonTypeInfo.As.PROPERTY,  
 	    property = "type")  
 @JsonSubTypes({
-	@Type(value = Restaurant.class, name = "restaurant"),
-	@Type(value = Chain.class, name = "chain"),
-	@Type(value = Distributor.class, name = "distributor"),
-	@Type(value = Portal.class, name = "portal"),
-	@Type(value = RestaurantFullInfo.class, name = "restaurant_full"),
-	@Type(value = ChainFullInfo.class, name = "chain_full"),
-	@Type(value = PortalFullInfo.class, name = "portal_full")
+	@Type(value = Restaurant.class, name = Restaurant.TYPE),
+	@Type(value = Chain.class, name = Chain.TYPE),
+	@Type(value = Distributor.class, name = Distributor.TYPE),
+	@Type(value = Portal.class, name = Portal.TYPE),
+	@Type(value = RestaurantFullInfo.class, name = RestaurantFullInfo.TYPE),
+	@Type(value = ChainFullInfo.class, name = ChainFullInfo.TYPE),
+	@Type(value = PortalFullInfo.class, name = PortalFullInfo.TYPE)
 })
 public abstract class OpenrestObject implements Serializable {
     private static final long serialVersionUID = 1L;

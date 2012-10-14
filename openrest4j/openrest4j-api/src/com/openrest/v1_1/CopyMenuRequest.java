@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CopyMenuRequest extends Request {
+	public static final String TYPE = "copy_menu";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

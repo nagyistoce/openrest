@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Restaurant extends Organization implements Comparable<Restaurant>{
+	public static final String TYPE = "restaurant";
 	private static final long serialVersionUID = 1L;
     
 	/** Restaurant system is used for demonstration only. Orders will not be handled. */
@@ -37,11 +38,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     public static final Set<String> ALL_STATES = new HashSet<String>(Arrays.asList(
     		STATE_DEMO, STATE_UNDER_CONSTRUCTION, STATE_OPERATIONAL, STATE_CLOSED, STATE_INFO));
     
-    /** The restaurant's welcome message. */
-    public static final String MESSAGE_TYPE_WELCOME = "welcome";
-    /** The restaurant's order confirmation message. */
-    public static final String MESSAGE_TYPE_ORDER_CONFIRMATION = "order_confirmation";
-	
     public Restaurant(String id, Map<String, String> externalIds, Long created, Long modified,
     		String distributorId, String chainId, Map<String, String> title,
     		Map<String, String> description, Contact contact, Map<String, Contact> externalContacts, Address address,
@@ -54,27 +50,24 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
             String picture, String icon, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
             String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank) {
-    	super(id, externalIds, created, modified, title, description, locale, locales, colorScheme,
-    			contact, externalContacts, address, timezone, link, domain, altDomains, apps, seo, properties,
-    			picture, icon, noImagePicture);
+    	super(id, externalIds, created, modified, title, description, locale, locales, messages, colorScheme,
+    			contact, externalContacts, address, timezone, currency, link, domain, altDomains, apps, seo, properties,
+    			picture, icon, noImagePicture, rank);
         
     	this.distributorId = distributorId;
     	this.chainId = chainId;
-        this.messages = messages;
         this.openTimes = openTimes;
         this.deliveryTimes = deliveryTimes;
         this.inactive = inactive;
         this.deliveryInfos = deliveryInfos;
         this.status = status;
         this.deliveryStatus = deliveryStatus;
-        this.currency = currency;
         this.paymentTypes = paymentTypes;
         this.cardInfos = cardInfos;
         this.minPayments = minPayments;
         this.state = state;
         this.features = features;
         this.legacyHierarchy = legacyHierarchy;
-        this.rank = rank;
     }
 
     /** Default constructor for JSON deserialization. */
@@ -171,10 +164,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String chainId;
     
-    /** Maps message types (e.g. MESSAGE_TYPE_WELCOME) to their text in various locales. */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, Map<String, String>> messages = Collections.emptyMap();
-
     /** Restaurant availability. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Availability openTimes = new Availability();
@@ -189,7 +178,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
 
     /** Information regarding the different delivery destinations. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<DeliveryInfo> deliveryInfos = Collections.emptyList();
+    public List<DeliveryInfo> deliveryInfos = new ArrayList<DeliveryInfo>();
 
     /** The current status. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -199,13 +188,9 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Status deliveryStatus;
 
-    /** The restaurant's currency (ISO 4217). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public String currency;
-    
     /** Available payment methods. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Set<String> paymentTypes = Collections.emptySet();
+    public Set<String> paymentTypes = new HashSet<String>();
     
     /**
      * Maps credit card networks (e.g. "visa", "amex" etc) to the information
@@ -217,7 +202,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      * http://code.google.com/p/creditcard/
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, CardInfo> cardInfos = Collections.emptyMap();
+    public Map<String, CardInfo> cardInfos = new HashMap<String, CardInfo>();
 
     /**
      * Maps available payment types to minimal charge allowed per payment, e.g.
@@ -225,7 +210,7 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      * payment types have zero minimum by default.
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, Integer> minPayments = Collections.emptyMap();
+    public Map<String, Integer> minPayments = new HashMap<String, Integer>();
 
     /** @see ALL_STATES */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -247,18 +232,6 @@ public class Restaurant extends Organization implements Comparable<Restaurant>{
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
-    
-    /** The restaurant's Openrest rank (higher is better). */
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Double rank;
-    
-    public static int compareRank(Double rank1, Double rank2) {
-		if (rank1 != null) {
-			return ((rank2 != null) ? -rank1.compareTo(rank2) : -1);
-		} else {
-			return ((rank2 == null) ? (0) : 1);
-		}
-    }
     
     public static int compareState(String state1, String state2) {
     	return getStateRank(state1) - getStateRank(state2);

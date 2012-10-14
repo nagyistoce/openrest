@@ -4,21 +4,25 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SetOrganizationRequest extends Request {
-    public static final String TYPE = "set_organization";
+public class SetBillingRequest extends Request {
+	public static final String TYPE = "set_billing";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
-    public SetOrganizationRequest() {}
+    public SetBillingRequest() {}
     
-    public SetOrganizationRequest(String accessToken, Organization organization) {
+    public SetBillingRequest(String accessToken, String organizationId, Billing billing) {
     	this.accessToken = accessToken;
-    	this.organization = organization;
+    	this.organizationId = organizationId;
+    	this.billing = billing;
     }
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String accessToken;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-    public Organization organization;
+    public String organizationId;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Billing billing;
 }

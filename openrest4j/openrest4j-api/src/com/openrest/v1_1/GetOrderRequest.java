@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetOrderRequest extends Request {
+	public static final String TYPE = "get_order";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

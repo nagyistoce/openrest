@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetItemRequest extends Request {
+	public static final String TYPE = "set_item";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

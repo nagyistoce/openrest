@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetBlobRequest extends Request {
+	public static final String TYPE = "set_blob";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

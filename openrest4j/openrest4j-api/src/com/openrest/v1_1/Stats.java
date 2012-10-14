@@ -9,7 +9,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Stats implements Serializable {
+public class Stats implements Serializable, Cloneable {
+    private static final long serialVersionUID = 1L;
+    
     public static final String STATS_GRANULARITY_DAY = "day";
     public static final String STATS_GRANULARITY_WEEK = "week";
     public static final String STATS_GRANULARITY_MONTH = "month";
@@ -28,6 +30,11 @@ public class Stats implements Serializable {
 
     /** Default constructor for JSON deserialization. */
     public Stats() {}
+    
+    @Override
+	public Object clone() {
+    	return new Stats(((date != null) ? (Date)date.clone() : null), count, total);
+	}
 
     @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
     public Date date;
@@ -37,6 +44,4 @@ public class Stats implements Serializable {
 
     @JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer total = 0;
-
-    private static final long serialVersionUID = 1L;
 }

@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeferredRequest extends Request {
+	public static final String TYPE = "deferred_request";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

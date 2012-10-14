@@ -8,6 +8,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SetAvailabilityExceptionsRequest extends Request {
+	public static final String TYPE = "set_availability_exceptions";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

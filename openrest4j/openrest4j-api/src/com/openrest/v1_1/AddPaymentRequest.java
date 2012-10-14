@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddPaymentRequest extends Request {
+	public static final String TYPE = "add_payment";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */

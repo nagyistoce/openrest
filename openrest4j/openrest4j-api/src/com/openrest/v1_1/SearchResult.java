@@ -1,6 +1,7 @@
 package com.openrest.v1_1;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +24,8 @@ public class SearchResult extends Restaurant {
             String link, String domain, Set<String> altDomains,
             String picture, String icon, String noImagePicture,
             List<AppInfo> apps, Seo seo, Map<String, String> properties,
-            String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems, Set<String> deliveryTypes) {
+            String state, Map<String, Double> features, Boolean legacyHierarchy, Double rank, List<TopItem> topItems,
+            Set<String> deliveryTypes, List<Charge> charges) {
     	super(id, externalIds, created, modified, distributorId, chainId, title, description, contact, externalContacts,
     			address, messages, colorScheme, openTimes, deliveryTimes, inactive, deliveryInfos, status, deliveryStatus, timezone,
     			currency, locale, locales, paymentTypes, cardInfos, minPayments, link, domain, altDomains, picture, icon, noImagePicture,
@@ -31,15 +33,20 @@ public class SearchResult extends Restaurant {
     	
     	this.topItems = topItems;
     	this.deliveryTypes = deliveryTypes;
+    	this.charges = charges;
     }
     
     /** Default constructor for JSON deserialization. */
     public SearchResult() {}
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<TopItem> topItems = Collections.emptyList();
+    public List<TopItem> topItems = new ArrayList<TopItem>();
     
     /** Supported delivery types (optimization to avoid getting the entire deliveryInfos field). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Set<String> deliveryTypes = Collections.emptySet();
+    public Set<String> deliveryTypes = new HashSet<String>();
+    
+    /** Available charges (for discounts search). */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public List<Charge> charges = new ArrayList<Charge>();
 }

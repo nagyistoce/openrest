@@ -18,6 +18,11 @@ public class Role implements Serializable, Cloneable {
     /** Default constructor for JSON deserialization. */
     public Role() {}
     
+    @Override
+	public Object clone() {
+    	return new Role(organizationId, organizationType, role);
+	}
+    
     /** The organization id. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String organizationId;

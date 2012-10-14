@@ -9,6 +9,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QueryOrdersRequest extends Request {
+	public static final String TYPE = "query_orders";
     private static final long serialVersionUID = 1L;
     
     /** Default constructor for JSON deserialization. */
