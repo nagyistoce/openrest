@@ -24,8 +24,10 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
     {
         var order = params.order;
         var charges = params.charges;
-        var clubMember = params.clubMember;
+        var clubIds = params.clubIds;
         var tagMap = params.tagMap;
+        var ref = params.ref;
+        var timezone = params.timezone;
 
         var res = [];
 
@@ -33,7 +35,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         {
             var charge = charges[i];
             if (openrest.ChargeHelper.isApplicable({charge:charge, orderItems:order.orderItems, 
-                clubMember:clubMember, tagMap:tagMap}))
+                clubIds:clubIds, tagMap:tagMap, ref:ref, timezone:timezone}))
             {
                 res.push(charges[i]);
             }
@@ -48,6 +50,8 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var charges = params.charges;
         var withoutTax = params.withoutTax;
         var tagMap = params.tagMap;
+        var ref = params.ref;
+        var timezone = params.timezone;
 
         var total = self.calculateTotalOrderWithoutCoupons(params);
         Ti.API.timestamp("OrderHelper.calculatTotalOrder >> W/o Coupons = "+total);

@@ -4,18 +4,46 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
 	var self = {};
 
+    function indexOf(arr, val)
+    {
+        for (var i in arr) if (arr[i] === val) return i;
+        return -1;
+    }
+
     self.isApplicable = function(params)
     {
         var charge = params.charge;
-        var orderItems = params.orderItems;
-        var clubMember = params.clubMember;
+        var clubIds = params.clubIds;
+        var ref = params.ref;
+        var timezone = params.timezone;
+        var dontCheckAvailability = params.dontCheckAvailability || false;
+
+
+        if ((charge.refs) && (indexOf(charge.refs, ref) === -1)) return false;
+        if (charge.inactive) return false;
+
+        if ((!dontCheckAvailability) && (charge.availability))
+        {
+            var now = new timezoneJS.Date();
+            now.setTimezone(timezone);
+            now.setTimestampToNow();
+
+            var util = new TimeWindowsIterator(now, charge.availability);
+            if (!util.hasNext())
+            {
+                console.log("TimeWindowsIterator >> item availability hasNext returned false!");
+                return false;
+            }
+
+            var availability = util.next();
+            if (availability.status === OPENREST_STATUS_STATUS_UNAVAILABLE) return false;
+        }
 
         if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))
         {
-            if (typeof(clubMember) == "undefined") return false;
-            if (typeof(clubMember.clubIds) == "undefined") return false;
+            if (typeof(clubIds) == "undefined") return false;
             if (typeof(charge.clubId) == "undefined") return false;
-            if (dojo.indexOf(clubMember.clubIds, charge.clubId) == -1) return false;
+            if (dojo.indexOf(clubIds, charge.clubId) == -1) return false;
             return true;
         }
 
@@ -45,7 +73,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
         if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_FIXED))
         {
-            return Math.min(charge.amountRule, maxDiscount);
+            return Math.max(charge.amountRule, -1*maxDiscount);
         }
         else if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
         {

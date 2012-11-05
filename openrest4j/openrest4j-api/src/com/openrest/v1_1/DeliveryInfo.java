@@ -12,13 +12,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DeliveryInfo implements Serializable, Cloneable {
 	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
-			Integer delayMins, Boolean inactive) {
+			Integer delayMins, Boolean inactive, Availability availability) {
     	this.type = type;
     	this.area = area;
     	this.minOrderPrice = minOrderPrice;
     	this.charge = charge;
     	this.delayMins = delayMins;
     	this.inactive = inactive;
+    	this.availability = availability;
+    }
+	
+	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
+			Integer delayMins, Boolean inactive) {		
+		this(type, area, minOrderPrice, charge, delayMins, inactive, null);
     }
 
     /** Default constructor for JSON deserialization. */
@@ -28,7 +34,8 @@ public class DeliveryInfo implements Serializable, Cloneable {
 	public Object clone() {
 		return new DeliveryInfo(type,
 				((area != null) ? (Area) area.clone() : null),
-				minOrderPrice, charge, delayMins, inactive);
+				minOrderPrice, charge, delayMins, inactive, 
+				((availability != null) ? (Availability) availability.clone() : null));
 	}
     
     /** Delivery type, one of Delivery.ALL_DELIVERY_TYPES. */
@@ -54,11 +61,17 @@ public class DeliveryInfo implements Serializable, Cloneable {
     /** Whether the delivery destination is deactivated (i.e. suspended or disabled). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean inactive = Boolean.FALSE;
+   
+    /** Time windows in which this item is regularly available. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Availability availability = new Availability();
     
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((availability == null) ? 0 : availability.hashCode());
 		result = prime * result + ((area == null) ? 0 : area.hashCode());
 		result = prime * result + ((charge == null) ? 0 : charge.hashCode());
 		result = prime * result
@@ -110,6 +123,12 @@ public class DeliveryInfo implements Serializable, Cloneable {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (availability == null) {
+			if (other.availability != null)
+				return false;
+		} else if (!availability.equals(other.availability))
+			return false;
+		
 		return true;
 	}
 

@@ -18,7 +18,7 @@ public class Feedback implements Serializable {
     public static final String FEEDBACK_TYPE_ERROR = "error";
     
     public Feedback(String organizationId, String ref, String type, Date created, Contact contact, String comment,
-    		User user, String userAgent) {
+    		User user, String userAgent, String version, String device) {
     	this.organizationId = organizationId;
     	this.ref = ref;
     	this.type = type;
@@ -27,10 +27,12 @@ public class Feedback implements Serializable {
     	this.comment = comment;
     	this.user = user;
     	this.userAgent = userAgent;
+    	this.version = version;
+    	this.device = device;
     }
     
     public Feedback(String organizationId, String ref, String type, Contact contact, String comment) {
-    	this(organizationId, ref, type, null, contact, comment, null, null);
+    	this(organizationId, ref, type, null, contact, comment, null, null, null, null);
     }
     
     /** Default constructor for JSON deserialization. */
@@ -67,4 +69,10 @@ public class Feedback implements Serializable {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String userAgent;
+
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+    public String version;
+
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+    public String device;
 }
