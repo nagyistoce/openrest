@@ -69,10 +69,10 @@ public class Feedback implements Serializable {
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String userAgent;
-
-    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String version;
-
-    @JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+   
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String device;
 }
