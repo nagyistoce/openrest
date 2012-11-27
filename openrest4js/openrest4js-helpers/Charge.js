@@ -17,6 +17,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var ref = params.ref;
         var timezone = params.timezone;
         var dontCheckAvailability = params.dontCheckAvailability || false;
+        var skipClub = params.skipClub || false;
 
 
         if ((charge.refs) && (indexOf(charge.refs, ref) === -1)) return false;
@@ -41,9 +42,12 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
         if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))
         {
-            if (typeof(clubIds) == "undefined") return false;
-            if (typeof(charge.clubId) == "undefined") return false;
-            if (dojo.indexOf(clubIds, charge.clubId) == -1) return false;
+            if (!skipClub)
+            {
+                if (typeof(clubIds) == "undefined") return false;
+                if (typeof(charge.clubId) == "undefined") return false;
+                if (dojo.indexOf(clubIds, charge.clubId) == -1) return false;
+            }
             return true;
         }
 
