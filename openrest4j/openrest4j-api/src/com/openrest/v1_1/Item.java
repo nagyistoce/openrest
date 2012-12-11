@@ -1,7 +1,8 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +64,11 @@ public class Item implements Serializable, Comparable<Item> {
 
     /** The item's title in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> title = Collections.emptyMap();
+    public Map<String, String> title = new HashMap<String, String>();
 
     /** The item's one line description in various locales. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> description = Collections.emptyMap();
+    public Map<String, String> description = new HashMap<String, String>();
 
     /** The item's price, in "cents". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -75,7 +76,7 @@ public class Item implements Serializable, Comparable<Item> {
 
     /** List of possible variations. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<Variation> variations = Collections.emptyList();
+    public List<Variation> variations = new ArrayList<Variation>();
 
     /** Time windows in which this item is regularly available. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -100,7 +101,7 @@ public class Item implements Serializable, Comparable<Item> {
      * Developers should use unique keys, e.g. "com.company.product".
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> externalIds = Collections.emptyMap();
+    public Map<String, String> externalIds = new HashMap<String, String>();
 
     /** The item's labels, e.g. "new", "spicy". */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
@@ -111,7 +112,7 @@ public class Item implements Serializable, Comparable<Item> {
      * keys, e.g. "com.googlecode.openrestext".
      */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public Map<String, String> properties = Collections.emptyMap();
+    public Map<String, String> properties = new HashMap<String, String>();
     
     /** The item's Openrest rank (higher is better). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)

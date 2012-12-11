@@ -22,11 +22,6 @@ public class DeliveryInfo implements Serializable, Cloneable {
     	this.availability = availability;
     }
 	
-	public DeliveryInfo(String type, Area area, Integer minOrderPrice, Integer charge,
-			Integer delayMins, Boolean inactive) {		
-		this(type, area, minOrderPrice, charge, delayMins, inactive, null);
-    }
-
     /** Default constructor for JSON deserialization. */
     public DeliveryInfo() {}
     
