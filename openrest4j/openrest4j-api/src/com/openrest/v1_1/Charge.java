@@ -10,9 +10,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * An extra charge or a discount associated with an order.
- * Examples: delivery charge, state tax, discount coupon.
+ * Examples: state tax, discount coupon.
  * 
- * TODO: geography filter (delivery charge).
+ * For legacy reasons, delivery charges are not part of this.
  * 
  * @author DL
  */
@@ -51,7 +51,7 @@ public class Charge implements Serializable {
     		String code, String clubId,
     		String tagId, String tagMode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
-    		Availability availability, Boolean inactive, Set<String> refs,
+    		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes,
     		Integer amount) {
     	this.id = id;
     	this.restaurantId = restaurantId;
@@ -67,6 +67,7 @@ public class Charge implements Serializable {
         this.availability = availability;
         this.inactive = inactive;
         this.refs = refs;
+        this.deliveryTypes = deliveryTypes;
         this.amount = amount;
     }
     
@@ -74,9 +75,9 @@ public class Charge implements Serializable {
     public Charge(String type, Double priority, String code, String clubId,
     		String tagId, String tagMode,
     		String amountRuleType, Integer amountRule, Coupon coupon,
-    		Availability availability, Boolean inactive, Set<String> refs) {
+    		Availability availability, Boolean inactive, Set<String> refs, Set<String> deliveryTypes) {
     	this(null, null, type, priority, code, clubId, tagId, tagMode, amountRuleType, amountRule, coupon,
-    			availability, inactive, refs, null);
+    			availability, inactive, refs, deliveryTypes, null);
     }
 
 	/** Default constructor for JSON deserialization. */
@@ -145,6 +146,13 @@ public class Charge implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Set<String> refs;
     
+    /**
+     * The delivery-types this charge applies to (null means any).
+     * @see Delivery.ALL_DELIVERY_TYPES
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Set<String> deliveryTypes;
+    
     /** Bottom-line charge amount (in cents). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Integer amount;
@@ -183,6 +191,11 @@ public class Charge implements Serializable {
 			if (other.refs != null)
 				return false;
 		} else if (!refs.equals(other.refs))
+			return false;
+		if (deliveryTypes == null) {
+			if (other.deliveryTypes != null)
+				return false;
+		} else if (!deliveryTypes.equals(other.deliveryTypes))
 			return false;
 		if (id == null) {
 			if (other.id != null)

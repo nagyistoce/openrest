@@ -12,13 +12,15 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 public class TopItem implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
     
-    public TopItem(Map<String, String> title, Integer price) {
+    public TopItem(String id, Map<String, String> title, Integer price, String picture) {
+    	this.id = id;
     	this.title = title;
     	this.price = price;
+    	this.picture = picture;
     }
     
     public TopItem(Item item) {
-    	this(item.title, item.price);
+    	this(item.id, item.title, item.price, item.picture);
     }
     
     /** Default constructor for JSON deserialization. */
@@ -26,14 +28,20 @@ public class TopItem implements Serializable, Cloneable {
     
     @Override
 	public Object clone() {
-    	return new TopItem(
+    	return new TopItem(id,
     			((title != null) ? new HashMap<String, String>(title) : null),
-    			price);
+    			price, picture);
 	}
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String id;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Map<String, String> title = Collections.emptyMap();
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer price = 0;
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String picture;
 }
