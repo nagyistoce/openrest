@@ -16,7 +16,8 @@ public class QueryOrdersRequest extends Request {
     public QueryOrdersRequest() {}
     
     public QueryOrdersRequest(String accessToken, String distributorId, String chainId, Collection<String> restaurantIds, String userId,
-    		String status, String ref, Long since, Long until, Boolean restaurantView, String ordering, Set<String> fields, Integer limit) {
+    		String status, String ref, Long since, Long until, String query, Boolean restaurantView, String ordering, Set<String> fields,
+    		Integer limit) {
     	this.accessToken = accessToken;
     	this.distributorId = distributorId;
     	this.chainId = chainId;
@@ -26,6 +27,7 @@ public class QueryOrdersRequest extends Request {
     	this.ref = ref;
     	this.since = since;
     	this.until = until;
+    	this.query = query;
     	this.restaurantView = restaurantView;
     	this.ordering = ordering;
     	this.fields = fields;
@@ -66,6 +68,9 @@ public class QueryOrdersRequest extends Request {
     public Date until() {
     	return ((until != null) ? new Date(until.longValue()) : null);
     }
+    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public String query;
     
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean restaurantView = Boolean.FALSE;

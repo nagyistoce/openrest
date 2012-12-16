@@ -27,6 +27,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = DisplayOrderRequest.class, name = DisplayOrderRequest.TYPE),
 	@Type(value = SubmitOrderRequest.class, name = SubmitOrderRequest.TYPE),
 	@Type(value = SetOrderStatusRequest.class, name = SetOrderStatusRequest.TYPE),
+	@Type(value = SetOrderPropertiesRequest.class, name = SetOrderPropertiesRequest.TYPE),
 	@Type(value = QueryClubMembersRequest.class, name = QueryClubMembersRequest.TYPE),
 	@Type(value = SubmitFeedbackRequest.class, name = SubmitFeedbackRequest.TYPE),
 	@Type(value = AddPaymentRequest.class, name = AddPaymentRequest.TYPE),

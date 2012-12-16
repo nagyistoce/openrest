@@ -38,12 +38,14 @@ public class Charge implements Serializable {
     public static final String AMOUNT_RULE_TYPE_FIXED_PER_ITEM = "fixed_per_item";
 	/** Amount rule is percentage of some baseline amount. */
     public static final String AMOUNT_RULE_TYPE_PERCENTAGE = "percentage";
+	/** Amount rule is ignored, amount can take any number. */
+    public static final String AMOUNT_RULE_TYPE_ANY = "any";
 	/** Amount rule is variable, depending on external factors. */
     public static final String AMOUNT_RULE_TYPE_VARIABLE = "variable";
 
     /** All known amount rule types. */
     public static final Set<String> ALL_AMOUNT_RULE_TYPES = new HashSet<String>(Arrays.asList(new String[] {
-    		AMOUNT_RULE_TYPE_FIXED, AMOUNT_RULE_TYPE_FIXED_PER_ITEM, AMOUNT_RULE_TYPE_PERCENTAGE, AMOUNT_RULE_TYPE_VARIABLE
+    		AMOUNT_RULE_TYPE_FIXED, AMOUNT_RULE_TYPE_FIXED_PER_ITEM, AMOUNT_RULE_TYPE_PERCENTAGE, AMOUNT_RULE_TYPE_ANY, AMOUNT_RULE_TYPE_VARIABLE
     }));
 
     /** Constructs a previously submitted charge from persisted data. */

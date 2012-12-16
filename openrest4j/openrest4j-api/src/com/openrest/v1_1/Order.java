@@ -14,6 +14,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     /**
      * The order has been submitted by the user, and awaits her final approval.
      * The restaurant is not made of the order.
@@ -41,7 +43,7 @@ public class Order implements Serializable {
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
             User user, ClubMember clubMember, String status, String shareToken,
-            String affiliate, String ref, Boolean legacyHierarchy, List<LogEntry> log) {
+            String affiliate, String ref, Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
         this.id = id;
         this.externalIds = externalIds;
@@ -64,6 +66,7 @@ public class Order implements Serializable {
         this.affiliate = affiliate;
         this.ref = ref;
         this.legacyHierarchy = legacyHierarchy;
+        this.properties = properties;
         this.log = log;
     }
 
@@ -71,10 +74,10 @@ public class Order implements Serializable {
     public Order(String locale, List<OrderItem> orderItems, String comment, Integer price,
             Delivery delivery, Contact contact, List<Payment> payments,
             Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref,
-            Boolean legacyHierarchy) {
+            Boolean legacyHierarchy, Map<String, String> properties) {
         this(null, new HashMap<String, String>(), null, locale, orderItems, comment, price, delivery, contact, payments,
         		takeoutPacks, charges, null, null, null, clubMember, null, null,
-        		affiliate, ref, legacyHierarchy, Collections.<LogEntry>emptyList());
+        		affiliate, ref, legacyHierarchy, properties, Collections.<LogEntry>emptyList());
     }
 
     /** Default constructor for JSON deserialization. */
@@ -183,6 +186,13 @@ public class Order implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Boolean legacyHierarchy = Boolean.FALSE;
     
+    /**
+     * Map of user-defined extended properties. Developers should use unique
+     * keys, e.g. "com.googlecode.openrestext".
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
+    public Map<String, String> properties = new HashMap<String, String>();
+    
     /** Change log for this order. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public List<LogEntry> log = Collections.emptyList();
@@ -190,6 +200,4 @@ public class Order implements Serializable {
     /** The order in HTML format. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public String html;
-    
-    private static final long serialVersionUID = 1L;
 }

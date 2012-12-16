@@ -10,6 +10,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Delivery implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     /** Delivery to an address of your choice. */
     public static final String DELIVERY_TYPE_DELIVERY = "delivery";
     /** Take-out from the restaurant. */
@@ -20,9 +22,10 @@ public class Delivery implements Serializable {
         DELIVERY_TYPE_DELIVERY, DELIVERY_TYPE_TAKEOUT
     }));
 
-    public Delivery(String type, Address address, Integer charge) {
+    public Delivery(String type, Address address, Long time, Integer charge) {
         this.type = type;
         this.address = address;
+        this.time = time;
         this.charge = charge;
     }
 
@@ -37,9 +40,15 @@ public class Delivery implements Serializable {
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Address address;
     
+    /** Timestamp by which the order will be delivered or ready for pick-up. */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Long time;
+    
+    public java.util.Date time() {
+        return ((time != null) ? new java.util.Date(time) : null);
+    }
+    
     /** The delivery charge (in "cents"). */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public Integer charge = 0;
-
-    private static final long serialVersionUID = 1L;
 }
