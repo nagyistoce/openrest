@@ -41,7 +41,7 @@ public class Order implements Serializable {
     /** Constructs a previously submitted order from persisted data. */
     public Order(String id, Map<String, String> externalIds, String restaurantId, String locale, List<OrderItem> orderItems,
     		String comment, Integer price, Delivery delivery, Contact contact, List<Payment> payments,
-            Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date modified,
+            Integer takeoutPacks, List<Charge> charges, java.util.Date created, java.util.Date received, java.util.Date modified,
             User user, ClubMember clubMember, String status, String shareToken,
             String affiliate, String ref, Boolean legacyHierarchy, Map<String, String> properties, List<LogEntry> log) {
 
@@ -58,6 +58,7 @@ public class Order implements Serializable {
         this.takeoutPacks = takeoutPacks;
         this.charges = charges;
         this.created = ((created != null) ? created.getTime() : null);
+        this.received = ((received != null) ? received.getTime() : null);
         this.modified = ((modified != null) ? modified.getTime() : null);
         this.user = user;
         this.clubMember = clubMember;
@@ -76,7 +77,7 @@ public class Order implements Serializable {
             Integer takeoutPacks, List<Charge> charges, ClubMember clubMember, String affiliate, String ref,
             Boolean legacyHierarchy, Map<String, String> properties) {
         this(null, new HashMap<String, String>(), null, locale, orderItems, comment, price, delivery, contact, payments,
-        		takeoutPacks, charges, null, null, null, clubMember, null, null,
+        		takeoutPacks, charges, null, null, null, null, clubMember, null, null,
         		affiliate, ref, legacyHierarchy, properties, Collections.<LogEntry>emptyList());
     }
 
@@ -85,6 +86,10 @@ public class Order implements Serializable {
     
     public java.util.Date created() {
         return ((created != null) ? new java.util.Date(created.longValue()) : null);
+    }
+    
+    public java.util.Date received() {
+        return ((received != null) ? new java.util.Date(received.longValue()) : null);
     }
 
     public java.util.Date modified() {
@@ -147,6 +152,13 @@ public class Order implements Serializable {
     /** The order's creation timestamp. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
     public Long created;
+    
+    /**
+     * Timestamp in which the order was marked as "new" in the syste. This may differ from the
+     * order's creation timestamp for orders that were pending upon creation.
+     */
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    public Long received;
 
     /** The order's last modification timestamp. */
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
