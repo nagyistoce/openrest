@@ -1,7 +1,7 @@
 package com.openrest.v1_1;
 
 import java.io.Serializable;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -17,7 +17,7 @@ public class ClubMembers implements Serializable {
     public ClubMembers() {}
 
     @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
-    public List<ClubMember> clubMembers = Collections.emptyList();
+    public List<ClubMember> clubMembers = new ArrayList<ClubMember>();
 
     private static final long serialVersionUID = 1L;
 }
