@@ -45,6 +45,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 	@Type(value = SetAvailabilityExceptionsRequest.class, name = SetAvailabilityExceptionsRequest.TYPE),
 	@Type(value = QueryEmailRequest.class, name = QueryEmailRequest.TYPE),
 	@Type(value = DeferredRequest.class, name = DeferredRequest.TYPE),
+	@Type(value = BatchRequest.class, name = BatchRequest.TYPE),
 	@Type(value = AddItemRequest.class, name = AddItemRequest.TYPE),
 	@Type(value = SetItemRequest.class, name = SetItemRequest.TYPE),
 	@Type(value = SetTagRequest.class, name = SetTagRequest.TYPE),
