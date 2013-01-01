@@ -16,11 +16,14 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var clubIds = params.clubIds;
         var ref = params.ref;
         var timezone = params.timezone;
+        var deliveryType = params.deliveryType || "";
         var dontCheckAvailability = params.dontCheckAvailability || false;
         var skipClub = params.skipClub || false;
 
 
         if ((charge.refs) && (indexOf(charge.refs, ref) === -1)) return false;
+
+        if ((charge.deliveryTypes) && (indexOf(charge.deliveryTypes, deliveryType) === -1)) return false;
         if (charge.inactive) return false;
 
         if ((!dontCheckAvailability) && (charge.availability))
@@ -83,6 +86,23 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         {
             return Math.min(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap}), maxDiscount);
         }
+        else if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_FIXED_PER_ITEM))
+        {
+            try{
+            var total = 0;
+            for (var i in orderItems)
+            {
+                var item = orderItems[i];
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                {
+                    var singlePrice = item.gTotalPrice() / item.count;
+                    var discount = Math.max(-1*singlePrice, charge.amountRule) * item.count;
+                    total += discount;
+                }
+            }
+            return total;
+            } catch(e) {alert(e)};
+        }
 
         // TODO: Variables!!
 
@@ -143,14 +163,15 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
     {
         var charge = params.charge;
         var i18n = params.i18n;
+        var defaultLocale = params.defaultLocale;
 
         if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))
         {
-            return charge.coupon.title[i18n.getLocale()];
+            return charge.coupon.title[i18n.getLocale()] || charge.coupon.title[defaultLocale];
         }
         if ((charge.type) && (charge.type == CHARGE_TYPE_COUPON))
         {
-            return charge.coupon.title[i18n.getLocale()];
+            return charge.coupon.title[i18n.getLocale()] || charge.coupon.title[defaultLocale];
         }
         if ((charge.type) && (charge.type == CHARGE_TYPE_TAX))
         {
@@ -164,12 +185,13 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
     {
         var charge = params.charge;
         var i18n = params.i18n;
+        var defaultLocale = params.defaultLocale;
 
         if ((charge.type) && ((charge.type == CHARGE_TYPE_CLUB_COUPON) || (charge.type == CHARGE_TYPE_COUPON)))
         {
             var ret = "";
 
-            if (charge.coupon.description) ret = charge.coupon.description[i18n.getLocale()];
+            if (charge.coupon.description) ret = charge.coupon.description[i18n.getLocale()] || charge.coupon.description[defaultLocale];
 
             return ret;
         }

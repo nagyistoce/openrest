@@ -35,7 +35,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         {
             var charge = charges[i];
             if (openrest.ChargeHelper.isApplicable({charge:charge, orderItems:order.orderItems, 
-                clubIds:clubIds, tagMap:tagMap, ref:ref, timezone:timezone}))
+                clubIds:clubIds, tagMap:tagMap, ref:ref, timezone:timezone, deliveryType:order.delivery.type}))
             {
                 res.push(charges[i]);
             }

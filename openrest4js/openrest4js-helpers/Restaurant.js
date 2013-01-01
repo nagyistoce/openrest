@@ -81,7 +81,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         for (var i in restaurant.deliveryInfos)
         {
             if (restaurant.deliveryInfos[i].type == "takeout") 
-                return restaurant.deliveryInfos[i].inactive;
+                return restaurant.deliveryInfos[i].inactive || false;
         }
         return true;
     }
@@ -91,9 +91,9 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         for (var i in restaurant.deliveryInfos)
         {
             if ((restaurant.deliveryInfos[i].type !== "takeout") && (!restaurant.deliveryInfos[i].inactive))
-                return true;
+                return false;
         }
-        return false;
+        return true;
     }
 
     self.getDeliveryInfoWithMinCharge = function(data)
