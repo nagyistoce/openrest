@@ -14,7 +14,7 @@ openrest.Protocol = openrest.Protocol || function(params) { return (function(par
 		
 		var client = http.create({
 			onload : function(e) {
-				callback(JSON.parse(this.responseText));
+				callback(JSON.parse(client.responseText));
 			},
 			onerror : function(e) {
 				callback({
@@ -39,7 +39,7 @@ openrest.Protocol = openrest.Protocol || function(params) { return (function(par
 		
 		var client = http.create({
 			onload : function(e) {
-				callback(JSON.parse(this.responseText));
+				callback(JSON.parse(client.responseText));
 			},
 			onerror : function(e) {
 				callback({
@@ -65,7 +65,7 @@ openrest.Protocol = openrest.Protocol || function(params) { return (function(par
 		
 		var client = http.create({
 			onload : function(e) {
-				callback(JSON.parse(this.responseText));
+				callback(JSON.parse(client.responseText));
 			},
 			onerror : function(e) {
 				callback({
@@ -91,7 +91,7 @@ openrest.Protocol = openrest.Protocol || function(params) { return (function(par
 		
 		var client = http.create({
 			onload : function(e) {
-				callback(JSON.parse(this.responseText));
+				callback(JSON.parse(client.responseText));
 			},
 			onerror : function(e) {
 				callback({
