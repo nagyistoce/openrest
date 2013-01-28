@@ -1,8 +1,3 @@
-OrderItem.prototype.gTotalPrice = function()
-{
-    return openrest.OrderItemHelper.getTotalPrice(this);
-};
-
 var openrest = openrest || {};
 
 openrest.OrderItemHelper = openrest.OrderItemHelper || (function() {

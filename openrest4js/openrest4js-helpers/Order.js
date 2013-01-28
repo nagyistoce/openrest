@@ -14,7 +14,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         for (var i = 0 ; i < orderItems.length; i++) 
         {
             var orderItem = order.orderItems[i];
-            total += orderItem.gTotalPrice();
+            total += openrest.OrderItemHelper.getTotalPrice(orderItem);
         }
 
         return total;
@@ -54,7 +54,6 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var timezone = params.timezone;
 
         var total = self.calculateTotalOrderWithoutCoupons(params);
-        Ti.API.timestamp("OrderHelper.calculatTotalOrder >> W/o Coupons = "+total);
         var price = 0;
 
         var charges = self.getAllApplicableCharges(params);
@@ -75,7 +74,6 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
             }
         }
 
-        Ti.API.timestamp("OrderHelper.calculatTotalOrder >> after charges = "+(total+price));
         return total + price;
     }
 

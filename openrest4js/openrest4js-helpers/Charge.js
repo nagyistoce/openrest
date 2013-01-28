@@ -49,7 +49,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             {
                 if (typeof(clubIds) == "undefined") return false;
                 if (typeof(charge.clubId) == "undefined") return false;
-                if (dojo.indexOf(clubIds, charge.clubId) == -1) return false;
+                if (indexOf(clubIds, charge.clubId) == -1) return false;
             }
             return true;
         }
@@ -95,7 +95,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
                 var item = orderItems[i];
                 if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
                 {
-                    var singlePrice = item.gTotalPrice() / item.count;
+                    var singlePrice = openrest.OrderItemHelper.getTotalPrice(item) / item.count;
                     var discount = Math.max(-1*singlePrice, charge.amountRule) * item.count;
                     total += discount;
                 }
@@ -125,7 +125,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
                 var item = orderItems[i];
                 if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
                 {
-                    total += item.gTotalPrice() * percentage / 10000;
+                    total += openrest.OrderItemHelper.getTotalPrice(item) * percentage / 10000;
                 }
             }
         }

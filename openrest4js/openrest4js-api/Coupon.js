@@ -22,7 +22,7 @@ function Coupon(type, title, description, maxNumAllowed, othersAllowed)
 
 Coupon.prototype.toOpenRestObj = function()
 {
-    var ret = dojo.fromJson(dojo.toJson(this));
+    var ret = JSON.parse(JSON.stringify(this));
 
     if (!('description' in ret)) delete ret.description;
     if (typeof(ret.maxNumAllowed) == "undefined") ret.maxNumAllowed = 2147483647;

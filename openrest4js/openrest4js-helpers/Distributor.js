@@ -1,38 +1,56 @@
-Distributor.prototype.getLogoUrl = function(width)
-{
-    if (typeof(width) == "undefined")
-    {
-        return spiceApiUrl+"/distributors/"+this.id+"/picture";
-    }
-    
-    if (this.picture)
-    {
-        return this.picture+"=s"+parseInt(width);
-    }
-    else
-    {
-        return this.getNoImageUrl(width);
-    }
-}
+var openrest = openrest || {};
 
-Distributor.prototype.getIconUrl = function()
-{
-    return spiceApiUrl+"/distributors/"+this.id+"/picture?type=icon";
-}
+openrest.DistributorHelper = openrest.DistributorHelper || (function() {
+	var self = {};
 
-Distributor.prototype.getNoImageUrl = function(width)
-{
-    if (typeof(width) == "undefined")
+    self.getLogoUrl = function(params)
     {
-        return spiceApiUrl+"/distributors/"+this.id+"/picture?type=no_image";
+        var distributor = params.distributor;
+        var width = params.width;
+
+        if (typeof(width) == "undefined")
+        {
+            return spiceApiUrl+"/distributors/"+distributor.id+"/picture";
+        }
+
+        if (distributor.picture)
+        {
+            return distributor.picture+"=s"+parseInt(width);
+        }
+        else
+        {
+            return distributor.getNoImageUrl(width);
+        }
     }
 
-    if (this.noImagePicture)
+    self.getIconUrl = function(params)
     {
-        return this.noImagePicture+"=s"+parseInt(width);
+        var distributor = params.distributor;
+
+        return spiceApiUrl+"/distributors/"+distributor.id+"/picture?type=icon";
     }
-    else
+
+    self.getNoImageUrl = function(params)
     {
-        return getStaticUrl("NoImage.png");
+        var distributor = params.distributor;
+        var width = params.width;
+        var defaultNoImage = params.defaultNoImage;
+
+        if (typeof(width) == "undefined")
+        {
+            return spiceApiUrl+"/distributors/"+distributor.id+"/picture?type=no_image";
+        }
+
+        if (distributor.noImagePicture)
+        {
+            return distributor.noImagePicture+"=s"+parseInt(width);
+        }
+        else
+        {
+            return defaultNoImage;
+        }
     }
-}
+
+	return self;
+}());
+

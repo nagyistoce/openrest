@@ -52,7 +52,7 @@ function Charge(id, restaurantId, type, priority, code, clubId,
 
 Charge.prototype.toOpenRestObj = function()
 {
-    var ret = dojo.fromJson(dojo.toJson(this));
+    var ret = JSON.parse(JSON.stringify(this));
 
     if (!this.coupon) 
     {

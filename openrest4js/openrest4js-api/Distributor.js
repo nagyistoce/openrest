@@ -9,16 +9,16 @@ function Distributor(id, title, description, contact, address, locale, locales,
         link, picture, icon, properties, facebookAppId, domain, noImagePicture)
 {
     this.id = element.id;
-    this.title = dojo.fromJson(dojo.toJson(element.title));
-    this.description = dojo.fromJson(dojo.toJson(element.description));
-    this.contact = dojo.fromJson(dojo.toJson(element.contact));
-    this.address = dojo.fromJson(dojo.toJson(element.address));
+    this.title = JSON.parse(JSON.stringify(element.title));
+    this.description = JSON.parse(JSON.stringify(element.description));
+    this.contact = JSON.parse(JSON.stringify(element.contact));
+    this.address = JSON.parse(JSON.stringify(element.address));
     this.locale = element.locale;
-    this.locales = dojo.fromJson(dojo.toJson(element.locales));
+    this.locales = JSON.parse(JSON.stringify(element.locales));
     this.link = element.link;
     this.picture = element.picture;
     this.icon = element.icon;
-    this.properties = dojo.fromJson(dojo.toJson(element.properties));
+    this.properties = JSON.parse(JSON.stringify(element.properties));
     this.facebookAppId = element.facebookAppId;
     this.domain = element.domain;
     this.noImagePicture = element.noImagePicture;
