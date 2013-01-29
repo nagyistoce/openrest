@@ -13,7 +13,7 @@ openrest.CategoryHelper = openrest.CategoryHelper || (function() {
             return {'status': OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var properties = category.properties["com.implied2.spice"] || {inactive:false};
+        var properties = JSON.parse(category.properties["com.implied2.spice"] || "{\"inactive\":false}");
         var times = properties.availability || {weekly:[], exceptions:[]};
    
         if (properties.inactive)

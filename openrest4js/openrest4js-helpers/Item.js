@@ -57,17 +57,6 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         return ret;
     };
 
-    self.getAvailabilityStr = function(params)
-    {
-        var item = params.item;
-        var i18n = params.i18n;
-        var always = params.always;
-        
-        var printer = new AvailabilityPrinter(i18n);
-        var times = item.availability || {weekly:[], exceptions:[]};
-        return printer.prettyPrint(always, times);
-    };
-
     self.doesFitOrderMinimum = function(params)
     {
         var item = params.item;
@@ -113,9 +102,9 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         var item = params.item;
         var tagMap = params.tagMap;
 
-        var basePrice = item.price;
+        var basePrice = item.price || 0;
         var minimumPriceRanges = [[basePrice]];
-        for (var i in item.variations)
+        for (var i in item.variations || [])
         {
             minimumPriceRanges.push(getMinimumPriceRange(item.variations[i], tagMap));
         }
@@ -168,35 +157,3 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
 
 	return self;
 }());
-
-/*
-Item.prototype.getItemImage = function(size, distributor, refresh)
-{
-    return openrest.ItemHelper.getItemImage({item:this, size:size, distributor:distributor, refresh:refresh});
-}
-
-Item.prototype.getAvailabilityStr = function(i18n)
-{
-    return openrest.ItemHelper.getAvailabilityStr({item:this, i18n:i18n, always:i18n.get("Always")});
-}
-
-Item.prototype.doesFitOrderMinimum = function(orderCost)
-{
-    return openrest.ItemHelper.doesFitOrderMinimum({item:this, orderCost:orderCost});
-}
-
-Item.prototype.getStatus = function(timezone)
-{
-    return openrest.ItemHelper.getStatus(this, timezone);
-}
-
-Item.prototype.getUrl = function(local, distributorId)
-{
-    return openrest.ItemHelper.getUrl(this, local, distributorId);
-}
-
-Item.prototype.getPriceRange = function(tagMap)
-{
-    return oprenrest.ItemHelper.getPriceRange({item:this, tagMap:tagMap});
-}
-*/
