@@ -86,7 +86,7 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         return true;
     };
 
-    self.getMinimumPriceRange = function(variation, tagMap)
+    function getMinimumPriceRange(variation, tagMap)
     {
         var minNumAllowed = variation.minNumAllowed || 0;
         switch (minNumAllowed) {
