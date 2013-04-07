@@ -32,15 +32,18 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             now.setTimezone(timezone);
             now.setTimestampToNow();
 
-            var util = new TimeWindowsIterator(now, charge.availability);
+            var util = new availability.AvailabilityIterator({
+            	cal : now,
+            	availability : charge.availability
+            });
             if (!util.hasNext())
             {
-                console.log("TimeWindowsIterator >> item availability hasNext returned false!");
+                console.log("AvailabilityIterator >> item availability hasNext returned false!");
                 return false;
             }
 
-            var availability = util.next();
-            if (availability.status === OPENREST_STATUS_STATUS_UNAVAILABLE) return false;
+            var status = util.next();
+            if (status.status === OPENREST_STATUS_STATUS_UNAVAILABLE) return false;
         }
 
         if ((charge.type) && (charge.type == CHARGE_TYPE_CLUB_COUPON))

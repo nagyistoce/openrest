@@ -11,14 +11,17 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         now.setTimezone(restaurant.timezone);
         now.setTimestampToNow();
 
-        var util = new TimeWindowsIterator(now, times);
+        var util = new availability.AvailabilityIterator({
+        	cal : now,
+        	availability : times
+        });
         if (!util.hasNext())
         {
             return true;
         }
 
-        var availability = util.next();
-        return availability.status === OPENREST_STATUS_STATUS_AVAILABLE;
+        var status = util.next();
+        return status.status === OPENREST_STATUS_STATUS_AVAILABLE;
     }
 
     self.getOneLineAddress = function(restaurant)
@@ -42,15 +45,20 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         now.setTimestampToNow();
 
         var times = restaurant.openTimes || {weekly:[], exceptions:[]};
-        var util = new TimeWindowsIterator(now, times);
+        var util = new availability.AvailabilityIterator({
+        	cal : now,
+        	availability : times
+        });
         if (!util.hasNext())
         {
             return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
         }
 
-        var availability = util.next();
-        if (typeof(availability.until) == "undefined") availability.until = Number.MAX_VALUE;
-        return availability;
+        var status = util.next();
+        if (!status.until) {
+        	status.until = Number.MAX_VALUE;
+        }
+        return status;
     }
 
     self.getDeliveryStatus = function(restaurant)
@@ -65,15 +73,20 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         now.setTimestampToNow();
 
         var times = restaurant.deliveryTimes || {weekly:[], exceptions:[]};
-        var util = new TimeWindowsIterator(now, times);
+        var util = new availability.AvailabilityIterator({
+        	cal : now,
+        	availability : times
+        });
         if (!util.hasNext())
         {
             return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
         }
 
-        var availability = util.next();
-        if (typeof(availability.until) == "undefined") availability.until = Number.MAX_VALUE;
-        return availability;
+        var status = util.next();
+        if (!status.until) {
+        	status.until = Number.MAX_VALUE;
+        }
+        return status;
     }
 
     self.isTakeoutInactive = function(restaurant)

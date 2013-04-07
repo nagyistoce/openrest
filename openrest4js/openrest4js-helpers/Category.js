@@ -25,15 +25,20 @@ openrest.CategoryHelper = openrest.CategoryHelper || (function() {
         now.setTimezone(timezone);
         now.setTimestampToNow();
 
-        var util = new TimeWindowsIterator(now, times);
+        var util = new availability.AvailabilityIterator({
+        	cal : now,
+        	availability : times
+        });
         if (!util.hasNext())
         {
             return {'status': OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var availability = util.next();
-        if (typeof(availability.until) == "undefined") availability.until = Number.MAX_VALUE;
-        return availability;
+        var status = util.next();
+        if (!status.until) {
+        	status.until = Number.MAX_VALUE;
+        }
+        return status;
     };
 
 	return self;
