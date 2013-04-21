@@ -78,18 +78,19 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var maxDiscount = params.maxDiscount || 0;
         var extraCost = params.extraCost;
         var tagMap = params.tagMap;
+        var type = charge.amountRuleType || AMOUNT_RULE_TYPE_VARIABLE;
 
         if (typeof(maxDiscount) == "undefined") maxDiscount = Number.MAX_VALUE;
 
-        if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_FIXED))
+        if (type == AMOUNT_RULE_TYPE_FIXED)
         {
             return Math.max(charge.amountRule, -1*maxDiscount);
         }
-        else if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
+        else if (type == AMOUNT_RULE_TYPE_PERCENTAGE)
         {
             return Math.min(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap}), maxDiscount);
         }
-        else if ((charge.amountRuleType) && (charge.amountRuleType == AMOUNT_RULE_TYPE_FIXED_PER_ITEM))
+        else if (type == AMOUNT_RULE_TYPE_FIXED_PER_ITEM)
         {
             try{
             var total = 0;
@@ -106,8 +107,21 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             return total;
             } catch(e) {alert(e)};
         }
-
-        // TODO: Variables!!
+        else if (type == AMOUNT_RULE_TYPE_VARIABLE)
+        {
+            if ((this.variableAmountRuleType) && (this.variableAmountRuleType == AMOUNT_RULE_TYPE_FIXED))
+            {
+                return Math.max(this.variableAmountRule, -1*maxDiscount);
+            }
+            else if ((this.variableAmountRuleType) && (this.variableAmountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
+            {
+                return Math.max(this.calculateChargeValuePercentage(orderItems, extraCost, this.variableAmountRule), -1*maxDiscount);
+            }
+            else
+            {
+                return charge.amount || 0;
+            }
+        }
 
         return 0;
     }
