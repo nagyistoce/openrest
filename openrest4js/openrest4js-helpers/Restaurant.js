@@ -3,16 +3,19 @@ openrest = openrest || {};
 openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 	var self = {};
 
-    function isAvailable(restaurant, times)
+    function isAvailable(restaurant, times, time)
     {
         if (!times) return true;
 
-        var now = new timezoneJS.Date();
-        now.setTimezone(restaurant.timezone);
-        now.setTimestampToNow();
+        if (!time)
+        {
+            time = new timezoneJS.Date();
+            time.setTimezone(restaurant.timezone);
+            time.setTimestampToNow();
+        }
 
         var util = new availability.AvailabilityIterator({
-        	cal : now,
+        	cal : time,
         	availability : times
         });
         if (!util.hasNext())
@@ -33,61 +36,92 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         }
         return s;
     }
-    self.getStatus = function(restaurant)
+
+    function getNextTimeStatusIs(restaurant, times, wantedStatus, _time, inactive)
+    {
+        var time = new timezoneJS.Date();
+        time.setTimezone(restaurant.timezone);
+        time.setTimestampToNow();
+
+        if (_time)
+        {
+            time.setTimezone(_time.getTimezone());
+            time.setTime(_time.getTime());
+        }
+
+        if (inactive)
+        {
+            return status === OPENREST_STATUS_STATUS_UNAVAILABLE ? {when:time} : {when:Number.MAX_VALUE};
+        }
+
+        var when = time.getTime() || Number.MAX_VALUE;
+
+        var times = times || {weekly:[], exceptions:[]};
+        var util = new availability.AvailabilityIterator({
+        	cal : time,
+        	availability : times
+        });
+
+        if (!util.hasNext())
+        {
+            return {when:Number.MAX_VALUE};
+        }
+
+        var status = util.next();
+        var reason = status.reason;
+        var comment = status.comment;
+        while (status.status !== wantedStatus)
+        {
+            if (!status.until) return {when:Number.MAX_VALUE};
+
+            when = status.until;
+            reason = status.reason;
+            comment = status.comment;
+
+        	status = util.next();
+        }
+        return {when:when, reason:reason, comment:comment}
+    }
+
+    self.getStatus = function(restaurant, time)
     {
         if (restaurant.inactive)
         {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var now = new timezoneJS.Date();
-        now.setTimezone(restaurant.timezone);
-        now.setTimestampToNow();
+        var nextAvailable = getNextTimeStatusIs(restaurant, restaurant.openTimes, OPENREST_STATUS_STATUS_AVAILABLE, time, restaurant.inactive);
+        var nextUnavailable = getNextTimeStatusIs(restaurant, restaurant.openTimes, OPENREST_STATUS_STATUS_UNAVAILABLE, time, restaurant.inactive);
 
-        var times = restaurant.openTimes || {weekly:[], exceptions:[]};
-        var util = new availability.AvailabilityIterator({
-        	cal : now,
-        	availability : times
-        });
-        if (!util.hasNext())
+        if (nextAvailable.when < nextUnavailable.when)
         {
-            return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
+            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable.when, reason:nextAvailable.reason, comment:nextAvailable.comment};
         }
-
-        var status = util.next();
-        if (!status.until) {
-        	status.until = Number.MAX_VALUE;
+        else
+        {
+            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable.when, reason:nextUnavailable.reason, comment:nextUnavailable.comment};
         }
-        return status;
     }
 
-    self.getDeliveryStatus = function(restaurant)
+    self.getDeliveryStatus = function(restaurant, time)
     {
         if (restaurant.inactive)
         {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var now = new timezoneJS.Date();
-        now.setTimezone(restaurant.timezone);
-        now.setTimestampToNow();
+        var nextAvailable = getNextTimeStatusIs(restaurant, restaurant.deliveryTimes, OPENREST_STATUS_STATUS_AVAILABLE, time, restaurant.inactive);
+        var nextUnavailable = getNextTimeStatusIs(restaurant, restaurant.deliveryTimes, OPENREST_STATUS_STATUS_UNAVAILABLE, time, restaurant.inactive);
 
-        var times = restaurant.deliveryTimes || {weekly:[], exceptions:[]};
-        var util = new availability.AvailabilityIterator({
-        	cal : now,
-        	availability : times
-        });
-        if (!util.hasNext())
+        if (nextAvailable.when < nextUnavailable.when)
         {
-            return {'status':OPENREST_STATUS_STATUS_AVAILABLE, until:Number.MAX_VALUE};
+            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable.when, reason:nextAvailable.reason, comment:nextAvailable.comment};
         }
-
-        var status = util.next();
-        if (!status.until) {
-        	status.until = Number.MAX_VALUE;
+        else
+        {
+            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable.when, reason:nextUnavailable.reason, comment:nextUnavailable.comment};
         }
-        return status;
-    }
+    };
 
     self.isTakeoutInactive = function(restaurant)
     {
@@ -109,7 +143,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return true;
     }
 
-    self.getDeliveryInfoWithMinCharge = function(data)
+    self.getDeliveryInfoWithMinCharge = function(data, time)
     {
         var value = undefined;
 
@@ -118,7 +152,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = data.deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(data, deliveryInfo.availability)) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
             if ((typeof(value) == "undefined") || (deliveryInfo.charge < value.charge)) {
                 value = deliveryInfo;
@@ -129,15 +163,15 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return value;
     }
 
-    self.getMinDeliveryChargePossible = function(data) 
+    self.getMinDeliveryChargePossible = function(data, time) 
     {
-        var info = self.getDeliveryInfoWithMinCharge(data);
+        var info = self.getDeliveryInfoWithMinCharge(data, time);
         if (typeof(info) == "undefined") return 0;
         if (typeof(info.charge) == "undefined") return 0;
         return info.charge;
     }
 
-    self.getMinMinPricedInfoContainingGecode = function(restaurant, geocode)
+    self.getMinMinPricedInfoContainingGecode = function(restaurant, geocode, time)
     {
         var best = undefined;
 
@@ -147,7 +181,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(restaurant, deliveryInfo.availability)) continue;
+            if (!isAvailable(restaurant, deliveryInfo.availability, time)) continue;
             if ((best) && (best.minOrderPrice < deliveryInfo.minOrderPrice)) continue;
 
             if (isInPolygon(deliveryInfo.area.polygon, geocode))
@@ -178,7 +212,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return ret;
     }
 
-    self.getMaxDeliveryChargePossible = function(data)
+    self.getMaxDeliveryChargePossible = function(data, time)
     {
         var value = undefined;
 
@@ -187,7 +221,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = data.deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(data, deliveryInfo.availability)) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
             if ((typeof(value) == "undefined") || (deliveryInfo.charge > value)) {
                 value = deliveryInfo.charge;
@@ -198,7 +232,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return value;
     }
 
-    self.getMinMinOrderPossible = function(data) 
+    self.getMinMinOrderPossible = function(data, time) 
     {
         var value = undefined;
 
@@ -207,7 +241,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = data.deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(data, deliveryInfo.availability)) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
             if ((typeof(value) == "undefined") || (deliveryInfo.minOrderPrice < value)) {
                 value = deliveryInfo.minOrderPrice;
@@ -218,7 +252,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return value;
     }
 
-    self.getMaxMinOrderPossible = function(data) 
+    self.getMaxMinOrderPossible = function(data, time) 
     {
         var value = undefined;
 
@@ -227,7 +261,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = data.deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(data, deliveryInfo.availability)) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
             if ((typeof(value) == "undefined") || (deliveryInfo.minOrderPrice > value)) {
                 value = deliveryInfo.minOrderPrice;
@@ -238,7 +272,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return value;
     }
 
-    self.getMinDelayMinsPossible = function(data) 
+    self.getMinDelayMinsPossible = function(data, time) 
     {
         var value = undefined;
 
@@ -247,7 +281,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = data.deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(data, deliveryInfo.availability)) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
             if ((typeof(value) == "undefined") || (deliveryInfo.delayMins < value)) {
                 value = deliveryInfo.delayMins;
@@ -307,7 +341,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return c;
     }
 
-    self.getDeliveryInfo = function(total, restaurant, geocode)
+    self.getDeliveryInfo = function(total, restaurant, geocode, time)
     {
         if (!geocode)
         {
@@ -330,7 +364,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
-            if (!isAvailable(restaurant, deliveryInfo.availability)) continue;
+            if (!isAvailable(restaurant, deliveryInfo.availability, time)) continue;
             if (total < deliveryInfo.minOrderPrice) continue;
             if ((best) && (best.charge < deliveryInfo.charge)) continue;
 
