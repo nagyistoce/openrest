@@ -377,6 +377,25 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return best;
     }
 
+    self.getAllDeliveryInfos = function(restaurant, geocode)
+    {
+        var ret = [];
+
+        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        {
+            var deliveryInfo = restaurant.deliveryInfos[i];
+
+            if (deliveryInfo.type != "delivery") continue;
+            if (deliveryInfo.inactive) continue;
+
+            if (isInPolygon(deliveryInfo.area.polygon, geocode))
+            {
+                ret.push(deliveryInfo);
+            }
+        }
+
+        return ret;
+    }
+
 	return self;
 }());
-

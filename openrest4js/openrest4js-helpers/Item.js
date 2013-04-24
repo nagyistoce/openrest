@@ -50,6 +50,33 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         return {when:when, reason:reason, comment:comment}
     }
 
+    self.getCurrentStatus = function(item, timezone, _time)
+    {
+        var time = new timezoneJS.Date();
+        time.setTimezone(timezone);
+        time.setTimestampToNow();
+
+        if (_time)
+        {
+            time.setTimezone(_time.getTimezone());
+            time.setTime(_time.getTime());
+        }
+
+        var times = item.availability || {weekly:[], exceptions:[]};
+        var util = new availability.AvailabilityIterator({
+        	cal : time,
+        	availability : times
+        });
+
+        if (!util.hasNext())
+        {
+            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE};
+        }
+
+        var status = util.next();
+        return status;
+    };
+
     self.getStatus = function(item, timezone, time)
     {
         if ((timezone) && (timezone.getTimezone))
