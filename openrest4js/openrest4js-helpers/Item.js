@@ -8,63 +8,108 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         for (var i in arr) if (arr[i] === val) return i;
         return -1;
     };
+    
+    var cachedTimezone = null;
+    var cachedTime = new timezoneJS.Date();
 
-    function getNextTimeStatusIs(timezone, times, wantedStatus, _time)
+    function getNextTimeStatusIs(timezone, times, _time)
     {
-        var time = new timezoneJS.Date();
-        time.setTimezone(timezone);
-        time.setTimestampToNow();
-
         if (_time)
         {
-            time.setTimezone(_time.getTimezone());
-            time.setTime(_time.getTime());
+            if (_time.getTimezone() !== cachedTimezone)
+            {
+                cachedTimezone = _time.getTimezone();
+                cachedTime.setTimezone(_time.getTimezone());
+            }
+            cachedTime.setTime(_time.getTime());
+        }
+        else
+        {
+            if (timezone !== cachedTimezone)
+            {
+                cachedTimezone = timezone;
+                cachedTime.setTimezone(timezone);
+            }
+            cachedTime.setTimestampToNow();
         }
 
-        var when = time.getTime() || Number.MAX_VALUE;
+        var when = cachedTime.getTime() || Number.MAX_VALUE; // Has to be before the iterator since
+                // the iterator changes cachedTime.getTime()
 
         var times = times || {weekly:[], exceptions:[]};
         var util = new availability.AvailabilityIterator({
-        	cal : time,
+        	cal : cachedTime,
         	availability : times
         });
 
         if (!util.hasNext())
         {
-            return {when:Number.MAX_VALUE};
+            return {"available":{when:Number.MAX_VALUE}, "unavailable":{when:Number.MAX_VALUE}};
         }
 
-        var status = util.next();
-        var reason = status.reason;
-        var comment = status.comment;
-        while (status.status !== wantedStatus)
+        var ret = {"available":{}, "unavailable":{}};
+
+        var nowStatus = util.next();
+
+        var reason = nowStatus.reason;
+        var comment = nowStatus.comment;
+
+        ret[nowStatus.status].when = when;
+        ret[nowStatus.status].until = nowStatus.until || Number.MAX_VALUE;
+        ret[nowStatus.status].comment = nowStatus.comment;
+        ret[nowStatus.status].reason = nowStatus.reason;
+        when = nowStatus.until || Number.MAX_VALUE;
+
+        if (!nowStatus.until)
         {
-            if (!status.until) return {when:Number.MAX_VALUE};
-
-            when = status.until;
-            reason = status.reason;
-            comment = status.comment;
-
-        	status = util.next();
+            return ret;
         }
-        return {when:when, reason:reason, comment:comment}
+
+        var nextStatus = util.next();
+        while (nextStatus.status === nowStatus.status)
+        {
+            ret[nextStatus.status].until = nextStatus.until || Number.MAX_VALUE;
+            when = nextStatus.until || Number.MAX_VALUE;
+
+            if (!nextStatus.until) { return ret; }
+
+            nextStatus = util.next();
+        }
+
+        ret[nextStatus.status].when = when;
+        ret[nextStatus.status].until = nextStatus.until || Number.MAX_VALUE;
+        ret[nextStatus.status].comment = nextStatus.comment;
+        ret[nextStatus.status].reason = nextStatus.reason;
+
+        // TODO, until not completely correct here, should go next until hitting the first...
+
+        return ret;
     }
 
     self.getCurrentStatus = function(item, timezone, _time)
     {
-        var time = new timezoneJS.Date();
-        time.setTimezone(timezone);
-        time.setTimestampToNow();
-
         if (_time)
         {
-            time.setTimezone(_time.getTimezone());
-            time.setTime(_time.getTime());
+            if (_time.getTimezone() !== cachedTimezone)
+            {
+                cachedTimezone = _time.getTimezone();
+                cachedTime.setTimezone(_time.getTimezone());
+            }
+            cachedTime.setTime(_time.getTime());
+        }
+        else
+        {
+            if (timezone !== cachedTimezone)
+            {
+                cachedTimezone = timezone;
+                cachedTime.setTimezone(timezone);
+            }
+            cachedTime.setTimestampToNow();
         }
 
         var times = item.availability || {weekly:[], exceptions:[]};
         var util = new availability.AvailabilityIterator({
-        	cal : time,
+        	cal : cachedTime,
         	availability : times
         });
 
@@ -81,8 +126,8 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
     {
         if ((timezone) && (timezone.getTimezone))
         {
-            timezone = timezone.getTimezone();
             time = timezone;
+            timezone = timezone.getTimezone();
         }
 
         if (item.inactive)
@@ -90,16 +135,17 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var nextAvailable = getNextTimeStatusIs(timezone, item.availability, OPENREST_STATUS_STATUS_AVAILABLE, time);
-        var nextUnavailable = getNextTimeStatusIs(timezone, item.availability, OPENREST_STATUS_STATUS_UNAVAILABLE, time);
+        var statuses = getNextTimeStatusIs(timezone, item.availability, time);
+        var nextAvailable = statuses[OPENREST_STATUS_STATUS_AVAILABLE].when || Number.MAX_VALUE;
+        var nextUnavailable = statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].when || Number.MAX_VALUE;
 
-        if (nextAvailable.when < nextUnavailable.when)
+        if (nextAvailable < nextUnavailable)
         {
-            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable.when, reason:nextAvailable.reason, comment:nextAvailable.comment};
+            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable, reason:statuses[OPENREST_STATUS_STATUS_AVAILABLE].reason, comment:statuses[OPENREST_STATUS_STATUS_AVAILABLE].comment};
         }
         else
         {
-            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable.when, reason:nextUnavailable.reason, comment:nextUnavailable.comment};
+            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable, reason:statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].reason, comment:statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].comment};
         }
     };
 
