@@ -125,19 +125,23 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
     self.isTakeoutInactive = function(restaurant)
     {
-        for (var i in restaurant.deliveryInfos)
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
+        for (var i = 0, l = deliveryInfos.length ; i < l ; i++)
         {
-            if (restaurant.deliveryInfos[i].type == "takeout") 
-                return restaurant.deliveryInfos[i].inactive || false;
+            if (deliveryInfos[i].type == "takeout") 
+                return deliveryInfos[i].inactive || false;
         }
         return true;
     }
 
     self.isDeliveryInactive = function(restaurant)
     {
-        for (var i in restaurant.deliveryInfos)
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
+        for (var i = 0, l = deliveryInfos.length ; i < l ; i++)
         {
-            if ((restaurant.deliveryInfos[i].type !== "takeout") && (!restaurant.deliveryInfos[i].inactive))
+            if ((deliveryInfos[i].type !== "takeout") && (!deliveryInfos[i].inactive))
                 return false;
         }
         return true;
@@ -147,9 +151,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var value = undefined;
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
@@ -175,9 +181,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var best = undefined;
 
-        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = restaurant.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
@@ -196,9 +204,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var ret = [];
 
-        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = restaurant.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
@@ -216,9 +226,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var value = undefined;
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
@@ -236,9 +248,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var value = undefined;
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
@@ -256,9 +270,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var value = undefined;
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
@@ -276,9 +292,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var value = undefined;
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
@@ -296,9 +314,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var areas = {};
 
-        for (var i = 0 ; i < data.deliveryInfos.length ; i++)
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = data.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
 
             if ((deliveryInfo.type == "delivery") && (!deliveryInfo.inactive))
             {
@@ -343,11 +363,13 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
     self.getDeliveryInfo = function(total, restaurant, geocode, time)
     {
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
         if (!geocode)
         {
-            for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+            for (var i = 0 ; i < deliveryInfos.length ; i++)
             {
-                var deliveryInfo = restaurant.deliveryInfos[i];
+                var deliveryInfo = deliveryInfos[i];
                 if (deliveryInfo.type == "takeout") 
                 {
                     return deliveryInfo;
@@ -358,9 +380,9 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
         var best = undefined;
 
-        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = restaurant.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
@@ -381,9 +403,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
     {
         var ret = [];
 
-        for (var i = 0 ; i < restaurant.deliveryInfos.length ; i++)
+        var deliveryInfos = restaurant.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
         {
-            var deliveryInfo = restaurant.deliveryInfos[i];
+            var deliveryInfo = deliveryInfos[i];
 
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
