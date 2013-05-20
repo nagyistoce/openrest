@@ -167,7 +167,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
         charge.tagMode = charge.tagMode || TAG_MODE_INCLUDE;
 
-        if (items.indexOf(itemId) == -1)
+        if (indexOf(items, itemId) == -1)
         {
             return (charge.tagMode === TAG_MODE_EXCLUDE);
         }
