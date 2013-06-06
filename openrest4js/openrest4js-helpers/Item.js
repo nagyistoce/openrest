@@ -11,80 +11,7 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
     
     var cachedTimezone = null;
     var cachedTime = new timezoneJS.Date();
-
-    function getNextTimeStatusIs(timezone, times, _time)
-    {
-        if (_time)
-        {
-            if (_time.getTimezone() !== cachedTimezone)
-            {
-                cachedTimezone = _time.getTimezone();
-                cachedTime.setTimezone(_time.getTimezone());
-            }
-            cachedTime.setTime(_time.getTime());
-        }
-        else
-        {
-            if (timezone !== cachedTimezone)
-            {
-                cachedTimezone = timezone;
-                cachedTime.setTimezone(timezone);
-            }
-            cachedTime.setTimestampToNow();
-        }
-
-        var when = cachedTime.getTime() || Number.MAX_VALUE; // Has to be before the iterator since
-                // the iterator changes cachedTime.getTime()
-
-        var times = times || {weekly:[], exceptions:[]};
-        var util = new availability.AvailabilityIterator({
-        	cal : cachedTime,
-        	availability : times
-        });
-
-        if (!util.hasNext())
-        {
-            return {"available":{when:Number.MAX_VALUE}, "unavailable":{when:Number.MAX_VALUE}};
-        }
-
-        var ret = {"available":{}, "unavailable":{}};
-
-        var nowStatus = util.next();
-
-        var reason = nowStatus.reason;
-        var comment = nowStatus.comment;
-
-        ret[nowStatus.status].when = when;
-        ret[nowStatus.status].until = nowStatus.until || Number.MAX_VALUE;
-        ret[nowStatus.status].comment = nowStatus.comment;
-        ret[nowStatus.status].reason = nowStatus.reason;
-        when = nowStatus.until || Number.MAX_VALUE;
-
-        if (!nowStatus.until)
-        {
-            return ret;
-        }
-
-        var nextStatus = util.next();
-        while (nextStatus.status === nowStatus.status)
-        {
-            ret[nextStatus.status].until = nextStatus.until || Number.MAX_VALUE;
-            when = nextStatus.until || Number.MAX_VALUE;
-
-            if (!nextStatus.until) { return ret; }
-
-            nextStatus = util.next();
-        }
-
-        ret[nextStatus.status].when = when;
-        ret[nextStatus.status].until = nextStatus.until || Number.MAX_VALUE;
-        ret[nextStatus.status].comment = nextStatus.comment;
-        ret[nextStatus.status].reason = nextStatus.reason;
-
-        // TODO, until not completely correct here, should go next until hitting the first...
-
-        return ret;
-    }
+    var cachedTimeTime = null;
 
     self.getCurrentStatus = function(item, timezone, _time)
     {
@@ -104,12 +31,19 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
                 cachedTimezone = timezone;
                 cachedTime.setTimezone(timezone);
             }
-            cachedTime.setTimestampToNow();
+
+            var now = new Date().getTime();
+
+            if ((!cachedTimeTime) || (now > cachedTimeTime+5000))
+            {
+                cachedTime.setTimestampToNow();
+                cachedTimeTime = now;
+            }
         }
 
         var times = item.availability || {weekly:[], exceptions:[]};
         var util = new availability.AvailabilityIterator({
-        	cal : cachedTime,
+        	cal : cachedTime.clone(),
         	availability : times
         });
 
@@ -122,31 +56,14 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         return status;
     };
 
-    self.getStatus = function(item, timezone, time)
+    self.getStatus = function(item, time)
     {
-        if ((timezone) && (timezone.getTimezone))
-        {
-            time = timezone;
-            timezone = timezone.getTimezone();
-        }
-
         if (item.inactive)
         {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var statuses = getNextTimeStatusIs(timezone, item.availability, time);
-        var nextAvailable = statuses[OPENREST_STATUS_STATUS_AVAILABLE].when || Number.MAX_VALUE;
-        var nextUnavailable = statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].when || Number.MAX_VALUE;
-
-        if (nextAvailable < nextUnavailable)
-        {
-            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable, reason:statuses[OPENREST_STATUS_STATUS_AVAILABLE].reason, comment:statuses[OPENREST_STATUS_STATUS_AVAILABLE].comment};
-        }
-        else
-        {
-            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable, reason:statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].reason, comment:statuses[OPENREST_STATUS_STATUS_UNAVAILABLE].comment};
-        }
+        return openrest.StatusHelper.getStatus(item.availability, time);
     };
 
     self.getUrl = function(item, local, distributorId)

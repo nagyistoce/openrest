@@ -37,52 +37,6 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return s;
     }
 
-    function getNextTimeStatusIs(restaurant, times, wantedStatus, _time, inactive)
-    {
-        var time = new timezoneJS.Date();
-        time.setTimezone(restaurant.timezone);
-        time.setTimestampToNow();
-
-        if (_time)
-        {
-            time.setTimezone(_time.getTimezone());
-            time.setTime(_time.getTime());
-        }
-
-        if (inactive)
-        {
-            return status === OPENREST_STATUS_STATUS_UNAVAILABLE ? {when:time} : {when:Number.MAX_VALUE};
-        }
-
-        var when = time.getTime() || Number.MAX_VALUE;
-
-        var times = times || {weekly:[], exceptions:[]};
-        var util = new availability.AvailabilityIterator({
-        	cal : time,
-        	availability : times
-        });
-
-        if (!util.hasNext())
-        {
-            return {when:Number.MAX_VALUE};
-        }
-
-        var status = util.next();
-        var reason = status.reason;
-        var comment = status.comment;
-        while (status.status !== wantedStatus)
-        {
-            if (!status.until) return {when:Number.MAX_VALUE};
-
-            when = status.until;
-            reason = status.reason;
-            comment = status.comment;
-
-        	status = util.next();
-        }
-        return {when:when, reason:reason, comment:comment}
-    }
-
     self.getStatus = function(restaurant, time)
     {
         if (restaurant.inactive)
@@ -90,17 +44,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var nextAvailable = getNextTimeStatusIs(restaurant, restaurant.openTimes, OPENREST_STATUS_STATUS_AVAILABLE, time, restaurant.inactive);
-        var nextUnavailable = getNextTimeStatusIs(restaurant, restaurant.openTimes, OPENREST_STATUS_STATUS_UNAVAILABLE, time, restaurant.inactive);
-
-        if (nextAvailable.when < nextUnavailable.when)
-        {
-            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable.when, reason:nextAvailable.reason, comment:nextAvailable.comment};
-        }
-        else
-        {
-            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable.when, reason:nextUnavailable.reason, comment:nextUnavailable.comment};
-        }
+        return openrest.StatusHelper.getStatus(restaurant.openTimes, time);
     }
 
     self.getDeliveryStatus = function(restaurant, time)
@@ -110,17 +54,12 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
         }
 
-        var nextAvailable = getNextTimeStatusIs(restaurant, restaurant.deliveryTimes, OPENREST_STATUS_STATUS_AVAILABLE, time, restaurant.inactive);
-        var nextUnavailable = getNextTimeStatusIs(restaurant, restaurant.deliveryTimes, OPENREST_STATUS_STATUS_UNAVAILABLE, time, restaurant.inactive);
+        if (self.isDeliveryInactive(restaurant))
+        {
+            return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
+        }
 
-        if (nextAvailable.when < nextUnavailable.when)
-        {
-            return {status:OPENREST_STATUS_STATUS_AVAILABLE, until:nextUnavailable.when, reason:nextAvailable.reason, comment:nextAvailable.comment};
-        }
-        else
-        {
-            return {status:OPENREST_STATUS_STATUS_UNAVAILABLE, until:nextAvailable.when, reason:nextUnavailable.reason, comment:nextUnavailable.comment};
-        }
+        return openrest.StatusHelper.getStatus(restaurant.deliveryTimes, time);
     };
 
     self.isTakeoutInactive = function(restaurant)
@@ -137,7 +76,13 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
     self.isDeliveryInactive = function(restaurant)
     {
-        var deliveryInfos = restaurant.deliveryInfos || [];
+        var deliveryInfos = restaurant.deliveryInfos;
+
+        if (!deliveryInfos)
+        {
+            console.warn("Warning: Restaurant "+restaurant.id+" has no delivery infos!");
+            return false;
+        }
 
         for (var i = 0, l = deliveryInfos.length ; i < l ; i++)
         {
