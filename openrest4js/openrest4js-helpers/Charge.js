@@ -109,13 +109,13 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         }
         else if (type == AMOUNT_RULE_TYPE_VARIABLE)
         {
-            if ((this.variableAmountRuleType) && (this.variableAmountRuleType == AMOUNT_RULE_TYPE_FIXED))
+            if ((charge.variableAmountRuleType) && (charge.variableAmountRuleType == AMOUNT_RULE_TYPE_FIXED))
             {
-                return Math.max(this.variableAmountRule, -1*maxDiscount);
+                return Math.max(charge.variableAmountRule, -1*maxDiscount);
             }
-            else if ((this.variableAmountRuleType) && (this.variableAmountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
+            else if ((charge.variableAmountRuleType) && (charge.variableAmountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
             {
-                return Math.max(this.calculateChargeValuePercentage(orderItems, extraCost, this.variableAmountRule), -1*maxDiscount);
+                return Math.max(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap, percentage:charge.variableAmountRule}), -1*maxDiscount);
             }
             else
             {
@@ -132,8 +132,8 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var orderItems = params.orderItems;
         var extraCost = params.extraCost;
         var tagMap = params.tagMap;
+        var percentage = params.percentage || parseInt(charge.amountRule);
 
-        var percentage = parseInt(charge.amountRule);
         var total = 0;
         if (typeof(orderItems) != "undefined")
         {

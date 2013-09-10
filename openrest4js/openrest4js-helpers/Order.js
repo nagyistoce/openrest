@@ -112,10 +112,6 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var destRestaurantFull = params.destRestaurantFull;
 
-        var restaurantClient = new RestaurantClient(spiceClient.url, destRestaurantFull.restaurant.id,
-                spiceClient, function(){}, destRestaurantFull);
-        restaurantClient.chargeManager.setClubMember(order.clubMember);
-
         var oldCharges = JSON.parse(JSON.stringify(order.charges));
         order.charges = getCharges({order:order, full:destRestaurantFull});
 
@@ -150,7 +146,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         
         var ret = [];
         var total = self.calculateTotalOrderWithoutCoupons({order:order});
-        var charges = self.getAllApplicableCharges({order:order, charges:full.charges, clubIds:order.clubMember.clubIds,
+        var charges = self.getAllApplicableCharges({order:order, charges:full.charges, clubIds:(order.clubMember || {}).clubIds,
                 tagMap:tagMap, ref:order.ref, timezone:full.restaurant.timezone});
 
         for (var i in charges)
