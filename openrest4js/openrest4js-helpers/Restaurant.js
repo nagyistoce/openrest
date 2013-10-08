@@ -80,7 +80,6 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
         if (!deliveryInfos)
         {
-            console.warn("Warning: Restaurant "+restaurant.id+" has no delivery infos!");
             return false;
         }
 
