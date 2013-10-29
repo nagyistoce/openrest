@@ -3,6 +3,16 @@ openrest = openrest || {};
 openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 	var self = {};
 
+    function canMeetTime(delayMins, deliveryTime) {
+        if (!deliveryTime) return true;
+
+        var time = new timezoneJS.Date();
+        var diff = (deliveryTime - time)/1000/60;
+
+        if (diff < delayMins) return false;
+        return true;
+    }
+
     function isAvailable(restaurant, times, time)
     {
         if (!times) return true;
@@ -234,6 +244,27 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
     self.getMinDelayMinsPossible = function(data, time) 
     {
+        var value = null;
+
+        var deliveryInfos = data.deliveryInfos || [];
+
+        for (var i = 0 ; i < deliveryInfos.length ; i++)
+        {
+            var deliveryInfo = deliveryInfos[i];
+            if (deliveryInfo.type != "delivery") continue;
+            if (deliveryInfo.inactive) continue;
+            if (!isAvailable(data, deliveryInfo.availability, time)) continue;
+
+            if ((value == null) || (deliveryInfo.delayMins < value)) {
+                value = deliveryInfo.delayMins;
+            }
+        }   
+
+        return value || 0;
+    }
+
+    self.getMaxDelayMinsPossible = function(data, time) 
+    {
         var value = undefined;
 
         var deliveryInfos = data.deliveryInfos || [];
@@ -245,13 +276,12 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
-            if ((typeof(value) == "undefined") || (deliveryInfo.delayMins < value)) {
+            if ((value == null) || (deliveryInfo.delayMins > value)) {
                 value = deliveryInfo.delayMins;
             }
         }   
 
-        if (typeof(value) == "undefined") return 0;
-        return value;
+        return value || 0;
     }
 
     self.isMultipleDeliveryArea = function(data)
@@ -305,7 +335,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
         return c;
     }
 
-    self.getDeliveryInfo = function(total, restaurant, geocode, time)
+    self.getDeliveryInfo = function(total, restaurant, geocode, time, deliveryTime)
     {
         var deliveryInfos = restaurant.deliveryInfos || [];
 
@@ -331,6 +361,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.type != "delivery") continue;
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(restaurant, deliveryInfo.availability, time)) continue;
+            if (!canMeetTime(deliveryInfo.delayMins, deliveryTime)) continue;
             if (total < deliveryInfo.minOrderPrice) continue;
             if ((best) && (best.charge < deliveryInfo.charge)) continue;
 
