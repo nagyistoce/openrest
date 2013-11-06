@@ -84,7 +84,14 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
 
         if (type == AMOUNT_RULE_TYPE_FIXED)
         {
-            return Math.max(charge.amountRule, -1*maxDiscount);
+            for (var i in orderItems)
+            {
+                var item = orderItems[i];
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                {
+                    return Math.max(charge.amountRule, -1*maxDiscount);
+                }
+            }
         }
         else if (type == AMOUNT_RULE_TYPE_PERCENTAGE)
         {
