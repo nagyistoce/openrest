@@ -296,7 +296,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
             if ((deliveryInfo.type == "delivery") && (!deliveryInfo.inactive))
             {
-                var key = JSON.stringify(deliveryInfo.title)+"_"+deliveryInfo.minOrderPrice+"_"+deliveryInfo.charge;
+                var key = JSON.stringify(deliveryInfo.area.title)+"_"+deliveryInfo.minOrderPrice+"_"+deliveryInfo.charge;
                 areas[key] = 1;
             }
         }
