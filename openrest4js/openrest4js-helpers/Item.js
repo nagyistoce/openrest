@@ -58,11 +58,6 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
 
     self.getStatus = function(item, time)
     {
-        if (item.inactive)
-        {
-            return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
-        }
-
         return openrest.StatusHelper.getStatus(item.availability, time);
     };
 
