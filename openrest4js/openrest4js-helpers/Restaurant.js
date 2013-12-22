@@ -49,21 +49,11 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
 
     self.getStatus = function(restaurant, time)
     {
-        if (restaurant.inactive)
-        {
-            return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
-        }
-
         return openrest.StatusHelper.getStatus(restaurant.openTimes, time);
     }
 
     self.getDeliveryStatus = function(restaurant, time)
     {
-        if (restaurant.inactive)
-        {
-            return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
-        }
-
         if (self.isDeliveryInactive(restaurant))
         {
             return {'status': OPENREST_STATUS_STATUS_UNAVAILABLE, until:Number.MAX_VALUE}; 
