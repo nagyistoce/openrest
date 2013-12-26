@@ -77,7 +77,6 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var orderItems = params.orderItems;
         var maxDiscount = params.maxDiscount || 0;
         var extraCost = params.extraCost;
-        var tagMap = params.tagMap;
         var type = charge.amountRuleType || AMOUNT_RULE_TYPE_VARIABLE;
 
         if (typeof(maxDiscount) == "undefined") maxDiscount = Number.MAX_VALUE;
@@ -87,7 +86,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             for (var i in orderItems)
             {
                 var item = orderItems[i];
-                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId}))
                 {
                     return Math.max(charge.amountRule, -1*maxDiscount);
                 }
@@ -95,7 +94,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         }
         else if (type == AMOUNT_RULE_TYPE_PERCENTAGE)
         {
-            return Math.min(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap}), maxDiscount);
+            return Math.min(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost}), maxDiscount);
         }
         else if (type == AMOUNT_RULE_TYPE_FIXED_PER_ITEM)
         {
@@ -104,7 +103,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             for (var i in orderItems)
             {
                 var item = orderItems[i];
-                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId}))
                 {
                     var singlePrice = openrest.OrderItemHelper.getTotalPrice(item) / item.count;
                     var discount = Math.max(-1*singlePrice, charge.amountRule) * item.count;
@@ -122,7 +121,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             }
             else if ((charge.variableAmountRuleType) && (charge.variableAmountRuleType == AMOUNT_RULE_TYPE_PERCENTAGE))
             {
-                return Math.max(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, tagMap:tagMap, percentage:charge.variableAmountRule}), -1*maxDiscount);
+                return Math.max(self.calculateChargeValuePercentage({charge:charge, orderItems:orderItems, extraCost:extraCost, percentage:charge.variableAmountRule}), -1*maxDiscount);
             }
             else
             {
@@ -138,7 +137,6 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var charge = params.charge;
         var orderItems = params.orderItems;
         var extraCost = params.extraCost;
-        var tagMap = params.tagMap;
         var percentage = params.percentage || parseInt(charge.amountRule);
 
         var total = 0;
@@ -147,7 +145,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
             for (var i in orderItems)
             {
                 var item = orderItems[i];
-                if (self.isApplicableItem({charge:charge, itemId:item.itemId, tagMap:tagMap}))
+                if (self.isApplicableItem({charge:charge, itemId:item.itemId}))
                 {
                     total += openrest.OrderItemHelper.getTotalPrice(item) * percentage / 10000;
                 }
@@ -166,19 +164,18 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
     {
         var charge = params.charge;
         var itemId = params.itemId;
-        var tagMap = params.tagMap;
 
-        if (typeof(charge.tagId) == "undefined") return true;
+        if (typeof(charge.itemIds) == "undefined") return true;
 
-        var items = tagMap[charge.tagId].itemIds;
+        var items = charge.itemIds;
 
-        charge.tagMode = charge.tagMode || TAG_MODE_INCLUDE;
+        charge.mode = charge.mode || MODE_INCLUDE;
 
         if (indexOf(items, itemId) == -1)
         {
-            return (charge.tagMode === TAG_MODE_EXCLUDE);
+            return (charge.mode === MODE_EXCLUDE);
         }
-        return (charge.tagMode === TAG_MODE_INCLUDE);
+        return (charge.mode === MODE_INCLUDE);
 
 
     }

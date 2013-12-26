@@ -103,7 +103,7 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
         return true;
     };
 
-    function getMinimumPriceRange(variation, tagMap)
+    function getMinimumPriceRange(variation)
     {
         var minNumAllowed = variation.minNumAllowed || 0;
         switch (minNumAllowed) {
@@ -111,7 +111,7 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
                 return [0];
             case 1:
                 {
-                    var itemIds = tagMap[variation.tagId].itemIds;
+                    var itemIds = variation.itemIds;
                     var minimumPriceRange = [];
                     for (var i in itemIds) {
                         var itemId = itemIds[i];
@@ -128,13 +128,12 @@ openrest.ItemHelper = openrest.ItemHelper || (function() {
     self.getPriceRange = function(params)
     {
         var item = params.item;
-        var tagMap = params.tagMap;
 
         var basePrice = item.price || 0;
         var minimumPriceRanges = [[basePrice]];
         for (var i in item.variations || [])
         {
-            minimumPriceRanges.push(getMinimumPriceRange(item.variations[i], tagMap));
+            minimumPriceRanges.push(getMinimumPriceRange(item.variations[i]));
         }
 
         var numNonTrivialRanges = 0;

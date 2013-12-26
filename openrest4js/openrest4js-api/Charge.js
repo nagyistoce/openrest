@@ -14,8 +14,8 @@ ALL_AMOUNT_RULE_TYPES = [
     AMOUNT_RULE_TYPE_FIXED, AMOUNT_RULE_TYPE_PERCENTAGE, AMOUNT_RULE_TYPE_VARIABLE, AMOUNT_RULE_TYPE_FIXED_PER_ITEM
 ];
 
-TAG_MODE_INCLUDE = "include";
-TAG_MODE_EXCLUDE = "exclude";
+MODE_INCLUDE = "include";
+MODE_EXCLUDE = "exclude";
 
 
 function ChargeFromObj(data)
@@ -26,12 +26,12 @@ function ChargeFromObj(data)
         coupon = CouponFromObj(data.coupon);
     }
     return new Charge(data.id, data.restaurantId, data.type, data.priority,
-        data.code, data.clubId, data.tagId, data.tagMode, data.amountRuleType, data.amountRule,
+        data.code, data.clubId, data.itemIds, data.mode, data.amountRuleType, data.amountRule,
         data.amount, coupon);
 }
 
 function Charge(id, restaurantId, type, priority, code, clubId,
-        tagId, tagMode, amountRuleType, amountRule, amount, coupon)
+        itemIds, mode, amountRuleType, amountRule, amount, coupon)
 {
     this.id = id;
     this.restaurantId = restaurantId;
@@ -40,9 +40,9 @@ function Charge(id, restaurantId, type, priority, code, clubId,
     if (!this.priority) this.priority = 0;
     this.code = code;
     this.clubId = clubId;
-    this.tagId = tagId;
-    this.tagMode = tagMode;
-    if (!this.tagMode) this.tagMode = TAG_MODE_INCLUDE;
+    this.itemIds = itemIds;
+    this.mode = mode;
+    if (!this.mode) this.mode = MODE_INCLUDE;
     this.amountRuleType = amountRuleType;
     if (!this.amountRuleType) this.amountRuleType = AMOUNT_RULE_TYPE_VARIABLE;
     this.amountRule = amountRule;
@@ -62,8 +62,8 @@ Charge.prototype.toOpenRestObj = function()
     {
         ret.coupon = this.coupon.toOpenRestObj();
     }
-    if (!ret.tagId) delete ret.tagId;
-    if (!ret.tagMode) delete ret.tagMode;
+    if (!ret.itemIds) delete ret.itemIds;
+    if (!ret.mode) delete ret.mode;
     if (typeof(ret.amount) == "undefined") delete ret.amount;
     if (typeof(ret.code) == "undefined") delete ret.code;
     if (typeof(ret.id) == "undefined") delete ret.id;

@@ -25,7 +25,6 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var charges = params.charges;
         var clubIds = params.clubIds;
-        var tagMap = params.tagMap;
         var ref = params.ref;
         var timezone = params.timezone;
 
@@ -35,7 +34,7 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         {
             var charge = charges[i];
             if (openrest.ChargeHelper.isApplicable({charge:charge, orderItems:order.orderItems, 
-                clubIds:clubIds, tagMap:tagMap, ref:ref, timezone:timezone, deliveryType:order.delivery.type}))
+                clubIds:clubIds, ref:ref, timezone:timezone, deliveryType:order.delivery.type}))
             {
                 res.push(charges[i]);
             }
@@ -49,7 +48,6 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var charges = params.charges;
         var withoutTax = params.withoutTax;
-        var tagMap = params.tagMap;
         var ref = params.ref;
         var timezone = params.timezone;
 
@@ -63,14 +61,12 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
             if ((charge.type == CHARGE_TYPE_COUPON) || (charge.type == CHARGE_TYPE_CLUB_COUPON))
             {
                 price += openrest.ChargeHelper.calculateAmount({charge:charge, 
-                    orderItems:order.orderItems, maxDiscount:total, extraCost:0,
-                      tagMap:tagMap});
+                    orderItems:order.orderItems, maxDiscount:total, extraCost:0});
             }
             if ((!withoutTax) && (charge.type == CHARGE_TYPE_TAX))
             {
                 price += openrest.ChargeHelper.calculateAmount({charge:charge, 
-                    orderItems:order.orderItems, maxDiscount:total, extraCost:0,
-                      tagMap:tagMap});
+                    orderItems:order.orderItems, maxDiscount:total, extraCost:0});
             }
         }
 
@@ -142,18 +138,16 @@ openrest.OrderHelper = openrest.OrderHelper || (function() {
         var order = params.order;
         var full = params.full;
 
-        var tagMap = openrest.MenuHelper.getTagMap({menu:full.menu});
-        
         var ret = [];
         var total = self.calculateTotalOrderWithoutCoupons({order:order});
         var charges = self.getAllApplicableCharges({order:order, charges:full.charges, clubIds:(order.clubMember || {}).clubIds,
-                tagMap:tagMap, ref:order.ref, timezone:full.restaurant.timezone});
+                ref:order.ref, timezone:full.restaurant.timezone});
 
         for (var i in charges)
         {
             var charge = charges[i];
             charge.amount = openrest.ChargeHelper.calculateAmount({charge:charge, orderItems:order.orderItems,
-                        maxDiscount:total, extraCost:0, tagMap:tagMap});
+                        maxDiscount:total, extraCost:0});
 
             ret.push(charge);
         }

@@ -118,12 +118,12 @@ openrest.OrderItemHelper = openrest.OrderItemHelper || (function() {
         return allOk;
     }
 
-    function validateVariation(variation, variationChoices, __tagById, __itemStatus, __itemById)
+    function validateVariation(variation, variationChoices, __itemStatus, __itemById)
     {
         var count = 0;
         var valid = true;
         var items = variationChoices || [];
-        var legalItems = __tagById(variation.tagId).itemIds;
+        var legalItems = variation.itemIds;
         var min = (variation.minNumAllowed ? variation.minNumAllowed : 0);
         var max = (variation.maxNumAllowed ? variation.maxNumAllowed : items.length);
 
