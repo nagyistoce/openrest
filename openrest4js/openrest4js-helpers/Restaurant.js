@@ -104,7 +104,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
-            if ((typeof(value) == "undefined") || (deliveryInfo.charge < value.charge)) {
+            if ((typeof(value) == "undefined") || ((deliveryInfo.charge || 0) < value.charge)) {
                 value = deliveryInfo;
             }
         }   
@@ -179,7 +179,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
-            if ((typeof(value) == "undefined") || (deliveryInfo.charge > value)) {
+            if ((typeof(value) == "undefined") || ((deliveryInfo.charge || 0) > value)) {
                 value = deliveryInfo.charge;
             }
         }   
@@ -245,8 +245,8 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
-            if ((value == null) || (deliveryInfo.delayMins < value)) {
-                value = deliveryInfo.delayMins;
+            if ((value == null) || ((deliveryInfo.delayMins || 0) < value)) {
+                value = deliveryInfo.delayMins || 0;
             }
         }   
 
@@ -266,7 +266,7 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             if (deliveryInfo.inactive) continue;
             if (!isAvailable(data, deliveryInfo.availability, time)) continue;
 
-            if ((value == null) || (deliveryInfo.delayMins > value)) {
+            if ((value == null) || ((deliveryInfo.delayMins || 0) > value)) {
                 value = deliveryInfo.delayMins;
             }
         }   
@@ -349,12 +349,13 @@ openrest.RestaurantHelper = openrest.RestaurantHelper || (function() {
             var deliveryInfo = deliveryInfos[i];
 
             if (deliveryInfo.type != "delivery") continue;
+
             if (deliveryInfo.inactive) continue;
+
             if (!isAvailable(restaurant, deliveryInfo.availability, time)) continue;
             if (!canMeetTime(deliveryInfo.delayMins, deliveryTime)) continue;
             if (total < deliveryInfo.minOrderPrice) continue;
-            if ((best) && (best.charge < deliveryInfo.charge)) continue;
-
+            if ((best) && ((best.charge || 0) < deliveryInfo.charge)) continue;
             if (isInPolygon(deliveryInfo.area.polygon, geocode))
             {
                 best = deliveryInfo;

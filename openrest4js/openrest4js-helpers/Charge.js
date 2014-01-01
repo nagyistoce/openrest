@@ -165,7 +165,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var charge = params.charge;
         var itemId = params.itemId;
 
-        if (typeof(charge.itemIds) == "undefined") return true;
+        if ((charge.itemIds || null) === null) return true;
 
         var items = charge.itemIds;
 
