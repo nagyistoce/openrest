@@ -90,7 +90,7 @@ openrest.OrderItemHelper = openrest.OrderItemHelper || (function() {
         return true;
     }
 
-    self.validate = function(orderItem, __tagById, __itemStatus, __itemById)
+    self.validate = function(orderItem, __itemStatus, __itemById)
     {
         if (__itemStatus(orderItem.itemId) === "unavailable") {
             return false;
@@ -112,7 +112,7 @@ openrest.OrderItemHelper = openrest.OrderItemHelper || (function() {
 
         for (var j = 0 ; j < variations.length ; j++)
         {       
-            allOk &= validateVariation(variations[j], variationsChoices[j], __tagById, __itemStatus);
+            allOk &= validateVariation(variations[j], variationsChoices[j], __itemStatus);
         }
 
         return allOk;
@@ -129,7 +129,7 @@ openrest.OrderItemHelper = openrest.OrderItemHelper || (function() {
 
         for (var i = 0 ; i < items.length ; i++) {
             valid &= inArray(legalItems, items[i].itemId);
-            valid &= self.validate(items[i], __tagById, __itemStatus, __itemById);
+            valid &= self.validate(items[i], __itemStatus, __itemById);
             count++;
         }
 
