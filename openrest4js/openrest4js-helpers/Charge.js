@@ -21,7 +21,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         var skipClub = params.skipClub || false;
 
 
-        if ((charge.refs) && (indexOf(charge.refs, ref) === -1)) return false;
+        if ((charge.refs) && (!_.isEmpty(charge.refs)) && (indexOf(charge.refs, ref) === -1)) return false;
 
         if ((charge.deliveryTypes) && (indexOf(charge.deliveryTypes, deliveryType) === -1)) return false;
         if (charge.inactive) return false;
@@ -196,7 +196,7 @@ openrest.ChargeHelper = openrest.ChargeHelper || (function() {
         }
         if ((charge.type) && (charge.type == CHARGE_TYPE_TAX))
         {
-            return i18n.get("OrderConfTax");
+            return i18n.get("openrest_common_tax");
         }
 
         return "";
